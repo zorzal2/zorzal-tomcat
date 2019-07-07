@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="ProcedimientoBean" table="PROCEDIMIENTO">
+
+		<id name="id" column="ID_PROCEDIMIENTO" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_PROCEDIMIENTO</param>
+		   </generator>	
+		</id>
+	
+		<property name="estado" column="CD_ESTADO" type="com.fontar.data.impl.domain.codes.seguimiento.controlAdquisicion.EstadoProcedimientoUserType"/>
+		<property name="fechaRecepcion" column="FE_RECEPCION" type="java.util.Date"/>
+		<property name="codigo" column="CD_PROCEDIMIENTO" type="java.lang.String"/>
+		<property name="descripcion" column="DE_PROCEDIMIENTO" type="java.lang.String"/>
+		<property name="fechaAsignacionEvaluador" column="FE_ASIGNACION_EVALUADOR" type="java.util.Date"/>
+		<property name="descripcionAsignacionEvaluador" column="DE_ASIGNACION_EVALUADOR" type="java.lang.String"/>
+		<property name="fechaFundamentacion" column="FE_EVALUACION_FUNDAMENTACION" type="java.util.Date"/>
+		<property name="descripcionFundamentacion" column="DE_FUNDAMENTACION" type="java.lang.String"/>
+		<property name="fechaResultadoFontar" column="FE_RESULTADO_FONTAR" type="java.util.Date"/>
+		<property name="observacionResultadoFontar" column="DE_OBSERVACION_FONTAR" type="java.lang.String"/>
+		<property name="fechaRemisionUffa" column="FE_REMISION_UFFA" type="java.util.Date"/>
+		<property name="observacionRemisionUffa" column="DE_REMISION_UFFA" type="java.lang.String"/>
+		<property name="fechaRemisionBid" column="FE_REMISION_BID" type="java.util.Date"/>
+		<property name="observacionRemisionBid" column="DE_REMISION_BID" type="java.lang.String"/>
+		<property name="fechaResultadoUffa" column="FE_RESULTADO_UFFA" type="java.util.Date"/>
+		<property name="observacionResultadoUffa" column="DE_OBSERVACION_UFFA" type="java.lang.String"/>
+		<property name="fechaResultadoBid" column="FE_RESULTADO_BID" type="java.util.Date"/>
+		<property name="observacionResultadoBid" column="DE_OBSERVACION_BID" type="java.lang.String"/>
+		<property name="idWorkFlow" column="ID_PROCESS_INSTANCE" type="java.lang.Long"/>        
+
+		<property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long"/>
+        <many-to-one name="proyecto" class="ProyectoRaizBean" lazy="false" column="ID_PROYECTO" insert="false" update="false" />
+
+		<property name="idPersonaEvaluador" column="ID_PERSONA_EVALUADOR" type="java.lang.Long"/>
+		<many-to-one name="evaluador" class="EvaluadorBean" lazy="false" column="ID_PERSONA_EVALUADOR" insert="false" update="false"/>
+
+        <property name="idTipoAdquisicion" column="ID_TIPO_ADQUISICION" type="java.lang.Long" />
+		<many-to-one name="tipoAdquisicion" class="TipoAdquisicionBean" lazy="false" column="ID_TIPO_ADQUISICION" insert="false" update="false"/>
+		
+		<filter name="securityFilter" condition="ID_PROYECTO in ( :allowedInstances )"/>
+	</class>
+    <query name="ProcedimientoBean.findByIdEvaluador">
+        <![CDATA[select p from ProcedimientoBean p where p.idPersonaEvaluador = ?]]>
+    </query> 
+
+</hibernate-mapping>

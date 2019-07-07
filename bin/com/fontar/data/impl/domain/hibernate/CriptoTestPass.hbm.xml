@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="CriptoTestPassBean" table="CRIPTO_TEST_PASS">
+		<id name="id" column="ID" type="long">
+			<generator class="increment"/>
+		</id>
+        <property name="idUsuario" type="long">
+            <column name="ID_USUARIO" />
+        </property>
+        <property name="clave" type="binary">
+            <column name="CLAVE" length="1024" />
+        </property>
+        <property name="tabla" type="string">
+            <column name="TABLA" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

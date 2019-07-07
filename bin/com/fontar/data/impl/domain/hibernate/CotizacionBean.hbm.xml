@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="CotizacionBean" table="COTIZACION">
+
+		<id name="id" column="ID_COTIZACION" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_COTIZACION</param>
+		   </generator>	
+		</id>
+	
+		<property name="fecha" column="FE_COTIZACION" type="java.util.Date"/>
+		<property name="monto" column="MO_COTIZACION" type="java.math.BigDecimal"/>		
+ 
+        <property name="idMoneda" column="ID_MONEDA" type="java.lang.Long" />
+         <many-to-one name="moneda" column="ID_MONEDA" class="MonedaBean" insert="false" update="false" />
+	</class>
+
+   	<query name="CotizacionBean.findByMoneda">
+        <![CDATA[select e from CotizacionBean e where (e.idMoneda = ?)]]>
+    </query> 
+
+   	<query name="CotizacionBean.findVigente">
+        <![CDATA[select o  
+				 from CotizacionBean o   
+				 where
+				  o.fecha =  (
+						   select max(o.fecha)  
+						   from CotizacionBean o   
+						   where
+						    o.moneda.id = :idMoneda
+						    and o.fecha<=:fecha
+						  )]]>
+    </query> 
+
+</hibernate-mapping>

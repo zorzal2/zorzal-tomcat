@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean.proyecto.presupuesto.plan">
+	<class name="ActividadBean" table="PROY_ACTIVIDAD">
+        <id name="id" type="java.lang.Long" column="ID_ACTIVIDAD">
+			<generator class="sequence">
+			      <param name="sequence">SQ_ACTIVIDAD</param>
+		   </generator>		
+		</id>
+		
+		<many-to-one name="etapa" class="com.fontar.data.impl.domain.bean.proyecto.presupuesto.plan.EtapaBean" column="ID_ETAPA"/>
+		
+		<property name="nombre" column="NM_ACTIVIDAD" type="java.lang.String"/>
+		<property name="descripcion" column="DE_ACTIVIDAD" type="java.lang.String"/>
+		<property name="inicio" column="FE_INICIO " type="java.util.Date"/>
+		<property name="fin" column="FE_FIN" type="java.util.Date"/>
+		<property name="avance" column="TX_AVANCE " type="java.lang.String"/>
+		<property name="observacion" column="DE_OBSERVACION" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

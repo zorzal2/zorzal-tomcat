@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="EvaluacionSeguimiento">
+	<start-state name="Iniciada">
+    	<transition name="" to="Pendiente de Resultado"/>
+	</start-state>
+	
+	<task-node name="Pendiente de Resultado">
+		<task name="Cargar resultado">
+	        <assignment class="com.fontar.jbpm.handler.assigner.EvaluacionGeneralActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-SEGUIMIENTO-CARGAR-RESULTADO</idActionWorkflow>
+         	</assignment>
+
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarResultadoEvaluacionSeguimiento</beanActionId>
+					<taskDescription>
+						wf.evaluacion.seguimiento.cargar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>resultado_cargado</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<task name="Anular">
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-SEGUIMIENTO-ANULAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularEvaluacionSeguimiento</beanActionId>
+					<taskDescription>
+						wf.evaluacion.seguimiento.anular
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>anulada</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" >
+			</action>
+		</event>		
+	
+		<transition name="resultado_cargado" to="fork1"></transition>
+		<transition name="anulada" to="Anulada"></transition>
+	</task-node>
+	
+	<fork name="fork1">
+		<transition name="tr2" to="Cargar Resultado"></transition>
+		<transition name="tr3" to="Confirmar Resultado"></transition>
+	</fork>
+	
+	<task-node name="Cargar Resultado">
+		<task name="Cargar resultado">
+			<assignment class="com.fontar.jbpm.handler.assigner.EvaluacionGeneralActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-SEGUIMIENTO-CARGAR-RESULTADO</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarResultadoEvaluacionSeguimiento</beanActionId>
+					<taskDescription>
+						wf.evaluacion.seguimiento.cargar
+					</taskDescription>
+				</action>
+			</event>
+			
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>	
+	
+		<transition name="cancel" to="join1"></transition>
+		<transition name="repeat" to="Repeater"></transition>
+	</task-node>
+	
+	<task-node name="Confirmar Resultado">
+		<task name="Confirmar resultado">
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-SEGUIMIENTO-CONFIRMAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>ConfirmarEvaluacionSeguimiento</beanActionId>
+					<taskDescription>wf.evaluacion.seguimiento.confirmar</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>resultado_confirmado</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<transition name="resultado_confirmado" to="Cancel Hnos"></transition>
+	</task-node>
+	
+	<node name="Repeater">
+		<transition name="" to="Cargar Resultado"></transition>
+	</node>
+	
+	<node name="Cancel Hnos">
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+			
+		<transition name="" to="join1"></transition>
+	</node>
+	
+	<join name="join1">
+		<transition name="" to="Confirmada"></transition>
+	</join>
+	
+	<end-state name="Confirmada"></end-state>
+	
+	<end-state name="Anulada"></end-state>
+</process-definition>

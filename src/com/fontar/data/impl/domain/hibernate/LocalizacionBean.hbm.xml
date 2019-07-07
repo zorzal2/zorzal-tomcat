@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="LocalizacionBean" table="LOCALIZACION">
+		<id name="id" column="ID_LOCALIZACION" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_LOCALIZACION</param>
+		   </generator>		
+		</id>
+
+		<property name="idJurisdiccion" type="java.lang.Long" column="ID_JURISDICCION" />
+		<many-to-one name="jurisdiccion" class="JurisdiccionBean" column="ID_JURISDICCION" update="false" insert="false"/>		
+		
+		<property name="direccion" type="java.lang.String">
+			<column name="TX_DIRECCION" />
+		</property>
+		
+		<property name="localidad" type="java.lang.String">
+			<column name="TX_LOCALIDAD" />
+		</property>
+		
+		<property name="departamento" type="java.lang.String">
+			<column name="TX_DEPARTAMENTO" />	
+		</property>
+		
+		<property name="codigoPostal" type="java.lang.String">
+			<column name="TX_CODIGO_POSTAL" />
+		</property>
+		
+		<property name="pais" type="java.lang.String">
+			<column name="TX_PAIS" />
+		</property>
+
+		<property name="telefono" type="java.lang.String">
+			<column name="TX_TELEFONO" />
+		</property>
+		
+		<property name="fax" type="java.lang.String">
+			<column name="TX_FAX" />
+		</property>
+		
+		<property name="email" type="java.lang.String">
+			<column name="TX_EMAIL" />
+		</property>
+		
+		<property name="paginaWeb" type="java.lang.String">
+			<column name="TX_PAGINA_WEB" />
+		</property>		
+    </class>
+</hibernate-mapping>
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+
+	<filter-def name="securityFilter">
+    	<filter-param name="allowedInstances" type="string"/>
+	</filter-def>
+
+	<filter-def name="evaluacionSecurityFilter">
+    	<filter-param name="allowedInstances" type="string"/>
+	</filter-def>
+
+</hibernate-mapping>

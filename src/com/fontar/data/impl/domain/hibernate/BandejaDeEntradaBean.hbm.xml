@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="BandejaDeEntradaBean" table="proyecto" schema="fontar">
+		<id name="id" column="ID_PROCESS_INSTANCE" type="long">
+			<generator class="increment"/>
+		</id>
+		<property name="nombre" column="RESUMEN"/>	
+		<property name="estado" column="ESTADO"/>
+		<property name="fechaInicio" column="FECHA_INGRESO"/>
+		<property name="responsable" column="ID_RESPONSABLE"/>
+	</class>
+</hibernate-mapping>

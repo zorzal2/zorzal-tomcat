@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="Evaluacion">
+	<start-state name="Iniciada">
+		<transition name="" to="¿Pendiente Autorización?"></transition>
+	</start-state>
+	<end-state name="No Autorizada"></end-state>
+
+	<task-node name="Pendiente Autorizacion">
+		<task name="Registrar conformidad evaluación">
+			
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-PROYECTO-AUTORIZAR</idActionWorkflow>
+         	</assignment>
+         				
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AutorizarEvaluacion</beanActionId>
+					<taskDescription>
+						wf.evaluacion.proyecto.autorizar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>registrada</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<task name="Anular">
+		
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-PROYECTO-ANULAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularEvaluacion</beanActionId>
+					<taskDescription>
+						wf.evaluacion.proyecto.anular
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>anulada</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<transition name="registrada" to="¿Autorizada?"></transition>
+		<transition name="anulada" to="Anulada"></transition>
+
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" />
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+	</task-node>
+
+	<decision name="¿Autorizada?">
+		<handler
+			class="com.fontar.jbpm.handler.decision.AutorizacionEvaluacion" />
+		<transition name="NO" to="No Autorizada"></transition>
+		<transition name="SI" to="Pendiente de Resultado"></transition>
+	</decision>
+
+	<task-node name="Pendiente de Resultado">
+		<task name="Cargar resultado">
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.EvaluacionGeneralActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-PROYECTO-CARGAR-RESULTADO</idActionWorkflow>
+         	</assignment>
+
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarEvaluacion</beanActionId>
+					<taskDescription>
+						wf.evaluacion.proyecto.cargar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>con_resultado</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<task name="Anular">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-PROYECTO-ANULAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularEvaluacion</beanActionId>
+					<taskDescription>
+						wf.evaluacion.proyecto.anular
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>anulada</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="con_resultado" to="fork1"></transition>
+		<transition name="anulada" to="Anulada"></transition>
+
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" />
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+	</task-node>
+	<end-state name="Anulada"></end-state>
+	<end-state name="Confirmada"></end-state>
+
+	<task-node name="Confirmar Resultado">
+		<task name="Confirmar resultado">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-PROYECTO-CONFIRMAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>ConfirmarEvaluacion</beanActionId>
+					<taskDescription>
+						wf.evaluacion.proyecto.confirmar
+					</taskDescription>
+				</action>
+			</event>
+		</task>
+		<transition name="" to="Cancelar Hnos"></transition>
+	</task-node>
+
+	<decision name="¿Pendiente Autorización?">
+		<handler
+			class="com.fontar.jbpm.handler.decision.AutorizacionEvaluacionPendiente" />
+		<transition name="SI" to="Pendiente Autorizacion"></transition>
+		<transition name="NO" to="Pendiente de Resultado"></transition>
+	</decision>
+
+	<fork name="fork1">
+		<transition name="" to="Confirmar Resultado"></transition>
+		<transition name="tr2" to="Cargar Resultado"></transition>
+	</fork>
+	<task-node name="Cargar Resultado">
+		<task name="Cargar resultado">
+		
+			<assignment class="com.fontar.jbpm.handler.assigner.EvaluacionGeneralActorAssigner">
+    	        <idActionWorkflow>WF-EVALUACION-PROYECTO-CARGAR-RESULTADO</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarEvaluacion</beanActionId>
+					<taskDescription>
+						wf.evaluacion.proyecto.cargar
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="repeat" to="Repeat"></transition>
+		<transition name="cancel" to="join1"></transition>
+	</task-node>
+	<node name="Repeat">
+		<transition name="" to="Cargar Resultado"></transition>
+	</node>
+	<node name="Cancelar Hnos">
+
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+		<transition name="" to="join1"></transition>
+	</node>
+	<join name="join1">
+		<transition name="" to="Confirmada"></transition>
+	</join>
+</process-definition>

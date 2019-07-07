@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="RendicionCuentasBean" table="RENDICION">
+		<id name="id" column="ID_RENDICION" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_RENDICION</param>
+			</generator>
+		</id>
+
+		<property name="idSeguimiento" column="ID_SEGUIMIENTO" type="java.lang.Long"/>
+		<many-to-one name="seguimiento" column="ID_SEGUIMIENTO" class="SeguimientoBean" update="false" insert="false" />
+		
+		<property name="idRubro" column="ID_RUBRO" type="java.lang.Long"/>	
+
+		<many-to-one name="rubro" column="ID_RUBRO" class="RubroBean" update="false" insert="false" lazy="false"/>
+		<property name="numeroFactura" column="TX_FACTURA" type="java.lang.String"/>		
+		<property name="numeroRecibo" column="TX_RECIBO" type="java.lang.String"/>		
+        <property name="fecha" column="FE_RENDICION" type="java.util.Date" />
+        <property name="nombreProveedor" column="NM_PROVEEDOR" type="java.lang.String" />		
+		<property name="montoTotal" column="MO_REND_TOTAL" type="java.math.BigDecimal"/>		
+        <property name="tieneCertificadoProveedor" column="ST_GRAL_CERTIFICADO_PROVEEDOR" type="java.lang.Boolean"/>		
+		<property name="montoParteRendicion" column="MO_REND_PARTE" type="java.math.BigDecimal" />
+		<property name="montoContraparteRendicion" column="MO_REND_CONTRAPARTE" type="java.math.BigDecimal" />		
+		<property name="montoParteEvaluacion" column="MO_EVAL_PARTE" type="java.math.BigDecimal" />
+		<property name="montoContraparteEvaluacion" column="MO_EVAL_CONTRAPARTE" type="java.math.BigDecimal" />
+		<property name="montoParteGestion" column="MO_GESTION_PARTE" type="java.math.BigDecimal" />
+		<property name="montoContraparteGestion" column="MO_GESTION_CONTRAPARTE" type="java.math.BigDecimal" />
+		<property name="paisProveedor" column="TX_GRAL_PAIS_PROVEEDOR" type="java.lang.String" />
+		
+		<property name="idPersona" column="ID_PERSONA" type="java.lang.Long"/>			
+		<many-to-one name="persona" column="ID_PERSONA" class="PersonaBean" update="false" insert="false" lazy="false"/>
+		<property name="profesionPersona" column="TX_PERS_PROFESION" type="java.lang.String" />
+		<property name="descripcion" column="TX_DESCRIPCION" type="java.lang.String" />
+		<property name="montoSueldoMensual" column="MO_PERS_SUELDO_MENSUAL" type="java.math.BigDecimal" />
+		<property name="porcentajeDedicacion" column="PR_PERS_DEDICACION" type="java.math.BigDecimal" />
+		<property name="mesesParticipacion" column="CA_PERS_MESES_PARTICIPACION" type="java.lang.Long" />		
+		<property name="observaciones" column="TX_EVALUACION" type="java.lang.String" />
+        <property name="version" column="FE_VERSION" type="java.util.Date" />
+	</class>
+
+    
+     <query name="RendicionCuentasBean.findRendicionesBeanPorSeguimiento">
+		<![CDATA[select r
+				 from RendicionCuentasBean r
+ 				 where	r.idSeguimiento = ? ]]>
+    </query> 
+    
+     <query name="RendicionCuentasBean.findRendicionesBeanPorProyecto">
+		<![CDATA[select r
+				 from RendicionCuentasBean r
+ 				 where	r.seguimiento.idProyecto = ? ]]>
+    </query> 
+    
+     <query name="RendicionCuentasBean.findRendicionesBeanPorPersona">
+		<![CDATA[select r
+				 from RendicionCuentasBean r
+ 				 where	r.idPersona is not null and r.idPersona = ? ]]>
+    </query> 
+</hibernate-mapping>
+
+
+
+
+
+
+

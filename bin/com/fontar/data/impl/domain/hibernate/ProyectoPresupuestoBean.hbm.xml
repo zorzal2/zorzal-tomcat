@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean" auto-import="false">
+	<class name="ProyectoPresupuestoBean" table="PROY_PRESUPUESTO">
+        <id name="id" type="java.lang.Long" column="ID_PROY_PRESUPUESTO">
+			<generator class="com.fontar.data.impl.domain.bean.BitacoraSequence">
+			      <param name="tipo">PRESUPUESTO</param>
+		   	</generator>
+		</id>	
+		<property name="montoPresupuestoTotal" column="MO_PROYECTO" type="com.fontar.data.impl.domain.hibernate.presupuesto.MontoPresupuestoTotalUserType"/>	        
+        <property name="montoPresupuestoSolicitado" column="MO_BENEFICIO" type="com.fontar.data.impl.domain.hibernate.presupuesto.MontoPresupuestoSolicitadoUserType"/>
+        
+        <property name="fundamentacion" column="DE_FUNDAMENTACION" type="java.lang.String"/>
+		<property name="presupuestoRubros" column="XML_PRESUPUESTO_RUBROS" type="com.fontar.proyecto.presupuesto.hibernate.EncryptedProyectoPresupuestoUserType" lazy="true"/>
+
+        <set name="etapas">
+            <key column="ID_PRESUPUESTO"/>
+            <one-to-many class="com.fontar.data.impl.domain.bean.proyecto.presupuesto.plan.EtapaBean"/>
+        </set>
+		<set name="adjuntos" table="ADJ_PRESUPUESTO" lazy="true">
+			<key column="ID_PRESUPUESTO" />
+			<many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>				 
+		</set>			
+    </class>
+        
+</hibernate-mapping>

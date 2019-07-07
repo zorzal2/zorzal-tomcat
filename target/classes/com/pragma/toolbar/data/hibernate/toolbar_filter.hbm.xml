@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+        <class name="com.pragma.toolbar.data.bean.ToolbarFilterBean" table="TOOLBAR_FILTER">
+           <id name="id" column="TOOLBAR_FILTER_ID" type="java.lang.Long">
+				<generator class="sequence"> 
+					<param name="sequence">SEQ_IDTOOLBAR_FILTER</param> 
+				</generator>  
+			</id>
+           <property name="property" column="PROPERTY" type="java.lang.String"/>
+           <property name="expression" column="EXPRESSION" type="java.lang.String"/>
+           <property name="filterTypeDescription" column="FILTER_TYPE_DESCRIPTION" type="java.lang.String"/>
+			<many-to-one name="value" column="VALUE" class="com.pragma.toolbar.data.bean.VariantBean"/>
+           <property name="classTypeName" column="CLASS_TYPE_NAME" type="java.lang.String"/>
+
+           <property name="userId" column="USER_ID" type="java.lang.String"/>
+           <property name="toolbarId" column="TOOLBAR_ID" type="java.lang.String"/>
+        </class>
+</hibernate-mapping>
+
+
+

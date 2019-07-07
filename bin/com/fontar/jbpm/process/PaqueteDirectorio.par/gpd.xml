@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="PaqueteDirectorio" width="1035" height="1600">
+  <node name="Confirmar Paquete" x="164" y="976" width="140" height="40">
+    <transition name="confirmado">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cancel">
+      <label x="15" y="-27"/>
+      <bendpoint w1="-2" h1="196" w2="-271" h2="0"/>
+    </transition>
+  </node>
+  <node name="Evaluar Paquete" x="403" y="990" width="140" height="40">
+    <transition name="repeat">
+      <label x="-23" y="-17"/>
+      <bendpoint w1="98" h1="-42" w2="-97" h2="-41"/>
+    </transition>
+    <transition name="cancel">
+      <label x="10" y="-20"/>
+    </transition>
+  </node>
+  <node name="start" x="382" y="92" width="141" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Fin" x="345" y="1559" width="140" height="40"/>
+  <node name="fork1" x="318" y="896" width="132" height="25">
+    <transition name="confirmar">
+      <label x="-55" y="-13"/>
+    </transition>
+    <transition name="continuar">
+      <label x="19" y="-11"/>
+    </transition>
+  </node>
+  <node name="join1" x="350" y="1179" width="127" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Controlar por Directorio" x="160" y="401" width="188" height="40">
+    <transition name="controlado">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-115" h1="0" w2="-226" h2="-163"/>
+      <bendpoint w1="-114" h1="153" w2="-223" h2="0"/>
+    </transition>
+  </node>
+  <node name="Repeater 1" x="537" y="1038" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-96" h1="43" w2="99" h2="42"/>
+    </transition>
+  </node>
+  <node name="Cancel Hnos 1" x="262" y="1081" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="fork2" x="352" y="212" width="200" height="25">
+    <transition name="anular">
+      <label x="-5" y="-30"/>
+    </transition>
+    <transition name="evaluar">
+      <label x="25" y="-2"/>
+    </transition>
+  </node>
+  <node name="Anular" x="756" y="304" width="140" height="40">
+    <transition name="cancel">
+      <label x="10" y="-7"/>
+      <bendpoint w1="168" h1="-3" w2="490" h2="-1116"/>
+      <bendpoint w1="170" h1="1093" w2="581" h2="-3"/>
+    </transition>
+    <transition name="anulada">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="join2" x="315" y="1408" width="200" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cancelar Hnos 2" x="757" y="638" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-3" h1="658" w2="396" h2="-121"/>
+    </transition>
+  </node>
+  <node name="fork3" x="219" y="298" width="200" height="25">
+    <transition name="modificar">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="controlar">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Modificar Paquete" x="354" y="492" width="140" height="40">
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="repeat">
+      <label x="17" y="-3"/>
+      <bendpoint w1="115" h1="-3" w2="-96" h2="-62"/>
+    </transition>
+  </node>
+  <node name="Cancelar Hnos 3" x="182" y="503" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="join3" x="231" y="619" width="200" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Repeater 2" x="525" y="561" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-115" h1="-7" w2="55" h2="45"/>
+    </transition>
+  </node>
+  <node name="¿En proceso de anulacion?" x="228" y="708" width="204" height="40">
+    <transition name="SI">
+      <label x="-265" y="-231"/>
+      <bendpoint w1="413" h1="190" w2="315" h2="-519"/>
+      <bendpoint w1="414" h1="364" w2="456" h2="-118"/>
+    </transition>
+    <transition name="NO">
+      <label x="-13" y="-15"/>
+    </transition>
+  </node>
+  <node name="Cargar Evaluacion" x="73" y="815" width="140" height="40">
+    <transition name="registrada">
+      <label x="5" y="-10"/>
+      <bendpoint w1="100" h1="-4" w2="-83" h2="53"/>
+    </transition>
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-87" h1="-2" w2="-372" h2="-604"/>
+      <bendpoint w1="-87" h1="502" w2="-372" h2="-100"/>
+    </transition>
+  </node>
+  <node name="Cancel Hnos 4" x="356" y="1258" width="117" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Liberar Proyectos" x="345" y="1479" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+</process-diagram>

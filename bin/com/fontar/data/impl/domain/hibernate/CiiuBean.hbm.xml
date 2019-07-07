@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="CiiuBean" table="CIIU" mutable="false">
+		<id name="id" type="java.lang.Long" column="ID_CIIU">
+			<generator class="sequence">
+			      <param name="sequence">SQ_CIIU</param>
+		   </generator>		
+		</id>		
+        <property name="nombre" column="NM_CIIU" type="java.lang.String" />
+        <property name="codigo" column="CD_CIIU" type="java.lang.String" />
+
+        <!-- estoy creando una relación padre -->
+        <property name="idPadre" type="java.lang.Long" column ="ID_CIIU_PADRE"  />
+        <many-to-one name="padre" class="CiiuBean" column ="ID_CIIU_PADRE" insert="false" update="false" />
+    </class>
+</hibernate-mapping>

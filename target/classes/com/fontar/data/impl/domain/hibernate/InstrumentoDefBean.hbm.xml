@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="InstrumentoDefBean" table="INSTRUMENTO_DEF">
+		<id name="id" type="java.lang.Long" column="ID_INSTRUMENTO_DEF">
+			<generator class="sequence">
+			      <param name="sequence">SQ_INSTRUMENTO_DEF</param>
+		   </generator>		
+		</id>		
+        <property name="codigoTipo" column="TP_INSTRUMENTO" type="java.lang.String" />
+        <property name="identificador" column="TX_IDENTIFICADOR" type="java.lang.String" />
+        
+        <property name="denominacion" column="NM_DENOMINACION" type="java.lang.String" />
+        <property name="monto" column="MO_FINANCIAMIENTO" type="java.math.BigDecimal" />
+        <property name="modalidad" column="TX_MODALIDAD" type="java.lang.String" />
+        <property name="proporcionApoyo" column="NR_APOYO" type="java.math.BigDecimal" />
+        <property name="periodoGracia" column="TX_PERIODO_GRACIA" type="java.lang.String" />
+        <property name="plazoEjecucion" column="TX_PLAZO_EJECUCION" type="java.lang.String" />
+        <property name="plazoAmortizacion" column="TX_PLAZO_AMORTIZACION" type="java.lang.String" />
+        <property name="tasaInteres" column="TX_TASA_INTERES" type="java.lang.String" />
+        <property name="garantia" column="TX_GARANTIA" type="java.lang.String" />
+        
+        <property name="permiteMultipleJurisdiccion" column="ST_MULTIPLE_JURISDICCION" type="java.lang.Boolean" /> 
+        <property name="permiteFinanciamientoBancario" column="ST_FINANCIMIENTO_BANCARIO" type="java.lang.Boolean" />
+        <property name="permiteComision" column="ST_COMISION" type="java.lang.Boolean" />
+        <property name="permiteSecretaria" column="ST_SECRETARIA" type="java.lang.Boolean" />
+        <property name="permiteAdjudicacion" column="ST_ADJUDICACION" type="java.lang.Boolean" />
+        <property name="permitePropiciado" column="ST_PROPICIADO" type="java.lang.Boolean" />                
+        <property name="permiteAdquisicion" column="ST_SUPERVISA_PROCEDIMIENTO_ADQ" type="java.lang.Boolean" />                
+
+        <property name="observacion" column="DE_OBSERVACION" type="java.lang.String" />
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+        <property name="idFuenteFinanciamiento" column="ID_FUENTE_FINANCIAMIENTO" type="java.lang.Long" />
+        <many-to-one name="fuenteFinanciamiento" class="FuenteFinanciamientoBean" column ="ID_FUENTE_FINANCIAMIENTO" update="false" insert="false"/>
+        <!-- 
+        <set name="adjuntos"
+			cascade="all-delete-orphan"
+			inverse="true"
+	        table="ADJ_INSTRUMENTO_DEF"
+	        lazy="false">
+			<key column="ID_ADJUNTO" />
+			<one-to-many  class="AdjuntoBean"/>
+		</set>
+		 -->
+        <set name="adjuntos" table="ADJ_INSTRUMENTO_DEF" lazy="true">
+			<key column="ID_INSTRUMENTO_DEF" />
+			<many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>
+		</set>
+        
+    </class>
+   
+    <query name="InstrumentoDefBean.findByIdentificador">
+        <![CDATA[from InstrumentoDefBean i where i.identificador = :identificador ]]>
+    </query> 
+    
+    <query name="InstrumentoDefBean.findByIdentificadorId">
+        <![CDATA[from InstrumentoDefBean i where i.identificador = :identificador AND (i.id <> :idInstrumentoDef)]]>
+    </query> 
+</hibernate-mapping>

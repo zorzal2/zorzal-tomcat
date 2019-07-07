@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="AdjuntoBean" table="ADJUNTO">
+		<id name="id" column="ID_ADJUNTO" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_ADJUNTO</param>
+		   </generator>		
+		</id>
+				
+		<property name="nombre" type="java.lang.String">
+			<column name="NM_ARCHIVO" />
+		</property>
+		
+		<property name="descripcion" type="java.lang.String">
+			<column name="DE_ARCHIVO" />
+		</property>
+		
+		<property name="fecha" type="java.util.Date">
+			<column name="FE_ARCHIVO" />	
+		</property>
+
+		<property name="cantidadLongitud" type="java.lang.Long">
+			<column name="CA_LONGITUD" />	
+		</property>
+		
+		<property name="tipoContenido" type="java.lang.String">
+			<column name="TP_CONTENIDO" />	
+		</property>
+		
+		<property name="idAdjuntoContenido" type="java.lang.Long">
+			<column name="ID_ADJUNTO_CONTENIDO" />	
+		</property>
+		<!-- 
+        <many-to-one name="InstrumentoDefBean" class="com.fontar.data.impl.domain.bean.InstrumentoDefBean" lazy="false" column="ID_INSTRUMENTO_DEF" insert="false" update="false"/>
+         -->
+    </class>
+</hibernate-mapping>

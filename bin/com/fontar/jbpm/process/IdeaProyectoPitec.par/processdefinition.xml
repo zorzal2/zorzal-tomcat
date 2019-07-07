@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="IdeaProyectoPitec">
+
+	<start-state name="start">
+		<transition name="" to="fork1"></transition>
+	</start-state>
+
+	<task-node name="Evaluar Admisión" signal="first">
+		<task name="Admision">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-ADMISION</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>
+						EvaluarAdmisibilidadProyecto
+					</beanActionId>
+					<taskDescription>
+						wf.proyecto.admision.evaluar
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+				</action>
+			</event>
+		</task>
+		<transition name="" to="¿Admitido?"></transition>
+		<transition name="cancel" to="join2"></transition>
+
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+
+	</task-node>
+
+	<decision name="¿Admitido?">
+		<handler class="com.fontar.jbpm.handler.decision.Admisibilidad" />
+		<transition name="NO" to="Solicitar Readmisión"></transition>
+		<transition name="SI"
+			to="Agregar Primera Evaluación">
+		</transition>
+	</decision>
+
+	<task-node name="Solicitar Readmisión" signal="first">
+
+		<task name="Solicitar readmisión">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-READMISION</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>
+						SolicitarReadmisionProyecto
+					</beanActionId>
+					<taskDescription>
+						wf.proyecto.readmision.solicitud
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+				</action>
+			</event>
+		</task>
+		<transition name="" to="Cancelar Hnos 5"></transition>
+
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+
+		<transition name="cancel" to="join2"></transition>
+	</task-node>
+
+	<task-node name="Agregar Evaluación" signal="first">
+		<task name="Agregar Evaluación">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-1-2-3-4-5-6</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>
+						EvaluarProyecto
+					</beanActionId>
+					<taskDescription>
+						wf.proyecto.evaluacion.agregar	
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="repeat" to="Repeater 1"></transition>
+		<transition name="cancel" to="join1"></transition>
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+	</task-node>
+	<fork name="fork1">
+		<transition name="global 1" to="Editar Presupuesto"></transition>
+		<transition name="global 2" to="Cerrar-Anular Proyecto"></transition>
+      <transition name="principal" to="¿Requiere Admisión?"></transition>
+    </fork>
+	<task-node name="Editar Presupuesto">
+		<task name="Editar Presupuesto">
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-EDITAR-PRESUPUESTO</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>
+						EditarPresupuestoProyecto
+					</beanActionId>
+					<taskDescription>
+						wf.proyecto.presupuesto.editar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+
+		</task>
+
+		<transition name="repeat" to="Repeater 2"></transition>
+		<transition name="cancel" to="join2"></transition>
+
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+
+	</task-node>
+	<task-node name="Cerrar-Anular Proyecto" signal="first">
+		<task name="Cerrar Proyecto">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-CERRAR</idActionWorkflow>
+         	</assignment>
+
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarProyecto</beanActionId>
+					<taskDescription>
+						wf.proyecto.cerrar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+
+		</task>
+		<task name="Anular Proyecto">
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularProyecto</beanActionId>
+					<taskDescription>wf.proyecto.anular</taskDescription>
+				</action>
+			</event>
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-ANULAR</idActionWorkflow>
+         	</assignment>
+         
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+		<event type="node-leave">
+			<script>
+				<expression>a = "SI";</expression>
+				<variable name='CERRANDO_PROYECTO' access='write'
+					mapped-name='a' />
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+		<transition name="cancel" to="join2"></transition>
+		<transition name="cerrar/anular" to="Cancelar Hnos 1"></transition>
+	</task-node>
+	
+	
+	<node name="Repeater 2">
+		<transition name="" to="Editar Presupuesto"></transition>
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+
+	</node>
+	<task-node name="Finalizar Control">
+		<task name="Finalizar Control">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-FINALIZAR-CONTROL</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>
+						FinalizarControlEvaluacion
+					</beanActionId>
+					<taskDescription>
+						wf.proyecto.evaluacion.finalizar
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>finalizar_control</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<transition name="finalizar_control" to="Cancelar Hnos 2"></transition>
+		<transition name="cancel" to="join1"></transition>
+
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+
+	</task-node>
+	<fork name="fork2">
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+		<transition name="repetitiva" to="Agregar Evaluación"></transition>
+		<transition name="tr" to="Finalizar Control"></transition>
+	</fork>
+	<node name="Repeater 1">
+		<transition name="" to="Agregar Evaluación"></transition>
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+	</node>
+	<join name="join1">
+		<transition name="" to="¿En Proceso de Cierre?"></transition>
+	</join>
+	<join name="join2">
+		<event type="node-enter">
+			<script>
+				System.out.println("Token " + token + " entrando a
+				join2");
+			</script>
+		</event>
+		<transition name="" to="Fin"></transition>
+	</join>
+	<node name="Cancelar Hnos 1">
+		<transition name="" to="join2"></transition>
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+	</node>
+	<node name="Cancelar Hnos 2">
+		<transition name="" to="join1"></transition>
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+	</node>
+	<task-node name="Agregar Primera Evaluación" signal="first">
+		<task name="Agregar Evaluación">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-AGREGAR-EVALUACION</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarProyecto</beanActionId>
+					<taskDescription>
+						wf.proyecto.evaluacion.agregar
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>evaluacion</transitionName>
+				</action>
+			</event>
+		</task>
+		<task name="Pasar Próxima Etapa">
+	        
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-PROXIMA-ETAPA</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>PasarProximaEtapa</beanActionId>
+					<taskDescription>
+						wf.proyecto.evaluacion.proximaEtapa
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>proxima_etapa</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" />
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+		<transition name="proxima_etapa" to="Controlado"></transition>
+		<transition name="cancel" to="join2"></transition>
+      <transition name="evaluacion" to="Comienzo Evaluación"></transition>
+	</task-node>
+	<node name="Cancelar Hnos 5">
+		<transition name="" to="join2"></transition>
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+		<event type="node-leave">
+			<script>
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+	</node>
+	<end-state name="Fin">
+		<event type="node-enter">
+			<script>
+				System.out.println("Entrando a " + node.getName());
+			</script>
+		</event>
+	</end-state>
+	<decision name="¿En Proceso de Cierre?">
+		<transition name="SI" to="join2">
+			<condition
+				expression="#{contextInstance.variables['CERRANDO_PROYECTO']=='SI'}" />
+		</transition>
+		<transition name="NO" to="Controlado">
+			<condition
+				expression="#{contextInstance.variables['CERRANDO_PROYECTO']!='SI'}" />
+		</transition>
+	</decision>
+	<task-node name="Cargar Alícuota">
+
+		<task name="Cargar alicuota">
+		
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-CARGAR-ALICUOTA</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AlicuotaEditar</beanActionId>
+					<taskDescription>
+						wf.proyecto.alicuota.cargar
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>con_alicuota</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="con_alicuota" to="Controlado"></transition>
+		<transition name="cancel" to="Cancel Hnos 6"></transition>
+	</task-node>
+	<state name="Controlado">
+		<event type="node-enter">
+			<action name="suspend cancelar"
+				class="com.fontar.jbpm.handler.action.SuspendTask">
+
+				<tasksName>
+					<element>Anular Proyecto</element>				
+					<element>Cerrar Proyecto</element>
+					<element>Editar Presupuesto</element>
+				</tasksName>
+
+			</action>
+		</event>
+		<event type="node-leave">
+			<action name="resume cancelar"
+				class="com.fontar.jbpm.handler.action.ResumeTask">
+				<tasksName>
+					<element>Anular Proyecto</element>
+					<element>Cerrar Proyecto</element>
+					<element>Editar Presupuesto</element>
+				</tasksName>
+			</action>
+		</event>
+		<transition name="" to="Fin Paquete"></transition>
+		<exception-handler
+			exception-class="com.pragma.jbpm.WorkFlowException" />
+	</state>
+
+	<decision name="Fin Paquete">
+		<handler
+			class="com.fontar.jbpm.handler.decision.ConfirmacionPaquete" />
+		<transition name="adjudicado" to="Firma de Contrato"></transition>
+		<transition name="reconsideracion" to="Reconsideración"></transition>
+		<transition name="pendiente_alicuota" to="Cargar Alícuota"></transition>
+		<transition name="controlado" to="Controlado"></transition>
+      <transition name="evaluacion" to="Comienzo Evaluación"></transition>
+	</decision>
+
+	<task-node name="Firma de Contrato">
+		<task name="Firma Contrato"></task>
+		<task name="Solicitar Reconsideracion"></task>
+		<transition name="reconsiderar"
+			to="Análisis Legal Reconsideración">
+		</transition>
+		<transition name="con_contrato" to="Agregar Seguimiento"></transition>
+		<transition name="cancel" to="Cancel Hnos 6"></transition>
+	</task-node>
+	<task-node name="Reconsideración">
+		<task name="Solicitar Reconsideracion"></task>
+
+		<task name="Finalizar Posibilidad Reconsideracion">
+			
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-PITEC-FINALIZAR-RECONSIDERACION</idActionWorkflow>
+         	</assignment>
+         				
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>
+						FinalizarPosibilidadReconsideracion
+					</beanActionId>
+					<taskDescription>
+						wf.proyecto.reconsideracion.finalizar
+					</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>
+						finalizar_reconsideracion
+					</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<transition name="reconsiderar"
+			to="Análisis Legal Reconsideración">
+		</transition>
+		<transition name="cancel" to="Cancel Hnos 6"></transition>
+		<transition name="finalizar_reconsideracion" to="¿Rechazado?"></transition>
+	</task-node>
+	<task-node name="Análisis Legal Reconsideración">
+		<transition name="cancel" to="Cancel Hnos 6"></transition>
+	</task-node>
+	<task-node name="Agregar Seguimiento">
+		<transition name="cancel" to="Cancel Hnos 6"></transition>
+	</task-node>
+	<node name="Cancel Hnos 6">
+
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+		<transition name="" to="join2"></transition>
+	</node>
+	<decision name="¿Rechazado?">
+			<handler
+			class="com.fontar.jbpm.handler.decision.ResultadoRechazo" />
+		<transition name="SI" to="Cancel Hnos 6"></transition>
+		<transition name="NO" to="Fin Paquete"></transition>
+	</decision>
+   <node name="Comienzo Evaluación">
+      <transition name="" to="fork2"></transition>
+   </node>
+   <decision name="¿Requiere Admisión?">
+      <transition name="NO" to="Agregar Primera Evaluación">
+      		<condition
+				expression="#{contextInstance.variables['ES_VENTANILLA']=='SI'}" />
+      </transition>
+      <transition name="SI" to="Evaluar Admisión">
+      		<condition
+				expression="#{contextInstance.variables['ES_VENTANILLA']=='NO'}" />
+      </transition>
+   </decision>
+</process-definition>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="Seguimiento">
+	<start-state name="Iniciado">
+      <transition name="" to="fork2"></transition>
+	</start-state>
+	
+	<end-state name="Finalizado"></end-state>
+   
+	<task-node name="Agregar Primera Evaluación">
+		<task name="Agregar Evaluación">
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-AGREGAR-EVALUACION-SEGUIMIENTO</idActionWorkflow>
+         	</assignment>
+
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarSeguimiento</beanActionId>
+					<taskDescription>wf.seguimiento.evaluacion.agregar</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>con_primera_evaluacion</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<transition name="con_primera_evaluacion" to="fork1"></transition>
+      <transition name="cancel" to="join2"></transition>
+	</task-node>
+   
+	<task-node name="Agregar Evaluación">
+   		<task name="Agregar Evaluación">
+	         <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-AGREGAR-EVALUACION-SEGUIMIENTO</idActionWorkflow>
+        	 </assignment>
+
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarSeguimiento</beanActionId>
+					<taskDescription>wf.seguimiento.evaluacion.agregar</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>
+   
+		<transition name="repeat" to="Repeater"></transition>
+		<transition name="cancel" to="join1"></transition>
+	</task-node>
+   
+	<node name="Repeater">
+		<transition name="" to="Agregar Evaluación"></transition>
+	</node>
+   
+	<task-node name="Evaluar Autorización De Pago">
+   		<task name="Evaluar Autorización de Pago">
+	         <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-SEGUIMIENTO-EVALUAR-AUTORIZACION-PAGO</idActionWorkflow>
+        	 </assignment>
+
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarAutorizacionPagoSeguimiento</beanActionId>
+					<taskDescription>wf.seguimiento.autorizacionPago.evaluar</taskDescription>
+				</action>
+			</event>
+			
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>autorizacion_de_pago_evaluada</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="cancel" to="join2"></transition>
+		<transition name="autorizacion_de_pago_evaluada" to="¿Autorizado?"></transition>
+	</task-node>
+   
+	<decision name="¿Autorizado?">
+		<handler class="com.fontar.jbpm.handler.decision.AutorizacionPagoSeguimiento" />
+		<transition name="SI" to="Evaluar Gestión De Pago"/>
+		<transition name="NO" to="Agregar Primera Evaluación"></transition>
+	</decision>
+   
+	<task-node name="Evaluar Gestión De Pago">
+   		<task name="Evaluar Gestion de Pago">
+	         <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-SEGUIMIENTO-EVALUAR-GESTION-PAGO</idActionWorkflow>
+        	 </assignment>
+
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarGestionPagoSeguimiento</beanActionId>
+					<taskDescription>wf.seguimiento.gestionPago.evaluar</taskDescription>
+				</action>
+			</event>
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>gestion_evaluada</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="cancel" to="join2"></transition>
+      <transition name="gestion_evaluada" to="¿Revaluar?"></transition>
+	</task-node>
+   
+	<fork name="fork1">
+		<transition name="" to="Agregar Evaluación"></transition>
+		<transition name="tr2" to="Finalizar Control"></transition>
+	</fork>
+
+	<task-node name="Finalizar Control">
+		<task name="Finalizar Control">		
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-SEGUIMIENTO-FINALIZAR-CONTROL</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>FinalizarControlSeguimiento</beanActionId>
+					<taskDescription>
+						wf.evaluacion.seguimiento.finalizarControl
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>finalizar_control</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="finalizar_control" to="Cancel Hnos"></transition>
+		<transition name="cancel" to="join1"></transition>
+	</task-node>
+
+	<node name="Cancel Hnos">
+		<action class="com.fontar.jbpm.handler.action.CancelBrothersTask"/>
+		<transition name="" to="join1"></transition>
+	</node>
+
+   <join name="join1">
+      <transition name="" to="¿En proceso de Anulación o Cierre?"></transition>
+   </join>
+
+   <fork name="fork2">
+      <transition name="evaluar" to="Agregar Primera Evaluación"></transition>
+      <transition name="cerrar-anular" to="Cerrar - Anular">
+      </transition>
+   </fork>
+   
+   <task-node name="Cerrar - Anular">
+		<task name="Anular">		
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-SEGUIMIENTO-ANULAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularSeguimiento</beanActionId>
+					<taskDescription>
+						wf.seguimiento.anular
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<script>
+					<expression>a = "SI";</expression>
+					<variable name='ANULANDO_SEGUIMIENTO' access='write'
+						mapped-name='a' />
+				</script>			
+			
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>			
+		</task>
+		
+		<task name="Cerrar">		
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  	        <idActionWorkflow>WF-SEGUIMIENTO-CERRAR</idActionWorkflow>
+		       	</assignment>
+		       			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarSeguimiento</beanActionId>
+					<taskDescription>
+						wf.seguimiento.cerrar
+					</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<script>
+					<expression>a = "SI";</expression>
+					<variable name='CERRANDO_SEGUIMIENTO' access='write'
+						mapped-name='a' />
+				</script>			
+			
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>			
+		</task>		
+
+		<event type="node-leave">
+			<action class="com.fontar.jbpm.handler.action.CancelOpenedTask" />
+		</event>			
+		
+      <transition name="cerrar/anular" to="Cancel Hnos2"></transition>
+      <transition name="cancel" to="join2"></transition>
+   </task-node>
+   
+	<node name="Cancel Hnos2">
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+	    <transition name="" to="join2"></transition>
+	</node>
+ 
+	<join name="join2">
+		<transition name="" to="Finalizado"></transition>
+	</join>
+ 
+	<node name="Cancel Hnos3">
+		<action class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+	    <transition name="" to="join2"></transition>
+	</node>
+
+	<decision name="¿Aceptado?">
+		<handler class="com.fontar.jbpm.handler.decision.SeguimientoRechazado" />
+		<transition name="aceptado" to="¿Es Contable?"></transition>
+      <transition name="rechazado" to="Cancel Hnos3"></transition>      
+	</decision>
+   
+	<decision name="¿Es Contable?">
+		<handler class="com.fontar.jbpm.handler.decision.SeguimientoEsFinanciero" />
+		
+		<transition name="SI" to="Evaluar Autorización De Pago"></transition>
+      <transition name="NO" to="Cancel Hnos3"></transition>
+	</decision>
+	
+	<decision name="¿En proceso de Anulación o Cierre?">
+		<transition name="SI" to="join2">
+			<condition 
+				expression="#{contextInstance.variables['ANULANDO_SEGUIMIENTO']=='SI' or
+								contextInstance.variables['CERRANDO_SEGUIMIENTO']=='SI'}" />
+		</transition>
+		
+		<transition name="NO" to="¿Aceptado?">
+			<condition 
+				expression="#{contextInstance.variables['ANULANDO_SEGUIMIENTO']!='SI' and 
+								contextInstance.variables['CERRANDO_SEGUIMIENTO']!='SI'}" />
+		</transition>
+	</decision>
+
+	<decision name="¿Revaluar?">
+		<handler class="com.fontar.jbpm.handler.decision.RevaluarSeguimiento" />
+	 
+		<transition name="NO" to="Cancel Hnos3"></transition>
+		<transition name="SI" to="Agregar Primera Evaluación"></transition>
+	</decision>
+</process-definition>
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="EntidadEvaluadoraBean" table="ENTIDAD_EVALUADORA">
+		<id name="id" type="java.lang.Long" column="ID_ENTIDAD_EVALUADORA">
+			<generator class="com.fontar.data.impl.domain.bean.EntidadSequence"/>
+		</id>		
+        <property name="nroCBU" column="NR_CBU" type="java.lang.String" />        
+        <property name="nroCuenta" column="NR_CUENTA" type="java.lang.String" />        
+        <property name="nombreBeneficiario" column="NM_BENEFICIARIO" type="java.lang.String" />                        
+        <property name="idEntidadBancaria" column="ID_ENTIDAD_BANCARIA" type="java.lang.Long" />
+        <many-to-one name="entidadBancaria" column="ID_ENTIDAD_BANCARIA" class="EntidadBancariaBean" insert="false" update="false" />
+        <one-to-one name="entidad" class="EntidadBean"/>
+        <set name="evaluadores" table="ENTIDAD_EVALUADORA_EVALUADOR" lazy="true" cascade="none" sort="com.fontar.bus.impl.configuracion.EvaluadorComparator">
+			<key column="ID_ENTIDAD_EVALUADORA"/>
+			<many-to-many class="EvaluadorBean" column="ID_PERSONA_EVALUADOR"/>
+		</set>
+	</class>
+	
+	 <query name="EntidadEvaluadoraBean.findByEvaluador">
+        <![CDATA[from EntidadEvaluadoraBean e where ? in elements( e.evaluadores ) and e.entidad.borrado=false ]]>
+    </query> 
+	
+
+</hibernate-mapping>

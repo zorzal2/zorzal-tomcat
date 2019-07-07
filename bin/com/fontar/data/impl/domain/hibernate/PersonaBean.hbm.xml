@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="PersonaBean" table="PERSONA">
+        <id name="id" type="java.lang.Long" column="ID_PERSONA">
+			<generator class="sequence">
+			      <param name="sequence">SQ_PERSONA</param>
+		   </generator>	
+		</id>
+        
+        <property name="tituloGrado" column="TX_TITULO_GRADO" type="java.lang.String"/>
+        <property name="sexo" column="TP_SEXO" type="java.lang.String"/>
+        <property name="nombre" column="NM_PERSONA" type="java.lang.String"/>
+        <property name="cuit" column="CD_CUIT" type="java.lang.String"/>
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+        <property name="borrado" column="BORRADO" type="java.lang.Boolean"/>
+        <property name="cargo" column="TX_CARGO" type="java.lang.String"/>
+		<property name="esEvaluador" column="ES_EVALUADOR" type="java.lang.Boolean"/>        
+        <property name="observacion" column="DE_OBSERVACION" type="java.lang.String"/>
+        
+        <property name="userId" column="USER_ID" type="java.lang.String"/>
+
+        <property name="idLocalizacion" column="ID_LOCALIZACION" type="java.lang.Long"/>
+        <many-to-one name="localizacion" column="ID_LOCALIZACION" class="LocalizacionBean"  update="false" insert="false" />        
+    </class>
+</hibernate-mapping>

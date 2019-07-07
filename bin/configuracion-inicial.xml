@@ -1,0 +1,1883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Document   : configuracion-inicial.xml
+	Created on : 2 de noviembre de 2006, 17:05
+	Author     : fferrara
+	Description:
+	Purpose of the document follows.
+-->
+
+<!-- toolbars  xmlns="http://www.pragmaconsultores.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.pragmaconsultores.com configuracion-inicial.xsd" -->
+<toolbars library="com.fontar.toolbar.properties.FilterTypeLibraryDecorator">
+
+	<!-- ********************************************************************** -->
+	<!-- 				Inventario de Llamados a Convocatoria 					-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="convocatorias" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.instrumentos.convocatoria.llamados.LlamadosConvocatoriaWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.LLamadoConvocatariaQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="identificador" visible="true"
+				title="app.header.id" align="left" order="1" orderType="ascending"/>
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+			<column property="modalidad" visible="true"
+				title="app.header.modalidad" align="left" 
+				decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper"/>
+			<column property="fechaApertura" visible="true"
+				title="app.header.fechaApertura" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="fechaCierre" visible="true"
+				title="app.header.fechaCierre" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="estado" visible="true"
+				title="app.header.estado" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="instrumentoDef.tipo" visible="true"
+				title="app.header.credito-subsidio" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="booleanEsVigente" visible="true"
+				title="app.header.booleanEsVigente" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="esIdeaProyectoPitec" visible="true"
+				title="app.header.ideaProyectoPitec" align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoFinanciamientoTotal" visible="true"
+				title="app.header.montoTotal" align="right"
+				decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" data-type="Number"/>
+			<column property="matrizPresupuesto.nombre" visible="true"
+				title="app.header.matrizPresupuesto" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEdicion" />
+			<action name="linkAdjuntos" />
+			<action name="linkBorrado" />
+		</actions>
+
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!-- 				Inventario de Presentaciones a Convocatoria 			-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="presentaciones" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.instrumentos.convocatoria.presentaciones.PresentacionesConvocatoriaWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.PresentacionConvocatoriaQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="codigo" visible="true"
+				title="app.header.codigo" align="left" data-type="String"/>
+			<column property="instrumento.identificador" visible="true"
+				title="app.header.idInstrumento" align="left" />
+			<column property="nombreEntidad" visible="true"
+				title="app.header.solicitante" align="left" />
+			<column property="fechaIngreso" visible="true"
+				title="app.header.fechaIngreso" order="1" orderType="descending"
+				align="center" data-type="Date"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" />
+			<column property="jurisdiccion.codigo" visible="true"
+				title="app.header.jurisdiccion" align="center" />
+			<column property="estado" visible="true" title="app.header.estado" align="center"  allow-filtering="false" allow-sorting="false"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkCargarProyecto" />
+			<action name="linkEditarPresentacion" />
+			<action name="linkEliminarPresentacion" />
+		</actions>
+
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!-- 				Inventario de Ventanilla Permanente						-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="ventanillas" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.instrumentos.ventanilla.ventanilla.VentanillaPermanenteWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.VentanillaPermanenteQueryInvocationHandler">
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="identificador" visible="true"
+				title="app.header.id" align="center" order="1" orderType="ascending"/>
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+			<column property="modalidad" visible="true"
+				title="app.header.modalidad" align="left" 
+				decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper"/>
+			<column property="estado.descripcion" visible="true"
+				title="app.header.estado" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="instrumentoDef.tipo" visible="true"
+				title="app.header.credito-subsidio" align="center" />
+			<column property="montoFinanciamientoTotal" visible="true"
+				title="app.header.montoTotal" align="right"
+				decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" data-type="Number"/>
+			<column property="matrizPresupuesto.nombre" visible="true"
+				title="app.header.matrizPresupuesto" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />			
+			<action name="linkEdicion"/>
+			<action name="linkAdjuntos"/>			
+			<action name="linkBorrado"/>
+			<action name="linkCargarProyectoCAE"/>
+		</actions>
+		
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Idea Proyecto							-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="ideasProyecto" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.instrumentos.ventanilla.ideaproyecto.IdeaProyectoWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.IdeaProyectoQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+<!-- 		<column property="codigoIdeaProyecto" visible="true" title="app.header.id" align="right" />  -->
+			<column property="codigo" visible="true" title="app.header.codigo" align="left" decorator="" order="2" orderType="ascending"/>
+			<column
+				property="proyectoDatos.entidadBeneficiaria.entidad.denominacion"
+				visible="true"
+				title="app.header.proyectoDatos.entidadBeneficiaria.entidad.denominacion"
+				align="left" />
+			<column property="proyectoDatos.titulo" visible="true"
+				title="app.header.titulo" align="left" decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper" />
+			<column property="proyectoJurisdiccion.jurisdiccion.codigo"
+				visible="true" title="app.header.jurisdiccion" align="center" />
+			<column property="proyectoDatos.fechaIngreso" visible="true"
+				title="app.header.fechaIngreso" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"
+				order="1" orderType="descending" />
+			<column property="proyectoDatos.instrumentoSolicitado"
+				visible="true" title="app.header.instrumentoSolicitado"
+				align="center" />
+			<column property="proyectoDatos.tipoProyecto.nombreCorto"
+				visible="true" title="app.header.tipoProyecto" align="left" />
+			<column
+				property="proyectoPresupuestoOriginal.montoPresupuestoTotal"
+				visible="true" title="app.header.montoTotal" align="right"
+				decorator="com.fontar.seguridad.cripto.EncryptedMoneyWrapper" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column
+				property="instrumentoRecomendado"
+				visible="false" title="app.header.instrumentoRecomendado" align="left"
+				allow-filtering="false" allow-sorting="false" />
+			<column
+				property="proyectoDatos.duracion"
+				visible="false" title="app.header.duracionMeses" align="right" data-type="Number"
+				allow-filtering="false" allow-sorting="false" />
+			<column
+				property="proyectoPresupuestoOriginal.montoPresupuestoSolicitado"
+				visible="true" title="app.header.montoSolicitado" align="right"
+				decorator="com.fontar.seguridad.cripto.EncryptedMoneyWrapper" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="estadoReconsideracion" visible="true"
+				title="app.header.enReconsideracion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column
+				property="estado.descripcion" visible="false" 
+				title="app.header.estado" align="center" allow-filtering="false" allow-sorting="false"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEdicion" />
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!-- 						Inventario de Proyectos							-->
+	<!-- ********************************************************************** -->	
+
+	<toolbar id="proyectos" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.administracion.proyecto.ProyectoWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.ProyectoQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="codigo" visible="true"
+				title="app.header.codigo" align="left" decorator="" order="1"
+				orderType="ascending" />
+			<column property="instrumento.identificador" visible="true"
+				title="app.header.idInstrumento" align="left" decorator="" />
+			<column
+				property="proyectoDatos.entidadBeneficiaria.entidad.denominacion"
+				visible="true"
+				title="app.header.proyectoDatos.entidadBeneficiaria.entidad.denominacion"
+				align="left" />
+			<column
+				property="proyectoDatos.titulo"
+				visible="false"
+				title="app.header.proyectoDatos.titulo"
+				align="left" />
+			<column
+				property="proyectoPitec"
+				visible="false"
+				title="app.header.proyectoPitecRelacionado"
+				align="left" />
+			<column property="proyectoDatos.fechaIngreso" visible="true"
+				title="app.header.fechaIngreso" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="proyectoDatos.localizacion.jurisdiccion.codigo"
+				visible="true" title="app.header.jurisdiccion" align="center" />
+			<column property="presentacionOrigen" visible="false" title="app.header.presentacionOrigen" align="left" allow-filtering="false" allow-sorting="false"/>				
+			<column property="ipOrigen" visible="false" title="app.header.ipOrigen" align="left" allow-filtering="false" allow-sorting="false" escape-html="false"/>
+			<column
+				property="montoBeneficioFONTARSolicitado"
+				visible="true" title="app.header.montoBeneficioSolicitado"
+				align="right"
+				data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column
+				property="montoTotalSolicitado"
+				visible="true" title="app.header.totalSolicitado"
+				align="right"
+				data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoBeneficioFONTARAprobado"
+				visible="true" title="app.header.montoBeneficioAprobado" align="right"
+				data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoTotalAprobado"
+				visible="true" title="app.header.totalAprobado" align="right"
+				data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="estadoEnPaquete" visible="true"
+				title="app.header.enPaquete" align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper"  allow-filtering="false" allow-sorting="false"/>
+			<column property="numeroDePaquete" visible="true"
+				title="app.header.nroPaquete" align="center"
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="estadoReconsideracion" visible="true"
+				title="app.header.enReconsideracion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper"  allow-filtering="false" allow-sorting="false"/>
+			<column property="estado.descripcion" visible="true"
+				title="app.header.estado" align="center" decorator=""  allow-filtering="false" allow-sorting="false"/>
+			<column property="recomendacionProyecto" visible="true"
+				title="app.header.recomendacion" align="center" decorator="com.fontar.web.decorator.evaluacion.EncryptedEnumerableWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="fechaResolucion" visible="false"
+				title="app.header.fechaResolucionAdj" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="codigoResolucion" visible="false" 
+			    title="app.header.nroResolucionAdj" align="center" />				
+			<column
+				property="proyectoDatos.ciiu.codigo"
+				visible="false"
+				title="app.header.ciiu"
+				align="left" />
+			<column
+				property="recomendacionFinal"
+				visible="false"
+				title="app.header.recomendacionFinal"
+				align="left" />
+			<column property="fechaFirmaDeContrato" visible="false"
+				title="app.header.fechaFirmaDeContrato" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEdicion" />
+			<action name="linkBitacora"/>
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+
+	</toolbar>
+
+
+	<!-- ********************************************************************** -->
+	<!-- 						Inventario de Paquetes							-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="paquetes" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.proyectos.paquetes.PaqueteWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.PaqueteQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true"
+				title="app.header.nroPaquete" align="right" order="1"
+				orderType="descending" data-type="Long"/>
+			<column property="tipo.descripcion" visible="true"
+				title="app.header.tipo" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="instrumento.identificador" visible="true"
+				title="app.header.instrumento" align="center" />
+			<column property="comision.denominacion" visible="true"
+				title="app.header.comision" align="left" />
+			<column property="codigoActa" visible="false"
+				title="app.header.nroActaResolucion" align="left" />				
+			<column property="tratamiento" visible="true"
+				title="app.header.tratamiento" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="estado" visible="true"
+				title="app.header.estado" align="center" allow-filtering="false" allow-sorting="false"/>
+				
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkAdjuntos" />			
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+
+	</toolbar>
+
+
+	<!-- ********************************************************************** -->
+	<!-- 						Inventario de Evaluaciones						-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="evaluaciones" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.evaluacion.EvaluacionWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.EvaluacionQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true"
+				title="app.header.id" align="right" data-type="Long"/>
+			<column property="proyecto.codigo" visible="true"
+				title="app.header.nroProyecto" align="center" />
+			<column property="proyecto.instrumento.identificador"
+				visible="true" title="app.header.instrumento" align="center" />
+			<column
+				property="proyecto.proyectoDatos.entidadBeneficiaria.denominacion"
+				visible="true" title="app.header.entidadBeneficiaria" align="left" />
+			<column property="tiposEvaluacion" visible="true"
+				title="app.header.tipo" align="left"
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="evaluadorInstitucion" visible="true"
+				title="app.header.evaluador" align="left"
+				decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper" 
+				allow-filtering="false" allow-sorting="false" />
+			<column property="fechaInicial" visible="true"
+				title="app.header.fechaInicial" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper"
+				order="1" orderType="descending" data-type="Date"/>
+			<column property="fecha" visible="true"
+				title="app.header.fechaEvaluacion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="estado" visible="true"
+				title="app.header.estado" align="center" 
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="resultadoEvaluacion" visible="true"
+				title="app.header.resultado" align="center" decorator="com.fontar.web.decorator.evaluacion.EncryptedEnumerableWrapper" 
+				allow-filtering="false" allow-sorting="false"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkAdjuntos" />			
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+
+	</toolbar>
+
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Jurisdicciones						-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="jurisdicciones" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.jurisdicciones.JurisdiccionesWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="codigo" visible="true"
+				title="app.header.codigo" align="left" />
+			<column property="descripcion" visible="true"
+				title="app.header.descripcion" align="left" order="1"
+				orderType="ascending" />
+			<column property="region.nombre" visible="true"
+				title="app.header.region" align="left" />				
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Regiones								-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="regiones" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.regiones.RegionWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true"
+				title="app.header.codigo" align="right" />
+			<column property="nombre" visible="true"
+				title="app.header.descripcion" align="left" order="1"
+				orderType="ascending" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de InstrumentoDef						-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="instrumentosDef" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.instrumentos.InstrumentosDefWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="identificador" visible="true"
+				title="app.header.id" align="left" order="1"
+				orderType="ascending" />
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+			<column property="modalidad" visible="true"
+				title="app.header.modalidad" align="left"
+				decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper" />
+			<column property="observacion" visible="true"
+				title="app.header.observacion" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEditar" />
+			<action name="linkAdjuntos" />
+		</actions>
+
+	</toolbar>
+
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Tipos de Proyecto						-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="tipoProyectos" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.tipoProyecto.TipoProyectoWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="nombre" visible="true"
+				title="app.header.nombre" align="left" order="1"
+				orderType="ascending" />
+			<column property="nombreCorto" visible="true"
+				title="app.header.nombreCorto" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Especialidad Evaluador				-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="especialidadesEvaluador" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.especialidadEvaluador.EspecialidadEvaluadorWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="codigo" visible="true"
+				title="app.header.codigo" align="left" order="1"
+				orderType="ascending" />
+			<column property="nombre" visible="true"
+				title="app.header.nombre" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario Seleccion  Entidad Evaluadora 			-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="entidadEvaluadoraSelector" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.EntidadEvaluadoraSelectorWrapper"  styleClass="inventario">
+		<buttons>
+			<button id="0" />
+		</buttons>
+		<columns>
+			<column property="entidad.denominacion" visible="true" title="app.header.denominacion" align="left" order="1" orderType="ascending" />
+			<column property="entidad.cuit" visible="true" title="app.header.cuit" align="left" />
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkSeleccionInventario" />
+		</actions>
+	</toolbar>
+
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Fuente Financiamiento					-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="fuentesFinanciamiento" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.fuenteFinanciamiento.FuenteFinanciamientoWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="identificador" visible="true"
+				title="app.header.id" align="left" order="1"
+				orderType="ascending" />
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Persona								-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="personas" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.entidades.personas.PersonasWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="nombre" visible="true"
+				title="app.header.nombre" align="left" order="1"
+				orderType="ascending" />
+			<column property="cuit" visible="true"
+				title="app.header.cuit" align="right" />
+			<column property="cargo" visible="true"
+				title="app.header.cargo" align="left" />
+			<column property="userId" visible="true"
+				title="app.header.usuario" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEditar" />
+			<action name="linkBorrar" />
+		</actions>
+
+	</toolbar>
+	
+	<toolbar id="personasSelector" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.entidades.personas.PersonasSelectorWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="nombre" visible="true"
+				title="app.header.nombre" align="left" order="1"
+				orderType="ascending" />
+			<column property="cuit" visible="true"
+				title="app.header.cuit" align="right" />
+			<column property="cargo" visible="true"
+				title="app.header.cargo" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkSeleccion" />
+		</actions>
+
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Entidades								-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="entidadesConfiguracion" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.entidades.entidades.EntidadesWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="cuit" visible="true"
+				title="app.header.cuit" align="right" order="1"
+				orderType="ascending" />
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEditar" />
+			<action name="linkBorrar" />
+		</actions>
+
+
+	</toolbar>
+	
+	<toolbar id="entidadesSelector" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.entidades.entidades.EntidadesWrapper"
+		styleClass="inventario">
+		<buttons>
+			<button id="0" />
+		</buttons>
+		<columns>
+			<column property="cuit" visible="true"
+				title="app.header.cuit" align="right" order="1"
+				orderType="ascending" />
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkSeleccion" />
+		</actions>
+
+	</toolbar>
+	
+	<!-- ********************************************************************** -->
+	<!--					Inventario Seleccion especialidadesEvaluador		-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="especialidadEvaluadorSelector" paging="true" pageSize="20" decorator="com.fontar.web.decorator.configuracion.especialidadEvaluador.EspecialidadEvaluadorWrapper" styleClass="inventario">
+		<buttons>
+			<button id="0" />
+		</buttons>
+		<columns>
+			<column property="nombre" visible="true" title="app.header.nombre" align="left" order="1" orderType="ascending" />
+			<column property="codigo" visible="true" title="app.header.codigo" align="right" />
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkSeleccionInventario" />
+		</actions>
+	</toolbar>
+
+	
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Comisiones							-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="comisiones" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.comisiones.ComisionesWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" order="1"
+				orderType="ascending" />
+			<column property="fechaAlta" visible="true"
+				title="app.header.fechaAlta" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper"  data-type="Date"/>
+			<column property="fechaBaja" visible="true"
+				title="app.header.fechaBaja" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+	
+	<!-- ********************************************************************** -->
+	<!--					Inventario Seleccion de Comisiones							-->
+	<!-- ********************************************************************** -->
+	
+	<toolbar id="comisionesSelector" paging="true" pageSize="20" decorator="com.fontar.web.decorator.configuracion.comisiones.ComisionesWrapper"  styleClass="inventario">
+		<buttons>
+			<button id="0" />
+		</buttons>
+		<columns>
+			<column property="denominacion" visible="true" title="app.header.denominacion" align="left" order="1" orderType="ascending" />
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkSeleccionInventario" />
+		</actions>
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario Seleccion Ciiu							-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="inventarioCiiu" paging="true" pageSize="20" decorator="com.fontar.web.decorator.configuracion.ciiu.CiiuWrapper" styleClass="inventario">
+		<buttons>
+			<button id="0" />
+		</buttons>
+		<columns>
+			<column property="nombre" visible="true" title="app.header.nombre" align="left" order="1" orderType="ascending" />
+			<column property="codigo" visible="true" title="app.header.codigo" align="right" />
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkSeleccionInventario" />
+		</actions>
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario Seleccion Entidad Beneficiaria			-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="entidadesBeneficiarias" paging="true" pageSize="20" decorator="com.fontar.web.decorator.configuracion.entidadesbeneficiarias.EntidadesBeneficiariasWrapper" styleClass="inventario">
+		<buttons>
+			<button id="0" />
+		</buttons>
+		<columns>
+			<column property="entidad.denominacion" visible="true" title="app.header.denominacion" align="left" order="1" orderType="ascending" />
+			<column property="entidad.cuit" visible="true" title="app.header.cuit" align="right" />
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkSeleccionInventario" />
+		</actions>
+	</toolbar>
+
+	<toolbar id="entidadBeneficiaria" paging="true" pageSize="20" decorator="com.fontar.web.decorator.configuracion.entidadesbeneficiarias.EntidadesBeneficiariasWrapper" styleClass="inventario">
+		<buttons>
+			<button id="0" />
+		</buttons>
+		<columns>
+			<column property="entidad.denominacion" visible="true" title="app.header.denominacion" align="left" order="1" orderType="ascending" />
+			<column property="entidad.cuit" visible="true" title="app.header.cuit" align="right" />
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkSeleccionEntidadesInventario" />
+		</actions>
+	</toolbar>
+
+
+
+	<!-- ********************************************************************** -->
+
+
+	<!-- ********************************************************************** -->
+	<!--					Bandeja de Entrada									-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="bandejaDeEntrada" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.workflow.TaskInstanceWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true"
+				title="app.header.idTarea" align="left" order="1"
+				orderType="descending" data-type="Long"/>
+
+			<column property="token.processInstance.processDefinition.name" visible="true"
+				title="app.header.proceso" align="center"/>
+
+			<column property="businessDescription" visible="true"
+				title="app.header.entidad" align="left" allow-filtering="false" allow-sorting="false"/>
+
+			<column property="name" visible="true"
+				title="app.header.nombre" align="left"/>
+
+			<column property="description" visible="true"
+				title="app.header.descripcion" align="left"/>
+				
+			<column property="create" visible="true"
+				title="app.header.fechaCreacion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.LongDateWrapper" data-type="Date"/>
+
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkCargar" />
+			<action name="linkDetalle" />						
+			<action name="linkLiberar" />			
+		</actions>
+
+	</toolbar>	
+	
+	
+	<!-- ********************************************************************** -->
+	<!--							Bitacora									-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="bitacora" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.administracion.bitacora.BitacoraWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="tipo" visible="true"
+				title="app.header.tipo" align="left"/>
+
+			<column property="idUsuario" visible="true"
+				title="app.header.usuario" align="center"/>				
+
+			<column property="fechaRegistro" visible="true"
+				title="app.header.fechaRegistro" align="center" decorator="com.pragma.toolbar.web.decorator.LongDateWrapper" order="1"
+				orderType="descending"/>
+								
+			<column property="fechaAsunto" visible="true"
+			title="app.header.fechaAsunto" align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper"/>
+
+			<column property="tema" visible="true"
+				title="app.header.tema" align="left"/>
+				
+			<column property="descripcion" visible="true" title="app.header.observaciones" decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper" align="left"/>				
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEditar" />
+			<action name="linkBorrar" />
+		</actions>
+
+	</toolbar>		
+
+	<!-- ********************************************************************************** -->
+	<!-- 						Inventario de Idea Proyecto Pitec							-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="ideasProyectoPitec" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.instrumentos.pitec.IdeaProyectoPitecWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.IdeaProyectoPitecQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="codigo" visible="true"
+				title="app.header.codigo" align="left" decorator="" order="1"
+				orderType="ascending" />
+			<column property="instrumento.identificador" visible="true"
+				title="app.header.idInstrumento" align="left" decorator="" />
+			<column
+				property="proyectoDatos.entidadBeneficiaria.entidad.denominacion"
+				visible="true"
+				title="app.header.proyectoDatos.entidadBeneficiaria.entidad.denominacion"
+				align="left" />
+			<column property="proyectoDatos.fechaIngreso" visible="true"
+				title="app.header.fechaIngreso" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" />
+			<column property="proyectoJurisdiccion.jurisdiccion.codigo"
+				visible="true" title="app.header.jurisdiccion" align="center" />
+			<column	property="proyectoPresupuestoOriginal.montoPresupuestoSolicitado"
+				visible="true" title="app.header.montoBeneficioSolicitado"
+				align="right"
+				decorator="com.fontar.seguridad.cripto.EncryptedMoneyWrapper" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="proyectoPresupuesto.montoPresupuestoSolicitado"
+				visible="true" title="app.header.montoBeneficioAprobado" align="right"
+				decorator="com.fontar.seguridad.cripto.EncryptedMoneyWrapper" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="estadoEnPaquete" visible="true"
+				title="app.header.enPaquete" align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="estadoReconsideracion" visible="true"
+				title="app.header.enReconsideracion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="estado.descripcion" visible="true"
+				title="app.header.estado" align="center" decorator="" allow-filtering="false" allow-sorting="false"/>
+			<column property="recomendacionProyecto" visible="true"
+				title="app.header.recomendacion" align="center" decorator="com.fontar.web.decorator.evaluacion.EncryptedEnumerableWrapper" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkCargar" />			
+			<action name="linkEdicion" />
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!-- 						Inventario Evaluaciones Proyecto							-->
+	<!-- ********************************************************************************** -->
+	
+	<toolbar id="evaluacionesProyecto" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.evaluacion.EvaluacionWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.EvaluacionQueryInvocationHandler">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true" title="app.header.id" align="right" />			
+			<column property="tipoDescripcion" visible="true" title="app.header.tipoEvaluacion"/>
+			<column property="evaluadorInstitucion" visible="true"
+				title="app.header.evaluador" align="left"
+				decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper" 
+				allow-filtering="false" allow-sorting="false" />
+			<column property="fechaInicial" visible="true" title="app.header.fechaInicial" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" order="1" orderType="descending" data-type="Date"/>
+			<column property="fecha" visible="true"	title="app.header.fechaEvaluacion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" />
+			<column property="estado.descripcion" visible="true" title="app.header.estado" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="resultadoEvaluacion" visible="true" title="app.header.resultado"
+					 align="center" decorator="com.fontar.web.decorator.evaluacion.EncryptedEnumerableWrapper" allow-filtering="false" allow-sorting="false"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!-- 						Inventario Expediente Proyecto							    -->
+	<!-- ********************************************************************************** -->
+	
+	<toolbar id="expedienteProyecto" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.administracion.proyecto.ExpedienteWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="cuerpo" visible="true" title="app.header.id" align="right" />
+			<column property="folioDesde" visible="true" title="app.header.tipoEvaluacion"/>
+			<column property="folioHasta" visible="true" title="app.header.fechaInicial" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+			<action name="linkBorrar" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--					Inventario de Matrices de Criterios								-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="matrizCriterios" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.criterios.MatrizCriteriosWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="nombre" visible="true" title="app.header.criterio" align="left"
+					order="1" orderType="ascending" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--							Inventario de Seguimientos en Proyecto					-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="seguimientoProyecto" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.seguimientos.SeguimientosWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="id" visible="true" title="app.header.idSeguimiento" align="right" data-type="Long"/>
+			<column property="descripcion" visible="true" title="app.header.seguimiento" align="left" />
+			<column property="fecha" 
+				visible="true" 
+				title="app.header.fecha" 
+				align="left" 
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" 
+				data-type="Date"/>
+			<column property="estado.descripcion" visible="true" title="app.header.estado" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="incluyeInformeAvance" 
+				visible="true" 
+				title="app.header.incluyeAdjuntos" align="center" 
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" 
+				allow-filtering="false" allow-sorting="false"	 />
+			<column property="incluyeRendicionDeCuentas" 
+				visible="true" 
+				title="app.header.incluyeRendicionDeCuentas" 
+				align="center" 
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" 
+				allow-filtering="false" allow-sorting="false"	 />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--							Inventario de Seguimientos								-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="seguimiento" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.seguimientos.SeguimientosWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.SeguimientoQueryInvocationHandler">
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="proyecto.codigo" visible="true" title="app.header.nroProyecto" align="center" />
+			<column property="id" visible="true" title="app.header.idSeguimiento" align="right"  data-type="Long"/>
+			<column property="proyecto.instrumento.identificador" visible="true" title="app.header.instrumento" align="center" />
+			<column	property="proyecto.proyectoDatos.entidadBeneficiaria.denominacion" visible="true" title="app.header.entidadBeneficiaria" align="left" />
+			<column property="descripcion" visible="true" title="app.header.descripcion" align="left" />
+			<column property="fecha" 
+				visible="true" 
+				title="app.header.fecha" 
+				align="left" 
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" 
+				data-type="Date"/>
+			<column property="estado.descripcion" visible="true" title="app.header.estado" align="center" allow-filtering="false" allow-sorting="false"/>
+			<column property="incluyeInformeAvance" 
+				visible="true" 
+				title="app.header.incluyeAdjuntos" 
+				align="center" 
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" 
+				allow-filtering="false" allow-sorting="false"	/>
+			<column property="incluyeRendicionDeCuentas" 
+				visible="true" 
+				title="app.header.incluyeRendicionDeCuentas" 
+				align="center" 
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper" 
+				allow-filtering="false" allow-sorting="false"	 />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+	</toolbar>
+	
+
+	<!-- ********************************************************************************** -->
+	<!--					Inventario de Rendiciones de Cuentas ANR						-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="rendicionesANR" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.seguimientos.anr.RendicionesWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="rubro.tipoRendicion" visible="false" title="app.header.tipo" align="left" allow-filtering="false" allow-sorting="false"/>
+			<column property="rubro.nombre" visible="true" title="app.header.rubro" align="left" order="1" orderType="ascending"/>
+			<column property="numeroFactura" visible="true" title="app.header.numeroFactura" align="right" order="2" orderType="ascending"/>
+			<column property="numeroRecibo" visible="false" title="app.header.numeroRecibo" align="right" />
+			<column property="fecha" 
+				visible="true" 
+				title="app.header.fecha" 
+				align="center" 
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper"
+				data-type="Date"/>
+			<column property="nombreProveedor" visible="true" title="app.header.proveedor" />
+			<column property="persona" visible="true" title="app.header.nombre" decorator="com.pragma.toolbar.web.decorator.PersonaWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="profesionPersona" visible="true" title="app.header.profesion" />
+			<column property="descripcion" visible="true" title="app.header.descripcion" />
+			<column property="montoSueldoMensual" visible="true" title="app.header.sueldoMensual" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="mesesParticipacion" visible="true" title="app.header.mesesParticipacion" align="right" data-type="Long"/>
+			<column property="porcentajeDedicacion" visible="true" title="app.header.porcentajeDedicacion" align="right" data-type="Number"/>
+			<column property="montoParteRendicion" visible="true" title="app.header.montoParteSolicitado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoContraparteRendicion" visible="true" title="app.header.montoContraparteSolicitado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoTotal" visible="true" title="app.header.montoTotalSolicitado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoParteAprobado" visible="true" title="app.header.montoParteAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoContraparteAprobado" visible="true" title="app.header.montoContraparteAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoTotalEvaluacion" visible="true" title="app.header.montoTotalAprobado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoParteGestionado" visible="true" title="app.header.montoParteGestionado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>			
+			<column property="montoContraparteGestionado" visible="true" title="app.header.montoContraparteGestionado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoTotalGestion" visible="true" title="app.header.montoTotalGestionado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="version" visible="false" title="app.header.version" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="left" data-type="String"/>
+			<column property="observaciones" visible="true" title="app.header.observaciones" align="left"/>		
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+			<action name="linkBorrar" />
+		</actions>
+		
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--					Inventario de Rendiciones de Cuentas CF							-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="rendicionesCF" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.seguimientos.cf.RendicionesWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="rubro.tipoRendicion" visible="false" title="app.header.tipo" align="left" allow-filtering="false" allow-sorting="false"/>
+			<column property="rubro.nombre" visible="true" title="app.header.rubro" align="left" order="1" orderType="ascending"/>
+			<column property="numeroFactura" visible="true" title="app.header.numeroFactura" align="right" order="2" orderType="ascending"/>
+			<column property="numeroRecibo" visible="false" title="app.header.numeroRecibo" align="right"/>
+			
+			<column property="fecha" 
+				visible="true" 
+				title="app.header.fecha" 
+				align="center" 
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper"
+				data-type="Date"/>
+			<column property="nombreProveedor" visible="true" title="app.header.proveedor" />
+			<column property="persona" visible="true" title="app.header.nombre" decorator="com.pragma.toolbar.web.decorator.PersonaWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="profesionPersona" visible="true" title="app.header.profesion" />
+			<column property="descripcion" visible="true" title="app.header.descripcion" />
+			<column property="montoSueldoMensual" visible="true" title="app.header.sueldoMensual" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="mesesParticipacion" visible="true" title="app.header.mesesParticipacion" align="right" data-type="Long"/>
+			<column property="porcentajeDedicacion" visible="true" title="app.header.porcentajeDedicacion" align="right" data-type="Number"/>
+			<column property="montoTotal" visible="true" title="app.header.montoTotalSolicitado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoTotalAprobado" visible="true" title="app.header.montoTotalAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoTotalGestionado" visible="true" title="app.header.montoTotalGestionado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="version" visible="false" title="app.header.version" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="left" data-type="String"/>
+			<column property="observaciones" visible="true" title="app.header.observaciones" align="left"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+			<action name="linkBorrar" />
+		</actions>
+		
+	</toolbar>
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Notificaciones						-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="notificacion" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.administracion.notificacion.NotificacionWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.NotificacionQueryInvocationHandler" >
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" 
+				visible="true"
+				title="app.header.nroNotificacion" 
+				align="left" 
+				order="1"
+				orderType="descending" 
+				data-type="Long"/>
+			<column property="proyecto.codigo" 
+				visible="true"
+				title="app.header.codigo" 
+				align="left" />
+			<column property="tipoNotificacion" 
+				visible="true"
+				title="app.header.tipoNotificacion" 
+				align="left" 
+				allow-filtering="false" allow-sorting="false" />
+			<column property="fechaCreacion" 
+				visible="true"
+				title="app.header.fechaCreacion" 
+				align="center" 
+				data-type="Date"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" />
+			<column property="fechaEnvio" 
+				visible="true"
+				title="app.header.fechaEnvio" 
+				align="center" 
+				data-type="Date"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" />
+			<column property="estado" 
+				visible="true"
+				title="app.header.estado" 
+				align="center" 
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="descripcion" 
+				visible="false"
+				title="app.header.descripcion" 
+				align="left" />
+			<column property="requiereAcuse" 
+				visible="false"
+				title="app.header.requiereACuse" 
+				align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper"
+				allow-filtering="false" allow-sorting="false"/>				
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+	</toolbar>
+	
+	
+	<!-- ********************************************************************** -->
+	<!-- 				Inventario de Evaluaciones de Seguimiento				-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="evaluacionesSeguimiento" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.evaluacion.EvaluacionSeguimientoWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.EvaluacionSeguimientoQueryInvocationHandler" >
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true"
+				title="app.header.id" align="right" data-type="Long"
+				order="1" orderType="descending" />
+			<column property="proyecto.instrumento.identificador"
+				visible="true" title="app.header.instrumento" align="center" />
+			<column property="proyecto.codigo" visible="true"
+				title="app.header.nroProyecto" align="center" />
+			<column property="proyecto.proyectoDatos.entidadBeneficiaria.denominacion"
+				visible="true" title="app.header.entidadBeneficiaria" align="left" />
+			<column property="tiposEvaluacion" visible="true"
+				title="app.header.tipo" align="left"
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="evaluadorInstitucion" visible="true"
+				title="app.header.evaluador" align="left"
+				decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper" 
+				allow-filtering="false" allow-sorting="false" />
+			<column property="fechaInicial" visible="true"
+				title="app.header.fechaInicial" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="fecha" visible="true"
+				title="app.header.fechaEvaluacion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="estado.descripcion" visible="true"
+				title="app.header.estado" align="center" 
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="bitacora.idSeguimiento" visible="false"
+				title="app.header.idSeguimiento" align="right" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />			
+		</actions>
+	</toolbar>
+	
+		<!-- ********************************************************************** -->
+	<!--					Inventario de Entidades Beneficiarias				-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="entidadesBeneficiariasConfiguracion" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.entidades.entidades.EntidadesWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="entidad.cuit" visible="true"
+				title="app.header.cuit" align="right" order="1"
+				orderType="ascending" />
+			<column property="entidad.denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+			<column property="fechaInicioActividad" visible="true"
+				title="app.header.inicioActividad" align="left" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="numeroConstitucion" visible="true"
+				title="app.header.numeroConstitucion" align="left" data-type="Long"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEditar" />
+			<action name="linkBorrarEntidadBeneficiaria" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--				Inventario de Rendicion Cuentas Evaluación Seguimiento				-->
+	<!-- ********************************************************************************** -->
+
+	<!-- ANR -->
+	<toolbar id="rendicionesEvaluacionSeguimientoANR" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.evaluacion.anr.RendicionesEvaluacionSeguimientoWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="rubro.tipoRendicion" visible="false" title="app.header.tipo" align="left" allow-filtering="false" allow-sorting="false"/>
+			<column property="rubro.nombre" visible="true" title="app.header.rubro" align="left" />
+			<column property="numeroFactura" visible="true" title="app.header.numeroFactura" align="right" order="1" orderType="ascending"/>
+			<column property="numeroRecibo" visible="true" title="app.header.numeroRecibo" align="right" />
+			<column property="fecha" visible="true" title="app.header.fecha" align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="nombreProveedor" visible="true" title="app.header.proveedor" />
+			<column property="persona" visible="true" title="app.header.nombre" decorator="com.pragma.toolbar.web.decorator.PersonaWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="profesionPersona" visible="true" title="app.header.profesion" />
+			<column property="descripcion" visible="true" title="app.header.descripcion" />
+			<column property="montoSueldoMensual" visible="false" title="app.header.sueldoMensual" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="mesesParticipacion" visible="false" title="app.header.mesesParticipacion" align="right" data-type="Long"/>
+			<column property="porcentajeDedicacion" visible="false" title="app.header.porcentajeDedicacion" align="right" data-type="Number"/>
+			<column property="montoParteRendicion" visible="true" title="app.header.montoParteSolicitado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoContraparteRendicion" visible="true" title="app.header.montoContraparteSolicitado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoTotal" visible="true" title="app.header.montoTotal" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoParteEvaluacion" visible="true" title="app.header.montoParteAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoContraparteEvaluacion" visible="true" title="app.header.montoContraparteAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoTotalEvaluacion" visible="true" title="app.header.totalAprobado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="observaciones" visible="true" title="app.header.observaciones" align="left"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditarMontosANR" />
+		</actions>
+	</toolbar>	
+	<!-- CF -->
+	<toolbar id="rendicionesEvaluacionSeguimientoCF" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.evaluacion.cf.RendicionesEvaluacionSeguimientoWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="rubro.tipoRendicion" visible="false" title="app.header.tipo" align="left" allow-filtering="false" allow-sorting="false"/>
+			<column property="rubro.nombre" visible="true" title="app.header.rubro" align="left" />
+			<column property="numeroFactura" visible="true" title="app.header.numeroFactura" align="right" order="1" orderType="ascending"/>
+			<column property="numeroRecibo" visible="true" title="app.header.numeroRecibo" align="right" />
+			<column property="fecha" visible="true" title="app.header.fecha" align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="nombreProveedor" visible="true" title="app.header.proveedor" />
+			<column property="persona" visible="true" title="app.header.nombre" decorator="com.pragma.toolbar.web.decorator.PersonaWrapper" allow-filtering="false" allow-sorting="false"/>
+			<column property="profesionPersona" visible="true" title="app.header.profesion" />
+			<column property="descripcion" visible="true" title="app.header.descripcion" />
+			<column property="montoSueldoMensual" visible="false" title="app.header.sueldoMensual" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="mesesParticipacion" visible="false" title="app.header.mesesParticipacion" align="right" data-type="Long" />
+			<column property="porcentajeDedicacion" visible="false" title="app.header.porcentajeDedicacion" align="right" data-type="Number" allow-filtering="false" allow-sorting="false"/>
+			<column property="montoTotal" visible="true" title="app.header.montoTotal" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="montoTotalEvaluacion" visible="true" title="app.header.montoAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false" align="right" data-type="Number" allow-filtering="true" allow-sorting="true"/>
+			<column property="observaciones" visible="true" title="app.header.observaciones" align="left"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditarMontosCF" />
+		</actions>
+	</toolbar>	
+	
+	
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Entidades Evaluadoras					-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="entidadesEvaluadorasConfiguracion" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.entidades.entidades.EntidadesWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="entidad.cuit" visible="true"
+				title="app.header.cuit" align="right" order="1"
+				orderType="ascending" />
+			<column property="entidad.denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+			<column property="nroCBU" visible="true"
+				title="app.header.nroCBU" align="left" />
+			<column property="nroCuenta" visible="true"
+				title="app.header.nroCuenta" align="left" />
+			<column property="nombreBeneficiario" visible="true"
+				title="app.header.nombreBeneficiario" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEditar" />
+			<action name="linkBorrarEntidadEvaluadora" />
+		</actions>
+	</toolbar>
+	
+	
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Entidades Bancarias					-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="entidadesBancariasConfiguracion" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.entidades.entidades.EntidadesWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="entidad.cuit" visible="true"
+				title="app.header.cuit" align="right" order="1"
+				orderType="ascending" />
+			<column property="entidad.denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkEditar" />
+			<action name="linkBorrarEntidadBancaria" />
+		</actions>
+	</toolbar>		
+
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Tributaria							-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="tributaria" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.emerix.TributariaWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="codigo" visible="true"
+				title="app.header.codigo" align="right" order="1"
+				orderType="ascending" />
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+			<column property="emerix" visible="true"
+				title="app.header.emerix" align="left" />
+			<column property="activo" visible="true"
+				title="app.header.activo" align="center" 
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper"
+				allow-filtering="false" allow-sorting="false"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+	
+	<!-- ********************************************************************** -->
+	<!--					Inventario de Cartera								-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="cartera" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.emerix.CarteraWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="codigo" visible="true"
+				title="app.header.codigo" align="right" order="1"
+				orderType="ascending" />
+			<column property="denominacion" visible="true"
+				title="app.header.denominacion" align="left" />
+			<column property="emerix" visible="true"
+				title="app.header.emerix" align="left" />
+			<column property="activo" visible="true"
+				title="app.header.activo" align="center" 
+				decorator="com.pragma.toolbar.web.decorator.BooleanWrapper"
+				allow-filtering="false" allow-sorting="false"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+		</actions>
+
+	</toolbar>
+	
+	<!-- ********************************************************************** -->
+	<!--					Inventario de PAC								-->
+	<!-- ********************************************************************** -->
+
+	<toolbar id="pac" paging="true" pageSize="20"
+		decorator="com.fontar.web.form.administracion.proyecto.pac.PacWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="item" visible="true"
+				title="app.header.item" align="right" order="1"
+				orderType="ascending" />
+			<column property="descripcion" visible="true"
+				title="app.header.descripcion" align="left" />
+			<column property="etapa" visible="true"
+				title="app.header.etapa" align="left" />
+			<column property="rubro.nombre" visible="true"
+				title="app.header.rubro" align="left" />
+			<column property="tipoAdquisicion.descripcion" visible="true"
+				title="app.header.tipoAdquisicion" align="left" />
+			<column property="fecha" align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" 
+				data-type="Date" visible="true"
+				title="app.header.fechaEstimadaCompra" />
+			<column property="montoFontar" visible="true"
+				title="app.header.montoEstimadoFontar" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" 
+				align="right" data-type="Number"/>
+			<column property="codigoEstado" visible="true"
+				title="app.header.estado" align="left" />
+			<column property="montoAdjudicacionMoneda" visible="true"
+				title="app.header.montoAdjudicacion" align="right"/>
+			<column property="montoADesembolsarConMoneda" visible="true"
+				title="app.header.montoDesembolsado" align="right"/>
+			<column property="montoPagado" visible="true"
+				title="app.header.montoPagado" align="right"/>
+			<column property="esPatrimonio" title="app.header.esPatrimonio" visible="true" align="center"
+				decorator="com.pragma.toolbar.web.decorator.BooleanSinNoWrapper" />   
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar" />
+			<action name="linkBorrar" />
+			<action name="linkPedirDesembolso" />
+			<action name="linkIngresarPago" />
+			<action name="linkPatrimonio" />
+			<action name="linkVisualizar" />
+		</actions>
+		
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--				Inventario de Rendicion Cuentas Gestión de Pagos					-->
+	<!-- ********************************************************************************** -->
+	<!-- ANR -->
+	<toolbar id="rendicionesGestionPagoANR" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.seguimientos.RendicionesGestionPagoWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="tipo" visible="false" title="app.header.tipo" align="left" allow-filtering="false" allow-sorting="false"/>
+			<column property="rubro.nombre" showProperty="nombreRubro" visible="true" title="app.header.rubro" align="left" order="1" orderType="ascending"/>
+			<column property="numeroFactura" visible="true" title="app.header.numeroFactura" align="right" order="2" orderType="ascending"/>
+			<column property="numeroRecibo" visible="false" title="app.header.numeroRecibo" align="right" />
+			<column property="fecha" visible="true" title="app.header.fecha" align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="nombreProveedor" visible="true" title="app.header.proveedor" />
+			<column property="nombrePersona" visible="true" title="app.header.nombre"/>
+			<column property="profesionPersona" visible="true" title="app.header.profesion" />
+			<column property="descripcion" visible="true" title="app.header.descripcion" />
+			<column property="montoSueldoMensual" visible="false" title="app.header.sueldoMensual" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="mesesParticipacion" visible="false" title="app.header.mesesParticipacion" align="right" data-type="Long"/>
+			<column property="porcentajeDedicacion" visible="false" title="app.header.porcentajeDedicacion" align="right" data-type="Number"/>
+
+			<column property="montoParteRendicion" visible="false" title="app.header.montoParte" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="montoContraparteRendicion" visible="false" title="app.header.montoContraparte" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="montoTotal" visible="true" title="app.header.montoTotal" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			
+			<column property="montoParteEvaluacion" visible="true" title="app.header.montoParteAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false"  align="right" data-type="Number"/>
+			<column property="montoContraparteEvaluacion" visible="true" title="app.header.montoContraparteAprobado" decorator="com.pragma.toolbar.web.decorator.EditableMoneyWrapper" escape-html="false"  align="right" data-type="Number"/>
+			<column property="montoTotalEvaluacion" visible="true" title="app.header.montoTotalAprobado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+
+			<column property="montoParteGestion" visible="true" title="app.header.montoParteGestionado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="montoContraparteGestion" visible="true" title="app.header.montoContraparteGestionado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="montoTotalGestion" visible="true" title="app.header.montoTotalGestionado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			
+			<column property="observaciones" visible="true" title="app.header.observaciones" align="left"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditarMontos" />
+		</actions>
+	</toolbar>
+	<!-- CF -->
+	<toolbar id="rendicionesGestionPagoCF" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.seguimientos.RendicionesGestionPagoWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="tipo" visible="false" title="app.header.tipo" align="left" allow-filtering="false" allow-sorting="false"/>
+			<column property="rubro.nombre" showProperty="nombreRubro" visible="true" title="app.header.rubro" align="left" order="1" orderType="ascending"/>
+			<column property="numeroFactura" visible="true" title="app.header.numeroFactura" align="right" order="2" orderType="ascending"/>
+			<column property="numeroRecibo" visible="false" title="app.header.numeroRecibo" align="right" />
+			<column property="fecha" visible="true" title="app.header.fecha" align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="nombreProveedor" visible="true" title="app.header.proveedor" />
+			<column property="nombrePersona" visible="true" title="app.header.nombre"/>
+			<column property="profesionPersona" visible="true" title="app.header.profesion" />
+			<column property="descripcion" visible="true" title="app.header.descripcion" />
+			<column property="montoSueldoMensual" visible="false" title="app.header.sueldoMensual" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="mesesParticipacion" visible="false" title="app.header.mesesParticipacion" align="right" data-type="Long"/>
+			<column property="porcentajeDedicacion" visible="false" title="app.header.porcentajeDedicacion" align="right" data-type="Number"/>
+
+			<column property="montoTotal" visible="true" title="app.header.montoTotal" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="montoTotalEvaluacion" visible="true" title="app.header.montoTotalAprobado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="montoTotalGestion" visible="true" title="app.header.montoTotalGestionado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<!-- Parte que paga el FONTAR por medio de la emision de un certificado -->
+			<column property="montoParteGestion" visible="true" title="app.header.montoDelCertificado" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			
+			<column property="observaciones" visible="true" title="app.header.observaciones" align="left"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditarMontos" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--						Inventario de Procedimientos								-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="procedimientos" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.controlAdquisicion.ProcedimientoWrapper"
+		styleClass="inventario" queryInvocationHandler="com.fontar.data.impl.dao.hibernate.ProcedimientoQueryInvocationHandler">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="proyecto.codigo" visible="true" title="app.header.nroProyecto" align="left" />
+			<column property="codigo" visible="true" title="app.header.nroProcedimiento" align="left" 
+				order="1" orderType="ascending"/>
+			<column property="fechaRecepcion" visible="true" title="app.header.fechaRecepcion" 
+				align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="descripcion" visible="true" title="app.header.descripcion" align="left"/>
+			<column property="tipoAdquisicion.descripcion" visible="true" title="app.header.tipoAdquisicion" 
+				align="left" decorator="" allow-filtering="false" allow-sorting="false"/>
+			<column property="estado.descripcion" visible="true" title="app.header.estado" 
+				align="center" decorator=""  allow-filtering="false" allow-sorting="false"/>
+			<column property="evaluador.nombre" visible="true" title="app.header.evaluador" align="left"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar"/>
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+	</toolbar>		
+
+	<!-- ********************************************************************************** -->
+	<!--						Inventario de Items de Procedimientos								-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="itemsProcedimiento" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.controlAdquisicion.ItemsProcedimientoWrapper"		
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="pacItem.item" visible="true" title="app.header.item" align="center" 
+				order="1" orderType="ascending"/>
+			<column property="pacItem.descripcion" visible="true" title="app.header.descripcion" align="left" />
+			<column property="pacItem.etapa" visible="true" title="app.header.etapa" align="center" />
+			<column property="pacItem.rubro.nombre" visible="true" title="app.header.rubro" align="left" />
+			<column property="pacItem.montoFontar" visible="true" title="app.header.montoEstimadoFontar" 
+				decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="pacItem.fecha" visible="true" title="app.header.fechaEstimadaCompra" 
+				align="center" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="pacItem.proveedor" visible="true" title="app.header.proveedor" align="left"/>
+			<column property="pacItem.moneda.descripcion" visible="true" title="app.header.moneda" align="left"/>
+			<column property="pacItem.montoAdjudicacion" visible="true" title="app.header.monto$" 
+				decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="resultadoFontar.descripcion" visible="true" title="app.header.resultadoFontar" align="left"/>
+			<column property="montoFontar" visible="true" title="app.header.montoFontar" 
+				decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+			<column property="resultadoUffaBid" visible="true" title="app.header.resultadoUffaBid" align="left"/>
+			<column property="montoUffaBid" visible="true" title="app.header.montoUffaBid" 
+				decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" align="right" data-type="Number"/>
+		</columns>
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar"/>
+		</actions>
+	</toolbar>		
+
+	<!-- ********************************************************************************** -->
+	<!--						Inventario de Cotizaciones								-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="cotizaciones" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.configuracion.cotizaciones.CotizacionesWrapper"		
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="moneda.tipoMoneda" visible="true" title="app.header.cotizacion.moneda.tipoMoneda" align="left" 
+				order="2" orderType="ascending"/>
+			<column property="moneda.descripcion" visible="true" title="app.header.cotizacion.moneda.descripcion" align="left" />
+			<column property="fecha" visible="true" title="app.header.cotizacion.fecha" align="left" order="1" orderType="descending" />
+			<column property="monto" visible="true" title="app.header.cotizacion.monto" align="right" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkEditar"/>
+			<action name="linkEliminar"/>
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!--						Inventario de Historia de Pac								-->
+	<!-- ********************************************************************************** -->
+
+	<toolbar id="historiaPac" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.controlAdquisicion.ProcedimientoWrapper"
+		styleClass="inventario">
+
+		<buttons><button id="0" /></buttons>
+
+		<columns>
+			<column property="procedimiento.codigo" visible="true" title="app.header.procedimiento" align="left" />
+			<column property="procedimiento.fechaRecepcion" visible="true" title="app.header.fechaRecepcion" align="left" decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" />
+			<column property="procedimiento.evaluador.nombre" visible="true" title="app.header.evaluador" align="left" />
+			<column property="remision" visible="true" title="app.header.remision" align="left" />
+			<column property="montoAdjudicacion" visible="true" title="app.header.montoAdjudicacion" align="right" decorator="com.pragma.toolbar.web.decorator.MoneyWrapper" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizarItem"/>
+		</actions>
+	</toolbar>		
+	
+	<!-- ********************************************************************************** -->
+	<!-- 							Mis Evaluaciones										-->
+	<!-- ********************************************************************************** -->
+	
+	<toolbar id="misEvaluaciones" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.evaluacion.EvaluacionWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true"
+				title="app.header.id" align="right" data-type="Long"/>
+			<column property="proyecto.codigo" visible="true"
+				title="app.header.nroProyecto" align="center" />
+			<column property="proyecto.instrumento.identificador"
+				visible="true" title="app.header.instrumento" align="center" />
+			<column
+				property="proyecto.proyectoDatos.entidadBeneficiaria.denominacion"
+				visible="true" title="app.header.entidadBeneficiaria" align="left" />
+			<column property="tiposEvaluacion" visible="true"
+				title="app.header.tipo" align="left"
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="fechaInicial" visible="true"
+				title="app.header.fechaInicial" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper"
+				order="1" orderType="descending" data-type="Date"/>
+			<column property="fecha" visible="true"
+				title="app.header.fechaEvaluacion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="estado" visible="true"
+				title="app.header.estado" align="center" 
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="resultadoEvaluacion" visible="true"
+				title="app.header.resultado" align="center" decorator="com.fontar.web.decorator.evaluacion.EncryptedEnumerableWrapper" 
+				allow-filtering="false" allow-sorting="false"/>
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkAdjuntos" />			
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />
+		</actions>
+	</toolbar>
+	
+	<!-- ********************************************************************************** -->
+	<!-- 							Mis Evaluaciones										-->
+	<!-- ********************************************************************************** -->
+	
+	<toolbar id="misEvaluacionesDeSeguimiento" paging="true" pageSize="20"
+		decorator="com.fontar.web.decorator.seguimientos.evaluacion.EvaluacionSeguimientoWrapper"
+		styleClass="inventario">
+
+		<buttons>
+			<button id="0" />
+		</buttons>
+
+		<columns>
+			<column property="id" visible="true"
+				title="app.header.id" align="right" data-type="Long"
+				order="1" orderType="descending" />
+			<column property="proyecto.instrumento.identificador"
+				visible="true" title="app.header.instrumento" align="center" />
+			<column property="proyecto.codigo" visible="true"
+				title="app.header.nroProyecto" align="center" />
+			<column property="proyecto.proyectoDatos.entidadBeneficiaria.denominacion"
+				visible="true" title="app.header.entidadBeneficiaria" align="left" />
+			<column property="tiposEvaluacion" visible="true"
+				title="app.header.tipo" align="left"
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="evaluadorInstitucion" visible="true"
+				title="app.header.evaluador" align="left"
+				decorator="com.fontar.web.decorator.miscelaneos.StringMaxLengthWrapper" 
+				allow-filtering="false" allow-sorting="false" />
+			<column property="fechaInicial" visible="true"
+				title="app.header.fechaInicial" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="fecha" visible="true"
+				title="app.header.fechaEvaluacion" align="center"
+				decorator="com.pragma.toolbar.web.decorator.ShortDateWrapper" data-type="Date"/>
+			<column property="estado.descripcion" visible="true"
+				title="app.header.estado" align="center" 
+				allow-filtering="false" allow-sorting="false"/>
+			<column property="bitacora.idSeguimiento" visible="false"
+				title="app.header.idSeguimiento" align="right" />
+		</columns>
+
+		<actions title="app.header.acciones">
+			<action name="linkVisualizar" />
+			<action name="linkDetalleWorkflow" />
+			<action name="comboTareasWorkflow" />			
+		</actions>
+	</toolbar>
+	
+	
+		
+</toolbars>

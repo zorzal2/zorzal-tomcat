@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="Notificacion" width="855" height="600">
+  <node name="start" x="70" y="23" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Pendiente de Envío" x="64" y="128" width="150" height="40">
+    <transition name="notificacion_enviada">
+      <label x="4" y="-26"/>
+    </transition>
+    <transition name="cerrar/anular">
+      <label x="-260" y="-17"/>
+      <bendpoint w1="344" h1="-1" w2="-1" h2="-80"/>
+    </transition>
+  </node>
+  <node name="¿Requiere Acuse?" x="62" y="251" width="155" height="40">
+    <transition name="SI">
+      <label x="-44" y="-17"/>
+      <bendpoint w1="132" h1="-1" w2="0" h2="-85"/>
+    </transition>
+    <transition name="NO">
+      <label x="6" y="-86"/>
+    </transition>
+  </node>
+  <node name="Finalizada" x="70" y="487" width="140" height="40"/>
+  <node name="Pendiente de Acuse" x="197" y="379" width="149" height="40">
+    <transition name="cerrar/anular">
+      <label x="-129" y="-17"/>
+      <bendpoint w1="213" h1="0" w2="0" h2="128"/>
+    </transition>
+    <transition name="acuse_recibido">
+      <label x="5" y="-80"/>
+      <bendpoint w1="0" h1="107" w2="131" h2="-1"/>
+    </transition>
+  </node>
+  <node name="Cerrada - Anulada" x="407" y="207" width="154" height="40"/>
+</process-diagram>

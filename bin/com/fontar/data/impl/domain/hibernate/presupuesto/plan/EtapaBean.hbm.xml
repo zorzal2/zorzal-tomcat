@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean.proyecto.presupuesto.plan">
+	<class name="EtapaBean" table="PROY_ETAPA">
+        <id name="id" type="java.lang.Long" column="ID_ETAPA">
+			<generator class="sequence">
+			      <param name="sequence">SQ_ETAPA</param>
+		   </generator>		
+		</id>
+		
+		<many-to-one name="presupuesto" class="com.fontar.data.impl.domain.bean.ProyectoPresupuestoBean" column="ID_PRESUPUESTO" insert="false" update="false" />
+		<property name="idPresupuesto" column="ID_PRESUPUESTO" type="java.lang.Long"/>	        
+		<property name="inicio" column="FE_INICIO" type="java.util.Date"/>	        
+		<property name="fin" column="FE_FIN" type="java.util.Date"/>	        
+        <property name="nombre" column="NM_ETAPA" type="java.lang.String"/>
+        <property name="descripcion" column="DE_ETAPA" type="java.lang.String"/>
+        <property name="avance" column="TX_AVANCE" type="java.lang.String"/>
+        <property name="observaciones" column="DE_OBSERVACION" type="java.lang.String"/>
+
+        <set name="actividades" inverse="true" lazy="true" cascade="none">
+            <key column="ID_ETAPA"/>
+            <one-to-many class="com.fontar.data.impl.domain.bean.proyecto.presupuesto.plan.ActividadBean"/>
+        </set>
+    </class>
+    <query name="EtapaBean.findByPresupuesto">
+         <![CDATA[from EtapaBean b where b.idPresupuesto = ?]]>
+    </query>   
+
+    <query name="EtapaBean.findByNombres">
+         <![CDATA[select distinct b.nombre from EtapaBean b where b.idPresupuesto = ?]]>
+    </query>   
+</hibernate-mapping>

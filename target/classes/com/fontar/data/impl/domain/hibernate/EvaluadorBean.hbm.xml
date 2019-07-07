@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="EvaluadorBean" table="EVALUADOR">
+        <id name="id" type="java.lang.Long" column="ID_PERSONA_EVALUADOR">
+			<generator class="com.fontar.data.impl.domain.bean.PersonaSequence" />
+        </id>
+        <property name="idEspecialidadPrimaria" column="ID_ESPECIALIDAD_PRIMARIA" type="java.lang.Long"  />
+        <property name="idEspecialidadSecundaria" column="ID_ESPECIALIDAD_SECUNDARIA" type="java.lang.Long"  />        
+        <property name="tituloPosgrado" column="TX_TITULO_POSTGRADO" type="java.lang.String" />
+        <property name="fechaIngreso" column="FE_INGRESO" type="java.util.Date" />        
+        <property name="borrado" column="BORRADO" type="java.lang.Boolean"/>
+    
+		<one-to-one name="persona" class="PersonaBean" />
+    </class> 
+</hibernate-mapping>

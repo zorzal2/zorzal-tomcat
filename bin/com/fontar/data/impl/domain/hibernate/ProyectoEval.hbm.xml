@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/08/2006 11:51:49 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="ProyectoEval" table="PROYECTO_EVAL">
+        <composite-id name="id" class="ProyectoEvalId">
+            <key-property name="idProyecto" type="long">
+                <column name="ID_PROYECTO" precision="22" scale="0" />
+            </key-property>
+            <key-property name="idEval" type="long">
+                <column name="ID_EVAL" precision="22" scale="0" />
+            </key-property>
+        </composite-id>
+
+        <many-to-one name="evaluador" class="Evaluador" update="false" insert="false" fetch="select">
+            <column name="ID_EVAL" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+
+        <many-to-one name="proyecto" class="Proyecto" update="false" insert="false" fetch="select">
+            <column name="ID_PROYECTO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

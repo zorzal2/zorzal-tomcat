@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="ProyectoReconsideracionBean" table="PROY_RECONSIDERACION">
+
+	    <id name="id" type="java.lang.Long" column="ID_PROY_RECONSIDERACION">
+			<generator class="com.fontar.data.impl.domain.bean.BitacoraSequence">
+			      <param name="tipo">RECONSIDERACION</param>
+		   	</generator>
+		</id>
+
+        <property name="fecha" column="FE_DICTAMEN" type="java.util.Date"/>
+        <property name="fundamentacion" column="DE_FUNDAMENTACION" type="java.lang.String"/>
+	    <property name="dictamen" column="TX_DICTAMEN" type="java.lang.String"/>
+	    <property name="resolucion" column="TX_RESOLUCION" type="java.lang.String"/>
+	    <property name="resultado" column="CD_RESULTADO" type="java.lang.String"/>
+	    <property name="observacion" column="DE_OBSERVACION" type="java.lang.String"/>
+    </class>
+
+</hibernate-mapping>

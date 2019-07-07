@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="ControlAdquisicion">
+	<start-state name="Ingresado">
+		<transition name="" to="Designar Evaluador Técnico"></transition>
+	</start-state>
+	
+	<task-node name="Designar Evaluador Técnico">
+		<task name="Designar Evaluador Técnico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-DESIGNAR-EVALUADOR-TECNICO</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>DesignarEvaluadorTecnico</beanActionId>
+					<taskDescription>wf.controlAdquisicion.designarEvaluador</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>evaluador_designado</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<transition name="evaluador_designado" to="Cargar Fundamentación Evaluador"></transition>
+	</task-node>
+	
+	<task-node name="Cargar Fundamentación Evaluador">
+		<task name="Cargar Fundamentación Evaluador">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-CARGAR-FUNDAMENTACION-EVALUADOR</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarFundamentacionEvaluador</beanActionId>
+					<taskDescription>wf.controlAdquisicion.cargarFundamentacion</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>fundamentacion_cargada</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<transition name="fundamentacion_cargada" to="Cargar Resultado"></transition>
+	</task-node>
+	
+	<task-node name="Cargar Resultado">
+		<task name="Cargar Resultado">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-CARGAR-RESULTADO</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarResultadoProcedimiento</beanActionId>
+					<taskDescription>wf.controlAdquisicion.cargarResultado</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>resultado_cargado</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<transition name="resultado_cargado" to="fork1"></transition>
+	</task-node>
+	
+	<task-node name="Remitir a UFFA">
+		<task name="Remitir a UFFA">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-REMITIR-UFFA</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>RemitirUffa</beanActionId>
+					<taskDescription>wf.controlAdquisicion.remitirUffa</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>remitido_uffa</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<transition name="remitido_uffa" to="Cargar Resultado UFFA"></transition>
+	</task-node>
+	
+	<decision name="¿Hay items para UFFA?">
+		<handler class="com.fontar.jbpm.handler.decision.ExistenItemsUFFA"/>
+			
+		<transition name="SI" to="Remitir a UFFA"></transition>
+		<transition name="NO" to="join1"></transition>
+	</decision>
+	
+	<decision name="¿Hay items Aprob. Pliego o PreCalificación?">
+		<handler class="com.fontar.jbpm.handler.decision.ExistenItemsAprobPliegoOPreClasificacion"/>
+	
+		<transition name="NO" to="Finalizado"></transition>
+		<transition name="SI" to="Generar Pedido Autorización"></transition>
+	</decision>
+	
+	<task-node name="Generar Pedido Autorización">
+		<task name="Generar Pedido Autorización">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-GENERAR-PEDIDO-AUTORIZACION</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>GenerarPedidoAutorizacion</beanActionId>
+					<taskDescription>wf.controlAdquisicion.pedirAutorizacion</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>autorizacion_pedida</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<transition name="autorizacion_pedida" to="Finalizado"></transition>
+	</task-node>
+	
+	<fork name="fork1">
+		<transition name="" to="¿Hay items para UFFA?"></transition>
+		<transition name="tr2" to="¿Hay items para BID?"></transition>
+	</fork>
+	
+	<task-node name="Remitir a BID">
+		<task name="Remitir a BID">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-REMITIR-BID</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>RemitirBid</beanActionId>
+					<taskDescription>wf.controlAdquisicion.remitirBid</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>remitido_bid</transitionName>
+				</action>
+			</event>
+		</task>	
+	
+		<transition name="remitido_bid" to="Cargar Resultado BID"></transition>
+	</task-node>
+	
+	<task-node name="Cargar Resultado UFFA">
+		<task name="Cargar Resultado UFFA">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-CARGAR-RESULTADO-UFFA</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarResultadoUffa</beanActionId>
+					<taskDescription>wf.controlAdquisicion.cargarResultadoUffa</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cargado_resultado_uffa</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<transition name="cargado_resultado_uffa" to="join1"></transition>
+	</task-node>
+	
+	<task-node name="Cargar Resultado BID">
+		<task name="Cargar Resultado BID">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-CONTROL-ADQUISICION-CARGAR-RESULTADO-BID</idActionWorkflow>
+			</assignment>
+		
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarResultadoBid</beanActionId>
+					<taskDescription>wf.controlAdquisicion.cargarResultadoBid</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cargado_resultado_bid</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<transition name="cargado_resultado_bid" to="join1"></transition>
+	</task-node>
+	
+	<decision name="¿Hay items para BID?">
+		<handler class="com.fontar.jbpm.handler.decision.ExistenItemsBID"/>
+	
+		<transition name="SI" to="Remitir a BID"></transition>
+		<transition name="NO" to="join1"></transition>
+	</decision>
+	
+	<join name="join1">
+		<transition name="" to="¿Hay items Aprob. Pliego o PreCalificación?"></transition>
+	</join>
+	
+	<end-state name="Finalizado"></end-state>
+</process-definition>

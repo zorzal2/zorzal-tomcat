@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="EntidadIntervinientesBean" table="PROY_ENTIDAD_INTERVINIENTE">
+		<id name="id" type="java.lang.Long" column="ID_PROY_EINTERVINIENTE">
+			<generator class="com.fontar.data.impl.domain.bean.BitacoraSequence"/>
+		</id>	
+
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean" />
+        <property name="idEntidad" column="ID_ENTIDAD" type="java.lang.Long" />
+        <property name="funcion" column="TX_FUNCION" type="java.lang.String" />
+        
+        <property name="tipoEntidad" column="CD_TIPO" type="com.fontar.data.impl.domain.codes.entidad.TipoEntidadUserType" />
+        <property name="relacion" column="TX_RELACION_CONTRACTUAL" type="java.lang.String" />
+		
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="ProyectoEvaluacionCriterioBean" table="PROY_EVALUACION_CRITERIOS">
+		<id name="id" column="ID_EVALUACION_CRITERIO" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_PROY_EVAL_CRIT</param>
+		   </generator>
+		</id>
+		<property name="idEvaluacion" column="ID_EVALUACION" type="java.lang.Long" />
+		<property name="idCriterio" column="ID_CRITERIO" type="java.lang.Long" />
+		
+ 	</class>
+	<query name="ProyectoEvaluacionCriterioBean.findByEvaluacion">
+         <![CDATA[select e from ProyectoEvaluacionCriterioBean e where e.idEvaluacion = :idEvaluacion]]>
+    </query>   
+</hibernate-mapping>

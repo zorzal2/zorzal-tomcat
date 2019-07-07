@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="RubroBean" table="RUBRO" mutable="false">
+		<id name="id" column="ID_RUBRO" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_RUBRO</param>
+		   </generator>
+		</id>
+		
+		<property name="nombre" column="NM_RUBRO" type="java.lang.String" />
+		<property name="codigo" column="CD_RUBRO" type="java.lang.String" />
+		<property name="codigoLargo" column="CD_RUBRO_LARGO" type="java.lang.String" />
+		<property name="tipo" column="TP_RUBRO" type="com.fontar.data.impl.domain.codes.rubro.TipoRubroUserType" />
+		<property name="tipoRendicion" column="TP_RENDICION" type="com.fontar.data.impl.domain.codes.rubro.TipoRendicionUserType" />
+
+		
+		<property name="idRubroPadre" column="ID_PADRE_RUBRO" type="java.lang.Long" />
+		<many-to-one name="rubroPadre" class="RubroBean" column="ID_PADRE_RUBRO" insert="false" update="false" />
+
+		<property name="nroOrden" column="NR_ORDEN" type="java.lang.Long" />
+	</class>
+
+    <query name="RubroBean.findIdsPadres">
+		<![CDATA[select distinct r.idRubroPadre from RubroBean r where r.idRubroPadre <> null]]>
+    </query> 
+ 
+    <query name="RubroBean.findSinPadresOrdenados">
+		<![CDATA[select r from RubroBean r where r.idRubroPadre is null order by r.nroOrden]]>
+    </query> 
+ 
+    <query name="RubroBean.findSinPadres">
+		<![CDATA[select r from RubroBean r where r.idRubroPadre = null order by r.id]]>
+    </query> 
+ 
+    <query name="RubroBean.findByCodigo">
+		<![CDATA[select r from RubroBean r where lower(r.codigo) = lower(:codigo)]]>
+    </query> 
+    
+    
+</hibernate-mapping>

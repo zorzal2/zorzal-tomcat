@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="ProyectoDesembolsoBean" table="PROY_CRONOGRAMA" >
+		<id name="id" type="java.lang.Long" column="ID_CRONOGRAMA">
+			<generator class="sequence">
+			      <param name="sequence">SQ_CRONOGRAMA</param>
+		   </generator>		
+		</id>		
+        <property name="concepto" column="TX_CONCEPTO" type="java.lang.String" />
+        <property name="fechaPago" column="FE_PAGO" type="java.util.Date" />
+        <property name="montoOriginal" column="MO_ORIGINAL" type="java.math.BigDecimal" />
+        <property name="codigoEstado" column="CD_ESTADO" type="com.fontar.data.impl.domain.codes.proyecto.desembolso.EstadoProyectoDesembolsoUserType" />
+        <property name="plazo" column="NR_DIAS_PLAZO" type="java.lang.Integer" />
+        <property name="montoAutorizado" column="MO_AUTORIZADO" type="java.math.BigDecimal" />
+        <property name="montoDesembolsado" column="MO_DESEMBOLSADO" type="java.math.BigDecimal" />
+        <property name="objetivo" column="TX_OBJETIVO" type="java.lang.String" />
+        <property name="idSeguimientoDeAutorizacion" column="ID_SEGUIMIENTO_DE_AUTORIZACION" type="java.lang.Long" />
+        <property name="esAnticipo" column="ES_ANTICIPO" type="java.lang.Boolean" />
+
+		<property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long"/>
+        <many-to-one name="proyecto" column="ID_PROYECTO" class="ProyectoBean" insert="false" update="false" />
+
+    </class>
+
+    <query name="ProyectoDesembolsoBean.findByProyecto">
+        <![CDATA[select p from ProyectoDesembolsoBean p where p.idProyecto= ? order by p.plazo]]>
+    </query>    
+
+   	<query name="ProyectoDesembolsoBean.selectMontoPago">
+        <![CDATA[select sum(r.montoDesembolsado )
+				from ProyectoDesembolsoBean r 
+				where
+					(r.idProyecto = ?) AND (r.codigoEstado IN ('PAGADO'))]]>
+    </query> 
+
+</hibernate-mapping>

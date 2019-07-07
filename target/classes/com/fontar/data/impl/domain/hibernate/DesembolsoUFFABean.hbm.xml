@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="DesembolsoUFFABean" table="DESEMBOLSO_UFFA" >
+		<id name="id" type="java.lang.Long" column="ID_DESEMBOLSO_UFFA">
+			<generator class="sequence">
+			      <param name="sequence">SQ_DESEMBOLSO_UFFA</param>
+		   </generator>		
+		</id>		
+        <property name="cuota" column="NU_CUOTA" type="java.lang.Integer" />
+ 		<property name="ordenPago" column="CD_ORDEN_PAGO" type="java.lang.String"/>
+        <property name="fechaPedido" column="FE_PEDIDO_DESEMBOLSO" type="java.util.Date" />
+        <property name="montoDesembolsado" column="MO_PEDIDO_DESEMBOLSO" type="java.math.BigDecimal" />
+        <property name="fechaPago" column="FE_PAGO" type="java.util.Date" />
+        <property name="montoPago" column="MO_PAGO" type="java.math.BigDecimal" />
+        <property name="esAnticipo" column="ES_APLICA_ANTICIPO" type="java.lang.Boolean" />
+
+		<property name="idPac" column="ID_PAC_ITEM" type="java.lang.Long"/>
+        <many-to-one name="pac" column="ID_PAC_ITEM" class="PacBean" insert="false" update="false" />
+
+        <property name="idMoneda" column="ID_MONEDA" type="java.lang.Long" />
+        <many-to-one name="moneda" column="ID_MONEDA" class="MonedaBean" insert="false" update="false" />
+    </class>
+
+   	<query name="DesembolsoUFFABean.findByPac">
+        <![CDATA[select e from DesembolsoUFFABean e where (e.idPac = ?)]]>
+    </query> 
+
+   	<query name="DesembolsoUFFABean.findByPacCuota">
+        <![CDATA[select e from DesembolsoUFFABean e where (e.idPac = ?) AND (e.cuota = ?)]]>
+    </query> 
+
+   	<query name="DesembolsoUFFABean.selectMontoPagoAnticipo">
+        <![CDATA[select sum(r.montoPago )
+				from DesembolsoUFFABean r 
+				where
+					(r.idPac = ?) AND (r.esAnticipo = '1')]]>
+    </query> 
+
+</hibernate-mapping>

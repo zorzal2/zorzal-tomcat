@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="InstrumentoBean" table="INSTRUMENTO">
+		<id name="id" type="java.lang.Long" column="ID_INSTRUMENTO">
+			<generator class="sequence">
+			      <param name="sequence">SQ_INSTRUMENTO</param>
+		   </generator>		
+		</id>		
+		<discriminator column="TP_INSTRUMENTO" type="java.lang.String" />
+		
+        <property name="identificador" column="TX_IDENTIFICADOR" type="java.lang.String" />
+        <property name="denominacion" column="NM_DENOMINACION" type="java.lang.String" />
+        <property name="modalidad" column="TX_MODALIDAD" type="java.lang.String" />        
+        <property name="fechaReconocimientoGastos" column="FE_RECONOMIENTO_GASTOS" type="java.util.Date" />
+        <property name="montoFinanciamiento" column="MO_LIMITE_FINAN" type="java.math.BigDecimal" />
+        <property name="montoFinanciamientoTotal" column="MO_FINAN_TOTAL" type="java.math.BigDecimal" />
+        <property name="proporcionApoyo" column="NR_APOYO" type="java.math.BigDecimal" />
+        <property name="periodoGracia" column="TX_PERIODO_GRACIA" type="java.lang.String" />
+        <property name="plazoEjecucion" column="TX_PLAZO_EJECUCION" type="java.lang.String" />
+        <property name="plazoAmortizacion" column="TX_PLAZO_AMORTIZACION" type="java.lang.String" />
+        <property name="tasaInteres" column="TX_TASA_INTERES" type="java.lang.String" />
+        <property name="garantia" column="TX_GARANTIA" type="java.lang.String" />
+        <property name="permiteFinanciamientoBancario" column="ST_FINANCIAMIENTO_BANCARIO" type="java.lang.Boolean" />
+        <property name="permiteComision" column="ST_COMISION" type="java.lang.Boolean" />
+        <property name="permiteSecretaria" column="ST_SECRETARIA" type="java.lang.Boolean" />
+        <property name="permiteAdjudicacion" column="ST_ADJUDICACION" type="java.lang.Boolean" />        			
+        <property name="plazoReconsideracion" column="NR_RECONSIDERACION" type="java.lang.Integer" />
+        <property name="firmaContrato" column="NR_FIRMA_CONTRATO" type="java.lang.Integer" />
+        <property name="permiteMultipleJurisdiccion" column="ST_MULTIPLE_JURISDICCION" type="java.lang.Boolean" />
+        <property name="observaciones" column="DE_OBSERVACIONES" type="java.lang.String" />
+        <property name="permitePropiciado" column="ST_PROPICIADO" type="java.lang.Boolean" />
+        <property name="codigoTipoFinanciamiento" column="TP_LIMITE_FINAN" type="java.lang.String" />
+        <property name="codigoTipoFinanciamientoAsignacion" column="TP_FINAN_ASIGNACION" type="java.lang.String" />
+        <property name="tipoDistribucionFinanciamiento" column="TP_DISTRIB_FINAN" type="java.lang.String" />
+        <property name="codigoEstado" column="ST_INSTRUMENTO" type="java.lang.String" />
+        <property name="paraProyectoHistorico" column="ST_PARA_PROY_HISTORICO" type="java.lang.Boolean" />
+                
+		<property name="emerix" column="CD_EMERIX" type="java.lang.Long"/>
+        <property name="idCartera" column="ID_CARTERA" type="java.lang.Long" />
+		<property name="varianteEmerix" column="ID_VARIANTE_EMERIX" type="java.lang.String"/>
+
+        <property name="idMatrizPresupuesto" column="ID_MATRIZ_PRESUPUESTO" type="java.lang.Long" />
+        <property name="idComision" column="ID_COMISION" type="java.lang.Long" />
+        <property name="idInstrumentoDef" column="ID_INSTRUMENTO_DEF" type="java.lang.Long" />
+        <property name="idInstrumentoVersion" column="ID_INSTRUMENTO_VERSION" type="java.lang.Long" />
+        
+        <many-to-one name="cartera" column="ID_CARTERA" class="CarteraBean" insert="false" update="false" fetch="join" lazy="false"/>
+        <many-to-one name="matrizPresupuesto" column="ID_MATRIZ_PRESUPUESTO" class="MatrizPresupuestoBean" insert="false" update="false" fetch="join" lazy="false"/>
+        <many-to-one name="comision" column="ID_COMISION" class="ComisionBean" insert="false" fetch="join" lazy="false" update="false"/>          
+        <many-to-one name="instrumentoDef" column="ID_INSTRUMENTO_DEF" class="InstrumentoDefBean" insert="false" update="false"/>        
+        <many-to-one name="instrumentoVersionActual" column="ID_INSTRUMENTO_VERSION" class="InstrumentoVersionBean" insert="false" update="false"/>        
+
+		<set name="distribucionFinanciamientos" inverse="true" cascade="all-delete-orphan" >
+			<key column="ID_INSTRUMENTO" />
+			<one-to-many class="DistribucionFinanciamientoBean" />
+		</set>
+		
+		<set name="instrumentoVersiones" inverse="true" cascade="all-delete-orphan" >
+			<key column="ID_INSTRUMENTO" />
+			<one-to-many class="InstrumentoVersionBean" />
+		</set>
+
+		<set name="adjuntos" table="ADJ_INSTR" lazy="true">
+			<key column="ID_INSTRUMENTO" />
+			<many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>
+		</set>
+		
+		<subclass name="VentanillaPermanenteBean" discriminator-value="V">
+		  <property name="aceptaIdeaProyecto" column="ST_ACEPTA_IDEAPROYECTO" type="java.lang.Boolean" />
+		</subclass>
+				
+		<subclass name="LlamadoConvocatoriaBean" discriminator-value="C">
+			<property name="fechaApertura" column="FE_APERTURA" type="java.util.Date" />
+			<property name="fechaCierre" column="FE_CIERRE" type="java.util.Date" />			
+			<property name="plazoReadmision" column="NR_READMISION" type="java.lang.Integer" />
+	        <property name="esIdeaProyectoPitec" column="ES_IDEA_PROYECTO_PITEC" type="java.lang.Boolean" />			
+		</subclass>
+        
+        <filter name="securityFilter" condition="ID_INSTRUMENTO in ( :allowedInstances )"/>
+        
+    </class>
+    
+    <query name="InstrumentoBean.findAll">
+        <![CDATA[from InstrumentoBean]]>
+    </query>
+    
+    <query name="InstrumentoBean.findByIdentificador">
+         <![CDATA[select p from InstrumentoBean p where p.identificador = :identificador]]>
+    </query>
+    
+    <query name="LlamadoConvocatoriaBean.findByEstado">
+         <![CDATA[select p from LlamadoConvocatoriaBean p where p.codigoEstado = ? and p.permiteComision = '1']]>
+    </query>    
+        
+    <query name="VentanillaPermanenteBean.findByEstado">
+         <![CDATA[select p from VentanillaPermanenteBean p where p.codigoEstado = ? and p.permiteComision = '1']]>
+    </query>    
+    
+    <query name="InstrumentoBean.findByComision">
+         <![CDATA[select i from InstrumentoBean i where i.permiteComision = '1' and exists (from ProyectoBean p where i.id = p.idInstrumento and p.codigoEstado = 'CONT_COM' and p.estadoEnPaquete = '0')]]>
+    </query>        
+    
+    <query name="InstrumentoBean.findBySecretaria">
+         <![CDATA[select i from InstrumentoBean i where i.permiteSecretaria = '1' and exists (from ProyectoBean p where i.id = p.idInstrumento and p.codigoEstado = 'CONT_SEC' and p.estadoEnPaquete = '0')]]>
+    </query>        
+
+    <query name="InstrumentoBean.findByDirectorio">
+         <![CDATA[select i from InstrumentoBean i where exists (from ProyectoBean p where i.id = p.idInstrumento and (p.codigoEstado = 'CONT_DIR_ADJ' or p.codigoEstado = 'NO_ADJUDICADO' or p.codigoEstado = 'CONT_DIR_EVAL') and p.estadoEnPaquete = '0')]]>
+    </query>        
+    
+    <query name="InstrumentoBean.findAllActivos">
+         <![CDATA[select i from InstrumentoBean i where (i.codigoEstado = 'ACTIVO' or  i.codigoEstado = 'ABIERTO')]]>
+    </query>        
+
+    <query name="LlamadoConvocatoriaBean.findAllActivosOrdenados">
+         <![CDATA[select p from LlamadoConvocatoriaBean p where p.codigoEstado = 'ACTIVO' order by p.identificador]]>
+    </query>    
+    
+     <query name="LlamadoConvocatoriaBean.findByIdentificador">
+         <![CDATA[select p from LlamadoConvocatoriaBean p where p.identificador = :identificador]]>
+     </query>	
+
+    <query name="LlamadoConvocatoriaBean.findByIdentificadorId">
+        <![CDATA[select p from LlamadoConvocatoriaBean p where p.identificador = :identificador and (p.id <> :idLlamado)]]>
+    </query> 
+
+     <query name="VentanillaPermanenteBean.findByIdentificador">
+         <![CDATA[select p from VentanillaPermanenteBean p where p.identificador = :identificador]]>
+     </query>	
+
+    <query name="VentanillaPermanenteBean.findByIdentificadorId">
+        <![CDATA[select p from VentanillaPermanenteBean p where p.identificador = :identificador and (p.id <> :idVentanilla)]]>
+    </query> 
+
+</hibernate-mapping>

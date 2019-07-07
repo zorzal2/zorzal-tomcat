@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="ComisionBean" table="COMISION" >
+		<id name="id" type="java.lang.Long" column="ID_COMISION">
+			<generator class="sequence">
+			      <param name="sequence">SQ_COMISION</param>
+		   </generator>		
+		</id>		
+        <property name="denominacion" column="NM_DENOMINACION" type="java.lang.String" />
+        <property name="resolucion" column="CD_RESOLUCION" type="java.lang.String" />
+        <property name="fechaBaja" column="FE_BAJA" type="java.util.Date" />
+        <property name="fechaAlta" column="FE_ALTA" type="java.util.Date" />
+        <property name="observacion" column="DE_OBSERVACION" type="java.lang.String" />
+        <property name="descripcion" column="DE_COMISION" type="java.lang.String" />
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+    </class>
+
+    <query name="ComisionBean.findByDenominacion">
+        <![CDATA[from ComisionBean c where c.denominacion = :denominacion order by c.denominacion]]>
+    </query> 
+    
+    <query name="ComisionBean.findByDenominacionId">
+        <![CDATA[from ComisionBean c where c.denominacion = :denominacion AND (c.id <> :idComision)]]>
+    </query> 
+</hibernate-mapping>

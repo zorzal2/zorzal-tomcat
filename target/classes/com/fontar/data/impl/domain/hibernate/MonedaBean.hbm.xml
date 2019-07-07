@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="MonedaBean" table="MONEDA">
+
+		<id name="id" column="ID_MONEDA" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_MONEDA</param>
+		   </generator>	
+		</id>
+	
+		<property name="tipoMoneda" column="CD_TIPO_MONEDA" type="java.lang.String"/>
+		<property name="descripcion" column="CD_DESCRIPCION" type="java.lang.String"/>		
+		<property name="codigoEmerix" column="CD_EMERIX" type="java.lang.String"/>		
+	</class>
+</hibernate-mapping>

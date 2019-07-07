@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="FuenteFinanciamientoBean" table="FUENTE_FINANCIAMIENTO">
+		<id name="id" type="java.lang.Long" column="ID_FUENTE_FINANCIAMIENTO">
+			<generator class="sequence">
+			      <param name="sequence">SQ_FUENTE_FINANCIAMIENTO</param>
+		   </generator>		
+		</id>		
+        <property name="identificador" column="NM_FUENTE_FINANCIAMIENTO" type="java.lang.String" />
+        <property name="denominacion" column="DE_FUENTE_FINANCIAMIENTO" type="java.lang.String" />
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+    </class>
+    
+    <query name="FuenteFinanciamientoBean.findByIdentificador">
+        <![CDATA[from FuenteFinanciamientoBean f where f.identificador = :identificador]]>
+    </query> 
+    
+    <query name="FuenteFinanciamientoBean.findByIdentificadorId">
+        <![CDATA[from FuenteFinanciamientoBean f where f.identificador = :identificador and (f.id <> :idFuente)]]>
+    </query> 
+
+    <query name="FuenteFinanciamientoBean.findByDenominacion">
+        <![CDATA[from FuenteFinanciamientoBean f where f.denominacion = :denominacion ]]>
+    </query> 
+    
+    <query name="FuenteFinanciamientoBean.findByDenominacionId">
+        <![CDATA[from FuenteFinanciamientoBean f where f.denominacion = :denominacion and (f.id <> :idFuente)]]>
+    </query> 
+</hibernate-mapping>

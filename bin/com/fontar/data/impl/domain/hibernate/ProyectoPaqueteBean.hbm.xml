@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="ProyectoPaqueteBean" table="PROY_PAQUETE">
+        <id name="id" type="java.lang.Long" column="ID_PROY_PAQUETE">
+			<generator class="com.fontar.data.impl.domain.bean.BitacoraSequence">
+			      <param name="tipo">PROY_PAQUETE</param>
+		   	</generator>
+		</id>		
+		
+		<property name="idPaquete" column="ID_PAQUETE" type="java.lang.Long"/>
+        <property name="esActivo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+        <property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long"/>
+        
+        <one-to-one name="bitacora" class="BitacoraBean" />
+        
+        <many-to-one name="proyecto" class="ProyectoBean" column="ID_PROYECTO" insert="false" update="false"/>
+        <many-to-one name="paquete" class="PaqueteBean" column="ID_PAQUETE" insert="false" update="false"/>
+        
+        <one-to-one name="evaluacion" property-ref="idProyectoPaquete" formula="idProyectoPaquete" class="EvaluacionPaqueteBean"/>
+        
+    </class>
+    
+    <query name="ProyectoPaqueteBean.findByProyectoPaquete">
+         <![CDATA[select p from ProyectoPaqueteBean p where p.idProyecto = :idProyecto and p.idPaquete = :idPaquete and p.esActivo = '1']]>
+    </query>  
+    
+    <query name="ProyectoPaqueteBean.findByPaquete">
+         <![CDATA[select p from ProyectoPaqueteBean p where p.idPaquete = ?]]>
+    </query>        
+
+    <query name="ProyectoPaqueteBean.findByProyecto">
+         <![CDATA[select p from ProyectoPaqueteBean p where p.idProyecto = ?]]>
+    </query>        
+</hibernate-mapping>
+
+

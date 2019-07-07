@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="EvaluacionBean" table="PROY_EVALUACION">
+        <id name="id" type="java.lang.Long" column="ID_EVALUACION">
+			<generator class="com.fontar.data.impl.domain.bean.BitacoraSequence">
+			      <param name="tipo">EVALUACION</param>
+		   	</generator>
+		</id>
+		
+		<property name="tipo" column="TP_CLASE_EVALUACION" type="com.fontar.data.impl.domain.codes.evaluacion.TipoEvaluacionUserType"/>
+        <property name="estado" column="ST_EVALUACION" type="com.fontar.data.impl.domain.codes.evaluacion.EstadoEvaluacionUserType"/>
+		<property name="fecha" column="FE_EVALUACION" type="java.util.Date"/>
+		<property name="recomendacion" column="DE_RECOMENDACION_INSTRUMENTO" type="java.lang.String"/>
+		<property name="fechaInicial" column="FE_INICIAL" type="java.util.Date"/>
+
+        <property name="idCronograma" column="ID_CRONOGRAMA" type="java.lang.Long"/>
+		<property name="idPlanTrabajo" column="ID_PLAN_TRABAJO" type="java.lang.Long"/>        
+		<property name="idPresupuesto" column="ID_PRESUPUESTO" type="java.lang.Long"/>
+		<property name="idPresupuestoInicial" column="ID_PRESUPUESTO_INICIAL" type="java.lang.Long"/>
+		<property name="observacion" column="DE_OBSERVACION" type="java.lang.String"/>		
+
+		<property name="resultadoEvaluacion" column="CD_RESULTADO" type="com.fontar.data.impl.domain.codes.evaluacion.ResultadoEvaluacionUserType"/>
+		<property name="fundamentacion" column="DE_FUNDAMENTACION" type="com.fontar.data.impl.domain.hibernate.evaluacion.FundamentacionUserType"/>
+
+		<property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long"/>
+		<property name="idWorkFlow" column="ID_PROCESS_INSTANCE" type="java.lang.Long"/>
+		<property name="idPaqRechElegibilidad" column="ID_PAQUETE_RECH_ELEGIBILIDAD" type="java.lang.Long"/>
+		<property name="idPaquete" column="ID_PAQUETE" type="java.lang.Long"/>
+		<property name="esDictamen" column="ES_DICTAMEN" type="java.lang.Boolean"/>
+		
+		<one-to-one name="bitacora" class="BitacoraBean" />
+		
+		<!-- No puede ser lazy, ya que el proxy no puede responder al metodo instance of necesario para los assemblers   -->
+        <many-to-one name="proyecto" class="ProyectoRaizBean" lazy="false" column="ID_PROYECTO" insert="false" update="false"/>
+		<many-to-one name="proyectoPresupuesto" class="com.fontar.data.impl.domain.bean.ProyectoPresupuestoBean" column="ID_PRESUPUESTO" insert="false" update="false" />
+		<many-to-one name="proyectoPresupuestoInicial" class="com.fontar.data.impl.domain.bean.ProyectoPresupuestoBean" column="ID_PRESUPUESTO_INICIAL" insert="false" update="false" />
+
+        <set name="adjuntos" table="ADJ_EVAL" lazy="true">
+			<key column="ID_EVALUACION" />
+			<many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>
+		</set>
+
+		<joined-subclass name="EvaluacionGeneralBean" table="PROY_EVALUACION_GENERAL" >
+			<key column="ID_EVALUACION" />
+				
+			<property name="esAuditoriaContable" column="ES_AUDITORIA_CONTABLE" type="java.lang.Boolean" />
+			<property name="esContable" column="ES_CONTABLE" type="java.lang.Boolean" />
+			<property name="esEconomica" column="ES_ECONOMICA" type="java.lang.Boolean" />
+			<property name="esFinanciera" column="ES_FINANCIARA" type="java.lang.Boolean" />
+			<property name="esTecnica" column="ES_TECNICA" type="java.lang.Boolean" />
+			<property name="esVisitaTecnica" column="ES_VISITA_TECNICA" type="java.lang.Boolean" />															
+			<property name="fechaEntregaComprometida" column="FE_COMPROMETIDA" type="java.util.Date" />
+			<property name="tipoEvaluacionFinanciera" column="TP_EVALUACION_FINANCIERA" type="com.fontar.data.impl.domain.codes.evaluacion.TipoEvaluacionFinancieraUserType"/>
+			
+			<set name="evaluadores" table="PROY_EVAL_EVALUADOR" >
+				<key column="ID_EVALUACION" />
+				<one-to-many class="EvaluacionEvaluadorBean"/>			
+			</set>
+
+
+			<joined-subclass name="EvaluacionSeguimientoBean" table="PROY_EVALUACION_SEGUIMIENTO" >
+				<key column="ID_EVALUACION" />
+
+				<property name="idSeguimiento" column="ID_SEGUIMIENTO" type="java.lang.Long" />
+				<many-to-one name="seguimiento" class="com.fontar.data.impl.domain.bean.SeguimientoBean" column="ID_SEGUIMIENTO" insert="false" update="false" />
+			</joined-subclass>
+
+		</joined-subclass>
+		
+		<joined-subclass name="EvaluacionPaqueteBean" table="PROY_EVALUACION_PAQUETE">
+			<key column="ID_EVALUACION" />
+			<property name="idProyectoPaquete" column="ID_PROY_PAQUETE" type="java.lang.Long" />
+		</joined-subclass>
+		
+		<filter name="securityFilter" condition="ID_PROYECTO in ( :allowedInstances )"/>
+	   
+	</class>
+
+	<query name="EvaluacionBean.findByProyecto">
+         <![CDATA[select e from EvaluacionBean e, BitacoraBean b where e.id = b.id AND b.idProyecto = ?]]>
+    </query>   
+    
+    <query name="EvaluacionPaqueteBean.findByProyectoPaqueteActivo">
+		<![CDATA[select ep from EvaluacionPaqueteBean ep, ProyectoPaqueteBean pp where ep.idProyectoPaquete = pp.id and pp.idPaquete = :idPaquete and pp.idProyecto = :idProyecto and pp.esActivo = '1']]>
+   	</query>
+	<query name="EvaluacionSeguimientoBean.findByProyecto">
+         <![CDATA[select e from EvaluacionSeguimientoBean e where e.seguimiento.idProyecto = ?]]>
+    </query>   
+
+    <query name="EvaluacionSeguimientoBean.findBySeguimiento">
+         <![CDATA[from EvaluacionSeguimientoBean e where e.idSeguimiento = ?]]>
+    </query>
+</hibernate-mapping>

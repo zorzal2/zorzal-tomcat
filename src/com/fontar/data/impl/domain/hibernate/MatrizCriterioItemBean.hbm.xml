@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="MatrizCriterioItemBean" table="MATRIZ_CRITERIO_ITEMS">
+		<id name="id" type="java.lang.Long" column="ID_CRITERIO">
+			<generator class="sequence">
+			      <param name="sequence">SQ_MATRIZ_CRITERIO_ITEMS</param>
+		   </generator>		
+		</id>		
+
+        <property name="idItemPadre" column="ID_CRITERIO_PADRE" type="java.lang.Long" />
+        <property name="denominacion" column="TX_CRITERIO" type="java.lang.String" />
+        <property name="puntaje" column="CA_PUNTAJE" type="java.lang.Long" />
+        <property name="idMatrizCriterio" column="ID_MATRIZ_CRITERIO" type="java.lang.Long" />
+
+        <many-to-one name="matrizCriterio" class="MatrizCriterioBean" lazy="false" column="ID_MATRIZ_CRITERIO" insert="false" update="false"/>
+        <many-to-one name="itemPadre" class="MatrizCriterioItemBean" lazy="false" column="ID_CRITERIO_PADRE" insert="false" update="false"/>
+
+    </class>
+    
+    <query name="MatrizCriterioItemBean.findCriterios">
+         <![CDATA[select c from MatrizCriterioItemBean c where c.idItemPadre is null]]>
+    </query>   
+    
+</hibernate-mapping>
+
+
+
+
+
+

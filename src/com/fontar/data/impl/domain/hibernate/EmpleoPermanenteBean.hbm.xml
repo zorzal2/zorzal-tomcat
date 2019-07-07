@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="EmpleoPermanenteBean" table="EMPLEO_PERMANENTE">
+		<id name="id" column="ID_EMPLEO_PERMANENTE" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_EMPLEO_PERMANENTE</param>
+		   </generator>
+		</id>
+		<property name="cantidadTecnicos" column="CA_TECNICO" type="java.lang.Integer" />
+		<property name="cantidadOperariosCalificados" column="CA_OPERARIO_CALIF" type="java.lang.Integer" />
+		<property name="cantidadOperariosNoCalificados" column="CA_OPERARIO_NO_CALIF" type="java.lang.Integer" />
+		<property name="cantidadProfesionales" column="CA_PROFESIONAL" type="java.lang.Integer" />
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="ProcedimientoItemBean" table="PROCEDIMIENTO_ITEM">
+
+		<id name="id" column="ID_PROCEDIMIENTO_ITEM" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_PROCEDIMIENTO_ITEM</param>
+		   </generator>	
+		</id>
+	
+		<property name="resultadoFontar" column="CD_RESULTADO_FONTAR" type="com.fontar.data.impl.domain.codes.seguimiento.controlAdquisicion.ResultadoFontarUserType"/>
+		<property name="montoFontar" column="MO_ADJUDICACION_FONTAR" type="java.math.BigDecimal"/>		
+		<property name="resultadoUffa" column="CD_RESULTADO_UFFA" type="com.fontar.data.impl.domain.codes.seguimiento.controlAdquisicion.ResultadoUffaBidUserType"/>
+		<property name="montoUffa" column="MO_ADJUDICACION_UFFA" type="java.math.BigDecimal"/>		
+		<property name="resultadoBid" column="CD_RESULTADO_BID" type="com.fontar.data.impl.domain.codes.seguimiento.controlAdquisicion.ResultadoUffaBidUserType"/>
+		<property name="montoBid" column="MO_ADJUDICACION_BID" type="java.math.BigDecimal"/>		
+
+		<property name="idProcedimiento" column="ID_PROCEDIMIENTO" type="java.lang.Long"/>
+        <many-to-one name="procedimiento" class="ProcedimientoBean" lazy="false" column="ID_PROCEDIMIENTO" insert="false" update="false" />
+
+		<property name="idPacItem" column="ID_PAC_ITEM" type="java.lang.Long"/>
+		<many-to-one name="pacItem" class="PacBean" lazy="false" column="ID_PAC_ITEM" insert="false" update="false"/>
+
+		<property name="idMoneda" column="ID_MONEDA" type="java.lang.Long"/>
+		<many-to-one name="moneda" class="MonedaBean" lazy="false" column="ID_MONEDA" insert="false" update="false"/>
+		
+		<filter name="securityFilter" condition="ID_PROYECTO in ( :allowedInstances )"/>
+	</class>
+	
+    <query name="ProcedimientoItemBean.findByProcedimiento">
+        <![CDATA[select p from ProcedimientoItemBean p where p.idProcedimiento = ? order by p.idPacItem]]>
+    </query>    
+
+    <query name="ProcedimientoItemBean.findByProcedimientoResultadoFontar">
+        <![CDATA[select p from ProcedimientoItemBean p where p.idProcedimiento = ? and p.resultadoFontar = ? order by p.idPacItem]]>
+    </query>    
+
+    <query name="ProcedimientoItemBean.findByProcedimientoConResultadoPliego">
+        <![CDATA[select	p 
+        		 from 	ProcedimientoItemBean p 
+        		 where 	p.idProcedimiento = ? 
+        		   and 	((p.resultadoFontar = 'APROB_PEND_UFFA' and (p.resultadoUffa = 'APROB_PLIEGO' or p.resultadoUffa = 'APROB_PRE_CLASIF'))
+        		    or 	(p.resultadoFontar = 'APROB_PEND_BID' and (p.resultadoBid = 'APROB_PLIEGO' or p.resultadoBid = 'APROB_PRE_CLASIF')))
+			  order by 	p.idPacItem]]>
+    </query>    
+	
+    <query name="ProcedimientoItemBean.findByPac">
+        <![CDATA[select p from ProcedimientoItemBean p where p.idPacItem = ?]]>
+    </query>    
+	
+</hibernate-mapping>

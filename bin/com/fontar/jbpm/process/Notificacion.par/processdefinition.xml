@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns=""  name="Notificacion">
+	<start-state name="start">
+		<transition name="" to="Pendiente de Envío"></transition>
+	</start-state>
+	
+	<task-node name="Pendiente de Envío">
+		<task name="Enviar Notificacion">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-NOTIFICACION-ENVIAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EnviarNotificacion</beanActionId>
+					<taskDescription>wf.notificacion.enviarNotificacion</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>notificacion_enviada</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<task name="Cerrar Proyecto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  	        <idActionWorkflow>WF-NOTIFICACION-CERRAR</idActionWorkflow>
+			</assignment>
+		       	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarNotificacion</beanActionId>
+					<taskDescription>wf.notificacion.cerrar</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<task name="Anular Proyecto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  		<idActionWorkflow>WF-NOTIFICACION-ANULAR</idActionWorkflow>
+		    </assignment>
+		       			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularNotificacion</beanActionId>
+					<taskDescription>wf.notificacion.anular</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>	
+
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" >
+			</action>
+		</event>
+	
+		<transition name="notificacion_enviada" to="¿Requiere Acuse?"></transition>
+      	<transition name="cerrar/anular" to="Cerrada - Anulada"></transition>
+	</task-node>
+	
+	<decision name="¿Requiere Acuse?">
+		<handler class="com.fontar.jbpm.handler.decision.Acuse" />	
+	
+		<transition name="SI" to="Pendiente de Acuse"></transition>
+      	<transition name="NO" to="Finalizada"></transition>
+	</decision>
+	
+	<end-state name="Finalizada"></end-state>
+	
+	<task-node name="Pendiente de Acuse">
+		<task name="Recibir Acuse">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-NOTIFICACION-RECIBIR-ACUSE</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>RecibirAcuseNotificacion</beanActionId>
+					<taskDescription>wf.notificacion.recibirAcuseNotificacion</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>acuse_recibido</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<task name="Cerrar Proyecto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  	        <idActionWorkflow>WF-NOTIFICACION-CERRAR</idActionWorkflow>
+			</assignment>
+		       	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarNotificacion</beanActionId>
+					<taskDescription>wf.notificacion.cerrar</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<task name="Anular Proyecto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  		<idActionWorkflow>WF-NOTIFICACION-ANULAR</idActionWorkflow>
+		    </assignment>
+		       			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularNotificacion</beanActionId>
+					<taskDescription>wf.notificacion.anular</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>	
+
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" >
+			</action>
+		</event>
+
+		<transition name="cerrar/anular" to="Cerrada - Anulada"></transition>
+		<transition name="acuse_recibido" to="Finalizada"></transition>
+	</task-node>
+	
+	<end-state name="Cerrada - Anulada"></end-state>
+</process-definition>

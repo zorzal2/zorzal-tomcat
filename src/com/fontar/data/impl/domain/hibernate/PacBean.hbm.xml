@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="PacBean" table="PAC_ITEM" >
+		<id name="id" type="java.lang.Long" column="ID_PAC_ITEM">
+			<generator class="sequence">
+			      <param name="sequence">SQ_PAC_ITEM</param>
+		   </generator>		
+		</id>		
+        <property name="descripcion" column="DE_DESCRIPCION" type="java.lang.String" />
+ 		<property name="item" column="CD_ITEM" type="java.lang.Long"/>
+        <property name="etapa" column="CD_ETAPA" type="java.lang.String" />
+        <property name="fecha" column="FE_ESTIMADA_ADQUISICION" type="java.util.Date" />
+        <property name="montoFontar" column="MO_PARTE" type="java.math.BigDecimal" />
+        <property name="codigoEstado" column="CD_ESTADO" type="com.fontar.data.impl.domain.codes.proyecto.pac.EstadoPacItemUserType" />
+        <property name="fechaEstado" column="FE_ESTADO" type="java.util.Date" />
+        <property name="esPatrimonio" column="ES_INGRESADO_PATRIMONIO" type="java.lang.Boolean" />
+        <property name="proveedor" column="DE_PROVEEDOR" type="java.lang.String" />
+        <property name="fechaAdjudicacion" column="FE_ADJUDICACION" type="java.util.Date" />
+        <property name="montoAdjudicacion" column="MO_ADJUDICACION" type="java.math.BigDecimal" />
+        <property name="fechaDesembolso" column="FE_DESEMBOLSO" type="java.util.Date" />
+        <property name="montoDesembolsado" column="MO_DESEMBOLSADO" type="java.math.BigDecimal" />
+        <property name="observaciones" column="DE_OBSERVACIONES" type="java.lang.String" />
+
+		<property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long"/>
+        <many-to-one name="proyecto" column="ID_PROYECTO" class="ProyectoBean" insert="false" update="false" />
+
+  		<property name="idRubro" column="ID_RUBRO" type="java.lang.Long"/>
+        <many-to-one name="rubro" column="ID_RUBRO" class="RubroBean" insert="false" update="false" />
+ 		<property name="idTipoAdquisicion" column="ID_TIPO_ADQUISICION" type="java.lang.Long"/>
+        <many-to-one name="tipoAdquisicion" column="ID_TIPO_ADQUISICION" class="TipoAdquisicionBean" insert="false" update="false" />
+        <property name="idMoneda" column="ID_MONEDA" type="java.lang.Long" />
+         <many-to-one name="moneda" column="ID_MONEDA" class="MonedaBean" insert="false" update="false" />
+         
+        <set name="desembolsosUFFA" inverse="true" lazy="true" cascade="none">
+            <key column="ID_PAC_ITEM"/>
+            <one-to-many class="com.fontar.data.impl.domain.bean.DesembolsoUFFABean"/>
+        </set>
+
+    </class>
+
+    <query name="PacBean.findByProyecto">
+        <![CDATA[select p from PacBean p where p.idProyecto= ?]]>
+    </query>    
+
+    <query name="PacBean.findByTipoAdquisicionYProyecto">
+        <![CDATA[select p from PacBean p where p.idTipoAdquisicion = ? and p.idProyecto= ? and p.codigoEstado = 'PENDIENTE_DE_COMPRA' order by p.id]]>
+    </query>    
+
+    <query name="PacBean.findByProcedimiento">
+        <![CDATA[select p from PacBean p, ProcedimientoItemBean pi where pi.idProcedimiento = ? and pi.idPacItem = p.id order by p.id]]>
+    </query>    
+
+</hibernate-mapping>

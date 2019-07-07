@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="NotificacionBean" table="NOTIFICACION">
+
+		<id name="id" column="ID_NOTIFICACION" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_NOTIFICACION</param>
+		   </generator>	
+		</id>
+	
+        <property name="tipoNotificacion" column="TP_NOTIFICACION" type="com.fontar.data.impl.domain.codes.notificacion.TipoNotificacionUserType" />
+		<property name="descripcion" column="DE_NOTIFICACION" type="java.lang.String"/>
+		<property name="fechaCreacion" column="FE_CREACION" type="java.util.Date"/>
+		<property name="fechaEnvio" column="FE_ENVIO" type="java.util.Date"/>
+		<property name="fechaAcuse" column="FE_ACUSE" type="java.util.Date"/>
+		<property name="requiereAcuse" column="ST_REQ_ACUSE" type="java.lang.Boolean"/>
+        <property name="estado" column="ST_NOTIFICACION" type="com.fontar.data.impl.domain.codes.notificacion.EstadoNotificacionUserType" />
+		<property name="idWorkFlow" column="ID_PROCESS_INSTANCE" type="java.lang.Long"/>        
+		<property name="observacion" column="DE_OBSERVACION" type="java.lang.String" />
+
+        <property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long" />
+        <many-to-one name="proyecto" class="ProyectoRaizBean" lazy="false" fetch="join" column="ID_PROYECTO" insert="false" update="false" />
+
+		<filter name="securityFilter" condition="ID_PROYECTO in ( :allowedInstances )"/>
+	  
+	</class>
+	
+    <query name="NotificacionBean.findByNotificacionesConProyectos">
+        <![CDATA[select p from NotificacionBean n, ProyectoRaizBean p where n.idProyecto is not null and n.idProyecto = p.id order by p.id]]>
+    </query> 	
+    
+    <query name="NotificacionBean.findByID">
+        <![CDATA[select p from NotificacionBean p where p.id= ?]]>
+    </query> 	
+</hibernate-mapping>

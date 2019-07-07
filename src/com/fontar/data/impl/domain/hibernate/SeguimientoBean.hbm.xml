@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="SeguimientoBean" table="PROY_SEGUIMIENTO">
+        <id name="id" type="java.lang.Long" column="ID_SEGUIMIENTO">
+			<generator class="com.fontar.data.impl.domain.bean.BitacoraSequence">
+			      <param name="tipo">SEGUIMIENTO</param>
+		   	</generator>
+		</id>
+
+		<property name="fecha" column="FE_SEGUIMIENTO" type="java.util.Date"/>		
+		<property name="descripcion" column="DE_DESCRIPCION" type="java.lang.String"/>
+
+		<property name="esTecnico" column="ES_TECNICO" type="java.lang.Boolean"/>
+		<property name="esFinanciero" column="ES_FINANCIERO" type="java.lang.Boolean"/>
+
+		<property name="estado" column="ST_SEGUIMIENTO" type="com.fontar.data.impl.domain.codes.seguimiento.EstadoSeguimientoUserType"/>
+				
+		<property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long"/>		
+
+		<property name="montoPresupuestoSegunAvance" column="MO_PRESUPUESTO_SEGUN_AVANCE" type="java.math.BigDecimal" />
+		<property name="montoPendienteDeRendicion" column="MO_PENDIENTE_DE_RENDICION" type="java.math.BigDecimal" />
+
+		<many-to-one name="proyecto" class="ProyectoBean" column="ID_PROYECTO" insert="false" update="false" />
+
+		<set name="rendiciones" table="RENDICION" inverse="true">
+			<key column="ID_SEGUIMIENTO" />
+			<one-to-many class="RendicionCuentasBean" />
+		</set>
+
+		<set name="desembolsosVinculados" table="PROY_CRONOGRAMA" inverse="true">
+			<key column="ID_SEGUIMIENTO_DE_AUTORIZACION" />
+			<one-to-many class="ProyectoDesembolsoBean" />
+		</set>
+
+		<set name="adjuntos" table="ADJ_SEGUIMIENTO" lazy="true">
+             <key column="ID_SEGUIMIENTO" />
+             <many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>
+		</set>
+
+		<one-to-one name="bitacora" class="BitacoraBean" />
+
+		<property name="observacion" column="DE_OBSERVACION" type="java.lang.String"/>
+		
+		<property name="idWorkFlow" column="ID_PROCESS_INSTANCE" type="java.lang.Long"/>
+		
+		<filter name="securityFilter" condition="ID_PROYECTO in ( :allowedInstances )"/>
+    </class>
+
+    <query name="SeguimientoBean.findResumenRendicionesCompleto">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.ResumenDeRendicionesDTO (
+						r.rubro,
+					 	sum(r.montoParteRendicion),
+					 	sum(r.montoContraparteRendicion),
+					 	nvl(sum(r.montoParteGestion), nvl(sum(r.montoParteEvaluacion), sum(r.montoParteRendicion))),
+					 	nvl(sum(r.montoContraparteGestion), nvl(sum(r.montoContraparteEvaluacion), sum(r.montoContraparteRendicion)))
+					 )
+				from RendicionCuentasBean r 
+				where r.idSeguimiento = ? 
+				group by r.rubro.id, r.rubro.nroOrden, r.rubro.nombre, r.rubro.idRubroPadre order by r.rubro.nroOrden]]>
+    </query> 
+
+    <query name="SeguimientoBean.findRendicionActualSolicitada">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.analisisDeGastos.AnalisisDeGastoPorConceptoYRubroDTO(
+						ru,
+						nvl(sum(r.montoParteRendicion),0), 
+						nvl(sum(r.montoContraparteRendicion),0)
+					) 
+				from 
+					RendicionCuentasBean r 
+					join 
+					r.seguimiento s with s.id = ? right join r.rubro ru 
+				group by ru.id, ru.nroOrden, ru.nombre,ru.idRubroPadre order by ru.nroOrden]]>				
+    </query> 
+    
+    <query name="SeguimientoBean.findMontoInversionRendidoAnteriormente">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.analisisDeGastos.AnalisisDeGastoPorConceptoYRubroDTO(
+						ru,
+					 	nvl(sum(r.montoParteRendicion),0), 
+					 	nvl(sum(r.montoContraparteRendicion),0)
+					 )
+				from 
+					RendicionCuentasBean r
+					join
+					r.seguimiento s with (s.idProyecto = :idProyecto and s.estado not in ( 'ANULADO', 'RECHAZADO', 'CERRADO', 'NO_GESTIONADO') and s.id < :idSeguimiento)
+					right join
+					r.rubro ru
+				group by ru.id, ru.nroOrden, ru.nombre,ru.idRubroPadre order by ru.nroOrden]]>
+	</query>
+    
+	<query name="SeguimientoBean.findRendicionActualAprobada">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.analisisDeGastos.AnalisisDeGastoPorConceptoYRubroDTO(
+						ru,
+				    	nvl(sum(case when r.montoParteEvaluacion is not null then r.montoParteEvaluacion else r.montoParteRendicion end),0),
+				     	nvl(sum(case when r.montoContraparteEvaluacion is not null then r.montoContraparteEvaluacion else r.montoContraparteRendicion end),0)
+					)
+				 from 
+				 	 RendicionCuentasBean r 
+					 join
+					 r.seguimiento s with (s.id = :idSeguimiento and s.estado not in ('INICIADO', 'ANULADO', 'RECHAZADO', 'NO_AUTORIZADO', 'NO_GESTIONADO'))
+					 right join
+					 r.rubro ru		
+				 group by ru.id, ru.nroOrden, ru.nombre,ru.idRubroPadre order by ru.nroOrden]]>
+	</query>
+    
+	<query name="SeguimientoBean.findRendicionActualGestionada">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.analisisDeGastos.AnalisisDeGastoPorConceptoYRubroDTO(
+						ru,
+				    	nvl(sum(r.montoParteGestion),0),
+				     	nvl(sum(r.montoContraparteGestion),0)
+					)
+				 from 
+				 	 RendicionCuentasBean r 
+					 join
+					 r.seguimiento s with (s.id = :idSeguimiento and s.estado in ('GESTIONADO', 'FINALIZADO'))
+					 right join
+					 r.rubro ru		
+				 group by ru.id, ru.nroOrden, ru.nombre,ru.idRubroPadre order by ru.nroOrden]]>
+	</query>
+    
+	<query name="SeguimientoBean.findRendicionActualAGestionar">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.analisisDeGastos.AnalisisDeGastoPorConceptoYRubroDTO(
+						ru,
+				    	nvl(sum(r.montoParteGestion),0),
+				     	nvl(sum(r.montoContraparteGestion),0)
+					)
+				 from 
+				 	 RendicionCuentasBean r 
+					 join
+					 r.seguimiento s with (s.id = :idSeguimiento)
+					 right join
+					 r.rubro ru		
+				 group by ru.id, ru.nroOrden, ru.nombre,ru.idRubroPadre order by ru.nroOrden]]>
+	</query>
+ 
+	<query name="SeguimientoBean.findMontoInversionAprobadoAnteriormente">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.analisisDeGastos.AnalisisDeGastoPorConceptoYRubroDTO(
+						ru,
+						nvl(sum(r.montoParteGestion),0),
+						nvl(sum(r.montoContraparteGestion),0)
+					)
+				 from 
+					RendicionCuentasBean r
+					join
+					r.seguimiento s with (s.idProyecto = :idProyecto and s.estado not in ( 'INICIADO', 'EVALUACION', 'CONTROLADO', 'AUTORIZADO', 'ANULADO', 'NO_GESTIONADO', 'NO_AUTORIZADO', 'CERRADO', 'RECHAZADO') and s.id < :idSeguimiento)
+					right join
+					r.rubro ru
+				group by ru.id, ru.nroOrden, ru.nombre,ru.idRubroPadre order by ru.nroOrden]]>
+	</query>
+	
+	<query name="SeguimientoBean.findFacturasRepetidas">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.ControlFacturasDTO
+						(r.numeroFactura as Factura, r.nombreProveedor as Proveedor,
+						 r.descripcion as Descripcion, r.montoTotal as MontoTotal,	
+					     s.descripcion as Seguimiento, p.codigo as Proyecto, 
+					     p.proyectoDatos.entidadBeneficiaria.descEmpresa as Empresa)
+					     
+				from 
+					 RendicionCuentasBean r 
+					 join r.seguimiento s
+					 join s.proyecto p
+				
+				where 
+					r.idSeguimiento <> :idSeguimiento
+					and r.seguimiento.estado not in ( 'RECHAZADO' , 'ANULADO' , 'CERRADO' , 'NO_GESTIONADO')
+					and r.numeroFactura in 
+					(select r1.numeroFactura 
+					 from RendicionCuentasBean r1
+					 where r1.idSeguimiento = :idSeguimiento)
+				 	   
+				order by r.numeroFactura, r.nombreProveedor]]>
+	</query>
+	
+	
+	 <query name="SeguimientoBean.selectMontoParteGestionSeguimientosAprobados">
+		<![CDATA[select sum(r.montoParteGestion)
+				from RendicionCuentasBean r 
+				where
+					r.montoParteGestion is not null and 
+					r.seguimiento.idProyecto = ? and
+					r.seguimiento.estado not in ( 'ANULADO' , 'NO_AUTORIZADO' , 'CERRADO' , 'NO_GESTIONADO')]]>
+    </query> 
+    
+    <query name="SeguimientoBean.selectMontoParteEvaluacionSeguimientosAprobados">
+		<![CDATA[select sum(r.montoParteEvaluacion)
+				from RendicionCuentasBean r 
+				where 
+					r.montoParteGestion is null and 
+					r.montoParteEvaluacion is not null and 
+					r.seguimiento.idProyecto = ? and
+					r.seguimiento.estado not in ( 'ANULADO' , 'NO_AUTORIZADO' , 'CERRADO' , 'NO_GESTIONADO')]]>
+    </query> 
+    
+    <query name="SeguimientoBean.selectMontoAprobadoSeguimiento">
+		<![CDATA[select sum(r.montoParteEvaluacion + r.montoContraparteEvaluacion )
+				from RendicionCuentasBean r 
+				where
+					r.idSeguimiento = ? and r.seguimiento.estado not in ('INICIADO', 'ANULADO', 'RECHAZADO', 'NO_AUTORIZADO' , 'NO_GESTIONADO')]]>
+    </query> 
+    
+    
+     <query name="SeguimientoBean.selectMontoRendidoSeguimiento">
+		<![CDATA[select sum(r.montoTotal )
+				from RendicionCuentasBean r 
+				where
+					r.idSeguimiento = ? ]]>
+    </query> 
+
+    <query name="SeguimientoBean.selectContraparteRendicionAprobadaDelProyecto">
+		<![CDATA[select 
+					nvl(sum(case when r.montoContraparteGestion is not null then r.montoContraparteGestion else r.montoContraparteEvaluacion end),0)
+				 from 
+					RendicionCuentasBean r
+				where
+					r.seguimiento.idProyecto = :idProyecto and
+					r.seguimiento.estado not in ('RECHAZADO' , 'ANULADO' , 'CERRADO' , 'NO_GESTIONADO')]]>
+	</query>
+
+    <query name="SeguimientoBean.findRendicionPorSeguimiento">
+		<![CDATA[select r from RendicionCuentasBean r where r.idSeguimiento = ?]]>
+	</query>
+
+	<query name="SeguimientoBean.selectResumenRendicionCompacto">
+		<![CDATA[select 
+					new com.fontar.data.impl.domain.dto.ResumenDeRendicionCompactoDTO(
+				    	sum(case when r.montoParteRendicion is not null then r.montoParteRendicion else 0 end),
+				    	sum(case when r.montoContraparteRendicion is not null then r.montoContraparteRendicion else 0 end),
+				    	sum(case when r.montoParteEvaluacion is not null then r.montoParteEvaluacion else 0 end),
+				    	sum(case when r.montoContraparteEvaluacion is not null then r.montoContraparteEvaluacion else 0 end),
+				    	sum(case when r.montoParteGestion is not null then r.montoParteGestion else 0 end),
+				    	sum(case when r.montoContraparteGestion is not null then r.montoContraparteGestion else 0 end)
+					)
+				 from 
+				 	RendicionCuentasBean r 
+				 where
+				 	r.seguimiento.id = :idSeguimiento ]]>
+	</query>
+</hibernate-mapping>

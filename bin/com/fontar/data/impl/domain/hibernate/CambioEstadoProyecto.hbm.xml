@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="CambioEstadoProyecto" table="PROY_CAMBIO_ESTADO">
+        <id name="id" type="java.lang.Long" column="ID_CAMBIO_ESTADO">      	
+			<!-- EL ID se asigna a nivel de trigger en la BD, para que no falle el incidente 43738 en la instalación del Fontar. 
+			    generator class="sequence">
+				<param name="sequence">SQ_PROY_CAMBIO_ESTADO</param>
+		   	</generator -->
+		</id>
+		
+		<property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long"/>
+	  	<many-to-one name="proyecto" class="ProyectoBean" lazy="false" column="ID_PROYECTO" insert="false" update="false"/>
+		<property name="fechaRegistro" column="FE_REGISTRO" type="java.util.Date" />                     
+		<property name="estadoInicial" column="ST_DESDE" type="com.fontar.data.impl.domain.codes.proyecto.EstadoProyectoUserType"/>
+		<property name="estadoFinal" column="ST_HASTA" type="com.fontar.data.impl.domain.codes.proyecto.EstadoProyectoUserType"/>
+		
+		
+	</class>
+	
+	<query name="CambioEstadoProyecto.findByConvocatoria">
+		<![CDATA[select c from CambioEstadoProyecto c where c.proyecto.idInstrumento = :idConvocatoria ]]>
+	</query> 
+		
+</hibernate-mapping>

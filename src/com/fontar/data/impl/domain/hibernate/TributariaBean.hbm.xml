@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="TributariaBean" table="CONDICION_TRIBUTARIA" >
+		<id name="id" type="java.lang.Long" column="ID_CONDICION_TRIBUTARIA">
+			<generator class="sequence">
+			      <param name="sequence">SQ_CONDICION_TRIBUTARIA</param>
+		   </generator>		
+		</id>		
+        <property name="denominacion" column="NM_CONDICION_TRIBUTARIA" type="java.lang.String" />
+        <property name="codigo" column="CD_CONDICION_TRIBUTARIA" type="java.lang.String" />
+        <property name="emerix" column="CD_EMERIX" type="java.lang.String" />
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+    </class>
+
+</hibernate-mapping>

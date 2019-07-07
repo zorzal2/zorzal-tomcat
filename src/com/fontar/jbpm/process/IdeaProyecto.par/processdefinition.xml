@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="IdeaProyecto">
+	<start-state name="start">
+      <transition name="" to="fork2"></transition>
+	</start-state>
+
+	<task-node name="Evaluacion">
+		<task name="Cargar Primera Evaluacion">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-AGREGAR-EVALUACION</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarProyecto</beanActionId>
+					<taskDescription>wf.ideaProyecto.evaluacion.agregar</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>con_primera_evaluacion</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<task name="Evaluar Por Junta">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-EVALUAR-POR-JUNTA</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>IdeaProyectoEvaluarPorJunta</beanActionId>
+					<taskDescription>wf.ideaProyecto.evaluacion.porJunta</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>evaluado_por_junta</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" >
+			</action>
+		</event>
+
+		<transition name="con_primera_evaluacion" to="fork1"></transition>
+      	<transition name="evaluado_por_junta" to="¿Elegible?"></transition>
+      	<transition name="cancel" to="join3"></transition>
+	</task-node>
+	
+	<fork name="fork1">
+		<transition name="" to="Evaluar por Junta"></transition>
+		<transition name="tr2" to="Agregar Evaluacion"></transition>
+	</fork>
+
+	<join name="join1">
+		<transition name="" to="¿En Proceso de Cierre?"></transition>
+	</join>
+	
+	<end-state name="Finalizada"></end-state>
+
+	<task-node name="Agregar Evaluacion">
+		<task name="Agregar Evaluacion">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-AGREGAR-EVALUACION</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarProyecto</beanActionId>
+					<taskDescription>wf.ideaProyecto.evaluacion.agregar</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<transition name="repeat" to="Repeater"></transition>
+		<transition name="cancel" to="join1"></transition>
+	</task-node>
+
+	<task-node name="Evaluar por Junta" signal="first">
+		<task name="Evaluar Por Junta">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-IDEA-PROYECTO-EVALUAR-POR-JUNTA</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>IdeaProyectoEvaluarPorJunta</beanActionId>
+					<taskDescription>wf.ideaProyecto.evaluacion.porJunta</taskDescription>
+				</action>
+			</event>
+			
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>evaluado_por_junta</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<transition name="evaluado_por_junta" to="Cancel Hnos 1"></transition>
+      	<transition name="cancel" to="join1"></transition>
+	</task-node>
+	
+	<node name="Repeater">
+		<transition name="" to="Agregar Evaluacion"></transition>
+	</node>
+	
+	<node name="Cancel Hnos 1">
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+
+		<transition name="" to="join1"></transition>
+	</node>
+
+	<decision name="¿Elegible?">
+		<handler class="com.fontar.jbpm.handler.decision.Elegibilidad" />
+
+		<transition name="NO" to="No Elegible"></transition>
+		<transition name="SI" to="Elegible"></transition>
+		<transition to="Pendiente" name="pendiente"></transition>
+	</decision>
+   
+	<task-node name="No Elegible" >	
+		<task name="Reconsiderar">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+            	<idActionWorkflow>WF-IDEA-PROYECTO-RECONSIDERACION-RECONSIDERAR</idActionWorkflow>
+			</assignment>
+                  	      	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>RegistrarPedidoReconsideracion</beanActionId>
+					<taskDescription>wf.proyecto.reconsideracion.reconsiderar</taskDescription>
+				</action>
+			</event>
+			
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>reconsiderado</transitionName>					
+				</action>
+			</event>
+		</task>
+
+		<transition name="reconsiderado" to="Evaluacion"></transition>
+		<transition name="cancel" to="join3"></transition>
+	</task-node>
+	
+	<task-node name="Elegible">
+		<task name="Cargar Proyecto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		          	<idActionWorkflow>WF-IDEA-PROYECTO-CARGAR-PROYECTO</idActionWorkflow>
+			</assignment>
+		                	      	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>IdeaProyectoCargarVentanilla</beanActionId>
+					<taskDescription>wf.ideaProyecto.cargarProyecto</taskDescription>
+				</action>
+			</event>
+			
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.CancelOpenedTasksAndLeave">
+					<transitionName>proyecto_cargado</transitionName>					
+				</action>
+			</event>
+		</task>
+		<task name="Reconsiderar">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+            	<idActionWorkflow>WF-IDEA-PROYECTO-RECONSIDERACION-RECONSIDERAR</idActionWorkflow>
+			</assignment>
+                  	      	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>RegistrarPedidoReconsideracion</beanActionId>
+					<taskDescription>wf.proyecto.reconsideracion.reconsiderar</taskDescription>
+				</action>
+			</event>
+			
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.CancelOpenedTasksAndLeave">
+					<transitionName>reconsiderado</transitionName>					
+				</action>
+			</event>
+		</task>
+	    <transition name="cancel" to="join3"></transition>
+   		<transition name="reconsiderado" to="Evaluacion"></transition>
+	    <transition name="proyecto_cargado" to="Cancel Hnos 2"></transition>
+	</task-node>
+	
+	<fork name="fork2">
+	   <transition name="" to="Evaluacion"></transition>
+	   <transition name="tr2" to="Cerrar - Anular"></transition>
+	</fork>
+	
+	<join name="join2">
+	   <transition name="" to="Finalizada"></transition>
+	</join>
+	
+	<end-state name="Cerrada - Anulada"></end-state>
+   
+	<task-node name="Cerrar - Anular">
+		<task name="Cerrar Proyecto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  	        <idActionWorkflow>WF-IDEA-PROYECTO-CERRAR</idActionWorkflow>
+			</assignment>
+		       	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarProyecto</beanActionId>
+					<taskDescription>wf.ideaProyecto.cerrar</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<task name="Anular Proyecto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  		<idActionWorkflow>WF-IDEA-PROYECTO-ANULAR</idActionWorkflow>
+		    </assignment>
+		       			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularProyecto</beanActionId>
+					<taskDescription>wf.ideaProyecto.anular</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<event type="node-leave">
+			<script>
+				<expression>a = "SI";</expression>
+				<variable name='CERRANDO_PROYECTO' access='write'
+					mapped-name='a' />
+			</script>
+		</event>   
+   
+		<transition name="cerrar/anular" to="Cancel Hnos 3"></transition>
+		<transition name="cancel" to="join2"></transition>
+	</task-node>
+	
+	<node name="Cancel Hnos 3">
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+	
+		<transition name="" to="join3"></transition>
+	</node>
+	
+	<join name="join3">
+	   <transition name="" to="Cerrada - Anulada"></transition>
+	</join>
+	
+	<node name="Cancel Hnos 2">
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+	
+		<transition name="" to="join2"></transition>
+	</node>
+	
+	<decision name="¿En Proceso de Cierre?">
+		<transition name="SI" to="join3">
+      		<condition
+				expression="#{contextInstance.variables['CERRANDO_PROYECTO']=='SI'}" />
+		</transition>
+
+		<transition name="NO" to="¿Elegible?">
+			<condition
+				expression="#{contextInstance.variables['CERRANDO_PROYECTO']!='SI'}" />
+		</transition>
+	</decision>
+
+	<node name="Pendiente">
+		<action
+			class="com.fontar.jbpm.handler.action.PasarAPendienteTask">
+		</action>
+		<transition to="Evaluacion"></transition>
+	</node>
+</process-definition>
+
+
+
+
+
+
+
+
+
+
+

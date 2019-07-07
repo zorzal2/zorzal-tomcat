@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="AdjuntoContenidoBean" table="ADJUNTO_CONTENIDO">
+		<id name="idAdjuntoContenido" column="ID_ADJUNTO_CONTENIDO" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_ADJUNTO_CONTENIDO</param>
+		   </generator>		
+		</id>
+				
+		<property name="blArchivo" type="binary" column="BL_ARCHIVO"/>
+
+		
+    </class>
+</hibernate-mapping>

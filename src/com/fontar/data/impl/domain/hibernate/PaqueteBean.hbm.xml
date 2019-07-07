@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="PaqueteBean" table="PAQUETE">
+		<id name="id" column="ID_PAQUETE" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_PAQUETE</param>
+		   </generator>	
+		</id>
+	
+        <property name="idComision" column="ID_COMISION" type="java.lang.Long" />
+        <property name="idInstrumento" column="ID_INSTRUMENTO" type="java.lang.Long" />
+        <property name="codigoTipo" column="TP_PAQUETE" type="java.lang.String" />
+        <property name="codigoEstado" column="ST_PAQUETE" type="java.lang.String" />
+        <property name="observacion" column="DE_OBSERVACION" type="java.lang.String" />
+        <property name="codigoTratamiento" column="TP_TRATAMIENTO" type="java.lang.String" />
+        <property name="codigoActa" column="CD_ACTA" type="java.lang.String" />        
+		<property name="idWorkFlow" column="ID_PROCESS_INSTANCE" type="java.lang.Long"/>        
+
+		<set name="proyectosPaquete" table="PROY_PAQUETE" inverse="true" cascade="all-delete-orphan" sort="com.fontar.bus.impl.paquete.ProyectoPaqueteComparator">
+			<key column="ID_PAQUETE" />
+			<one-to-many class="ProyectoPaqueteBean" />			
+		</set>
+
+		<set name="adjuntos" table="ADJ_PAQUETE" lazy="true">
+			<key column="ID_PAQUETE" />
+			<many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>
+		</set>
+		
+		<many-to-one 
+			name="instrumento" 
+			class="InstrumentoBean" 
+			column="ID_INSTRUMENTO" 
+			insert="false" 
+			update="false" lazy="false"/>
+			
+        <many-to-one 
+        	name="comision" 
+			class="ComisionBean" 
+        	column="ID_COMISION" 
+        	insert="false" 
+        	update="false"  lazy="false"/>          
+        
+		<!-- Si Paquete tiene como atributo un "Set proyectos" y usamos la tabla de relacion -->
+		<!--  set name="proyectos" outer-join="true" table="PROY_PAQUETE">
+			<key column="ID_PAQUETE"/>
+			<many-to-many column="ID_PROYECTO" class="ProyectoBean"/>
+		</set -->
+
+	   <filter name="securityFilter" condition="ID_INSTRUMENTO in ( :allowedInstances )"/>
+      
+	 </class>
+
+</hibernate-mapping>

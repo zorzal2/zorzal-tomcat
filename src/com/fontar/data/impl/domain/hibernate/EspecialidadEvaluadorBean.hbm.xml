@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="EspecialidadEvaluadorBean" table="ESPECIALIDAD_EVALUADOR">
+		<id name="id" type="java.lang.Long" column="ID_ESPECIALIDAD">
+			<generator class="sequence">
+			      <param name="sequence">SQ_ESPECIALIDAD_EVALUADOR</param>
+		   </generator>		
+		</id>		
+        <property name="codigo" column="CD_ESPECIALIDAD" type="java.lang.String" />
+        <property name="nombre" column="NM_ESPECIALIDAD" type="java.lang.String" />
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+    </class>
+    
+    <query name="EspecialidadEvaluadorBean.findByCodigo">
+        <![CDATA[from EspecialidadEvaluadorBean f where f.codigo = :codigo]]>
+    </query> 
+    
+    <query name="EspecialidadEvaluadorBean.findByNombre">
+        <![CDATA[from EspecialidadEvaluadorBean f where f.nombre = :nombre ]]>
+    </query> 
+    
+    <query name="EspecialidadEvaluadorBean.findByCodigoID">
+        <![CDATA[from EspecialidadEvaluadorBean f where f.codigo = ? and (f.id <> ?)]]>
+    </query> 
+
+    <query name="EspecialidadEvaluadorBean.findByNombreID">
+        <![CDATA[from EspecialidadEvaluadorBean f where f.nombre = ? and (f.id <> ?)]]>
+    </query>     
+</hibernate-mapping>

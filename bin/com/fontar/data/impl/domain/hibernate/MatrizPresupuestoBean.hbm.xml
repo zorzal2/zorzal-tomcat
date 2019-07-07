@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="MatrizPresupuestoBean" table="MATRIZ_PRESUPUESTO">
+		<id name="id" column="ID_MATRIZ_PRESUPUESTO" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_MATRIZ_PRESUPUESTO</param>
+		   </generator>
+		</id>
+
+		<property name="nombre" column="NM_MATRIZ" type="java.lang.String"/>		
+		<property name="tipo" column="TP_MATRIZ" type="java.lang.String"/>
+		<property name="activo" column="ST_MATRIZ" type="java.lang.Boolean"/>
+
+		<property name="idAdjunto" type="java.lang.Long" column="ID_ADJUNTO" />
+		<many-to-one name="adjunto" class="AdjuntoBean" column="ID_ADJUNTO" update="false" insert="false"/>
+
+	</class>
+</hibernate-mapping>
+
+
+
+

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+<class name="Payment" table="PAYMENT">
+    <id name="id" type="long" column="PAYMENT_ID">
+        <generator class="native"/>
+    </id>
+    <discriminator column="PAYMENT_TYPE" type="string"/>
+    <property name="amount" column="AMOUNT"/>
+
+    <subclass name="CreditCardPayment" discriminator-value="CREDIT">
+
+    </subclass>
+    <subclass name="CashPayment" discriminator-value="CASH">
+    <property name="amount" column="AMOUNT"/>
+    </subclass>
+    
+    <subclass name="ChequePayment" discriminator-value="CHEQUE">
+  	  <property name="amount" column="AMOUNT"/>
+    </subclass>
+</class>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="Evaluacion" width="1069" height="840">
+  <node name="Iniciada" x="417" y="126" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="No Autorizada" x="911" y="596" width="140" height="40"/>
+  <node name="Pendiente Autorizacion" x="886" y="216" width="182" height="40">
+    <transition name="registrada">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="anulada">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="¿Autorizada?" x="908" y="461" width="140" height="40">
+    <transition name="NO">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="SI">
+      <label x="11" y="-21"/>
+      <bendpoint w1="-156" h1="0" w2="339" h2="138"/>
+    </transition>
+  </node>
+  <node name="Pendiente de Resultado" x="376" y="323" width="223" height="40">
+    <transition name="con_resultado">
+      <label x="12" y="-4"/>
+    </transition>
+    <transition name="anulada">
+      <label x="-8" y="-18"/>
+    </transition>
+  </node>
+  <node name="Anulada" x="762" y="322" width="140" height="40"/>
+  <node name="Confirmada" x="336" y="799" width="140" height="40"/>
+  <node name="Confirmar Resultado" x="515" y="521" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="¿Pendiente Autorización?" x="394" y="215" width="188" height="40">
+    <transition name="SI">
+      <label x="5" y="-18"/>
+    </transition>
+    <transition name="NO">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="fork1" x="386" y="417" width="200" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="tr2">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cargar Resultado" x="337" y="519" width="140" height="40">
+    <transition name="repeat">
+      <label x="5" y="1"/>
+      <bendpoint w1="-56" h1="71" w2="88" h2="-50"/>
+    </transition>
+    <transition name="cancel">
+      <label x="2" y="-2"/>
+    </transition>
+  </node>
+  <node name="Repeat" x="167" y="537" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="24" h1="-77" w2="-134" h2="44"/>
+    </transition>
+  </node>
+  <node name="Cancelar Hnos" x="515" y="618" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="join1" x="306" y="724" width="200" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+</process-diagram>

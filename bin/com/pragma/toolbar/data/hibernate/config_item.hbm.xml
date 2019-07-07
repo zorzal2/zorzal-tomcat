@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+        <class name="com.pragma.toolbar.data.bean.UserConfigItemBean" table="USER_CONFIG_ITEM">
+           <id name="id" column="USER_CONFIG_ITEM_ID" type="java.lang.Long">
+				<generator class="sequence"> 
+					<param name="sequence">SEQ_IDUSER_CONFIG_ITEM</param> 
+				</generator>  
+			</id>
+           <property name="userId" column="USER_ID" type="java.lang.String"/>
+           <property name="uri" column="URI" type="java.lang.String"/>
+			<many-to-one name="value" column="VALUE" class="com.pragma.toolbar.data.bean.VariantBean"/>
+        </class>
+</hibernate-mapping>
+
+
+

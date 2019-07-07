@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="ControlAdquisicion" width="757" height="1059">
+  <node name="Ingresado" x="236" y="17" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Designar Evaluador Técnico" x="212" y="117" width="190" height="40">
+    <transition name="evaluador_designado">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cargar Fundamentación Evaluador" x="196" y="222" width="222" height="40">
+    <transition name="fundamentacion_cargada">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cargar Resultado" x="238" y="323" width="140" height="40">
+    <transition name="resultado_cargado">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Remitir a UFFA" x="58" y="605" width="140" height="40">
+    <transition name="remitido_uffa">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="¿Hay items para UFFA?" x="46" y="506" width="162" height="40">
+    <transition name="SI">
+      <label x="3" y="-9"/>
+    </transition>
+    <transition name="NO">
+      <label x="5" y="-10"/>
+      <bendpoint w1="109" h1="61" w2="-77" h2="-234"/>
+    </transition>
+  </node>
+  <node name="¿Hay items Aprob. Pliego o PreCalificación?" x="177" y="897" width="271" height="45">
+    <transition name="NO">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="SI">
+      <label x="-13" y="-14"/>
+    </transition>
+  </node>
+  <node name="Generar Pedido Autorización" x="560" y="900" width="196" height="40">
+    <transition name="autorizacion_pedida">
+      <label x="4" y="-89"/>
+      <bendpoint w1="-1" h1="118" w2="317" h2="-1"/>
+    </transition>
+  </node>
+  <node name="fork1" x="207" y="421" width="200" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="tr2">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Remitir a BID" x="445" y="604" width="140" height="40">
+    <transition name="remitido_bid">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cargar Resultado UFFA" x="46" y="690" width="162" height="40">
+    <transition name="cargado_resultado_uffa">
+      <label x="-167" y="-28"/>
+    </transition>
+  </node>
+  <node name="Cargar Resultado BID" x="438" y="692" width="155" height="40">
+    <transition name="cargado_resultado_bid">
+      <label x="60" y="-29"/>
+    </transition>
+  </node>
+  <node name="¿Hay items para BID?" x="435" y="511" width="161" height="40">
+    <transition name="SI">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="NO">
+      <label x="-17" y="-12"/>
+      <bendpoint w1="-124" h1="55" w2="78" h2="-235"/>
+    </transition>
+  </node>
+  <node name="join1" x="213" y="809" width="200" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Finalizado" x="243" y="1018" width="140" height="40"/>
+</process-diagram>

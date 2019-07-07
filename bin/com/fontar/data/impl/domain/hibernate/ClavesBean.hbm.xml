@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="ClavesBean" table="USUARIO_CLAVE_BEAN">
+		<id name="id" column="ID" type="long">
+			<generator class="sequence">
+			      <param name="sequence">SEQ_CLAVES_BEAN</param>
+		   </generator>	
+		</id>
+        <property name="nombreUsuario" type="string">
+            <column name="USUARIO"/>
+        </property>
+        <property name="clave" type="binary">
+            <column name="CLAVE" length="1024" />
+        </property>
+        <property name="bean" type="string">
+            <column name="BEAN" length="50" />
+        </property>
+    </class>
+    
+    <query name="ClavesBean.selectByUserAndDataType">
+        <![CDATA[from ClavesBean claves where claves.nombreUsuario =:user and claves.bean=:dataType]]>
+    </query> 
+    
+    
+    <query name="ClavesBean.findByUser">
+        <![CDATA[from ClavesBean claves where claves.nombreUsuario =:user]]>
+    </query> 
+    
+</hibernate-mapping>

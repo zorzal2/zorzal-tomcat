@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="com.fontar.data.impl.domain.bean.EntidadBean" table="ENTIDAD">
+		<id name="id" type="java.lang.Long" column="ID_ENTIDAD">
+			<generator class="sequence">
+			      <param name="sequence">SQ_ENTIDAD</param>
+		   </generator>		
+		</id>		
+
+        <property name="denominacion" column="NM_DENOMINACION" type="java.lang.String" />
+        <property name="cuit" column="CD_CUIT" type="java.lang.String" />
+        <property name="contacto" column="TX_CONTACTO" type="java.lang.String" />
+        <property name="descripcion" column="DE_ENTIDAD" type="java.lang.String" />        
+        
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean" />
+        <property name="borrado" column="BORRADO" type="java.lang.Boolean" />
+       	<property name="evaluadora" column="ES_EVALUADORA" type="java.lang.Boolean" />
+       	<property name="bancaria" column="ES_BANCARIA" type="java.lang.Boolean" />
+       	<property name="beneficiaria" column="ES_BENEFICIARIA" type="java.lang.Boolean" />
+        <property name="idLocalizacion" column="ID_LOCALIZACION" type="java.lang.Long" />
+        <many-to-one name="localizacion" column="ID_LOCALIZACION" class="LocalizacionBean" insert="false" update="false" />
+    </class>
+</hibernate-mapping>

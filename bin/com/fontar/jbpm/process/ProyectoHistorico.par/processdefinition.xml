@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="ProyectoHistorico">
+	<start-state name="Iniciado">
+		<transition name="proyecto_cargado" to="Cargar Presupuesto"></transition>
+	</start-state>
+
+	<end-state name="Finalizado"></end-state>
+
+	<task-node name="Completar Datos Iniciales">
+		<task name="Completar Datos Iniciales Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-PROY-HISTORICO-COMPLETAR-DATOS-INICIALES</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CompletarDatosIniciales</beanActionId>
+					<taskDescription>wf.proyectoHistorico.completarDatosIniciales</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>datos_iniciales_completados</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<task name="Editar Presupuesto Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-PROYECTO-EDITAR-PRESUPUESTO</idActionWorkflow>
+			</assignment>
+
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EditarPresupuestoProyecto</beanActionId>
+					<taskDescription>wf.proyecto.presupuesto.editar</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+
+		</task>
+
+		<task name="Cerrar Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  	        <idActionWorkflow>WF-PROYECTO-CERRAR</idActionWorkflow>
+			</assignment>
+		       	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarProyecto</beanActionId>
+					<taskDescription>wf.proyecto.cerrar</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<task name="Anular Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  		<idActionWorkflow>WF-PROYECTO-ANULAR</idActionWorkflow>
+		    </assignment>
+		       			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularProyecto</beanActionId>
+					<taskDescription>wf.proyecto.anular</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>	
+		
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" >
+			</action>
+		</event>		
+	
+		<transition name="datos_iniciales_completados" to="Agregar Seguimiento"></transition>
+		<transition name="cerrar/anular" to="Cerrado - Anulado"></transition>
+      <transition name="repeat" to="Repeater 1"></transition>
+	</task-node>
+
+	<task-node name="Agregar Seguimiento">
+		<task name="Agregar Seguimiento">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-PROYECTO-AGREGAR-SEGUIMIENTO</idActionWorkflow>
+			</assignment>
+	
+			<event type="task-create">
+				<action	class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CargarSeguimiento</beanActionId>
+					<taskDescription>wf.proyecto.seguimiento.agregar</taskDescription>
+				</action>
+			</event>
+	
+			<event type="task-end">
+				<action	class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>	
+
+		<task name="Pedir Autorización">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-PROYECTO-PEDIR-AUTORIZACION</idActionWorkflow>
+			</assignment>
+	
+			<event type="task-create">
+				<action	class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>PedirAutorizacion</beanActionId>
+					<taskDescription>wf.proyecto.seguimiento.pedirAutorizacion</taskDescription>
+				</action>
+			</event>
+	
+			<event type="task-end">
+				<action	class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<task name="Finalizar Proyecto">
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>FinalizarProyecto</beanActionId>
+					<taskDescription>wf.proyecto.finalizar</taskDescription>
+				</action>
+			</event>
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-PROYECTO-FINALIZAR</idActionWorkflow>
+         	</assignment>
+         
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>finalizado</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<task name="Editar Presupuesto">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-PROYECTO-EDITAR-PRESUPUESTO</idActionWorkflow>
+			</assignment>
+
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EditarPresupuestoProyecto</beanActionId>
+					<taskDescription>wf.proyecto.presupuesto.editar</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+
+		</task>
+		
+		<task name="Cerrar Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  	        <idActionWorkflow>WF-PROYECTO-CERRAR</idActionWorkflow>
+			</assignment>
+		       	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarProyecto</beanActionId>
+					<taskDescription>wf.proyecto.cerrar</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<task name="Anular Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  		<idActionWorkflow>WF-PROYECTO-ANULAR</idActionWorkflow>
+		    </assignment>
+		       			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularProyecto</beanActionId>
+					<taskDescription>wf.proyecto.anular</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+		
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" >
+			</action>
+		</event>		
+		
+		<transition name="finalizado" to="Finalizado"></transition>
+		<transition name="cerrar/anular" to="Cerrado - Anulado"></transition>
+      <transition name="repeat" to="Repeater 2"></transition>
+	</task-node>
+
+	<node name="Repeater 2">
+		<transition name="" to="Agregar Seguimiento"></transition>
+	</node>
+
+	<end-state name="Cerrado - Anulado"></end-state>
+   <node name="Repeater 1">
+      <transition name="" to="Completar Datos Iniciales"></transition>
+   </node>
+
+   <task-node name="Cargar Presupuesto">
+		<task name="Cerrar Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+		  	        <idActionWorkflow>WF-PROYECTO-CERRAR</idActionWorkflow>
+			</assignment>
+		       	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>CerrarProyecto</beanActionId>
+					<taskDescription>wf.proyecto.cerrar</taskDescription>
+				</action>
+			</event>
+		
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>cerrar/anular</transitionName>
+				</action>
+			</event>
+		</task>
+	
+		<task name="Editar Presupuesto Proyecto Historico">
+			<assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+				<idActionWorkflow>WF-PROYECTO-EDITAR-PRESUPUESTO</idActionWorkflow>
+			</assignment>
+
+			<event type="task-create">
+				<action class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EditarPresupuestoProyecto</beanActionId>
+					<taskDescription>wf.proyecto.presupuesto.editar</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>Presupuesto cargado</transitionName>
+				</action>
+			</event>
+		</task>
+		<event type="node-leave">
+			<action
+				class="com.fontar.jbpm.handler.action.CancelOpenedTask" >
+			</action>
+		</event>
+      <transition name="Presupuesto cargado" to="Completar Datos Iniciales"></transition>
+   </task-node>
+</process-definition>

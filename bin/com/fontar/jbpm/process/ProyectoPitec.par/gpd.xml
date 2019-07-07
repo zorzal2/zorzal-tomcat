@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="ProyectoPitec" width="1371" height="2002">
+  <node name="start" x="211" y="52" width="128" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Evaluar Admisión" x="446" y="288" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cancel">
+      <label x="-101" y="-9"/>
+      <bendpoint w1="272" h1="61" w2="-370" h2="-23"/>
+    </transition>
+  </node>
+  <node name="¿Admitido?" x="449" y="367" width="140" height="40">
+    <transition name="NO">
+      <label x="10" y="-10"/>
+    </transition>
+    <transition name="SI">
+      <label x="2" y="-20"/>
+    </transition>
+  </node>
+  <node name="Solicitar Readmisión" x="546" y="465" width="190" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cancel">
+      <label x="18" y="-20"/>
+      <bendpoint w1="125" h1="-60" w2="-409" h2="0"/>
+    </transition>
+  </node>
+  <node name="Agregar Evaluación" x="305" y="811" width="140" height="40">
+    <transition name="repeat">
+      <label x="5" y="-10"/>
+      <bendpoint w1="22" h1="64" w2="22" h2="-65"/>
+    </transition>
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="fork1" x="175" y="179" width="200" height="25">
+    <transition name="global 1">
+      <label x="-2" y="-24"/>
+    </transition>
+    <transition name="global 2">
+      <label x="1" y="-23"/>
+    </transition>
+    <transition name="principal">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Editar Presupuesto" x="454" y="95" width="140" height="40">
+    <transition name="repeat">
+      <label x="-7" y="-19"/>
+      <bendpoint w1="112" h1="-45" w2="-137" h2="-12"/>
+    </transition>
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+      <bendpoint w1="390" h1="117" w2="-244" h2="-160"/>
+    </transition>
+  </node>
+  <node name="Cerrar-Anular Proyecto" x="456" y="207" width="169" height="40">
+    <transition name="cancel">
+      <label x="-154" y="-20"/>
+      <bendpoint w1="299" h1="3" w2="-333" h2="-162"/>
+    </transition>
+    <transition name="cerrar/anular">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Repeater 2" x="703" y="62" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-116" h1="43" w2="133" h2="10"/>
+    </transition>
+  </node>
+  <node name="Finalizar Control" x="593" y="808" width="140" height="40">
+    <transition name="finalizar_control">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="fork2" x="451" y="715" width="142" height="25">
+    <transition name="repetitiva">
+      <label x="3" y="-8"/>
+    </transition>
+    <transition name="tr">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Repeater 1" x="298" y="938" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-43" h1="-70" w2="-43" h2="59"/>
+    </transition>
+  </node>
+  <node name="join1" x="465" y="978" width="139" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="join2" x="960" y="382" width="200" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cancelar Hnos 1" x="713" y="286" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cancelar Hnos 2" x="674" y="907" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Agregar Primera Evaluación" x="174" y="476" width="205" height="40">
+    <transition name="proxima_etapa">
+      <label x="-12" y="-363"/>
+      <bendpoint w1="-201" h1="1" w2="-628" h2="-625"/>
+      <bendpoint w1="-200" h1="673" w2="-403" h2="-1"/>
+    </transition>
+    <transition name="cancel">
+      <label x="-21" y="-19"/>
+      <bendpoint w1="180" h1="71" w2="-692" h2="137"/>
+      <bendpoint w1="725" h1="68" w2="-147" h2="134"/>
+    </transition>
+    <transition name="evaluacion">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cancelar Hnos 5" x="816" y="469" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Fin" x="1230" y="375" width="140" height="40"/>
+  <node name="¿En Proceso de Cierre?" x="432" y="1074" width="199" height="40">
+    <transition name="SI">
+      <label x="-143" y="-23"/>
+      <bendpoint w1="384" h1="-1" w2="-395" h2="507"/>
+    </transition>
+    <transition name="NO">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cargar Alícuota" x="898" y="1351" width="140" height="40">
+    <transition name="con_alicuota">
+      <label x="5" y="30"/>
+      <bendpoint w1="-2" h1="-154" w2="444" h2="-1"/>
+    </transition>
+    <transition name="cancel">
+      <label x="5" y="-22"/>
+      <bendpoint w1="1" h1="523" w2="122" h2="-89"/>
+    </transition>
+  </node>
+  <node name="Controlado" x="462" y="1198" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-41" h1="70" w2="-36" h2="-82"/>
+    </transition>
+  </node>
+  <node name="Fin Paquete" x="454" y="1350" width="140" height="40">
+    <transition name="adjudicado">
+      <label x="-48" y="-13"/>
+    </transition>
+    <transition name="reconsideracion">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="pendiente_alicuota">
+      <label x="-33" y="-20"/>
+    </transition>
+    <transition name="controlado">
+      <label x="5" y="-10"/>
+      <bendpoint w1="48" h1="-78" w2="43" h2="74"/>
+    </transition>
+    <transition name="evaluacion">
+      <label x="28" y="286"/>
+      <bendpoint w1="-341" h1="-2" w2="-137" h2="706"/>
+      <bendpoint w1="-340" h1="-611" w2="-136" h2="97"/>
+    </transition>
+  </node>
+  <node name="Firma de Contrato" x="124" y="1473" width="140" height="40">
+    <transition name="reconsiderar">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="con_contrato">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cancel">
+      <label x="11" y="-18"/>
+      <bendpoint w1="234" h1="391" w2="-426" h2="-97"/>
+    </transition>
+  </node>
+  <node name="Reconsideración" x="447" y="1481" width="140" height="40">
+    <transition name="reconsiderar">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+      <bendpoint w1="248" h1="164" w2="-110" h2="-314"/>
+    </transition>
+    <transition name="finalizar_reconsideracion">
+      <label x="-62" y="-27"/>
+    </transition>
+  </node>
+  <node name="Análisis Legal Reconsideración" x="405" y="1653" width="218" height="40">
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Agregar Seguimiento" x="122" y="1961" width="140" height="40">
+    <transition name="cancel">
+      <label x="1" y="-18"/>
+    </transition>
+  </node>
+  <node name="Cancel Hnos 6" x="784" y="1961" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="207" h1="0" w2="1" h2="1587"/>
+    </transition>
+  </node>
+  <node name="¿Rechazado?" x="784" y="1483" width="140" height="40">
+    <transition name="SI">
+      <label x="-28" y="-162"/>
+    </transition>
+    <transition name="NO">
+      <label x="14" y="-10"/>
+      <bendpoint w1="-116" h1="-79" w2="240" h2="55"/>
+    </transition>
+  </node>
+  <node name="Comienzo Evaluación" x="189" y="565" width="176" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="¿Requiere Admisión?" x="192" y="287" width="163" height="40">
+    <transition name="NO">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="SI">
+      <label x="-8" y="-15"/>
+    </transition>
+  </node>
+</process-diagram>

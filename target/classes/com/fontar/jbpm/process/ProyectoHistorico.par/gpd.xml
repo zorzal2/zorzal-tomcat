@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="ProyectoHistorico" width="964" height="664">
+  <node name="Iniciado" x="193" y="22" width="140" height="40">
+    <transition name="proyecto_cargado">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Finalizado" x="193" y="458" width="140" height="40"/>
+  <node name="Completar Datos Iniciales" x="171" y="173" width="185" height="40">
+    <transition name="datos_iniciales_completados">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="cerrar/anular">
+      <label x="-62" y="-17"/>
+      <bendpoint w1="272" h1="-1" w2="-105" h2="-68"/>
+    </transition>
+    <transition name="repeat">
+      <label x="-27" y="-15"/>
+      <bendpoint w1="-135" h1="10" w2="41" h2="-62"/>
+    </transition>
+  </node>
+  <node name="Agregar Seguimiento" x="182" y="308" width="163" height="40">
+    <transition name="finalizado">
+      <label x="4" y="22"/>
+    </transition>
+    <transition name="cerrar/anular">
+      <label x="-65" y="-20"/>
+      <bendpoint w1="282" h1="-1" w2="-95" h2="67"/>
+    </transition>
+    <transition name="repeat">
+      <label x="-26" y="-19"/>
+      <bendpoint w1="-128" h1="13" w2="41" h2="-57"/>
+    </transition>
+  </node>
+  <node name="Repeater 2" x="24" y="378" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="121" h1="-10" w2="-48" h2="60"/>
+    </transition>
+  </node>
+  <node name="Cerrado - Anulado" x="531" y="240" width="140" height="40"/>
+  <node name="Repeater 1" x="17" y="245" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="132" h1="-10" w2="-44" h2="62"/>
+    </transition>
+  </node>
+  <node name="Cargar Presupuesto" x="194" y="98" width="140" height="40">
+    <transition name="Presupuesto cargado">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+</process-diagram>

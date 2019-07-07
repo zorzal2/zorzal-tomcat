@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="EntidadBeneficiariaBean" table="ENTIDAD_BENEFICIARIA">
+		<id name="id" type="java.lang.Long" column="ID_ENTIDAD_BENEFICIARIA">
+			<generator class="com.fontar.data.impl.domain.bean.EntidadSequence"/>
+		</id>		
+
+        <property name="tipoEmpresa" column="TP_EMPRESA" type="java.lang.String" />        
+        <property name="tipoNoEmpresa" column="TP_NO_EMPRESA" type="java.lang.String" />        
+        <property name="tipo" column="TP_ENTIDAD_BENEFICIARIA" type="java.lang.String" />        
+        
+        <property name="fechaInicioActividad" column="FE_INICIO_ACTIVIDAD" type="java.util.Date" />
+        <property name="codigoCategorizacion" column="CD_CATEGORIZACION" type="java.lang.String" />        
+        <property name="descEmpresa" column="DE_EMPRESA" type="java.lang.String" />        
+        <property name="numeroConstitucion" column="NR_CONSTITUCION" type="java.lang.Integer" />         
+        
+ 		<property name="emerix" column="CD_EMERIX" type="java.lang.Long"/>
+	    <property name="idTributaria" column="ID_CONDICION_TRIBUTARIA" type="java.lang.Long" />
+        <many-to-one name="tributaria" column="ID_CONDICION_TRIBUTARIA" class="TributariaBean" insert="false" update="false" />
+
+        <property name="idLocalizacionEconomica" column="ID_LOCALIZACION_ECONOMICA" type="java.lang.Long" />
+        <many-to-one name="localizacionEconomica" column="ID_LOCALIZACION_ECONOMICA" class="LocalizacionBean" insert="false" update="false" />
+
+        <property name="idEmpleoPermanente" column="ID_EMPLEO_PERMANENTE" type="java.lang.Long" />
+        <many-to-one name="empleoPermanente" column="ID_EMPLEO_PERMANENTE" class="EmpleoPermanenteBean" insert="false" update="false" />
+        
+        <property name="idCiiu" column="ID_CIIU" type="java.lang.Long" />
+		<one-to-one name="entidad" class="EntidadBean" />
+		
+	</class>
+
+</hibernate-mapping>
+
+
+

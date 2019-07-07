@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="TipoProyectoBean" table="TIPO_PROYECTO">
+		<id name="id" type="java.lang.Long" column="ID_TIPO_PROYECTO">
+			<generator class="sequence">
+			      <param name="sequence">SQ_TIPO_PROYECTO</param>
+		   </generator>		
+		</id>		
+        <property name="nombre" column="NM_TIPO_PROYECTO" type="java.lang.String"/>
+        <property name="nombreCorto" column="NM_TIPO_PROY_CORTO" type="java.lang.String"/>
+        <property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+    </class>
+    
+    <query name="TipoProyectoBean.findByNombre">
+        <![CDATA[from TipoProyectoBean tp where tp.nombre = :nombre ]]>
+    </query> 
+    
+    <query name="TipoProyectoBean.findByNombreCorto">
+        <![CDATA[from TipoProyectoBean tp where tp.nombreCorto = :nombreCorto ]]>
+    </query> 
+    
+    <query name="TipoProyectoBean.findByNombreTipo">
+        <![CDATA[from TipoProyectoBean tp where tp.nombre = :nombre AND (tp.id <> :idTipoProyecto)]]>
+    </query> 
+    
+    <query name="TipoProyectoBean.findByNombreCortoId">
+        <![CDATA[from TipoProyectoBean tp where tp.nombreCorto = :nombreCorto AND (tp.id <> :idTipoProyecto)]]>
+    </query> 
+    
+</hibernate-mapping>

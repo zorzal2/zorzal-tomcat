@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="DistribucionTipoProyectoBean" table="INS_DISTRIB_TIPO_PROYECTO">
+		<id name="id" column="ID_INS_DISTRIB_TIPO_PROYECTO" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_DISTRIB_TIPO_PROYECTO</param>
+		   </generator>
+		</id>
+		<property name="idInstrumento" column="ID_INSTRUMENTO" type="java.lang.Long" />
+		<property name="idTipoProyecto" column="ID_TIPO_PROYECTO" type="java.lang.Long" />
+		<property name="monto" column="MO_MONTO" type="java.math.BigDecimal" />
+		<property name="limite" column="MO_LIMITE" type="java.math.BigDecimal" />
+		<property name="idMatrizCriterio" column="ID_MATRIZ_CRITERIO" type="java.lang.Long" />		
+		<property name="plazoEjecucion" column="NR_PLAZO_EJECUCION" type="java.lang.Integer" />				
+		
+		<many-to-one name="tipoProyecto" column="ID_TIPO_PROYECTO" class="TipoProyectoBean" insert="false" update="false"/>        
+		<many-to-one name="matrizCriterio" class="MatrizCriterioBean" column="ID_MATRIZ_CRITERIO" insert="false" update="false" lazy="false"/>
+		
+	</class>
+	
+    <query name="DistribucionTipoProyectoBean.findByInstrumento">
+        <![CDATA[select p from DistribucionTipoProyectoBean p where p.idInstrumento = :idInstrumento]]>
+    </query> 
+
+    <query name="DistribucionTipoProyectoBean.findByInstrumentoTipoProyecto">
+        <![CDATA[select p from DistribucionTipoProyectoBean p where p.idInstrumento = :idInstrumento and p.idTipoProyecto = :idTipoProyecto]]>
+    </query> 
+
+</hibernate-mapping>

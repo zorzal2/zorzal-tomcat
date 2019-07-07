@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean.seguridad">
+    <class name="SeguridadObjetoBean" table="SEGURIDAD_OBJETO">
+		<id name="id" type="java.lang.Long" column="ID_SEGURIDAD_OBJETO">
+			<generator class="sequence">
+			      <param name="sequence">SQ_SEGURIDAD_OBJETO</param>
+		   </generator>		
+		</id>		
+        <property name="usuario" column="USER_ID" type="java.lang.String" />
+        <property name="clase" column="CD_CLASE" type="java.lang.String" />
+        <property name="idObjeto" column="ID_OBJETO" type="java.lang.Long" />
+        <property name="accion" column="CD_ACCION" type="java.lang.String" />
+        <property name="idProcessInstance" column="ID_PROCESS_INSTANCE" type="java.lang.Long" />
+    </class>
+    <query name="SeguridadObjetoBean.findByUsuario">
+		<![CDATA[select s from SeguridadObjetoBean s where s.usuario = ? order by s.id desc ]]>
+    </query> 
+     <query name="SeguridadObjetoBean.findByUsuarioYAccion">
+		<![CDATA[select s
+				 from SeguridadObjetoBean s
+ 				 where	(s.usuario = :userId) and (s.accion = :accion) ]]>
+    </query> 
+     <query name="SeguridadObjetoBean.findByAccionObjetoYUsuario">
+		<![CDATA[select s
+				 from SeguridadObjetoBean s
+ 				 where
+ 				 	(s.accion = :accion) and 
+ 				 	(s.clase = :className) and 
+ 				 	(s.idObjeto = :idObjeto) and 
+ 				 	(s.usuario = :userId) ]]>
+    </query> 
+     <query name="SeguridadObjetoBean.findByObjeto">
+		<![CDATA[select s
+				 from SeguridadObjetoBean s
+ 				 where	(s.clase = :className) and (s.idObjeto = :idObjeto) ]]>
+    </query> 
+     <query name="SeguridadObjetoBean.findByObjetoYAccion">
+		<![CDATA[select s
+				 from SeguridadObjetoBean s
+ 				 where	(s.clase = :className) and (s.idObjeto = :idObjeto) and (s.accion = :accion) ]]>
+    </query> 
+     <query name="SeguridadObjetoBean.findInstancias">
+		<![CDATA[select s
+				 from SeguridadObjetoBean s
+ 				 where	(s.clase = :className) and (s.usuario = :userId) and (s.accion = :accion) ]]>
+    </query> 
+</hibernate-mapping>

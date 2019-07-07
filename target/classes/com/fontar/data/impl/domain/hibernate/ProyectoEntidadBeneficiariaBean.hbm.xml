@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="ProyectoEntidadBeneficiariaBean" table="PROY_ENTIDAD_BENEFICIARIA">
+		<composite-id>
+			<key-property name="id" column="ID_PROY_ENT_BENEFICIARIA" type="java.lang.Long" />
+			<key-property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long" />	
+		</composite-id>		
+		 
+        <property name="idEntidadBeneficiaria" column="ID_ENTIDAD_BENEFICIARIA" type="java.lang.Long"/>
+        <many-to-one name="EntidadBeneficiaria" class="EntidadBeneficiariaBean" insert="false" update="false"/>
+        <many-to-one name="proyecto" class="ProyectoBean" insert="false" update="false"/>        
+
+    </class>
+    
+</hibernate-mapping>

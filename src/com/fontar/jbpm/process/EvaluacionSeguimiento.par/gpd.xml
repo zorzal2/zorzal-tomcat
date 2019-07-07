@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="EvaluacionSeguimiento" width="676" height="622">
+  <node name="Iniciada" x="261" y="24" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Pendiente de Resultado" x="251" y="124" width="161" height="40">
+    <transition name="resultado_cargado">
+      <label x="8" y="-22"/>
+    </transition>
+    <transition name="anulada">
+      <label x="-46" y="-19"/>
+    </transition>
+  </node>
+  <node name="fork1" x="247" y="223" width="169" height="25">
+    <transition name="tr2">
+      <label x="-10" y="-25"/>
+    </transition>
+    <transition name="tr3">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Cargar Resultado" x="155" y="313" width="140" height="40">
+    <transition name="cancel">
+      <label x="6" y="-85"/>
+      <bendpoint w1="-1" h1="142" w2="-111" h2="-53"/>
+    </transition>
+    <transition name="repeat">
+      <label x="10" y="-16"/>
+      <bendpoint w1="-115" h1="-1" w2="36" h2="-60"/>
+    </transition>
+  </node>
+  <node name="Confirmar Resultado" x="372" y="313" width="140" height="40">
+    <transition name="resultado_confirmado">
+      <label x="5" y="-16"/>
+    </transition>
+  </node>
+  <node name="Repeater" x="4" y="372" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="109" h1="-1" w2="-42" h2="58"/>
+    </transition>
+  </node>
+  <node name="Cancel Hnos" x="372" y="409" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-1" h1="49" w2="106" h2="-50"/>
+    </transition>
+  </node>
+  <node name="join1" x="253" y="516" width="165" height="25">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="Confirmada" x="266" y="581" width="140" height="40"/>
+  <node name="Anulada" x="519" y="123" width="140" height="40"/>
+</process-diagram>

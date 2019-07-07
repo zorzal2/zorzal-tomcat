@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="Usuario" table="USUARIO">
+		<id name="id" column="ID" type="long">
+			<generator class="increment"/>
+		</id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="20" />
+        </property>
+        <property name="clavePublica" type="binary">
+            <column name="CLAVE_PUBLICA" length="1024" />
+        </property>
+        <property name="clavePublicaCertificada" type="binary">
+            <column name="CLAVE_PUBLICA_CERTIFICADA" length="1024" />
+        </property>
+    </class>
+    
+    <query name="Usuario.findByName">
+        <![CDATA[select u from Usuario u where u.nombre= lower(:userName)]]>
+    </query>
+    
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="ProyectoDatosBean" table="PROY_DATOS" >
+        <id name="id" type="java.lang.Long" column="ID_PROY_DATOS">
+			<generator class="com.fontar.data.impl.domain.bean.BitacoraSequence">
+			      <param name="tipo">PROY_DATOS</param>
+		   	</generator>
+		</id>
+		<property name="fechaIngreso" column="FE_INGRESO" type="java.util.Date"/>
+
+		<property name="idLocalizacion" column="ID_LOCALIZACION" type="java.lang.Long"/>
+		<property name="titulo" column="TX_TITULO" type="java.lang.String"/>
+		<property name="idCiiu" column="ID_CIIU" type="java.lang.Long"/>
+		<property name="fechaCertificadoContratar" column="FE_CERTIFICADO_CONTRATAR" type="java.util.Date"/>
+		<property name="duracion" column="NR_DURACION" type="java.lang.Integer"/>
+
+		<property name="resumen" column="DE_RESUMEN" type="java.lang.String"/>
+		<property name="palabraClave" column="TX_PALABRA_CLAVE" type="java.lang.String"/>
+		<property name="observacion" column="DE_OBSERVACION" type="java.lang.String"/>
+		<property name="objetivo" column="TX_OBJETIVO" type="java.lang.String"/>
+		<property name="tir" column="NU_TIR" type="java.math.BigDecimal"/>
+		<property name="van" column="NU_VAN" type="java.math.BigDecimal"/>
+		<property name="idPersonaDirector" column="ID_PERSONA_DIRECTOR" type="java.lang.Long"/>
+		<property name="idPersonaLegal" column="ID_PERSONA_LEGAL" type="java.lang.Long"/>
+		<property name="idPersonaRepresentante" column="ID_PERSONA_REPRESENTANTE" type="java.lang.Long"/>
+		<property name="idTipoProyecto" column="ID_TIPO_PROYECTO" type="java.lang.Long"/>		
+		<property name="descripcionEntidadBancaria" column="DE_ENTIDAD_BANCARIA" type="java.lang.String"/>
+		<property name="idEntidadBancaria" column="ID_ENTIDAD_BANCARIA" type="java.lang.Long"/>				
+		<property name="instrumentoSolicitado" column="TX_INSTRUMENTO_SOLICITADO" type="java.lang.String"/>	
+		<property name="idEntidadBeneficiaria" column="ID_ENTIDAD_BENEFICIARIA" type="java.lang.Long"/>					
+		<property name="porcentajeTasaInteres" column="PR_TASA_INTERES" type="java.math.BigDecimal"/>					
+		
+		<many-to-one name="entidadBeneficiaria" class="EntidadBeneficiariaBean" column="ID_ENTIDAD_BENEFICIARIA" insert="false" update="false" fetch="join" lazy="false"/>
+		<many-to-one name="localizacion" column="ID_LOCALIZACION" class="LocalizacionBean"  update="false" insert="false" />
+		<many-to-one name="ciiu" column="ID_CIIU" class="CiiuBean"  update="false" insert="false" />
+		
+		<many-to-one name="personaLegal" class="PersonaBean" column="ID_PERSONA_LEGAL" insert="false" update="false" />
+		<many-to-one name="personaDirector" class="PersonaBean" column="ID_PERSONA_DIRECTOR" insert="false" update="false" />
+		<many-to-one name="personaRepresentante" class="PersonaBean" column="ID_PERSONA_REPRESENTANTE" insert="false" update="false" />
+		<many-to-one name="tipoProyecto" class="TipoProyectoBean" column="ID_TIPO_PROYECTO" insert="false" update="false" />
+		<many-to-one name="entidadBancaria" class="EntidadBancariaBean" column="ID_ENTIDAD_BANCARIA" insert="false" update="false" />
+	</class>
+	
+    <query name="ProyectoDatosBean.findByEntidad">
+        <![CDATA[select p from ProyectoDatosBean p where :idEntidad = p.idEntidadBeneficiaria or :idEntidad = p.idEntidadBancaria ]]>
+    </query> 
+    
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+

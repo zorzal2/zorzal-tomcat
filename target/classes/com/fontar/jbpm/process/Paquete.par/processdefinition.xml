@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="Paquete">
+	<task-node name="Confirmar Paquete">
+		<task name="Confirmar Paquete">
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-PAQUETE-CONFIRMAR</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>ConfirmarPaquete</beanActionId>
+					<taskDescription>
+						wf.paquete.confirmar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>confirmado</transitionName>
+				</action>
+			</event>
+		</task>
+		<transition name="confirmado" to="Cancel Hnos 1"></transition>
+		<transition name="cancel" to="join1"></transition>
+	</task-node>
+	<task-node name="Evaluar Paquete">
+		<task name="Evaluar Paquete">
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-PAQUETE-EVALUAR</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarPaquete</beanActionId>
+					<taskDescription>
+						wf.paquete.evaluar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+
+		</task>
+		<transition name="repeat" to="Repeater 1"></transition>
+		<transition name="cancel" to="join1"></transition>
+	</task-node>
+	<start-state name="start">
+		<transition name="" to="fork2"></transition>
+	</start-state>
+	<end-state name="Fin"></end-state>
+	<fork name="fork1">
+		<transition name="confirmar" to="Confirmar Paquete"></transition>
+		<transition name="continuar" to="Evaluar Paquete"></transition>
+	</fork>
+	<join name="join1">
+		<transition name="" to="Cancel Hnos 4"></transition>
+	</join>
+	<task-node name="Cargar Evaluacion">
+		<task name="Evaluar Paquete">
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-PAQUETE-EVALUAR</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>EvaluarPaquete</beanActionId>
+					<taskDescription>
+						wf.paquete.evaluar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>registrada</transitionName>
+				</action>
+			</event>
+
+		</task>
+		<transition name="registrada" to="Cancelar Hnos 3"></transition>
+		<transition name="cancel" to="join3"></transition>
+	</task-node>
+	<node name="Repeater 1">
+		<transition name="" to="Evaluar Paquete"></transition>
+	</node>
+	<node name="Cancel Hnos 1">
+		<transition name="" to="join1"></transition>
+
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+	</node>
+	<fork name="fork2">
+		<transition name="anular" to="Anular"></transition>
+		<transition name="evaluar" to="fork3"></transition>
+	</fork>
+	<task-node name="Anular">
+		<task name="Anular Paquete">
+		
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-PAQUETE-ANULAR</idActionWorkflow>
+         	</assignment>
+         			
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>AnularPaquete</beanActionId>
+					<taskDescription>wf.paquete.anular</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>anulada</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<event type="node-leave">
+			<script>
+				<expression>a = "SI";</expression>
+				<variable name='ANULANDO_PAQUETE' access='write'
+					mapped-name='a' />
+				System.out.println("Me voy de " + node.getName());
+			</script>
+		</event>
+
+
+		<transition name="cancel" to="join2"></transition>
+		<transition name="anulada" to="Cancelar Hnos 2"></transition>
+	</task-node>
+	<join name="join2">
+		<transition name="" to="Liberar Proyectos"></transition>
+	</join>
+	<node name="Cancelar Hnos 2">
+		<transition name="" to="join2"></transition>
+
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+	</node>
+	<fork name="fork3">
+		<transition name="modificar" to="Modificar Paquete"></transition>
+		<transition name="evaluar" to="Cargar Evaluacion"></transition>
+	</fork>
+	<task-node name="Modificar Paquete">
+		<task name="Modificar Paquete">
+
+	        <assignment class="com.fontar.jbpm.handler.assigner.ActorAssigner">
+    	        <idActionWorkflow>WF-PAQUETE-MODIFICAR</idActionWorkflow>
+         	</assignment>
+         	
+			<event type="task-create">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskCreate">
+					<beanActionId>ModificarPaquete</beanActionId>
+					<taskDescription>
+						wf.paquete.modificar
+					</taskDescription>
+				</action>
+			</event>
+
+			<event type="task-end">
+				<action
+					class="com.fontar.jbpm.handler.action.TaskEndTransition">
+					<transitionName>repeat</transitionName>
+				</action>
+			</event>
+		</task>
+
+		<transition name="cancel" to="join3"></transition>
+		<transition name="repeat" to="Repeater 2"></transition>
+	</task-node>
+	<node name="Cancelar Hnos 3">
+
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+		<transition name="" to="join3"></transition>
+	</node>
+	<join name="join3">
+		<transition name="" to="¿En proceso de anulacion?"></transition>
+	</join>
+	<node name="Repeater 2">
+		<transition name="" to="Modificar Paquete"></transition>
+	</node>
+	<decision name="¿En proceso de anulacion?">
+		<transition name="SI" to="join2">
+			<condition
+				expression="#{contextInstance.variables['ANULANDO_PAQUETE']=='SI'}" />
+		</transition>
+		<transition name="NO" to="fork1">
+			<condition
+				expression="#{contextInstance.variables['ANULANDO_PAQUETE']!='SI'}" />
+		</transition>
+
+	</decision>
+	<node name="Cancel Hnos 4">
+		<transition name="" to="join2"></transition>
+
+		<action
+			class="com.fontar.jbpm.handler.action.CancelBrothersTask">
+		</action>
+	</node>
+	<node name="Liberar Proyectos">
+		<transition name="" to="Fin"></transition>
+
+		<action
+			class="com.fontar.jbpm.handler.action.LiberarProyectos">
+		</action>
+	</node>
+</process-definition>

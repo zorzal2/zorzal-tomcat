@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="DistribucionFinanciamientoBean" table="INS_DISTRIB_FINANC">
+
+		<id name="id" type="java.lang.Long" column="ID_INS_DISTRIB_FINANC">
+			<generator class="sequence">
+			      <param name="sequence">SQ_INS_DISTRIB_FINANC</param>
+		   </generator>		
+		</id>		
+		
+        <property name="idRegion" column="ID_REGION" type="java.lang.Long" />
+        <property name="idJurisdiccion" column="ID_JURISDICCION" type="java.lang.Long" />
+        <property name="idInstrumento" column="ID_INSTRUMENTO" type="java.lang.Long" />	
+        
+        <property name="monto" column="MO_FINANCIAMIENTO" type="java.math.BigDecimal" />
+        <property name="porcentaje" column="PR_FINANCIAMIENTO" type="java.math.BigDecimal" /> 
+        
+		<many-to-one name="jurisdiccion" column="ID_JURISDICCION" class="JurisdiccionBean" insert="false" update="false"/>        
+		<many-to-one name="region" column="ID_REGION" class="RegionBean" insert="false" update="false"/>        
+    </class>   
+
+    <query name="DistribucionFinanciamientoBean.findByInstrumento">
+        <![CDATA[select p from DistribucionFinanciamientoBean p where p.idInstrumento = :idInstrumento]]>
+    </query> 
+
+</hibernate-mapping>
+

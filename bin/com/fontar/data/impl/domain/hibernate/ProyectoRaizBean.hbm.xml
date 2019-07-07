@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="ProyectoRaizBean" table="PROYECTO">
+        <id name="id" type="java.lang.Long" column="ID_PROYECTO">      	
+			<generator class="sequence">
+				<param name="sequence">SQ_PROYECTO</param>
+		   	</generator>
+		</id>
+		<discriminator column="TP_PROYECTO" type="java.lang.String" />
+		
+		<!-- FF / Refactor ProyectoRaiz, por el momento esto es lo común entre proyecto e ideaProyecto  -->
+		<property name="idDatos" column="ID_DATOS" type="java.lang.Long"/>
+		<many-to-one name="proyectoDatos" class="ProyectoDatosBean" column="ID_DATOS" insert="false" update="false" lazy="false"/>
+		
+		<property name="idPresupuestoOriginal" column="ID_PRESUPUESTO_ORIGINAL" type="java.lang.Long"/>
+		<many-to-one name="proyectoPresupuestoOriginal" class="com.fontar.data.impl.domain.bean.ProyectoPresupuestoBean" column="ID_PRESUPUESTO_ORIGINAL" insert="false" update="false" />
+		 
+		<property name="idProyectoJurisdiccion" column="ID_PROY_JURISDICCION" type="java.lang.Long"/>
+		<many-to-one name="proyectoJurisdiccion" class="ProyectoJurisdiccionBean" column="ID_PROY_JURISDICCION" insert="false" update="false" fetch="join" lazy="false"/>
+
+		<property name="idEmpleoPermanente" column="ID_EMPLEO_PERMANENTE" type="java.lang.Long"/>
+        <many-to-one name="empleoPermanente" class="EmpleoPermanenteBean" column="ID_EMPLEO_PERMANENTE" insert="false" update="false" />
+        
+		<property name="idInstrumento" column="ID_INSTRUMENTO" type="java.lang.Long"/>
+		<many-to-one name="instrumento" class="InstrumentoBean" column="ID_INSTRUMENTO" insert="false" update="false" lazy="false"/>
+		
+		<property name="idPresupuesto" column="ID_PRESUPUESTO" type="java.lang.Long"/>
+		<many-to-one name="proyectoPresupuesto" class="com.fontar.data.impl.domain.bean.ProyectoPresupuestoBean" column="ID_PRESUPUESTO" insert="false" update="false" />
+			 	
+		<property name="idWorkFlow" column="ID_PROCESS_INSTANCE" type="java.lang.Long"/>
+        <property name="codigo" column="CD_PROYECTO" type="java.lang.String"/>
+		<property name="codigoEstado" column="ST_PROYECTO" type="java.lang.String"/>
+		
+		<property name="estadoReconsideracion" column="ST_RECONSIDERACION" type="java.lang.Boolean"/>
+		<property name="emerix" column="CD_EMERIX" type="java.lang.Long"/>
+		<property name="proyectoPitec" column="CD_PROYECTO_PITEC" type="java.lang.String"/>
+		
+		<set name="evaluaciones" table="PROY_EVALUACION" inverse="true" cascade="all-delete-orphan">
+				<key column="ID_PROYECTO" />
+				<one-to-many class="EvaluacionBean" />			
+		</set>
+		
+		<set name="seguimientos" table="PROY_SEGUIMIENTO" inverse="true" cascade="all-delete-orphan">
+				<key column="ID_PROYECTO" />
+				<one-to-many class="SeguimientoBean" />			
+		</set>
+		
+       <!-- CLASE Idea Proyecto -->
+        <subclass name="IdeaProyectoBean" discriminator-value="IP" >       	
+        	<property name="codigoIdeaProyecto" column="CD_IDEA_PROYECTO" type="java.lang.Long"/>
+	
+			<set name="adjuntos" table="ADJ_PROY" lazy="true">
+				<key column="ID_PROYECTO" />
+				<many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>				 
+			</set>			
+        </subclass>
+        
+        
+       <!-- CLASE Proyecto -->
+        <subclass name="ProyectoBean" discriminator-value="P" >       	
+			<property name="recomendacionProyecto" column="CD_RECOMENDACION" type="com.fontar.data.impl.domain.codes.proyecto.RecomendacionUserType"/>		
+			<property name="idPlanTrabajo" column="ID_PLAN_TRABAJO" type="java.lang.Long"/>
+			<property name="idProyectoOrigen" column="ID_PROYECTO_ORIGEN" type="java.lang.Long"/>
+			<property name="idPresentacion" column="ID_PRESENTACION" type="java.lang.Long"/>
+			<many-to-one name="presentacionConvocatoria" class="PresentacionConvocatoriaBean" column="ID_PRESENTACION" insert="false" update="false" />
+	
+			<property name="porcentajeAlicuotaAdjudicada" column="PR_ALICUOTA_ADJUDICADA" type="java.math.BigDecimal"/>
+			<property name="porcentajeAlicuotaSolicitada" column="PR_ALICUOTA_SOLICITADA" type="java.math.BigDecimal"/>
+			<property name="estadoEnPaquete" column="ST_EN_PAQUETE" type="java.lang.Boolean"/>
+			<property name="motivoCierre" column="CD_MOTIVO_CIERRE" type="java.lang.String"/>
+
+			<property name="idProyectoPaquete" column="ID_PROY_PAQUETE" type="java.lang.Long"/>
+			<many-to-one name="proyectoPaquete" class="ProyectoPaqueteBean" column="ID_PROY_PAQUETE" insert="false" update="false" />
+
+			<property name="idProyectoPitec" column="ID_PROYECTO_PITEC" type="java.lang.Long"/>
+			
+			<property name="fechaResolucion" column="FE_RESOLUCION" type="java.util.Date" />                     
+			<property name="codigoResolucion" column="CD_RESOLUCION" type="java.lang.String"/>
+			<property name="recomendacionFinal" column="CD_RECOMENDACION_FINAL" type="com.fontar.data.impl.domain.codes.proyecto.RecomendacionFinalUserType"/>					
+			<property name="fechaCierreFinal" column="FE_CIERRE_FINAL" type="java.util.Date" />
+			<property name="fechaFirmaDeContrato" column="FE_FIRMA_CONTRATO" type="java.util.Date" />
+			
+			<set name="adjuntos" table="ADJ_PROY" lazy="true">
+				<key column="ID_PROYECTO" />
+				<many-to-many column="ID_ADJUNTO" class="AdjuntoBean"/>				 
+			</set>			
+		
+	        <!-- Subclase Proyecto PITEC -->
+	        <subclass name="ProyectoPitecBean" discriminator-value="PP" >       	
+	           
+    	    </subclass>				
+
+       		<!-- Subclase Idea Proyecto PITEC -->
+	        <subclass name="IdeaProyectoPitecBean" discriminator-value="IPP" >
+	        </subclass>
+    	    
+    	
+    	    
+        </subclass>        
+		
+
+        <filter name="securityFilter" condition="ID_INSTRUMENTO in ( :allowedInstances )"/>
+        
+        <filter name="evaluacionSecurityFilter" condition="TP_PROYECTO = 'IP' or ID_INSTRUMENTO in ( :allowedInstances )"/>
+        
+    </class>
+
+    <query name="ProyectoBean.findByCodigo">
+        <![CDATA[select p from ProyectoBean p where p.codigo= ? and p.codigoEstado<>'ANULADO' order by p.codigo]]>
+    </query> 
+
+    <query name="ProyectoBean.findByInstrumentoNoAnuladas">
+         <![CDATA[select p from ProyectoBean p where p.idInstrumento = ? and p.codigoEstado <> 'Anulada' order by p.codigo]]>
+    </query>    
+	
+    <query name="IdeaProyectoBean.findByCodigo">
+        <![CDATA[select p from IdeaProyectoBean p where p.codigo= ? order by p.codigo]]>
+    </query>    
+    
+    <query name="IdeaProyectoBean.selectLastAvailableCode">
+        <![CDATA[select MAX(p.codigoIdeaProyecto)+1 as codigo from IdeaProyectoBean p]]>
+    </query>
+    
+    <query name="ProyectoBean.findByPresentacionNoAnulados">
+         <![CDATA[select p from ProyectoBean p where p.idPresentacion = ? and p.codigoEstado <> 'Anulado' order by p.codigo]]>
+    </query>    
+
+    <query name="ProyectoBean.findByInstrumentoTratamiento">
+         <![CDATA[select p from ProyectoBean p where (:idInstrumento is null or p.idInstrumento = :idInstrumento) and p.estadoEnPaquete = '0' and ('RECONSIDERACION' <> :tratamiento or p.estadoReconsideracion = '0') and ((('EVALUACION' = :tratamiento or 'RECONSIDERACION' = :tratamiento) and (p.codigoEstado = 'CONT_COM' or p.codigoEstado = 'CONT_SEC' or p.codigoEstado = 'CONT_DIR_EVAL')) or (('ADJUDICACION' = :tratamiento) and (p.codigoEstado = 'NO_ADJUDICADO' or p.codigoEstado = 'CONT_DIR_ADJ'))) order by p.codigo]]>
+    </query> 
+
+    <query name="ProyectoBean.findByInstrumento">
+         <![CDATA[select p from ProyectoBean p where (:idInstrumento is null or p.idInstrumento = :idInstrumento) and p.estadoEnPaquete = '0' order by p.codigo]]>
+    </query>    
+    
+    <query name="ProyectoBean.findByProyectoOriginal">
+         <![CDATA[select p from ProyectoBean p where p.idProyectoOrigen = ?]]>
+    </query>    
+    
+    <query name="ProyectoBean.findByInstrumentoEvaluacionEstado">
+         <![CDATA[select p from ProyectoBean p where p.idInstrumento = :idInstrumento and p.codigoEstado = :estado and p.estadoEnPaquete = '0' and p.estadoReconsideracion = '0' order by p.codigo]]>
+    </query>    
+
+    <query name="ProyectoBean.findByInstrumentoReconsideracionEstado">
+         <![CDATA[select p from ProyectoBean p where (:idInstrumento is null or p.idInstrumento = :idInstrumento) and p.estadoEnPaquete = '0' and p.estadoReconsideracion = '1' and p.codigoEstado = :estado order by p.codigo]]>
+    </query>    
+
+    <query name="ProyectoBean.findByInstrumentoAdjudicacion">
+         <![CDATA[select p from ProyectoBean p where (:idInstrumento is null or p.idInstrumento = :idInstrumento) and p.estadoEnPaquete = '0' and (p.codigoEstado = 'NO_ADJUDICADO' or p.codigoEstado = 'CONT_DIR_ADJ') order by p.codigo]]>
+    </query>  
+
+    <query name="ProyectoBean.findByPaquete">
+         <![CDATA[select p from ProyectoBean p, ProyectoPaqueteBean pp where pp.idPaquete = :idPaquete and p.id = pp.idProyecto order by p.codigo]]>
+    </query>  
+    
+    <query name="ProyectoBean.findByPaqueteActivo">
+         <![CDATA[select p from ProyectoBean p, ProyectoPaqueteBean pp where pp.idPaquete = :idPaquete and p.id = pp.idProyecto and pp.esActivo='1' order by p.codigo]]>
+    </query>  
+
+    <query name="ProyectoBean.findByPaqueteInstrumento">
+         <![CDATA[select p from ProyectoBean p, ProyectoPaqueteBean pp where pp.idPaquete = :idPaquete and pp.esActivo = '1' and p.id = pp.idProyecto and (:idInstrumento is null or p.idInstrumento = :idInstrumento) order by p.codigo]]>
+    </query>    
+    
+    <query name="ProyectoBean.findByPaqueteInstrumentoEvaluacionEstado">
+         <![CDATA[select p from ProyectoBean p, ProyectoPaqueteBean pp where pp.idPaquete = :idPaquete and pp.esActivo = '1' and p.id = pp.idProyecto and (:idInstrumento is null or p.idInstrumento = :idInstrumento) and p.estadoReconsideracion = '0' and p.codigoEstado = :estado order by p.codigo]]>
+    </query>    
+
+    <query name="ProyectoBean.findByPaqueteInstrumentoReconsideracionEstado">
+         <![CDATA[select p from ProyectoBean p, ProyectoPaqueteBean pp where pp.idPaquete = :idPaquete and pp.esActivo = '1' and p.id = pp.idProyecto and (:idInstrumento is null or p.idInstrumento = :idInstrumento) and p.estadoReconsideracion = '1' and p.codigoEstado = :estado order by p.codigo]]>
+    </query>    
+
+    <query name="ProyectoBean.findByPaqueteInstrumentoAdjudicacion">
+         <![CDATA[select p from ProyectoBean p, ProyectoPaqueteBean pp where pp.idPaquete = :idPaquete and pp.esActivo = '1' and p.id = pp.idProyecto and (:idInstrumento is null or p.idInstrumento = :idInstrumento) and (p.codigoEstado = 'NO_ADJUDICADO' or p.codigoEstado = 'CONT_DIR_ADJ') order by p.codigo]]>
+    </query>  
+
+	<query name="ProyectoBean.findCountProyectosAprobadosByInstrumento">
+         <![CDATA[select count(p) from ProyectoBean p where p.idInstrumento = ? and p.fechaResolucion <> null ]]>
+    </query>  
+
+	<query name="ProyectoBean.findCountByInstrumentoNoAnuladas">
+         <![CDATA[select count(p) from ProyectoBean p where p.idInstrumento = ? and p.codigoEstado <> 'Anulada' order by p.codigo]]>
+    </query>  
+    
+    <query name="ProyectoBean.findPresupuestosByInstrumento">
+         <![CDATA[select new com.fontar.data.impl.domain.dto.ProyectoPresupuestosDTO(p.proyectoPresupuesto,p.proyectoPresupuestoOriginal) 
+         			 from ProyectoBean p where p.idInstrumento = ?]]>
+    </query>  
+    
+    <query name="ProyectoRaizBean.findProyectosPorIdDePersonaParticipante">
+         <![CDATA[select p from ProyectoRaizBean p
+         			where 	p.proyectoDatos.idPersonaDirector = :idPersona
+         				or 	p.proyectoDatos.idPersonaLegal = :idPersona
+         				or	p.proyectoDatos.idPersonaRepresentante = :idPersona ]]>
+    </query>  
+
+
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+

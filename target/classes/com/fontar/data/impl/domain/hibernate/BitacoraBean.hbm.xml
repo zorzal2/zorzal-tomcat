@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="BitacoraBean" table="PROY_BITACORA">
+		<id name="id" type="java.lang.Long" column="ID_BITACORA">
+			<generator class="sequence">
+			      <param name="sequence">SQ_BITACORA</param>
+		   </generator>		
+		</id>	
+
+		<property name="idProyecto" column="ID_PROYECTO" type="java.lang.Long" />
+        <property name="idSeguimiento" column="ID_SEGUIMIENTO" type="java.lang.Long" />
+        <property name="idEvaluacion" column="ID_EVALUACION" type="java.lang.Long" />
+        <property name="idUsuario" column="ID_USUARIO" type="java.lang.String" />
+        <property name="descripcion" column="DE_BITACORA" type="java.lang.String" />
+        <property name="fechaAsunto" column="FE_ASUNTO" type="java.util.Date" />
+        <property name="tipo" column="TP_BITACORA" type="com.fontar.data.impl.domain.codes.bitacora.TipoBitacoraUserType" />
+        <property name="fechaRegistro" column="FE_REGISTRO" type="java.util.Date" />
+        <property name="tema" column="TX_TEMA" type="java.lang.String" />	
+		
+		<many-to-one name="proyecto" class="ProyectoRaizBean" lazy="false" column="ID_PROYECTO" insert="false" update="false"/>
+    </class>
+    
+    <query name="BitacoraBean.findByProyecto">
+         <![CDATA[from BitacoraBean b where b.idProyecto = ?]]>
+    </query>   
+
+    <query name="BitacoraBean.findByProyectoTipo">
+         <![CDATA[from BitacoraBean b where (b.idProyecto = :idProyecto) AND (b.tipo = :tipo)]]>
+    </query>
+
+    <query name="BitacoraBean.findBySeguimientoTipo">
+         <![CDATA[from BitacoraBean b where (b.idSeguimiento = :idSeguimiento) AND (b.tipo = :tipo)]]>
+    </query>
+    
+    <query name="BitacoraBean.findBySeguimiento">
+         <![CDATA[from BitacoraBean b where b.idSeguimiento = ?]]>
+    </query>
+
+</hibernate-mapping>

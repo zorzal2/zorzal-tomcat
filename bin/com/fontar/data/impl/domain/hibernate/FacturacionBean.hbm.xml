@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+    <class name="FacturacionBean" table="ENTIDAD_BENEF_FACTURACION">
+		<id name="id" column="ID_FACTURACION" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_ENTIDAD_BENEF_FACTURACION</param>
+		   </generator>		
+		</id>
+		
+		<property name="numeroFacturacion" type="java.math.BigDecimal">
+			<column name="MO_FACTURACION" />
+		</property>
+		
+		<property name="idEntidadBeneficiaria" type="java.lang.Long">
+			<column name="ID_ENTIDAD_BENEFICIARIA" />
+		</property>
+		
+		<property name="numeroPeriodico" type="java.lang.Integer">
+			<column name="NR_PERIODO"/>
+		</property>
+   </class>
+
+   	<query name="FacturacionBean.findByID">
+        <![CDATA[select f from FacturacionBean f where (f.idEntidadBeneficiaria= :idEntidadBeneficiaria)]]>
+    </query> 
+
+</hibernate-mapping>
+
+
+
+
+
+
+

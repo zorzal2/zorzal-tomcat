@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="PresentacionConvocatoriaBean" table="PRESENTACION">
+		<id name="id" column="ID_PRESENTACION" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_PRESENTACION</param>
+		   </generator>
+		</id>
+		<property name="codigo" length="100" column="CD_PRESENTACION" type="java.lang.String"/>		
+		<property name="nombreEntidad" length="100" column="NM_ENTIDAD" type="java.lang.String"/>		
+		<property name="idJurisdiccion" column="ID_JURISDICCION" type="java.lang.Long"/>
+		<property name="fechaIngreso" column="FE_INGRESO" type="java.util.Date"/>
+		<property name="observaciones" length="255" column="DE_OBSERVACION" type="java.lang.String"/>
+		<property name="idInstrumento" column="ID_INSTRUMENTO" type="java.lang.Long"/>
+		<property name="estado" column="ST_PRESENTACION" type="com.fontar.data.impl.domain.codes.presentacionConvocatoria.EstadoPresentacionUserType"/>
+		
+		<many-to-one name="jurisdiccion" column="ID_JURISDICCION" class="JurisdiccionBean" update="false" insert="false" />
+
+		<!-- 
+			 A instrumento se le setea "lazy = false" porque necesitamos poder castearlo directamente a un 			 
+			 LlamadoConvocatoria o Ventanilla que son sus subclases (Ver PresentacionesConvocatoriaWrapper).
+		 -->
+		<many-to-one name="instrumento" column="ID_INSTRUMENTO" class="InstrumentoBean" update="false" insert="false" lazy="false"/>
+		
+		<filter name="securityFilter" condition="ID_INSTRUMENTO in ( :allowedInstances )"/>
+      
+	</class>
+	
+     <query name="PresentacionConvocatoriaBean.findByEstado">
+         <![CDATA[select p from PresentacionConvocatoriaBean p where p.estado = ?]]>
+     </query>	
+     
+     <query name="PresentacionConvocatoriaBean.findByInstrumentoNoAnuladas">
+         <![CDATA[select p from PresentacionConvocatoriaBean p where p.idInstrumento = ? and p.estado <> 'Anulada']]>
+     </query>
+
+     <query name="PresentacionConvocatoriaBean.findByCodigo">
+         <![CDATA[select p from PresentacionConvocatoriaBean p where p.codigo = :codigo]]>
+     </query>	
+
+    <query name="PresentacionConvocatoriaBean.findByCodigoId">
+        <![CDATA[select p from PresentacionConvocatoriaBean p where p.codigo = :codigo and (p.id <> :idPresentacion)]]>
+    </query> 
+     
+</hibernate-mapping>

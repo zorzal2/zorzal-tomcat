@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+        <class name="com.pragma.toolbar.data.bean.VariantBean" table="VARIANT">
+           <id name="id" column="VARIANT_ID" type="java.lang.Long">
+				<generator class="sequence"> 
+					<param name="sequence">SEQ_IDVARIANT</param> 
+				</generator>  
+			</id>
+           <property name="internalValue" column="VALUE" type="java.lang.String"/>
+           <property name="valueType" column="VALUE_TYPE" type="java.lang.String"/>
+        </class>
+</hibernate-mapping>
+
+
+

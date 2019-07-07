@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.fontar.data.impl.domain.bean">
+	<class name="JurisdiccionBean" table="JURISDICCION">
+		<id name="id" column="ID_JURISDICCION" type="java.lang.Long">
+			<generator class="sequence">
+			      <param name="sequence">SQ_JURISDICCION</param>
+		   </generator>
+		</id>
+		<property name="codigo" column="CD_JURISDICCION" type="java.lang.String" />		
+		<property name="descripcion" column="NM_JURISDICCION" type="java.lang.String" />		
+		<property name="activo" column="ES_ACTIVO" type="java.lang.Boolean"/>
+		<property name="idRegion" column="ID_REGION" type="java.lang.Long"/>
+		<property name="emerix" column="CD_EMERIX" type="java.lang.String"/>
+		<many-to-one name="region" class="RegionBean" column="ID_REGION" insert="false" update="false" />
+		
+	</class>
+	
+    <query name="JurisdiccionBean.findByCodigo">
+         <![CDATA[select p from JurisdiccionBean p where p.codigo = :codigo]]>
+    </query>
+
+    <query name="JurisdiccionBean.findByCodigoId">
+        <![CDATA[select p from JurisdiccionBean p where p.codigo = :codigo and (p.id <> :idJurisdiccion)]]>
+    </query> 
+</hibernate-mapping>
+
+
+
+
