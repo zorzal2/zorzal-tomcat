@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+
+  	<!-- Instrumentos -> Convocatoria -> Presentación a Convocatoria -->
+  	<definition 
+  		name=".PresentacionConvocatoriaInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/convocatoria/presentaciones/inventario.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".PresentacionConvocatoriaEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/convocatoria/presentaciones/editar.jsp" >
+  		</put>
+  	</definition>
+
+ 	
+   <definition 
+   		name=".ListarDef" 
+   		extends=".popUpDef">
+   		 <put name="body"
+  			value="/jsp/layout/displayList.jsp" >
+  		</put>
+   </definition>
+
+	<!-- Instrumentos -> Convocatoria -> Llamados a Convocatoria -->
+  	<definition 
+  		name=".LlamadoConvocatoriaInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/convocatoria/llamados/inventario.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".LlamadoConvocatoriaEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/convocatoria/llamados/editar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition 
+  		name=".LlamadoConvocatoriaVersionarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/convocatoria/llamados/versionar.jsp" >
+  		</put>
+  	</definition>
+
+
+  	<!-- Instrumentos -> Ventanilla Permanente -->
+  	<definition 
+  		name=".VentanillaPermanenteInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ventanillapermanente/inventario.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".VentanillaPermanenteEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ventanillapermanente/editar.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".VentanillaPermanenteDistribuirDef"
+  		extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ventanillapermanente/distribuir.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".VentanillaPermanenteVersionarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ventanillapermanente/versionar.jsp" >
+  		</put>
+  	</definition>  	
+  	
+
+  	<definition  name=".VentanillaPermanenteCargaProyecto" extends=".baseMenuDef">
+  		<put name="body" value="/jsp/administracion/proyectos/cargarProyecto.jsp"/>
+  	</definition>  	
+  	
+  	
+  	
+	<!-- Instrumentos -> Ideas Proyecto -->
+
+  	<definition 
+  		name=".IdeaProyectoInventarioDef" 
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/inventario.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".IdeaProyectoEditarDef" 
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/editar.jsp" >
+  		</put>
+  	</definition>
+  	
+   	<definition name=".IdeaProyectoVisualizarDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.visualizarIdeaProyecto"/>
+  		<put name="subTitle" value="app.title.informacion"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraIdeaProyecto.jsp"/>
+		<put name="tabs" value="/jsp/instrumentos/ventanilla/ideaproyecto/menuIdeaProyecto.jsp"/>
+  		<put name="body" value="/jsp/instrumentos/ventanilla/ideaproyecto/visualizar.jsp" />
+  		<put name="linkInventario" value="/jsp/instrumentos/ventanilla/ideaproyecto/linkInventario.jsp" />
+  	</definition>
+  	
+ 	<definition name=".BitacoraIdeaProyectoInventarioDef" extends=".IdeaProyectoVisualizarDef">
+  		<put name="subTitle" value="app.title.bitacora"/>
+  		<put name="body"
+  			value="/jsp/administracion/bitacoras/inventario.jsp" >
+  		</put>
+  	</definition>    	
+
+   	<definition name=".EvaluacionesIdeaProyectoInventarioDef" extends=".IdeaProyectoVisualizarDef">
+  		<put name="subTitle" value="app.title.evaluaciones"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/inventarioEvaluaciones.jsp" >
+  		</put>
+  	</definition>  	
+
+  	<!-- Vaya a saber Dios -->
+  	<definition 
+  		name=".IdeaProyectoAgregarEvaluacionDef" 
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/agregarEvaluacion.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".IdeaProyectoCargarResultadoEvaluacionDef" 
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/cargarResultadoEvaluacion.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".IdeaProyectoEvaluarPorJuntaDef" 
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/evaluarPorJunta.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".IdeaProyectoConfirmarEvaluacionDef" 
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/confirmarEvaluacion.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition 
+  		name=".DistribucionFinanciamientoDef" 
+  		extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/distribucionFinanciamiento.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition 
+  		name=".InstrumentoVersionDef" 
+  		extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/instrumentoVersion/inventario.jsp" >
+  		</put>
+  	</definition>  	
+
+  	<definition 
+  		name=".InstrumentoVersionEditarDef" 
+  		extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/instrumentoVersion/editar.jsp" >
+  		</put>
+  	</definition>  	
+  	
+  	<definition name=".DistribucionTipoProyectoEditarDef" 
+				extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/instrumentos/general/distribucionTipoProyecto.jsp"/>
+	</definition> 	
+  	
+  	<!-- Ideas Proyecto Pitec -->
+	<definition name=".IdeaProyectoPitecInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/instrumentos/ideaProyectoPitec/inventario.jsp"/>
+	</definition>
+
+	<!-- Adjuntos -->
+	<definition name=".InstrumentoDefBeanAdjuntosUpload" extends=".baseMenuDef">
+		<put name="body" value="/jsp/instrumentos/adjuntos/adjuntos.jsp"/>
+	</definition>	
+	
+	<definition name=".InstrumentoDefBeanAdjuntosInventario" extends=".baseMenuDef">
+		<put name="body" value="/jsp/instrumentos/adjuntos/adjuntosDownload.jsp"/>
+	</definition>
+
+	<!-- LLAMADO CONVOCATORIA - Datos Generales  -->
+   	<definition name=".LlamadoConvocatoriaDatosGeneralesDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.llamadoConvocatoria.visualizacionLlamadoConvocatoria"/>
+  		<put name="subTitle" value="app.title.llamadoConvocatoria.datosGenerales"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraInstrumento.jsp"/>
+		<put name="tabs" value="/jsp/instrumentos/convocatoria/llamados/menuLlamadoConvocatoria.jsp"/>
+  		<put name="body" value="/jsp/instrumentos/convocatoria/llamados/visualizarDatosGenerales.jsp"/>
+  		<put name="linkInventario" value="/jsp/instrumentos/convocatoria/llamados/linkInventario.jsp" />
+  	</definition>  	
+  	
+	<!-- LLAMADO CONVOCATORIA - Visualizar Distribucion Financiamiento -->
+	<definition name=".LlamadoConvocatoriaDistribucionFinanciamiento" extends=".LlamadoConvocatoriaDatosGeneralesDef">
+		<put name="subTitle" value="app.title.llamadoConvocatoria.distribucionZona"/>
+		<put name="body" value="/jsp/instrumentos/convocatoria/llamados/visualizarDistribucionFinanciamiento.jsp"/>
+	</definition>
+
+	<!-- LLAMADO CONVOCATORIA - Visualizar Distribucion Financiamiento -->
+	<definition name=".LlamadoConvocatoriaDistribucionTipoProyecto" extends=".LlamadoConvocatoriaDatosGeneralesDef">
+		<put name="subTitle" value="app.title.llamadoConvocatoria.distribucionTipoProyecto"/>
+		<put name="body" value="/jsp/instrumentos/convocatoria/llamados/visualizarDistribucionTipoProyecto.jsp"/>
+	</definition>
+
+	<!-- VENTANILLA PERMANENTE- Datos Generales  -->
+   	<definition name=".VentanillaPermanenteDatosGeneralesDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.ventanillaPermanente.visualizacionVentanilla"/>
+  		<put name="subTitle" value="app.title.ventanillaPermanente.datosGenerales"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraInstrumento.jsp"/>
+		<put name="tabs" value="/jsp/instrumentos/ventanilla/ventanillapermanente/menuVentanillaPermanente.jsp"/>
+  		<put name="body" value="/jsp/instrumentos/ventanilla/ventanillapermanente/visualizarDatosGenerales.jsp"/>
+  		<put name="linkInventario" value="/jsp/instrumentos/ventanilla/ventanillapermanente/linkInventario.jsp" />
+  	</definition>  	
+  	
+	<!-- VENTANILLA PERMANENTE- Visualizar Distribucion Financiamiento -->
+	<definition name=".VentanillaPermanenteDistribucionFinanciamiento" extends=".VentanillaPermanenteDatosGeneralesDef">
+		<put name="subTitle" value="app.title.llamadoConvocatoria.distribucionZona"/>
+		<put name="body" value="/jsp/instrumentos/ventanilla/ventanillapermanente/visualizarDistribucionFinanciamiento.jsp"/>
+	</definition>
+
+	<!-- VENTANILLA PERMANENTE- Visualizar Distribucion Financiamiento -->
+	<definition name=".VentanillaPermanenteDistribucionTipoProyecto" extends=".VentanillaPermanenteDatosGeneralesDef">
+		<put name="subTitle" value="app.title.llamadoConvocatoria.distribucionTipoProyecto"/>
+		<put name="body" value="/jsp/instrumentos/ventanilla/ventanillapermanente/visualizarDistribucionTipoProyecto.jsp"/>
+	</definition>
+
+</tiles-definitions>
+
+
+
+
+

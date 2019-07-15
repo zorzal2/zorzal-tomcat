@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     FF / Definiciones bases de TILES.
+-->
+
+<tiles-definitions>
+  <definition name=".baseDef" path="/jsp/layout/layout.jsp">
+    <put name="title" value="FONTAR" />  
+    <put name="header" value="/Header.do" />
+  </definition>
+  
+  <definition name=".baseMenuDef" path="/WEB-INF/jspf/layoutMenu.jsp">
+    <put name="title" value="FONTAR" />  
+    <put name="header" value="/WEB-INF/jspf/top.jsp" />
+	<put name="menu" value="/WEB-INF/jspf/menu.jsp" />
+  </definition>
+
+  <definition name=".popUpDef" path="/WEB-INF/jspf/layoutPopUp.jsp">
+    <put name="title" value="FONTAR" />  
+    <put name="header" value="/WEB-INF/jspf/top.jsp" />
+	<put name="menu" value="/WEB-INF/jspf/menu.jsp" />
+  </definition>
+  
+  <definition name=".selectorInventarioDef" path="/WEB-INF/jspf/layoutSelectorInventario.jsp">
+    <put name="title" value="FONTAR" />  
+	<put name="tituloSeleccion" value="selector" />  
+  </definition>
+  
+  <definition name=".errorDef" path="/WEB-INF/jspf/layoutMenu.jsp">
+    <put name="title" value="FONTAR" />  
+    <put name="header" value="/WEB-INF/jspf/top.jsp" />
+	<put name="menu" value="/WEB-INF/jspf/menu.jsp" />
+	<put name="body" value="/jsp/error.jsp"/>
+  </definition>
+
+  <definition name=".encryptErrorDef" path="/WEB-INF/jspf/layoutMenu.jsp">
+    <put name="title" value="FONTAR" />  
+    <put name="header" value="/WEB-INF/jspf/top.jsp" />
+	<put name="menu" value="/WEB-INF/jspf/menu.jsp" />
+	<put name="body" value="/jsp/noEncryptContext.jsp"/>
+  </definition>
+   
+  <definition name=".popUpEncryptErrorDef" path="/WEB-INF/jspf/layoutPopUp.jsp">
+    <put name="title" value="FONTAR" />  
+	<put name="body" value="/jsp/noEncryptContext.jsp"/>
+  </definition>   
+  
+  <definition name=".basePrintDef" path="/WEB-INF/jspf/layoutPrint.jsp">
+    <put name="title" value="FONTAR" />  
+    <put name="header" value="/WEB-INF/jspf/topPrint.jsp" />
+  </definition>
+
+  <definition name=".baseImprimirDef" path="/WEB-INF/jspf/layoutImprimir.jsp">
+    <put name="title" value="FONTAR" />  
+    <put name="header" value="/WEB-INF/jspf/topPrint.jsp" />
+  </definition>
+</tiles-definitions>

@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<!-- Servicio para Reportes -->
+	
+	<bean id="reporteService" class="com.fontar.consultas.reportes.ReporteServiceImpl">
+		<property name="reportLocation" value="/WEB-INF/conf/consultas/templates/"/>
+		<property name="reportProcessURL" value="/fontar/processReport/"/>
+		<property name="logo" value="images/logo_agencia2.gif"/>
+		<property name="reportes">
+			<map>
+				<entry key="situacion-convocatoria" value-ref="situacion-convocatoria"/>
+				<entry key="reporte-proyectos-aprobados" value-ref="reporte-proyectos-aprobados"/>
+				<entry key="reporte-proyectos-aprobados-provincias" value-ref="reporte-proyectos-aprobados-provincias"/>
+				<entry key="empresas-nuevas" value-ref="empresas-nuevas"/>
+				<entry key="empresas-antiguas" value-ref="empresas-antiguas"/>
+				<entry key="proyectos-admitidos" value-ref="proyectos-admitidos"/>
+				<entry key="reporte-proyectos-provincias-entidades" value-ref="reporte-proyectos-provincias-entidades"/>
+				<entry key="reporte-proyectos-adjudicados-rubro" value-ref="reporte-proyectos-adjudicados-rubro"/>
+				<entry key="proyectos-instrumento-anio-fuenteFinanciamiento" value-ref="proyectos-instrumento-anio-fuenteFinanciamiento"/>
+				<entry key="situacion-ideasproyecto" value-ref="situacion-ideasproyecto"/>
+				<entry key="consejerias-datos" value-ref="consejerias-datos"/>
+				<entry key="consejerias-cantidad" value-ref="consejerias-cantidad"/>
+				<entry key="alerta-por-demora-proyectos-sin-rendicion" value-ref="alerta-por-demora-proyectos-sin-rendicion"/>
+				<entry key="alerta-por-demora-proyectos-con-rendicion-demorada" value-ref="alerta-por-demora-proyectos-con-rendicion-demorada"/>
+				<entry key="alerta-por-demora-proyectos-con-demora-en-desembolsos" value-ref="alerta-por-demora-proyectos-con-demora-en-desembolsos"/>
+				<entry key="alerta-por-demora-proyectos-con-rendicion-pendiente" value-ref="alerta-por-demora-proyectos-con-rendicion-pendiente"/>
+				<entry key="facturacion-por-empresa" value-ref="facturacion-por-empresa"/>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- Reportes -->
+	
+	<bean id="situacion-convocatoria" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="situacion-convocatoria"/>
+		<property name="descripcion" value="Estado situación convocatoria"/>
+		<property name="titulo" value="Estado Situación Convocatorias"/>
+		<property name="permissionRequired" value="REPORTE-SITUACION-ESTADO-CONVOCATORIA"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteEstadoSituacionConvocatoriaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="reporte-proyectos-aprobados" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="reporte-proyectos-aprobados"/>
+		<property name="descripcion" value="Proyectos por fecha de aprobación"/>
+		<property name="titulo" value="Proyectos aprobados por fecha"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-APROBADOS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteEstadoAprobadoProyectoResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="reporte-proyectos-aprobados-provincias" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="reporte-proyectos-aprobados-provincias"/>
+		<property name="descripcion" value="Proyectos aprobados por provincias"/>
+		<property name="titulo" value="Proyectos aprobados por provincias"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-APROBADOS-PROVINCIAS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteEstadoAprobadoProyectoPorProvinciaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="reporte-proyectos-adjudicados-rubro" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="reporte-proyectos-adjudicados-rubro"/>
+		<property name="descripcion" value="Proyectos Adjudicados Desagregados por Rubro"/>
+		<property name="titulo" value="Proyectos adjudicados desagregados por Rubro"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-ADJUDICADOS-RUBRO"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectosAdjudicadosXRubroResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="proyectos-instrumento-anio-fuenteFinanciamiento" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="proyectos-instrumento-anio-fuenteFinanciamiento"/>
+		<property name="descripcion" value="Proyectos por instrumento, por año y por fuente de financiamiento"/>
+		<property name="titulo" value="Proyectos por instrumento, año y fuente de financiamiento"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-INSTRUMENTO-ANIO-FUENTEFINANCIAMIENTO"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectoInstrumentoAnioFuenteFinanciamientoResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empresas-nuevas" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="empresas-nuevas"/>
+		<property name="descripcion" value="Empresas con hasta un número dado de años desde su constitución"/>
+		<property name="titulo" value="Empresas Nuevas"/>
+		<property name="permissionRequired" value="REPORTE-EMPRESAS-NUEVAS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteEmpresasNuevasResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="empresas-antiguas" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="empresas-antiguas"/>
+		<property name="descripcion" value="Empresas con más de cierto número de años desde su constitución"/>
+		<property name="titulo" value="Empresas con Antigüedad"/>
+		<property name="permissionRequired" value="REPORTE-EMPRESAS-ANTIGUAS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteEmpresasAntiguasResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="proyectos-admitidos" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="proyectos-admitidos"/>
+		<property name="descripcion" value="Proyectos admitidos en cierto rango de fechas"/>
+		<property name="titulo" value="Proyectos Admitidos"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-ADMITIDOS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectosAdmitidosResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="reporte-proyectos-provincias-entidades" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="reporte-proyectos-provincias-entidades"/>
+		<property name="descripcion" value="Proyectos por provincia con participación de UVT y otras entidades participantes"/>
+		<property name="titulo" value="Proyectos por provincia con participación de UVT y otras entidades participantes"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-PROVINCIAS-ENTIDADES"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectoPorProvinciaYEntidadResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="situacion-ideasproyecto" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="situacion-ideasproyecto"/>
+		<property name="descripcion" value="Estado situación idea proyecto por rango de fechas de presentación"/>
+		<property name="titulo" value="Estado Situación Idea Proyecto"/>
+		<property name="permissionRequired" value="REPORTE-SITUACION-ESTADO-IDEAPROYECTO"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteEstadoSituacionIdeaProyectoResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="consejerias-datos" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="consejerias-datos"/>
+		<property name="descripcion" value="Datos consejeros intervinientes en proyectos aprobados"/>
+		<property name="titulo" value="Consejeros intervinientes"/>
+		<property name="permissionRequired" value="REPORTE-DATOS-CONSEJERIAS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteConsejeriasDatosResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="consejerias-cantidad" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="consejerias-cantidad"/>
+		<property name="descripcion" value="Cantidad consejeros intervinientes en proyectos aprobados"/>
+		<property name="titulo" value="Cantidad consejeros intervinientes"/>
+		<property name="permissionRequired" value="REPORTE-CANTIDAD-CONSEJERIAS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteConsejeriasCantidadResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="alerta-por-demora-proyectos-sin-rendicion" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="alerta-por-demora-proyectos-sin-rendicion"/>
+		<property name="descripcion" value="Proyectos con contrato firmado desde hace más de 6 meses que aún no tienen rendición"/>
+		<property name="titulo" value="Proyectos sin rendición"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-SIN-RENDICION"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectosSinRendicionResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="alerta-por-demora-proyectos-con-rendicion-demorada" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="alerta-por-demora-proyectos-con-rendicion-demorada"/>
+		<property name="descripcion" value="Proyectos con demoras de más de 4 meses en la presentación de la siguiente rendición de cuentas"/>
+		<property name="titulo" value="Proyectos con rendición demorada"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-CON-RENDICION-DEMORADA"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectosConRendicionDemoradaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="alerta-por-demora-proyectos-con-demora-en-desembolsos" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="alerta-por-demora-proyectos-con-demora-en-desembolsos"/>
+		<property name="descripcion" value="Proyectos con demoras en desembolsos respecto al plazo previsto"/>
+		<property name="titulo" value="Proyectos con demora en desembolsos"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-CON-DEMORA-EN-DESEMBOLSOS"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectosConDemoraEnDesembolsosResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="alerta-por-demora-proyectos-con-rendicion-pendiente" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="alerta-por-demora-proyectos-con-rendicion-pendiente"/>
+		<property name="descripcion" value="Proyectos con desembolso final que aún tienen rendiciones por presentar"/>
+		<property name="titulo" value="Proyectos con rendición pendiente"/>
+		<property name="permissionRequired" value="REPORTE-PROYECTOS-CON-RENDICION-PENDIENTE"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteProyectosConRendicionPendienteResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="facturacion-por-empresa" class="com.fontar.consultas.reportes.Reporte">
+		<property name="nombre" value="facturacion-por-empresa"/>
+		<property name="descripcion" value="Monto de facturación anual por empresa y convocatoria"/>
+		<property name="titulo" value="Facturación por empresa"/>
+		<property name="permissionRequired" value="REPORTE-FACTURACION-POR-EMPRESA"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.reportes.ReporteFacturacionPorEmpresaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- Servicio para Consultas -->
+	
+	<bean id="consultaService" class="com.fontar.consultas.ConsultaServiceImpl">
+		<property name="consultas">
+			<map>
+				<entry key="proyectos-region" value-ref="proyectos-region"/>
+				<entry key="proyectos-empresa-convocatoria" value-ref="proyectos-empresa-convocatoria"/>
+				<entry key="proyectos-indicando-representante-director-empresas" value-ref="proyectos-indicando-representante-director-empresas"/>
+				<entry key="proyectos-aprobados" value-ref="proyectos-aprobados"/>
+				<entry key="montoSolicitado-proyecto" value-ref="montoSolicitado-proyecto"/>
+				<entry key="representantes-proyecto-empresa" value-ref="representantes-proyecto-empresa"/>
+				<entry key="proyectos-ciiu" value-ref="proyectos-ciiu"/>
+				<entry key="proyectos-provincias" value-ref="proyectos-provincias"/>
+				<entry key="proyectos-ciiu-resolucion" value-ref="proyectos-ciiu-resolucion"/>
+				<entry key="empresas" value-ref="empresas"/>
+				<entry key="proyectos-rechazados" value-ref="proyectos-rechazados"/>
+				<entry key="proyectos-evaluadores" value-ref="proyectos-evaluadores"/>
+				<entry key="evaluaciones-institucion" value-ref="evaluaciones-institucion"/>
+				<entry key="proyectos-datos-empresa" value-ref="proyectos-datos-empresa"/>
+				<entry key="proyectos" value-ref="proyectos"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Consultas -->	
+
+	<bean id="proyectos-region" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-region"/>
+		<property name="descripcion" value="Consulta de proyectos por región."/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-REGION"/>
+		<property name="titulo" value="Proyectos por Región"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoPorRegionResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="proyectos-empresa-convocatoria" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-empresa-convocatoria"/>
+		<property name="descripcion" value="Consulta de proyectos por empresa y por convocatoria."/>
+		<property name="titulo" value="Proyectos por Empresa y Convocatoria"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-EMPRESA-CONVOCATORIA"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoPorEmpresaYConvocatoriaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="proyectos-ciiu" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-ciiu"/>
+		<property name="descripcion" value="Consulta de proyectos por CIIU"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-CIIU"/>
+		<property name="titulo" value="Proyectos por CIIU"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoPorCIIUResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="proyectos-indicando-representante-director-empresas" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-indicando-representante-director-empresas"/>
+		<property name="descripcion" value="Consulta de proyectos indicando representante, director y empresas participantes"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-INDICANDO-REPRESENTANTE-DIRECTOR-EMPRESAS"/>
+		<property name="titulo" value="Proyectos con representante, director y empresas"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoIndicandoRepresentanteDirectorYEmpresasResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="proyectos-aprobados" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-aprobados"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-APROBADOS"/>
+		<property name="descripcion" value="Consulta de Proyectos aprobados (Contactos)"/>
+		<property name="titulo" value="Proyectos Aprobados (Contactos)"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectosAprobadosResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="montoSolicitado-proyecto" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="montoSolicitado-proyecto"/>
+		<property name="descripcion" value="Consulta de monto solicitado por Proyecto"/>
+		<property name="permissionRequired" value="CONSULTA-MONTOSOLICITADO-PROYECTO"/>
+		<property name="titulo" value="Monto solicitado por Proyecto"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.MontoSolicitadoPorProyectoResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="representantes-proyecto-empresa" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="representantes-proyecto-empresa"/>
+		<property name="descripcion" value="Representantes por proyecto y por empresa"/>
+		<property name="permissionRequired" value="CONSULTA-REPRESENTANTES-PROYECTO-EMPRESA"/>
+		<property name="titulo" value="Representantes por Proyecto y Empresa"/>		
+		<property name="resolver">
+			<bean class="com.fontar.consultas.RepresentantesPorProyectoYEmpresaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+
+	<bean id="proyectos-provincias" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-provincias"/>
+		<property name="descripcion" value="Proyectos presentados por provincias"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-PROVINCIAS"/>
+		<property name="titulo" value="Proyectos presentados por provincias"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoPorProvinciaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="proyectos-ciiu-resolucion" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-ciiu-resolucion"/>
+		<property name="descripcion" value="Proyectos con resolución por CIIU"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-CIIU-RESOLUCION"/>
+		<property name="titulo" value="Proyectos con Resolución por CIIU"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoPorCIIUResolucionResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empresas" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="empresas"/>
+		<property name="descripcion" value="Proyectos listados por empresas"/>
+		<property name="permissionRequired" value="CONSULTA-EMPRESAS"/>
+		<property name="titulo" value="Proyectos listados por empresas"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ListadoEmpresaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+
+	<bean id="proyectos-rechazados" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-rechazados"/>
+		<property name="descripcion" value="Consulta de proyectos rechazados en distintas instancias (técnica, económica, financiera) por instrumento"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-RECHAZADOS"/>
+		<property name="titulo" value="Proyectos rechazados"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoRechazadoResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="proyectos-evaluadores" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-evaluadores"/>
+		<property name="descripcion" value="Consulta de evaluadores"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-EVALUADORES"/>
+		<property name="titulo" value="Evaluadores"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoPorEvaluadoresResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="evaluaciones-institucion" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="evaluaciones-institucion"/>
+		<property name="descripcion" value="Distribución de las evaluaciones por institución"/>
+		<property name="permissionRequired" value="CONSULTA-EVALUACIONES-INSTITUCION"/>
+		<property name="titulo" value="Distribución de evaluaciones"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.EvaluacionPorInstitucionResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="proyectos-datos-empresa" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos-datos-empresa"/>
+		<property name="descripcion" value="Datos de Empresa por Proyectos y Convocatoria"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS-DATOS-EMPRESA"/>
+		<property name="titulo" value="Datos de Empresa por Proyectos Y Convocatoria"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectosDatosEmpresaResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="proyectos" class="com.fontar.consultas.Consulta">
+		<property name="nombre" value="proyectos"/>
+		<property name="descripcion" value="Listado total de proyectos"/>
+		<property name="permissionRequired" value="CONSULTA-PROYECTOS"/>
+		<property name="titulo" value="Listado total de proyectos"/>
+		<property name="resolver">
+			<bean class="com.fontar.consultas.ProyectoResolver">
+				<property name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	
+</beans>

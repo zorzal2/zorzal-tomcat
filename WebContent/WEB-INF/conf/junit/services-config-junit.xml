@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!-- BEAN Transaction base, por default se extiende de este -->
+<bean id="baseDaoTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+     abstract="true">
+   <property name="transactionManager" ref="transactionManager"/>
+   <property name="transactionAttributes">
+     <props>
+		<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="save*">PROPAGATION_REQUIRED</prop>
+		<prop key="update*">PROPAGATION_REQUIRED</prop>		
+		<prop key="delete*">PROPAGATION_REQUIRED</prop>
+		<prop key="get*">PROPAGATION_REQUIRED</prop>
+        <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+     </props>
+   </property>
+</bean>
+
+<bean name="proyectoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="proyectoDao"/>
+</bean>
+
+<bean name="proyectoPitecDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="proyectoPitecDao"/>
+</bean>
+ 
+<bean name="instrumentoDefDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="instrumentoDefDao"/>
+</bean>
+
+<bean name="evaluacionDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="evaluacionDao"></property>
+</bean>
+
+<bean name="evaluacionGeneralDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="evaluacionGeneralDao"></property>
+</bean>
+
+<bean name="evaluacionSeguimientoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="evaluacionSeguimientoDao"></property>
+</bean>
+
+<bean name="presentacionDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="presentacionConvocatoriaDao"></property>
+</bean> 
+ 
+<bean name="matrizPresupuestoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="matrizPresupuestoDao"></property>
+</bean> 
+<bean name="llamadoConvocatoriaDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="llamadoConvocatoriaDao"></property>
+</bean>  
+<bean name="ventanillaPermanenteDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="ventanillaPermanenteDao"></property>
+</bean> 
+<bean name="entidadDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="entidadDao"></property>
+</bean> 
+<bean name="personaDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="personaDao"></property>
+</bean> 
+<bean name="entidadBeneficiariaDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="entidadBeneficiariaDao"></property>
+</bean> 
+<bean name="entidadEvaluadoraDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="entidadEvaluadoraDao"></property>
+</bean> 
+<bean name="entidadBancariaDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="entidadBancariaDao"></property>
+</bean> 
+<bean name="evaluadorDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="evaluadorDao"></property>
+</bean> 
+<bean name="paqueteDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="paqueteDao"></property>
+</bean>  
+<bean name="ideaProyectoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="ideaProyectoDao"/>
+</bean>
+<bean name="bitacoraDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="bitacoraDao"/>
+</bean>
+
+<bean name="distribucionFinanciamientoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="distribucionFinanciamientoDao"/>
+</bean>
+<bean name="instrumentoVersionDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="instrumentoVersionDao"/>
+</bean>
+<bean name="fuenteFinanciamientoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="fuenteFinanciamientoDao"/>
+</bean>
+
+<bean name="distribucionTipoProyectoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="distribucionTipoProyectoDao"/>
+</bean>
+<bean name="proyectoPresupuestoDaoService" parent="baseDaoTransactionProxy">
+	<property name="target" ref="proyectoPresupuestoDao"></property>
+</bean> 
+</beans>

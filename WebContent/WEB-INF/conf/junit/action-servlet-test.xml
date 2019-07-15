@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <bean name="criptoSistema" class="com.fontar.seguridad.cripto.CriptoSistema">
+	<!--  
+	<property name="presentacionConvocatoriaServicio">
+		<ref bean="presentacionConvocatoriaService"/>
+	</property>
+	-->
+  </bean>
+  
+  <bean name="clavesPaqueteEvaluadorDAOImpl" class="com.fontar.data.impl.dao.hibernate.ClavesPaqueteEvaluadorDAOImpl">
+  	<property name="hibernateTemplate"><ref bean="hibernateTemplate"/></property>  
+  </bean>
+
+  <!-- bean name="paqueteDAOImpl" class="com.fontar.data.impl.dao.hibernate.PaqueteDAOImpl">
+  	<property name="hibernateTemplate"><ref bean="hibernateTemplate"/></property>  
+  </bean-->
+
+  <bean name="criptoTestPassDAOImpl" class="com.fontar.data.impl.dao.hibernate.CriptoTestPassDAOImpl">
+  	<property name="hibernateTemplate"><ref bean="hibernateTemplate"/></property>  
+  </bean>
+
+  <bean name="criptoTest" class="com.fontar.seguridad.cripto.CriptoTest">
+	<property name="criptoSistema"><ref bean="criptoSistema"/></property>
+	<property name="usuarioDAOImpl"><ref bean="usuarioDAOImpl"/></property>
+	<property name="clavesPaqueteEvaluadorDAOImpl"><ref bean="clavesPaqueteEvaluadorDAOImpl"/></property>
+	<property name="paqueteDAOImpl"><ref bean="paqueteDAOImpl"/></property>
+	<property name="criptoTestPassDAOImpl"><ref bean="criptoTestPassDAOImpl"/></property>
+  </bean>
+
+  <bean name="criptoInfraestructuraTest" class="com.fontar.seguridad.cripto.CriptoInfraestructuraTest">
+	<property name="criptoSistema"><ref bean="criptoSistema"/></property>
+	<!-- property name="proyectoDao"><ref bean="proyectoDao"/></property-->
+  </bean>
+
+</beans>
+
+
+
+
+

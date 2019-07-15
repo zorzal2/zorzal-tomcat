@@ -1,0 +1,1201 @@
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- === Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="SeguimientoFiltersForm" type="com.pragma.toolbar.web.form.ToolbarAllFiltersForm" />
+		<form-bean name="RendicionCuentasFiltersForm" type="com.pragma.toolbar.web.form.ToolbarAllFiltersForm" />
+		<form-bean name="ProcedimientoFiltersForm" type="com.pragma.toolbar.web.form.ToolbarAllFiltersForm" />
+		<form-bean name="ItemsProcedimientoFiltersForm" type="com.pragma.toolbar.web.form.ToolbarAllFiltersForm" />
+
+		<form-bean name="SeguimientoEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="esFinanciero" type="java.lang.String" />
+			<form-property name="_esFinanciero" type="java.lang.String" />
+			<form-property name="esTecnico" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="RendicionCuentasANREditarDynaForm" type="com.fontar.web.form.administracion.seguimiento.rendiciones.anr.CargaRendicionForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="tipoRendicion" type="java.lang.String" />
+			<form-property name="tipoRubro" type="java.lang.String" />
+			
+			<!-- Campos para rubros de tipo General -->			
+			<form-property name="idRubro" type="java.lang.String" />
+			<form-property name="nroFactura" type="java.lang.String" />
+			<form-property name="nroRecibo" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="proveedor" type="java.lang.String" />
+			<form-property name="montoParte" type="java.lang.String" />
+			<form-property name="montoContraparte" type="java.lang.String" />
+			<form-property name="tieneCertificadoProveedor" type="java.lang.String" initial="false"/>
+			<form-property name="paisProveedor" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+
+			<!-- Campos para rubros de tipo Persona -->						
+			<form-property name="idPersonaRendicion" type="java.lang.String" />
+			<form-property name="txtPersonaRendicion" type="java.lang.String" />
+			<form-property name="profesion" type="java.lang.String" />
+			<form-property name="sueldoMensual" type="java.lang.String" />
+			<form-property name="porcentajeDedicacion" type="java.lang.String" />
+			<form-property name="mesesParticipacion" type="java.lang.String" />
+			<form-property name="funcion" type="java.lang.String" />
+			<form-property name="costoTotalMensual" type="java.lang.String" />
+						
+		</form-bean>
+		<form-bean name="RendicionCuentasCFEditarDynaForm" type="com.fontar.web.form.administracion.seguimiento.rendiciones.cf.CargaRendicionForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="tipoRendicion" type="java.lang.String" />
+			<form-property name="tipoRubro" type="java.lang.String" />
+			
+			<!-- Campos para rubros de tipo General -->			
+			<form-property name="idRubro" type="java.lang.String" />
+			<form-property name="nroFactura" type="java.lang.String" />
+			<form-property name="nroRecibo" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="proveedor" type="java.lang.String" />
+			<form-property name="montoTotal" type="java.lang.String" />
+			<form-property name="tieneCertificadoProveedor" type="java.lang.String" initial="false"/>
+			<form-property name="paisProveedor" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+
+			<!-- Campos para rubros de tipo Persona -->						
+			<form-property name="idPersonaRendicion" type="java.lang.String" />
+			<form-property name="txtPersonaRendicion" type="java.lang.String" />
+			<form-property name="profesion" type="java.lang.String" />
+			<form-property name="sueldoMensual" type="java.lang.String" />
+			<form-property name="porcentajeDedicacion" type="java.lang.String" />
+			<form-property name="mesesParticipacion" type="java.lang.String" />
+			<form-property name="funcion" type="java.lang.String" />
+			<form-property name="costoTotalMensual" type="java.lang.String" />
+						
+		</form-bean>
+
+	
+		<form-bean name="SeguimientoProyectoFiltersForm" type="com.pragma.toolbar.web.form.ToolbarAllFiltersForm"/>
+		
+		<form-bean name="RendicionCuentasResumenDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+		</form-bean>
+		
+		<form-bean name="EditarEvaluacionSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="aceptada" type="java.lang.String"/>
+			<form-property name="fundamentacion" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="ObservacionEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="avance" type="java.lang.String"/>
+			<form-property name="observaciones" type="java.lang.String" />
+			<form-property name="esEtapa" type="java.lang.String" />
+			<form-property name="windowClose" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="EvaluacionSeguimientoFiltersForm" type="com.pragma.toolbar.web.form.ToolbarAllFiltersForm"/>
+
+		<form-bean name="EditarMontosRendicionCuentasANRDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="montoParteEvaluacion" type="java.lang.String" />
+			<form-property name="montoContraparteEvaluacion" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="EditarMontosRendicionCuentasCFDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="montoTotalEvaluacion" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="ConfirmarEvaluacionSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="EvaluarAutorizacionPagoSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="fechaEvaluacion" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="autorizaEvaluacion" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="EditarDatosGeneralesGestionPagoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />
+			<form-property name="estado" type="java.lang.String"/>
+		</form-bean>		
+		
+		<form-bean name="EditarMontosGestionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="montoParteGestion" type="java.lang.String" />
+			<form-property name="montoContraparteGestion" type="java.lang.String" />
+			<form-property name="montoTotalGestion" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="DesignarEvaluadorDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idPersonaEvaluador" type="java.lang.String" />
+			<form-property name="fechaAsignacionEvaluador" type="java.lang.String"/>
+			<form-property name="descripcionAsignacionEvaluador" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="CargarFundamentacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="fechaFundamentacion" type="java.lang.String"/>
+			<form-property name="descripcionFundamentacion" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="EditarResultadoFontarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String"/>
+			<form-property name="proveedor" type="java.lang.String"/>
+			<form-property name="idMoneda" type="java.lang.String" />
+			<form-property name="montoFontar" type="java.lang.String"/>
+			<form-property name="resultadoFontar" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="EditarResultadoUffaDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String"/>
+			<form-property name="proveedor" type="java.lang.String"/>
+			<form-property name="idMoneda" type="java.lang.String" />
+			<form-property name="montoUffa" type="java.lang.String"/>
+			<form-property name="resultadoUffa" type="java.lang.String" />
+		</form-bean>	
+		
+		<form-bean name="EditarResultadoBidDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String"/>
+			<form-property name="proveedor" type="java.lang.String"/>
+			<form-property name="idMoneda" type="java.lang.String" />
+			<form-property name="montoBid" type="java.lang.String"/>
+			<form-property name="resultadoBid" type="java.lang.String" />
+		</form-bean>			
+
+		<form-bean name="RemitirUffaDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="fechaRemisionUffa" type="java.lang.String"/>
+			<form-property name="observacionRemisionUffa" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="RemitirBidDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="fechaRemisionBid" type="java.lang.String"/>
+			<form-property name="observacionRemisionBid" type="java.lang.String" />
+		</form-bean>
+		<!-- Carga de rendiciones desde Excel -->
+		<form-bean name="RendicionesExcelUploadForm" type="com.fontar.web.form.administracion.seguimiento.rendiciones.RendicionesExcelUploadForm">
+			<form-property name="content" type="org.apache.struts.upload.FormFile" />
+			<form-property name="seguimientoId" type="java.lang.Long" />
+			<form-property name="borrarExistentes" type="java.lang.Boolean" />
+		</form-bean>
+		
+		<form-bean name="EditarEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="fechaInicial" type="java.lang.String" />
+			<form-property name="fechaEntregaComprometida" type="java.lang.String"/>
+			<form-property name="observacion" type="java.lang.String" />
+			<form-property name="idEvaluador" type="java.lang.String[]" />
+			<form-property name="idEntidadEvaluadora" type="java.lang.String[]" />
+			<form-property name="lugar" type="java.lang.String[]" />	
+		</form-bean>
+		
+		<form-bean name="ModificarCamposDeAnalisisDeGastosDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.Long" />
+			<form-property name="valor" type="java.lang.String" />
+		</form-bean>
+		
+	</form-beans>
+
+	<!-- Action Mapping Definitions -->
+	<action-mappings>
+
+		<action path="/SeguimientoInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SeguimientoFiltersForm" parameter="inventario"
+			validate="false">
+			<forward name="success" path=".SeguimientoInventarioDef" />
+		</action>
+
+	
+		<action path="/SeguimientoInventarioFiltrar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SeguimientoFiltersForm" parameter="filtrar" validate="true"
+			input="/SeguimientoInventario.do">
+			<forward name="success" path=".SeguimientoInventarioDef" />
+		</action>
+
+		<action path="/SeguimientosProyectoInventario" 
+				type="org.springframework.web.struts.DelegatingActionProxy" 
+				name="SeguimientoProyectoFiltersForm"
+				parameter="verInventario" 
+				scope="request">
+				
+			<forward name="inventario" path=".SeguimientosProyectoDef" />
+		</action>
+
+		<action path="/SeguimientoGuardarEdicion"
+			type="org.springframework.web.struts.DelegatingActionProxy" 
+			name="SeguimientoEditarDynaForm" 
+			parameter="guardarEdicion" 
+			scope="request" 
+			validate="true" 
+			input="/SeguimientoEditar.do">
+			
+			<forward name="success" path="/SeguimientoVisualizar.do" />
+
+		</action>
+
+		<!-- Rendicion de Cuentas ANR -->
+		<action path="/RendicionCuentasANRInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			
+			<forward name="success" path=".RendicionCuentasANRInventarioDef" />
+		</action>
+
+		<action path="/RendicionCuentasANRAgregar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasANREditarDynaForm" 
+			parameter="cargar"
+			scope="request"	
+			validate="false">
+
+			<forward name="success" path=".EditarRendicionCuentasANRDef"/>
+		</action>	
+
+		<action path="/RendicionCuentasANREditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasANREditarDynaForm" 
+			parameter="cargar"
+			scope="request"	
+			validate="false">
+
+			<forward name="success" path=".EditarRendicionCuentasANRDef"/>
+		</action>	
+
+		<action path="/RendicionCuentasANRResumen"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasResumenDynaForm" 
+			parameter="resumen"
+			scope="request"
+			validate="false">
+
+			<forward name="success" path=".RendicionCuentasANRResumenDef"/>
+		</action>
+			
+		<action path="/RendicionCuentasANRGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasANREditarDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/RendicionCuentasANRAgregar.do">
+
+			<forward name="success" path="/RendicionCuentasANRInventario.do"/>
+			<forward name="invalid"	path="/RendicionCuentasANRAgregar.do"/>
+		</action>
+		<action path="/RendicionCuentasANRBorrar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="guardar"
+			scope="request"
+			input="/RendicionCuentasANRInventario.do">
+
+			<forward 
+				name="success"
+				path="/RendicionCuentasANRInventario.do" redirect="true">
+			</forward>
+		</action>
+		<!-- Fin Rendicion de cuentas ANR -->
+		<!-- Rendicion de Cuentas CF -->
+		<action path="/RendicionCuentasCFInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			
+			<forward name="success" path=".RendicionCuentasCFInventarioDef" />
+		</action>
+
+		<action path="/RendicionCuentasCFAgregar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasCFEditarDynaForm" 
+			parameter="cargar"
+			scope="request"	
+			validate="false">
+
+			<forward name="success" path=".EditarRendicionCuentasCFDef"/>
+		</action>	
+
+		<action path="/RendicionCuentasCFEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasCFEditarDynaForm" 
+			parameter="cargar"
+			scope="request"	
+			validate="false">
+
+			<forward name="success" path=".EditarRendicionCuentasCFDef"/>
+		</action>	
+
+		<action path="/RendicionCuentasCFResumen"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasResumenDynaForm" 
+			parameter="resumen"
+			scope="request"
+			validate="false">
+
+			<forward name="success" path=".RendicionCuentasCFResumenDef"/>
+		</action>
+			
+		<action path="/RendicionCuentasCFGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasCFEditarDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/RendicionCuentasCFAgregar.do">
+
+			<forward name="success" path="/RendicionCuentasCFInventario.do"/>
+			<forward name="invalid"	path="/RendicionCuentasCFAgregar.do"/>
+		</action>
+
+		<action path="/RendicionCuentasCFBorrar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="guardar"
+			scope="request"
+			input="/RendicionCuentasCFInventario.do">
+
+			<forward 
+				name="success"
+				path="/RendicionCuentasCFInventario.do" redirect="true">
+			</forward>
+
+		</action>
+		<!-- Fin Rendicion de cuentas CF -->
+
+		<action path="/SeguimientoProyectoInventarioFiltrar" 
+               type="org.springframework.web.struts.DelegatingActionProxy" 
+               name="SeguimientoProyectoFiltersForm" parameter="filtrar" validate="true" 
+               input="/SeguimientoProyectoInventario.do"> 
+               <forward name="success" path=".SeguimientosProyectoDef" /> 
+		</action>
+
+		<!-- Análisis de Pertinencia de Gastos -->
+		<action path="/SeguimientoAnalisisGastosEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="analisisDeGastosEvaluacion"
+			scope="request"
+			validate="false">
+			<forward name="success"	path=".EvaluacionDeSeguimientoAnalisisGastosDef" redirect="true"/>
+		</action>
+		<action path="/SeguimientoAnalisisGastosEvaluarGestionDePago"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="analisisDeGastosEvaluarGestionDePago"
+			scope="request"
+			validate="false">
+			<forward name="success"	path=".SeguimientoAnalisisGastosEvaluarGestionDePagoDef" redirect="true"/>
+		</action>
+		<action path="/SeguimientoAnalisisGastosVisualizacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="analisisDeGastosVisualizarSeguimiento"
+			scope="request"
+			validate="false">
+			<forward name="success"	path=".SeguimientoAnalisisGastosVisualizacionDef" redirect="true"/>
+		</action>
+	
+		<!-- Análisis de Pertinencia de Gastos - Imprimir -->
+		<action 
+			path="/SeguimientoAnalisisGastosEvaluacionImprimir"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="analisisDeGastosEvaluacion"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"	
+				path=".EvaluacionDeSeguimientoAnalisisGastosImprimirDef" 
+				redirect="true"/>
+		</action>
+		<action 
+			path="/SeguimientoAnalisisGastosVisualizacionSeguimientoImprimir"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="analisisDeGastosVisualizarSeguimiento"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"	
+				path=".SeguimientoAnalisisGastosVisualizacionImprimirDef" 
+				redirect="true"/>
+		</action>
+		<action 
+			path="/SeguimientoAnalisisGastosEvaluarGestionDePagoImprimir"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="analisisDeGastosEvaluarGestionDePago"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"	
+				path=".SeguimientoAnalisisGastosEvaluarGestionDePagoImprimirDef" 
+				redirect="true"/>
+		</action>
+		
+		<!--  EVALUACION SEGUIMIENTO  -->
+		<!-- Evaluacion Seguimiento Inventario Toolbar -->
+        <action path="/EvaluacionSeguimientoInventario" 
+       		type="org.springframework.web.struts.DelegatingActionProxy" 
+       		name="EvaluacionSeguimientoFiltersForm" 
+       		parameter="inventario" 
+       		validate="false">
+			<forward name="success" 
+				path=".EvaluacionSeguimientoInventarioDef"/>
+        </action>
+
+		<action path="/EvaluacionSeguimientoInventarioFiltrar" 
+			type="org.springframework.web.struts.DelegatingActionProxy" 
+			name="EvaluacionSeguimientoFiltersForm" 
+			parameter="filtrar" 
+			validate="true" 
+			input="/EvaluacionSeguimientoInventario.do">
+			<forward name="success" 
+				path=".EvaluacionSeguimientoInventarioDef"/>
+        </action>
+
+		<!-- Visualizar Evaluación Seguimiento -->
+		<action path="/VisualizarEvaluacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/EvaluacionSeguimientoInventario.do">
+			</forward>
+			<forward 
+				name="success"
+				path=".DatosEvaluacionSeguimientoDef">
+			</forward>
+		</action>	
+
+		<!--  -->
+		<action path="/ObservacionEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ObservacionEditarDynaForm" 
+			parameter="agregar"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".ObservacionEditarDef">
+			</forward>
+		</action>		
+		
+		<action path="/ObservacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ObservacionEditarDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/ObservacionEditar.do">
+			<forward 
+				name="success"
+				path=".ObservacionEditarDef">
+			</forward>
+		</action>	
+
+
+		<action path="/SeguimientoControlarFacturas"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="controlarFacturas"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".SeguimientoControlarFacturasDef">
+			</forward>
+		</action>	
+
+		<!-- Rendición Cuentas Evaluación Seguimiento Inventario -->
+		<action path="/RendicionEvaluacionSeguimientoANRInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".RendicionEvaluacionSeguimientoANRInventarioDef">
+			</forward>
+		</action>
+		<action path="/RendicionEvaluacionSeguimientoCFInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".RendicionEvaluacionSeguimientoCFInventarioDef">
+			</forward>
+		</action>
+		
+		<!-- Editar Montos Rendición Cuentas Evaluación Seguimiento -->
+		<action path="/EditarMontosRendicionEvaluacionSeguimientoANR"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarMontosRendicionCuentasANRDynaForm" 
+			parameter="editar"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".EditarMontosRendicionEvaluacionSeguimientoANRDef">
+			</forward>
+		</action>
+		<action path="/EditarMontosRendicionEvaluacionSeguimientoCF"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarMontosRendicionCuentasCFDynaForm" 
+			parameter="editar"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".EditarMontosRendicionEvaluacionSeguimientoCFDef">
+			</forward>
+		</action>
+
+		<!-- Guardar Edición Montos Rendición Cuentas Evaluación Seguimiento -->
+		<action path="/GuardarEdicionMontosRendicionEvaluacionSeguimientoANR"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarMontosRendicionCuentasANRDynaForm" 
+			parameter="guardarEdicion"
+			validate="true"
+			input="/EditarMontosRendicionEvaluacionSeguimientoANR.do">
+			<forward 
+				name="success" 
+				path="/jsp/util/close.jsp">
+			</forward>
+		</action>
+		<action path="/GuardarEdicionMontosRendicionEvaluacionSeguimientoCF"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarMontosRendicionCuentasCFDynaForm" 
+			parameter="guardarEdicion"
+			validate="true"
+			input="/EditarMontosRendicionEvaluacionSeguimientoCF.do">
+			<forward 
+				name="success" 
+				path="/jsp/util/close.jsp">
+			</forward>
+		</action>
+		
+		<!-- Datos Generales Evaluación Seguimiento -->
+		<action path="/DatosGeneralesEvaluacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDatosGenerales"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/EvaluacionSeguimientoInventario.do">
+			</forward>			
+			<forward 
+				name="success"
+				path=".DatosEvaluacionSeguimientoDef">
+			</forward>
+		</action>
+		<!-- Datos Generales Evaluación Seguimiento - Imprimir -->
+		<action path="/DatosGeneralesEvaluacionSeguimientoImprimir"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDatosGenerales"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/EvaluacionSeguimientoInventario.do">
+			</forward>			
+			<forward 
+				name="success"
+				path=".DatosEvaluacionSeguimientoImprimirDef">
+			</forward>
+		</action>
+		
+		<!-- Editar Datos Generales Evaluación Seguimiento -->
+		<action path="/EditarEvaluacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarEvaluacionSeguimientoDynaForm" 
+			parameter="editarDatosGenerales"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/EvaluacionSeguimientoInventario.do">
+			</forward>	
+			<forward 
+				name="success"
+				path=".EditarEvaluacionSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<!-- Editar Evaluadores de Evaluación Seguimiento -->
+		<action path="/EditarEvaluadoresEvalSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarEvaluacionSeguimientoDynaForm" 
+			parameter="editarDatosGenerales"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarEvaluacionSeguimientoDef">
+			</forward>
+		</action>
+				
+		<!-- Confirmar evaluación -->
+		<action path="/ConfirmarEvaluacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ConfirmarEvaluacionSeguimientoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ConfirmarEvaluacionSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<action path="/ConfirmarEvaluacionSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ConfirmarEvaluacionSeguimientoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/ConfirmarEvaluacionSeguimiento.do">
+			<forward 
+				name="success"
+				path="/WFBandejaDeEntrada.do">
+			</forward>
+		</action>		
+
+		<!-- Evaluar Autorizacion de Pago de Seguimiento -->
+		<action path="/EvaluarAutorizacionPagoSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarAutorizacionPagoSeguimientoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EvaluarAutorizacionPagoSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<action path="/EvaluarAutorizacionPagoSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarAutorizacionPagoSeguimientoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EvaluarAutorizacionPagoSeguimiento.do">
+			<forward 
+				name="success"
+				path="/SeguimientoInventario.do">
+			</forward>
+		</action>		
+		
+		<!-- SEGUIMIENTO - Inventario de Rendicion de Cuentas Gestión de Pago -->
+		<action path="/RendicionCuentasGestionPagoInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionCuentasFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".InventarioRendicionGestionPagoDef">
+			</forward>				
+		</action>		
+		
+		<!-- SEGUIMIENTO - Datos Generales Gestión de Pago -->
+		<action path="/DatosGeneralesGestionPago"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="obtenerDatosResumen"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".DatosGeneralesGestionPagoDef">
+			</forward>
+		</action>		
+		
+		<!-- SEGUIMIENTO - Editar Datos Generales Gestión de Pago -->
+		<action path="/EditarDatosGeneralesGestionPago"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarDatosGeneralesGestionPagoDynaForm" 
+			parameter="obtenerDatosResumen"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarDatosGeneralesGestionPagoDef">
+			</forward>
+		</action>				
+
+		<!-- Editar Montos Rendición Cuentas Evaluación Seguimiento -->
+		<action path="/EditarMontosGestionadosRendicion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarMontosGestionDynaForm" 
+			parameter="editar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".EditarMontosGestionPagoDef">
+			</forward>
+		</action>		
+
+		<!-- Guardar Edición Montos Rendición Cuentas Evaluación Seguimiento -->
+		<action path="/GuardarEdicionMontosGestionadosRendicion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarMontosGestionDynaForm" 
+			parameter="guardarEdicion"
+			scope="request"
+			validate="true"
+			input="/EditarMontosGestionadosRendicion.do">
+			<forward 
+				name="invalid" 
+				path="/EditarMontosGestionadosRendicion.do">
+			</forward>
+			<forward 
+				name="success" 
+				path="/jsp/util/close.jsp">
+			</forward>
+		</action>		
+
+		<!-- CONTROL ADQUISICIONES - Procedimientos Inventario -->
+		<action path="/ProcedimientoInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ProcedimientoFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".ProcedimientoInventarioDef" />
+		</action>
+		<action path="/ProcedimientoInventarioFiltrar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ProcedimientoFiltersForm" 
+			parameter="filtrar" 
+			validate="true"
+			input="/ProcedimientoInventario.do">
+			<forward 
+				name="success" 
+				path=".ProcedimientoInventarioDef" />
+		</action>
+		
+		<!-- CONTROL ADQUISICION - Visualizar Datos Generales Procedimiento -->
+		<action path="/VisualizarDatosGeneralesProcedimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".DatosGeneralesProcedimientoDef">
+			</forward>
+		</action>	
+		
+		<!-- CONTROL ADQUISICION - Visualizar Inventario Items Procedimiento -->
+		<action path="/VisualizarItemsProcedimientoInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/ItemsProcedimientoInventario.do">
+			</forward>
+		</action>		
+		
+		<!-- CONTROL ADQUISICIONES - Items Procedimientos Inventario -->
+		<action path="/ItemsProcedimientoInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ItemsProcedimientoFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".ItemsProcedimientoInventarioDef" />
+		</action>
+		<action path="/ItemsProcedimientoInventarioFiltrar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ItemsProcedimientoFiltersForm" 
+			parameter="filtrar" 
+			validate="true"
+			input="/ItemsProcedimientoInventario.do">
+			<forward 
+				name="success" 
+				path=".ItemsProcedimientoInventarioDef" />
+		</action>
+		
+		<!-- CONTROL ADQUISICION - DESIGNAR EVALUADOR TÉCNICO - Inventario de Items del procedimiento -->
+		<action path="/CircuitoAutorizacionItemsInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ItemsProcedimientoFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			<forward 
+				name="DesignarEvaluadorTecnico" 
+				path=".DesignarEvaluadorTecnicoDef" />
+			<forward 
+				name="CargarFundamentacionEvaluador" 
+				path=".CargarFundamentacionEvaluadorDef" />
+			<forward 
+				name="RemitirUffa" 
+				path=".RemitirUffaDef" />
+			<forward 
+				name="RemitirBid" 
+				path=".RemitirBidDef" />
+		</action>		
+
+		<!-- CONTROL ADQUISICION - DESIGNAR EVALUADOR TÉCNICO - Visualizar Datos Gestión -->
+		<action path="/CircuitoAutorizacionVisualizarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDatosGestion"
+			scope="request"
+			validate="false">
+			<forward 
+				name="DesignarEvaluadorTecnico" 
+				path=".DesignarEvaluadorTecnicoVisualizarDatosGestionDef" />
+			<forward 
+				name="CargarFundamentacionEvaluador" 
+				path=".CargarFundamentacionEvaluadorVisualizarDatosGestionDef" />
+			<forward 
+				name="RemitirUffa" 
+				path=".RemitirUffaVisualizarDatosGestionDef" />				
+			<forward 
+				name="RemitirBid" 
+				path=".RemitirBidVisualizarDatosGestionDef" />				
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - Imprimir Datos Completos -->
+		<action path="/CircuitoAutorizacionImprimir"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="imprimirDatosCompletos"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/ImprimirItemsInventario.do">
+			</forward>
+		</action>			
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - Imprimir Inventarios de Items de Procedimiento -->
+		<action path="/ImprimirItemsInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ItemsProcedimientoFiltersForm" 
+			parameter="inventario"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ImprimirCircuitoEvaluacion">
+			</forward>
+		</action>			
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA  - DESIGNAR EVALUADOR TÉCNICO - Editar Datos Gestión -->
+		<action path="/DesignarEvaluadorEditarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DesignarEvaluadorDynaForm" 
+			parameter="editarDatosGestion"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarDatosGestionDef">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA  - DESIGNAR EVALUADOR TÉCNICO - Guardar Datos Gestión -->
+		<action path="/DesignarEvaluadorGuardarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DesignarEvaluadorDynaForm" 
+			parameter="guardarDatosGestion"
+			scope="request"
+			validate="true"
+			input="/DesignarEvaluadorEditarDatosGestion.do">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionVisualizarDatosGestion.do">
+			</forward>
+		</action>			
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Editar Datos Gestión -->
+		<action path="/CargarFundamentacionEvaluadorEditarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarFundamentacionDynaForm" 
+			parameter="editarDatosGestion"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarDatosGestionDef">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Guardar Datos Gestión -->
+		<action path="/CargarFundamentacionEvaluadorGuardarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarFundamentacionDynaForm" 
+			parameter="guardarDatosGestion"
+			scope="request"
+			validate="true"
+			input="/CargarFundamentacionEvaluadorEditarDatosGestion.do">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionVisualizarDatosGestion.do">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO FONTAR - Editar Resultado Item -->
+		<action path="/EditarResultadoFontar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarResultadoFontarDynaForm" 
+			parameter="editar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarResultadoFontarDef">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO FONTAR - Guardar Resultado Item -->
+		<action path="/GuardarResultadoFontar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarResultadoFontarDynaForm" 
+			parameter="guardarEdicion"
+			scope="request"
+			validate="true"
+			input="/EditarResultadoFontar.do">
+			<forward 
+				name="invalid" 
+				path="/EditarResultadoFontar.do">
+			</forward>
+			<forward 
+				name="success" 
+				path="/jsp/util/close.jsp">
+			</forward>			
+		</action>			
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Editar Resultado Item -->
+		<action path="/EditarResultadoUffa"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarResultadoUffaDynaForm" 
+			parameter="editar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarResultadoUffaDef">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Guardar Resultado Item -->
+		<action path="/GuardarResultadoUffa"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarResultadoUffaDynaForm" 
+			parameter="guardarEdicion"
+			scope="request"
+			validate="true"
+			input="/EditarResultadoUffa.do">
+			<forward 
+				name="invalid" 
+				path="/EditarResultadoUffa.do">
+			</forward>
+			<forward 
+				name="success" 
+				path="/jsp/util/close.jsp">
+			</forward>			
+		</action>	
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Editar Resultado Item -->
+		<action path="/EditarResultadoBid"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarResultadoBidDynaForm" 
+			parameter="editar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarResultadoBidDef">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Guardar Resultado Item -->
+		<action path="/GuardarResultadoBid"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarResultadoBidDynaForm" 
+			parameter="guardarEdicion"
+			scope="request"
+			validate="true"
+			input="/EditarResultadoBid.do">
+			<forward 
+				name="invalid" 
+				path="/EditarResultadoBid.do">
+			</forward>
+			<forward 
+				name="success" 
+				path="/jsp/util/close.jsp">
+			</forward>			
+		</action>	
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Editar Datos Gestión -->
+		<action path="/RemitirUffaEditarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RemitirUffaDynaForm" 
+			parameter="editarDatosGestion"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarDatosGestionDef">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Guardar Datos Gestión -->
+		<action path="/RemitirUffaGuardarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RemitirUffaDynaForm" 
+			parameter="guardarDatosGestion"
+			scope="request"
+			validate="true"
+			input="/RemitirUffaEditarDatosGestion.do">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionVisualizarDatosGestion.do">
+			</forward>
+		</action>		
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Editar Datos Gestión -->
+		<action path="/RemitirBidEditarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RemitirBidDynaForm" 
+			parameter="editarDatosGestion"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EditarDatosGestionDef">
+			</forward>
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Guardar Datos Gestión -->
+		<action path="/RemitirBidGuardarDatosGestion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RemitirBidDynaForm" 
+			parameter="guardarDatosGestion"
+			scope="request"
+			validate="true"
+			input="/RemitirBidEditarDatosGestion.do">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionVisualizarDatosGestion.do">
+			</forward>
+		</action>		
+        <!-- Carga de rendiciones desde Excel -->
+        <action path="/RendicionesExcelIngresar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionesExcelUploadForm" 
+			parameter="ingresar"
+			scope="request"
+			validate="false">
+			<forward name="success" path=".RendicionesExcelIngresarDef" />
+		</action>
+        <action path="/RendicionesExcelCargar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RendicionesExcelUploadForm" 
+			parameter="cargar"
+			scope="request"
+			validate="false">
+			<forward name="invalid" path=".RendicionesExcelIngresarDef" />
+		</action>
+        <action path="/RendicionesExcelCancelar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="cancelar"
+			scope="request"
+			validate="false" />
+			
+		<!-- Editar Evaluadores de Evaluación Seguimiento -->
+		<action path="/EditarEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarEvaluacionDynaForm" 
+			parameter="editar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/VisualizarEvaluacionSeguimiento.do">
+			</forward>	
+			<forward 
+				name="success"
+				path=".EditarEvaluacionDef">
+			</forward>
+		</action>	
+		
+		<!-- Guardar Edición Evaluadores de Evaluación Seguimiento -->
+		<action path="/GuardarEdicionEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarEvaluacionDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/EditarEvaluacion.do">
+			<forward 
+				name="success"
+				path="/VisualizarEvaluacionSeguimiento.do">
+			</forward>
+		</action>				
+		<!-- Modificar presupuesto segun avance -->
+		<action path="/ModificarPresupuestoSegunAvance"
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				parameter="cargarPresupuestoSegunAvance"
+				scope="request"
+				name="ModificarCamposDeAnalisisDeGastosDynaForm"
+				validate="false">
+				<forward name="success" path=".ModificarPresupuestoSegunAvanceDef" />
+		</action>
+		<action path="/ModificarPresupuestoSegunAvanceGuardar"
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				parameter="guardarPresupuestoSegunAvance"
+				scope="request"
+				name="ModificarCamposDeAnalisisDeGastosDynaForm"
+				input="/ModificarPresupuestoSegunAvance.do"
+				validate="true">
+				<forward name="success" path="/jsp/util/closeAndParentReload.jsp" />
+		</action>
+		<!-- Modificar pendiente de rendicion -->
+		<action path="/ModificarPendienteDeRendicion"
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				parameter="cargarPendienteDeRendicion"
+				scope="request"
+				name="ModificarCamposDeAnalisisDeGastosDynaForm"
+				validate="false">
+				<forward name="success" path=".ModificarPendienteDeRendicionDef" />
+		</action>
+		<action path="/ModificarPendienteDeRendicionGuardar"
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				parameter="guardarPendienteDeRendicion"
+				scope="request"
+				name="ModificarCamposDeAnalisisDeGastosDynaForm"
+				input="/ModificarPendienteDeRendicion.do"
+				validate="true">
+				<forward name="success" path="/jsp/util/closeAndParentReload.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>
+
+
+

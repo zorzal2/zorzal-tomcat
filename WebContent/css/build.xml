@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="deployer" basedir="." default="use">
+	
+	<property name="source" value="${basedir}"/>
+	<property name="root" value="${jbpm.deploy}"/>
+	<property name="included" value="(.*)css"/>
+		
+	<target name="use" description="Use the Task">
+        <taskdef name="deploy" classname="com.pragma.util.deploy.WebRootDeployer" classpath="../../lib/${ant.project.name}.jar"/>
+        <deploy source="${source}" root="${root}" included="${included}"/>
+    </target>
+</project>

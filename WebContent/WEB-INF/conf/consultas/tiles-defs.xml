@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<tiles-definitions>
+
+	<definition name=".consultaDef" path="/jsp/consultas/layout.jsp">
+		<put name="title" value="FONTAR" />  
+		<put name="header" value="/WEB-INF/jspf/top.jsp" />
+		<put name="menu" value="/WEB-INF/jspf/menu.jsp" />
+	</definition>
+
+	<definition name=".reporteDef" path="/jsp/consultas/reportes/layout.jsp">
+		<put name="title" value="FONTAR" />  
+		<put name="header" value="/WEB-INF/jspf/top.jsp" />
+		<put name="menu" value="/WEB-INF/jspf/menu.jsp" />
+	</definition>
+	
+	<!-- Consultas  -->
+	<definition name=".ConsultasInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/consultas/inventario.jsp"/>
+	</definition>
+	
+	<definition name=".Consulta0001" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/consulta0001.jsp"/>
+	</definition>
+	
+	<definition name=".ProyectosRegion" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-region.jsp"/>
+	</definition>
+
+	<definition name=".ProyectosEmpresaConvocatoria" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-empresa-convocatoria.jsp"/>
+	</definition>
+
+	<definition name=".ProyectosRepresentanteDirectorEmpresas" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-indicando-representante-director-empresas.jsp"/>
+	</definition>
+
+	<definition name=".ProyectosAprobados" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-aprobados.jsp"/>
+	</definition>
+
+	<definition name=".MontoSolicitadoPorProyecto" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/montoSolicitado-proyecto.jsp"/>
+	</definition>
+
+	<definition name=".RepresentantesProyectoEmpresa" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/representantes-proyecto-empresa.jsp"/>
+	</definition>
+	<definition name=".ProyectosCIIU" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-ciiu.jsp"/>
+	</definition>
+
+	<definition name=".ProyectosProvincia" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-provincia.jsp"/>
+	</definition>
+
+	<definition name=".ProyectosCIIUResolucion" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-ciiuReso.jsp"/>
+	</definition>
+
+	<definition name=".ListadoEmpresa" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/empresas.jsp"/>
+	</definition>
+
+	<definition name=".ProyectosRechazados" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-rechazados.jsp"/>
+	</definition>
+
+	<definition name=".ProyectosEvaluadores" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-evaluadores.jsp"/>
+	</definition>
+
+	<definition name=".EvaluacionesInstitucion" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/evaluaciones-institucion.jsp"/>
+	</definition>
+	
+	<definition name=".ProyectosDatosEmpresa" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos-datos-empresa.jsp"/>
+	</definition>
+
+	<definition name=".Proyectos" extends=".consultaDef">
+		<put name="body" value="/jsp/consultas/proyectos.jsp"/>
+	</definition>
+
+	
+	<!-- Reportes -->
+	<definition name=".ReportesInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/consultas/reportes/inventario.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteSituacionConvocatoria" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/situacion-convocatoria.jsp"/>
+	</definition>
+
+	<definition name=".ReporteProyectoInstrumentoAnioFuenteFinanciamiento" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/proyectos-instrumento-anio-fuenteFinanciamiento.jsp"/>
+	</definition>
+
+	<definition name=".ReporteEmpresasNuevas" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/empresas-nuevas.jsp"/>
+	</definition>
+
+	<definition name=".ReporteEmpresasAntiguas" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/empresas-antiguas.jsp"/>
+	</definition>
+
+	<definition name=".ReporteProyectosAdmitidos" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/proyectos-admitidos.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectoAprobado" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/proyectos-aprobados.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectoProvinciaAprobado" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/proyectos-aprobados-provincias.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectoProvinciaEntidad" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/proyectos-aprobados-provincias.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectoAdjudicadoRubro" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/proyectos-adjudicados-rubro.jsp"/>
+	</definition>	
+	
+	<definition name=".ReporteSituacionIdeaProyecto" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/situacion-ideasproyecto.jsp"/>
+	</definition>
+
+	<definition name=".ReporteConsejeriasDatosProyecto" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/consejerias-datos.jsp"/>
+	</definition>
+
+	<definition name=".ReporteConsejeriasCantidadProyecto" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/consejerias-cantidad.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectosSinRendicion" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/alerta-por-demora-proyectos-sin-rendicion.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectosConRendicionDemorada" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/alerta-por-demora-proyectos-con-rendicion-demorada.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectosConDemoraEnDesembolsos" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/alerta-por-demora-proyectos-con-demora-en-desembolsos.jsp"/>
+	</definition>
+	
+	<definition name=".ReporteProyectosConRendicionPendiente" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/alerta-por-demora-proyectos-con-rendicion-pendiente.jsp"/>
+	</definition>
+	
+	<definition name=".FacturacionPorEmpresa" extends=".reporteDef">
+		<put name="body" value="/jsp/consultas/reportes/facturacion-por-empresa.jsp"/>
+	</definition>
+
+</tiles-definitions>
+
+
+
+

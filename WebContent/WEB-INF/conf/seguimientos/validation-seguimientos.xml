@@ -1,0 +1,317 @@
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN" "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+<form-validation>
+	<formset>
+		<form name="SeguimientoEditarDynaForm">
+			<field property="_esFinanciero" depends="validwhen">
+				<arg bundle="labels" key="app.label.tipo" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>( ((*this* != null) and (*this* != 'false')) or (esTecnico != null) )</var-value>
+			  	</var>
+			</field>			
+			<field property="esTecnico" depends="validwhen">
+				<arg bundle="labels" key="app.label.tipo" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>((*this* != null) or ((_esFinanciero != null) and (_esFinanciero != 'false')) )</var-value>
+			  	</var>
+			</field>
+			<field property="descripcion" depends="required">
+				<arg bundle="labels" key="app.label.descripcion" position="0" />
+			</field>
+			<field property="observaciones" depends="required">
+				<arg bundle="labels" key="app.label.observaciones" position="0" />
+			</field>
+		</form>	
+		
+		<form name="RendicionCuentasANREditarDynaForm">
+			<field property="idRubro" depends="required">
+				<arg bundle="labels" key="app.label.rubro" position="0" />
+			</field>
+			<field property="fecha" depends="date,required">			
+				<arg bundle="labels" key="app.label.fecha" position="0" />
+			</field>
+			<field property="sueldoMensual" depends="currency">			
+				<arg bundle="labels" key="app.label.sueldoMensual" position="0" />
+			</field>
+			<field property="costoTotalMensual" depends="currency">			
+				<arg bundle="labels" key="app.label.sueldoMensual" position="0" />
+			</field>
+			<field property="montoParte" depends="importe">			
+				<arg bundle="labels" key="app.label.montoParte" position="0" />
+			</field>
+			<field property="montoContraparte" depends="importe">			
+				<arg bundle="labels" key="app.label.montoContraparte" position="0" />
+			</field>
+			<field property="mesesParticipacion" depends="numPos">			
+				<arg bundle="labels" key="app.label.mesesParticipacion" position="0" />
+			</field>
+			<field property="porcentajeDedicacion" depends="porcentaje">
+				<arg bundle="labels" key="app.label.porcentajeDedicacion" position="0" />
+			</field>
+		</form>
+		<form name="RendicionCuentasCFEditarDynaForm">
+			<field property="idRubro" depends="required">
+				<arg bundle="labels" key="app.label.rubro" position="0" />
+			</field>
+			<field property="fecha" depends="date,required">			
+				<arg bundle="labels" key="app.label.fecha" position="0" />
+			</field>
+			<field property="sueldoMensual" depends="currency">			
+				<arg bundle="labels" key="app.label.sueldoMensual" position="0" />
+			</field>
+			<field property="costoTotalMensual" depends="currency">			
+				<arg bundle="labels" key="app.label.sueldoMensual" position="0" />
+			</field>
+			<field property="montoTotal" depends="importe">			
+				<arg bundle="labels" key="app.label.montoTotal" position="0" />
+			</field>
+			<field property="mesesParticipacion" depends="numPos">			
+				<arg bundle="labels" key="app.label.mesesParticipacion" position="0" />
+			</field>
+			<field property="porcentajeDedicacion" depends="porcentaje">			
+				<arg bundle="labels" key="app.label.porcentajeDedicacion" position="0" />
+			</field>
+		</form>
+
+		<form name="EditarEvaluacionSeguimientoDynaForm">
+			<field property="fecha" depends="date,required">
+				<arg bundle="labels" key="app.label.fechaEvaluacion"/>
+			</field>
+			<field property="aceptada" depends="required">
+				<arg bundle="labels" key="app.label.resultado"/>
+			</field>
+			<field property="fundamentacion" depends="required,maxLength">
+				<arg bundle="labels" key="app.label.fundamentacion"/>
+				<var>
+					<var-name>maxLength</var-name>
+					<var-value>100000</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="EditarMontosRendicionCuentasANRDynaForm">
+			<field property="montoParteEvaluacion" depends="required,importe">
+				<arg bundle="labels" key="app.label.montoParteAprobado"/>
+			</field>
+			<field property="montoContraparteEvaluacion" depends="required,importe">
+				<arg bundle="labels" key="app.label.montoContraparteAprobado"/>
+			</field>
+			<field property="observaciones" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>		
+
+		<form name="EditarMontosGestionDynaForm">
+			<field property="montoParteGestion" depends="required,importe">
+				<arg bundle="labels" key="app.label.montoParteGestionado"/>
+			</field>
+			<field property="montoContraparteGestion" depends="required,importe">
+				<arg bundle="labels" key="app.label.montoContraparteGestionado"/>
+			</field>
+			<field property="montoTotalGestion" depends="required,importe">
+				<arg bundle="labels" key="app.label.montoTotalGestionado"/>
+			</field>
+			<field property="observaciones" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>			
+		<form name="EditarMontosRendicionCuentasCFDynaForm">
+			<field property="montoTotalEvaluacion" depends="required,importe">
+				<arg bundle="labels" key="app.label.montoAprobado"/>
+			</field>
+			<field property="observaciones" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>		
+		
+		<form name="EditarDatosGeneralesGestionPagoDynaForm">
+			<field property="estado" depends="required">
+				<arg bundle="labels" key="app.label.resultado"/>
+			</field>
+			<field property="observacion" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>			
+
+		<form name="DesignarEvaluadorDynaForm">
+			<field property="idPersonaEvaluador" depends="required">
+				<arg bundle="labels" key="app.label.evaluador"/>
+			</field>
+			<field property="fechaAsignacionEvaluador" depends="required,date">
+				<arg bundle="labels" key="app.label.fecha"/>
+			</field>			
+			<field property="descripcionAsignacionEvaluador" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>	
+		
+		<form name="CargarFundamentacionDynaForm">
+			<field property="fechaFundamentacion" depends="required,date">
+				<arg bundle="labels" key="app.label.fecha"/>
+			</field>			
+			<field property="descripcionFundamentacion" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.fundamentacion"/>
+			</field>
+		</form>	
+
+		<form name="EditarResultadoFontarDynaForm">
+			<field property="resultadoFontar" depends="required">
+				<arg bundle="labels" key="app.label.resultado"/>
+			</field>			
+			<field property="proveedor" depends="validwhen">
+				<arg bundle="labels" key="app.label.proveedor" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoFontar == 'NO_AUTORIZADO') or (resultadoFontar == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>			
+			<field property="idMoneda" depends="validwhen">
+				<arg bundle="labels" key="app.label.moneda" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoFontar == 'NO_AUTORIZADO') or (resultadoFontar == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>			
+			<field property="montoFontar" depends="validwhen">
+				<arg bundle="labels" key="app.label.monto_SinMoneda" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoFontar == 'NO_AUTORIZADO') or (resultadoFontar == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>
+
+		</form>	
+		
+		<form name="EditarResultadoUffaDynaForm">
+			<field property="resultadoUffa" depends="required">
+				<arg bundle="labels" key="app.label.resultado"/>
+			</field>			
+			<field property="proveedor" depends="validwhen">
+				<arg bundle="labels" key="app.label.proveedor" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoUffa == 'NO_AUTORIZADO') or (resultadoUffa == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>			
+			<field property="idMoneda" depends="validwhen">
+				<arg bundle="labels" key="app.label.moneda" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoUffa == 'NO_AUTORIZADO') or (resultadoUffa == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>			
+			<field property="montoUffa" depends="validwhen">
+				<arg bundle="labels" key="app.label.monto_SinMoneda" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoUffa == 'NO_AUTORIZADO') or (resultadoUffa == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>	
+		</form>			
+
+		<form name="EditarResultadoBidDynaForm">
+			<field property="resultadoBid" depends="required">
+				<arg bundle="labels" key="app.label.resultado"/>
+			</field>	
+			<field property="proveedor" depends="validwhen">
+				<arg bundle="labels" key="app.label.proveedor" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoBid == 'NO_AUTORIZADO') or (resultadoBid == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>						
+			<field property="idMoneda" depends="validwhen">
+				<arg bundle="labels" key="app.label.moneda" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoBid == 'NO_AUTORIZADO') or (resultadoBid == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>			
+			<field property="montoBid" depends="validwhen">
+				<arg bundle="labels" key="app.label.monto_SinMoneda" position="0" />
+				<msg name="validwhen" key="errors.required" />
+			  	<var>
+			    	<var-name>test</var-name>
+					<var-value>(((resultadoBid == 'NO_AUTORIZADO') or (resultadoBid == 'DESIERTO')) or (*this* != null))</var-value>
+			  	</var>
+			</field>			
+		</form>	
+		
+		<form name="RemitirUffaDynaForm">
+			<field property="fechaRemisionUffa" depends="required,date">
+				<arg bundle="labels" key="app.label.fecha"/>
+			</field>			
+			<field property="observacionRemisionUffa" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>	
+
+		<form name="RemitirBidDynaForm">
+			<field property="fechaRemisionBid" depends="required,date">
+				<arg bundle="labels" key="app.label.fecha"/>
+			</field>			
+			<field property="observacionRemisionBid" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>	
+
+		<form name="EditarEvaluacionDynaForm">
+			<field property="fechaInicial" depends="required,date">
+				<arg bundle="labels" key="app.label.fechaInicial" position="0" />
+			    <var> 
+			        <var-name>datePattern</var-name> 
+			        <var-value>${dateFormat}</var-value> 
+	   	        </var> 						
+			</field>
+			<field property="fechaEntregaComprometida" depends="required,date,dateGreaterThan">
+				<arg bundle="labels" key="app.label.fechaEntrega" position="0" />
+				<arg bundle="labels" key="app.label.fechaInicial" position="1" />				
+				<msg name="dateGreaterThan" key="errors.mayorIgualDate"/>
+				<var>
+			    	<var-name>datePattern</var-name>
+			    	<var-value>${dateFormat}</var-value>
+			  	</var>
+			  	<var>
+                    <var-name>dateGreaterThan</var-name>
+                    <var-value>fechaInicial</var-value>
+                </var>			
+			</field>		
+			<field property="observacion" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones"/>
+			</field>
+		</form>	
+		<form name="EvaluarAutorizacionPagoSeguimientoDynaForm">
+			<field property="fechaEvaluacion" depends="required,date">
+				<arg bundle="labels" key="app.label.fechaEvaluacion" position="0" />
+			    <var> 
+			        <var-name>datePattern</var-name> 
+			        <var-value>${dateFormat}</var-value> 
+	   	        </var> 						
+			</field>
+			<field property="autorizaEvaluacion" depends="required">
+				<arg bundle="labels" key="app.label.autorizaEvaluacion"/>
+			</field>
+		</form>
+		<form name="ModificarCamposDeAnalisisDeGastosDynaForm">
+			<field property="valor" depends="required,importe">
+				<arg bundle="labels" key="app.label.monto" position="0" />
+			</field>
+		</form>	
+	</formset>
+</form-validation>	
+
+
+
+
+

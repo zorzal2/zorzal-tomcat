@@ -1,0 +1,122 @@
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<!-- === Form Bean Definitions -->
+	<form-beans>
+
+		<form-bean name="LogonCriptoDynaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="usuario" type="java.lang.String" />
+			<form-property name="criptoPassword" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="ModificarPasswordDynaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="oldPassword" type="java.lang.String" />
+			<form-property name="newPassword" type="java.lang.String" />
+			<form-property name="confirmNewPassword" type="java.lang.String" />
+		</form-bean>
+
+	</form-beans>
+
+
+	<!-- === Action Mapping Definitions -->
+	<action-mappings>
+	
+		<!-- Criptografía -->
+ 		<action path="/LogonCripto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LogonCriptoDynaForm" 
+			parameter="logon"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".LogonCriptoDef">
+			</forward>
+		</action> 
+		
+		<action path="/LogonCriptoValidate"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LogonCriptoDynaForm" 
+			parameter="validateLogon"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success" 
+				path="/jsp/cripto/logonSuccess.jsp">
+			</forward>
+			<forward 
+				name="invalid" 
+				path="/LogonCripto.do">
+			</forward>
+		</action> 
+
+		<action path="/TestDecript"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LogonCriptoDynaForm" 
+			parameter="decript"
+			scope="request">
+			<forward 
+				name="success" 
+				path=".LogonCriptoDef">
+			</forward>
+		</action> 
+
+		<action path="/TestEncript"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LogonCriptoDynaForm" 
+			parameter="encript"
+			scope="request">
+			<forward 
+				name="success" 
+				path=".LogonCriptoDef">
+			</forward>
+		</action> 		
+		
+ 		<action path="/ChangePassword"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ModificarPasswordDynaForm" 
+			parameter="changePassword"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".PopUpModificarPasswordDef">
+			</forward>
+		</action> 		
+		
+ 		<action path="/ChangePasswordValidate"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ModificarPasswordDynaForm" 
+			parameter="validateChangedPassword"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success" 
+				path="/jsp/util/close.jsp">
+			</forward>
+			<forward 
+				name="invalid" 
+				path="/ChangePassword.do">
+			</forward>
+		</action>
+		
+ 		<action path="/LogoutCripto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LogonCriptoDynaForm" 
+			parameter="logout"
+			scope="request">
+			<forward 
+				name="success" 
+				path="/jsp/cripto/logoutCripto.jsp">
+			</forward>
+		</action> 
+
+	</action-mappings>
+</struts-config>
+
+
+
+
+

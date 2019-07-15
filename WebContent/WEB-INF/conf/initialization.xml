@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean name="initializationService" class="com.fontar.initialization.InitializeApplicationService">
+			<property name="commands">
+				<list>
+					<ref bean="permissionCreationCommand"/>
+					<ref bean="groupCreationCommand"/>
+					<ref bean="userCreationCommand"/>
+				</list>
+			</property>
+	</bean>
+	
+	<bean name="permissionCreationCommand" class="com.fontar.initialization.PermissionCreationCommand">
+		<property name="permisoDao" ref="permisoLdapDao"/>
+		<property name="permissionMap">
+			<map>
+				<entry key="General">
+					<list>
+						<value>SUPERUSUARIO</value>
+					</list>
+				</entry>
+				<entry key="Instrumento">
+					<list>
+						<value>LLAMADOSCONVOCATORIA-INVENTARIO</value>
+						<value>LLAMADOSCONVOCATORIA-VISUALIZAR</value>
+						<value>LLAMADOSCONVOCATORIA-AGREGAR</value>
+						<value>LLAMADOSCONVOCATORIA-EDITAR</value>
+						<value>LLAMADOSCONVOCATORIA-ELIMINAR</value>
+						<value>LLAMADOSCONVOCATORIAADJUNTOS-EDITAR</value>
+						<value>LLAMADOSCONVOCATORIAADJUNTOS-VIZUALIZAR</value>
+<!--  -->						
+						<value>PRESENTACIONCONVOCATORIA-INVENTARIO</value>
+						<value>PRESENTACIONCONVOCATORIA-VISUALIZAR</value>
+						<value>PRESENTACIONCONVOCATORIA-AGREGAR</value>
+						<value>PRESENTACIONCONVOCATORIA-EDITAR</value>
+						<value>PRESENTACIONCONVOCATORIA-ELIMINAR</value>
+<!--  -->						
+						<value>VENTANILLAPERMANENTE-INVENTARIO</value>
+						<value>VENTANILLAPERMANENTE-VISUALIZAR</value>
+						<value>VENTANILLAPERMANENTE-AGREGAR</value>
+						<value>VENTANILLAPERMANENTE-EDITAR</value>
+						<value>VENTANILLAPERMANENTE-ELIMINAR</value>
+					</list>	
+				</entry>
+				<entry key="IdeaProyecto">
+					<list>
+						<value>IDEASPROYECTO-INVENTARIO</value>
+						<value>IDEASPROYECTO-VISUALIZAR</value>
+						<value>IDEASPROYECTO-AGREGAR</value>
+						<value>IDEASPROYECTO-EDITAR</value>
+						<value>IDEASPROYECTO-ADMINISTRAR-BITACORA</value>						
+<!--  -->
+						<value>WF-IDEA-PROYECTO-CERRAR</value>
+						<value>WF-IDEA-PROYECTO-AGREGAR-EVALUACION</value>
+						<value>WF-IDEA-PROYECTO-EVALUAR-POR-JUNTA</value>
+						<value>WF-IDEA-PROYECTO-RECONSIDERACION-RECONSIDERAR</value>
+						<value>WF-IDEA-PROYECTO-CARGAR-PROYECTO</value>
+					</list>	
+				</entry>		
+<!--  -->
+				<!--entry key="IdeaProyectoPITEC">
+					<list>
+						<value>IDEASPROYECTOPITEC-INVENTARIO</value>
+						<value>IDEASPROYECTOPITEC-VISUALIZAR</value>
+						<value>IDEASPROYECTOPITEC-AGREGAR</value>
+						<value>IDEASPROYECTOPITEC-EDITAR</value>
+						
+						<value>WF-IDEA-PROYECTO-PITEC-ADMISION</value>
+						<value>WF-IDEA-PROYECTO-PITEC-READMISION</value>
+						<value>WF-IDEA-PROYECTO-PITEC-AGREGAR-EVALUACION</value>
+						<value>WF-IDEA-PROYECTO-PITEC-EDITAR-PRESUPUESTO</value>
+						<value>WF-IDEA-PROYECTO-PITEC-CERRAR</value>
+						<value>WF-IDEA-PROYECTO-PITEC-ANULAR</value>
+						<value>WF-IDEA-PROYECTO-PITEC-FINALIZAR-CONTROL</value>
+						<value>WF-IDEA-PROYECTO-PITEC-PROXIMA-ETAPA</value>
+						<value>WF-IDEA-PROYECTO-PITEC-CARGAR-ALICUOTA</value>
+						<value>WF-IDEA-PROYECTO-PITEC-FINALIZAR-RECONSIDERACION</value>
+					</list>	
+				</entry-->
+				<entry key="Proyecto">
+					<list>
+						<value>PROYECTOS-CARGAR-DESDE-EXCEL</value>
+						<value>PROYECTOS-INVENTARIO</value>
+						<value>PROYECTOS-VISUALIZAR</value>
+						<value>PROYECTOS-EDITAR</value>
+						<value>PROYECTOS-CAMBIAR-RECOMENDACION</value>
+						<value>PROYECTOS-VISUALIZAR-RECOMENDACION</value>
+						<value>PROYECTOS-ADMINISTRAR-BITACORA</value>
+						<value>PROYECTOS-CARGAR</value>
+						<value>PROYECTOS-CRONOGRAMA-INVENTARIO</value>
+						<value>PROYECTOS-CRONOGRAMA-AGREGAR</value>
+						<value>PROYECTOS-CRONOGRAMA-EDITAR</value>
+						<value>PROYECTOS-CRONOGRAMA-ELIMINAR</value>
+						<value>PROYECTOS-CRONOGRAMA-PAGAR</value>
+<!--  -->
+						<value>WF-PROYECTO-ADMISION</value>
+						<value>WF-PROYECTO-SOLICITAR-READMISION</value>
+						<value>WF-PROYECTO-EVALUAR-READMISION</value>
+						<value>WF-PROYECTO-EDITAR-PRESUPUESTO</value>
+						<value>WF-PROYECTO-PROXIMA-ETAPA</value>
+						<value>WF-PROYECTO-AGREGAR-EVALUACION</value>
+						<value>WF-PROYECTO-FINALIZAR-CONTROL</value>
+						<value>WF-PROYECTO-SOLICITAR-RECONSIDERACION</value>
+						<value>WF-PROYECTO-ANALIZAR-RECONSIDERACION</value>
+						<value>WF-PROYECTO-FINALIZAR-RECONSIDERACION</value>
+						<value>WF-PROYECTO-RECONSIDERACION-RECONSIDERAR</value>
+						<value>WF-PROYECTO-CARGAR-ALICUOTA</value>
+						<value>WF-PROYECTO-FIRMAR-CONTRATO</value>
+						<value>WF-PROYECTO-AGREGAR-SEGUIMIENTO</value>
+						<value>WF-PROYECTO-CERRAR</value>
+						<value>WF-PROYECTO-ANULAR</value>
+						<value>WF-PROYECTO-FINALIZAR</value>
+						<value>WF-PROYECTO-PEDIR-AUTORIZACION</value>
+						<value>WF-PROY-HISTORICO-COMPLETAR-DATOS-INICIALES</value>
+					</list>	
+				</entry>		
+				<!-->entry key="ProyectoPITEC">
+					<list>
+						<value>WF-PROYECTO-PITEC-ADMISION</value>
+						<value>WF-PROYECTO-PITEC-READMISION</value>
+						<value>WF-PROYECTO-PITEC-AGREGAR-EVALUACION</value>
+						<value>WF-PROYECTO-PITEC-EDITAR-PRESUPUESTO</value>
+						<value>WF-PROYECTO-PITEC-CERRAR</value>
+						<value>WF-PROYECTO-PITEC-ANULAR</value>
+						<value>WF-PROYECTO-PITEC-FINALIZAR-CONTROL</value>
+						<value>WF-PROYECTO-PITEC-PROXIMA-ETAPA</value>
+						<value>WF-PROYECTO-PITEC-CARGAR-ALICUOTA</value>
+						<value>WF-PROYECTO-PITEC-FINALIZAR-RECONSIDERACION</value>
+					</list>	
+				</entry-->		
+				<entry key="EvaluacionProyecto">
+					<list>
+						<value>EVALUACIONES-INVENTARIO</value>
+						<value>MISEVALUACIONESGENERALES-INVENTARIO</value>
+						<value>EVALUACIONES-VISUALIZAR</value>
+						<value>EVALUACIONES-EDITAR</value>
+<!--  -->
+						<value>WF-EVALUACION-PROYECTO-AUTORIZAR</value>
+						<value>WF-EVALUACION-PROYECTO-CARGAR-RESULTADO</value>
+						<value>WF-EVALUACION-PROYECTO-CONFIRMAR</value>
+						<value>WF-EVALUACION-PROYECTO-ANULAR</value>
+					</list>
+				</entry>
+				<entry key="Seguimiento">
+					<list>
+						<value>SEGUIMIENTOS-INVENTARIO</value>
+						<value>SEGUIMIENTOS-VISUALIZAR</value>
+						<value>SEGUIMIENTOS-EDITAR</value>
+						<value>SEGUIMIENTOS-EDITAR-MONTOS-ANALISIS-DE-GASTOS</value>
+<!--  -->
+						<value>WF-AGREGAR-EVALUACION-SEGUIMIENTO</value>
+						<value>WF-SEGUIMIENTO-EVALUAR-AUTORIZACION-PAGO</value>
+						<value>WF-SEGUIMIENTO-EVALUAR-GESTION-PAGO</value>
+						<value>WF-SEGUIMIENTO-FINALIZAR-CONTROL</value>
+						<value>WF-SEGUIMIENTO-ANULAR</value>
+						<value>WF-SEGUIMIENTO-CERRAR</value>
+					</list>	
+				</entry>
+				<entry key="EvaluacionSeguimiento">
+					<list>
+						<value>EVALUACIONESSEGUIMIENTO-INVENTARIO</value>
+						<value>MISEVALUACIONESDESEGUIMIENTO-INVENTARIO</value>
+						<value>EVALUACIONESSEGUIMIENTO-VISUALIZAR</value>
+						<value>EVALUACIONESSEGUIMIENTO-EDITAR</value>
+<!--  -->
+						<value>WF-EVALUACION-SEGUIMIENTO-CARGAR-RESULTADO</value>
+						<value>WF-EVALUACION-SEGUIMIENTO-CONFIRMAR</value>
+						<value>WF-EVALUACION-SEGUIMIENTO-ANULAR</value>
+					</list>
+				</entry>
+				<entry key="Paquete">
+					<list>
+						<value>PAQUETES-INVENTARIO</value>
+						<value>PAQUETES-EDITAR</value>
+						<value>PAQUETES-AGREGAR</value>
+						<value>PAQUETES-VISUALIZAR</value>
+<!--  -->
+						<value>WF-PAQUETE-MODIFICAR</value>
+						<value>WF-PAQUETE-EVALUAR</value>
+						<value>WF-PAQUETE-CONFIRMAR</value>
+						<value>WF-PAQUETE-ANULAR</value>
+<!--  -->						
+						<value>WF-PAQUETE-DIRECTORIO-MODIFICAR</value>
+						<value>WF-PAQUETE-DIRECTORIO-CONTROLAR</value>
+						<value>WF-PAQUETE-DIRECTORIO-EVALUAR</value>
+						<value>WF-PAQUETE-DIRECTORIO-CONFIRMAR</value>
+						<value>WF-PAQUETE-DIRECTORIO-ANULAR</value>
+					</list>	
+				</entry>
+				<entry key="Notificacion">
+					<list>
+						<value>NOTIFICACIONES-INVENTARIO</value>
+						<value>WF-NOTIFICACION-ENVIAR</value>
+						<value>WF-NOTIFICACION-RECIBIR-ACUSE</value>
+						<value>WF-NOTIFICACION-CERRAR</value>
+						<value>WF-NOTIFICACION-ANULAR</value>
+					</list>	
+				</entry>
+				<entry key="ControlAdquisicion">
+					<list>
+						<value>PROCEDIMIENTOS-INVENTARIO</value>
+						<value>PROCEDIMIENTOS-VISUALIZAR</value>
+						<value>WF-CONTROL-ADQUISICION-DESIGNAR-EVALUADOR-TECNICO</value>
+						<value>WF-CONTROL-ADQUISICION-CARGAR-FUNDAMENTACION-EVALUADOR</value>
+						<value>WF-CONTROL-ADQUISICION-CARGAR-RESULTADO</value>
+						<value>WF-CONTROL-ADQUISICION-REMITIR-UFFA</value>
+						<value>WF-CONTROL-ADQUISICION-REMITIR-BID</value>
+						<value>WF-CONTROL-ADQUISICION-CARGAR-RESULTADO-UFFA</value>
+						<value>WF-CONTROL-ADQUISICION-CARGAR-RESULTADO-BID</value>
+						<value>WF-CONTROL-ADQUISICION-GENERAR-PEDIDO-AUTORIZACION</value>
+						<value>PAC-MODIFICAR</value>
+						<value>PAC-ANULAR</value>
+						<value>PAC-DESEMBOLSO</value>
+						<value>PAC-PAGO</value>
+						<value>PAC-PATRIMONIO</value>
+						<value>PAC-HISTORIA-VISUALIZAR</value>
+					</list>	
+				</entry>				
+				
+				<entry key="Workflow">
+					<list>
+						<value>BANDEJAENTRADA-INVENTARIO</value>
+						<value>PROCESOSDEFINIDOS-INVENTARIO</value>
+					</list>	
+				</entry>
+				<entry key="Configuracion">
+					<list>
+						<value>PERSONAS-INVENTARIO</value>
+						<value>PERSONAS-AGREGAR</value>
+						<value>PERSONAS-EDITAR</value>
+						<value>PERSONAS-VISUALIZAR</value>
+						<value>PERSONAS-ELIMINAR</value>
+						
+						<value>MONEDAS-INVENTARIO</value>
+						<value>MONEDAS-AGREGAR</value>
+						<value>MONEDAS-EDITAR</value>
+						
+						<value>COTIZACIONES-INVENTARIO</value>
+						<value>COTIZACIONES-AGREGAR</value>
+						<value>COTIZACIONES-EDITAR</value>
+						<value>COTIZACIONES-ELIMINAR</value>
+<!--  -->
+						<value>COMISIONES-INVENTARIO</value>
+						<value>COMISIONES-AGREGAR</value>
+						<value>COMISIONES-EDITAR</value>
+<!--  -->
+						<value>ENTIDADES-INVENTARIO</value>
+						<value>ENTIDADES-AGREGAR</value>
+						<value>ENTIDADES-EDITAR</value>
+						<value>ENTIDADES-ELIMINAR</value>
+						<value>ENTIDADES-VISUALIZAR</value>
+<!--  -->
+						<value>INSTRUMENTOS-INVENTARIO</value>
+						<value>INSTRUMENTOS-AGREGAR</value>
+						<value>INSTRUMENTOS-EDITAR</value>
+<!--  -->
+						<value>CRITERIOS-INVENTARIO</value>
+						<value>CRITERIOS-AGREGAR</value>
+						<value>CRITERIOS-EDITAR</value>
+<!--  -->
+						<value>FUENTES FINANCIAMIENTO-INVENTARIO</value>
+						<value>FUENTES FINANCIAMIENTO-AGREGAR</value>
+						<value>FUENTES FINANCIAMIENTO-EDITAR</value>
+<!--  -->
+						<value>JURISDICCIONES-INVENTARIO</value>
+						<value>JURISDICCIONES-AGREGAR</value>
+						<value>JURISDICCIONES-EDITAR</value>
+<!--  -->
+						<value>REGIONES-INVENTARIO</value>
+						<value>REGIONES-AGREGAR</value>
+						<value>REGIONES-EDITAR</value>
+<!--  -->
+						<value>FUENTESFINANCIAMIENTO-INVENTARIO</value>
+						<value>FUENTESFINANCIAMIENTO-AGREGAR</value>
+						<value>FUENTESFINANCIAMIENTO-EDITAR</value>
+<!--  -->
+						<value>TIPOSPROYECTO-INVENTARIO</value>
+						<value>TIPOSPROYECTO-AGREGAR</value>
+						<value>TIPOSPROYECTO-EDITAR</value>
+<!--  -->						
+						<value>ESPECIALIDADESEVALUADOR-INVENTARIO</value>
+						<value>ESPECIALIDADESEVALUADOR-AGREGAR</value>
+						<value>ESPECIALIDADESEVALUADOR-EDITAR</value>
+<!--  -->
+						<value>CARTERA-INVENTARIO</value>
+						<value>CARTERA-AGREGAR</value>
+						<value>CARTERA-EDITAR</value>
+<!--  -->
+						<value>CONDICIONTRIBUTARIA-INVENTARIO</value>
+						<value>CONDICIONTRIBUTARIA-AGREGAR</value>
+						<value>CONDICIONTRIBUTARIA-EDITAR</value>
+					</list>
+				</entry>					
+				<entry key="Seguridad">
+					<list>
+						<value>USUARIOS-INVENTARIO</value>
+						<value>USUARIOS-AGREGAR</value>
+						<value>USUARIOS-EDITAR</value>
+						<value>USUARIOS-ELIMINAR</value>
+<!--  -->
+						<value>GRUPOS-INVENTARIO</value>
+						<value>GRUPOS-AGREGAR</value>
+						<value>GRUPOS-EDITAR</value>
+						<value>GRUPOS-ELIMINAR</value>
+<!--  -->						
+						<value>ENCRIPTACION</value>
+					</list>	
+				</entry>
+				<entry key="Reportes">
+					<list>
+						<value>REPORTES-INVENTARIO</value>
+						<value>REPORTE-SITUACION-ESTADO-CONVOCATORIA</value>
+						<value>REPORTE-SITUACION-ESTADO-IDEAPROYECTO</value>
+						<value>REPORTE-EMPRESAS-NUEVAS</value>
+						<value>REPORTE-EMPRESAS-ANTIGUAS</value>
+						<value>REPORTE-PROYECTOS-ADMITIDOS</value>
+						<value>REPORTE-PROYECTOS-APROBADOS</value>
+						<value>REPORTE-PROYECTOS-APROBADOS-PROVINCIAS</value>						
+						<value>REPORTE-PROYECTOS-PROVINCIAS-ENTIDADES</value>						
+						<value>REPORTE-PROYECTOS-ADJUDICADOS-RUBRO</value>
+						<value>REPORTE-PROYECTOS-INSTRUMENTO-ANIO-FUENTEFINANCIAMIENTO</value>
+						<value>REPORTE-DATOS-CONSEJERIAS</value>
+						<value>REPORTE-CANTIDAD-CONSEJERIAS</value>
+						<value>REPORTE-PROYECTOS-SIN-RENDICION</value>
+						<value>REPORTE-PROYECTOS-CON-RENDICION-DEMORADA</value>
+						<value>REPORTE-PROYECTOS-CON-DEMORA-EN-DESEMBOLSOS</value>
+						<value>REPORTE-PROYECTOS-CON-RENDICION-PENDIENTE</value>
+						<value>REPORTE-FACTURACION-POR-EMPRESA</value>
+					</list>
+				</entry>
+				<entry key="Consultas">
+					<list>
+						<value>CONSULTAS-INVENTARIO</value>
+						<value>CONSULTA-PROYECTOS-REGION</value>
+						<value>CONSULTA-PROYECTOS-EMPRESA-CONVOCATORIA</value>
+						<value>CONSULTA-PROYECTOS-CIIU</value>
+						<value>CONSULTA-PROYECTOS-EVALUADORES</value>
+						<value>CONSULTA-PROYECTOS-INDICANDO-REPRESENTANTE-DIRECTOR-EMPRESAS</value>
+						<value>CONSULTA-PROYECTOS-PROVINCIAS</value>
+						<value>CONSULTA-PROYECTOS-APROBADOS</value>
+						<value>CONSULTA-PROYECTOS-CIIU-RESOLUCION</value>
+						<value>CONSULTA-PROYECTOS</value>
+						<value>CONSULTA-EVALUACIONES-INSTITUCION</value>
+						<value>CONSULTA-REPRESENTANTES-PROYECTO-EMPRESA</value>
+						<value>CONSULTA-MONTOSOLICITADO-PROYECTO</value>
+						<value>CONSULTA-PROYECTOS-RECHAZADOS</value>
+						<value>CONSULTA-EMPRESAS</value>
+						<value>CONSULTA-PROYECTOS-DATOS-EMPRESA</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean name="userCreationCommand" class="com.fontar.initialization.UserCreationCommand">
+		<property name="usuarioService" ref="usuarioService"/>
+		<property name="grupoService" ref="grupoService"/>
+	</bean>
+	
+	
+	<bean name="groupCreationCommand" class="com.fontar.initialization.GroupCreationCommand">
+		<property name="grupoService" ref="grupoService"/>
+	</bean>
+	
+</beans>

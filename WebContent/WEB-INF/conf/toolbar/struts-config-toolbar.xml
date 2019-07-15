@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+<!-- ================================================ Form Bean Definitions -->
+
+    <form-beans>
+	    <form-bean name="ToolbarPersistentFiltersForm" type="com.pragma.toolbar.web.form.ToolbarPersistentFiltersForm">
+			<form-property name="userId" type="java.lang.String"/>
+			<form-property name="toolbarId" type="java.lang.String"/>
+			<form-property name="filtersXML" type="java.lang.String"/>
+		</form-bean>
+		
+	    <form-bean name="ToolbarSortCriteriaForm" type="com.pragma.toolbar.web.form.ToolbarSortCriteriaForm">
+			<form-property name="userId" type="java.lang.String"/>
+			<form-property name="toolbarId" type="java.lang.String"/>
+			<form-property name="criteriaXML" type="java.lang.String"/>
+		</form-bean>		
+		
+	    <form-bean name="ToolbarPersistentColumnsForm" type="com.pragma.toolbar.web.form.ToolbarPersistentColumnsForm"/>
+	    
+	    <form-bean name="ToolbarPageSizeForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="userId" type="java.lang.String"/>
+			<form-property name="toolbarId" type="java.lang.String"/>
+			<form-property name="customValue" type="java.lang.Integer"/>
+			<form-property name="pageSize" type="java.lang.Integer"/>
+			<form-property name="pageSizeCustom" type="java.lang.Integer"/>
+	    </form-bean>
+
+    </form-beans>
+
+
+<!-- =========================================== Action Mapping Definitions -->
+
+    <action-mappings>
+    
+       <!-- Ordenamiento -->
+        <action path="/ToolbarSortCriterionGetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarSortCriteriaAction"
+        		name="ToolbarSortCriteriaForm"
+        		parameter="getAll">
+			<forward name="success" path="/jsp/toolbar/sorting.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action>
+        <action path="/ToolbarSortCriterionSetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarSortCriteriaAction"
+        		name="ToolbarSortCriteriaForm"
+        		parameter="setAll">
+			<forward name="success" path="/jsp/toolbar/update_opener.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action>    
+        <action path="/ToolbarFilterGetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarFilterAction"
+        		name="ToolbarPersistentFiltersForm"
+        		parameter="getAll">
+			<forward name="success" path="/jsp/toolbar/filters.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action>
+        <action path="/ToolbarFilterSetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarFilterAction"
+        		name="ToolbarPersistentFiltersForm"
+        		parameter="setAll">
+			<forward name="success" path="/jsp/toolbar/update_opener.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action>
+        
+        <action path="/ToolbarColumnGetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarColumnAction"
+        		name="ToolbarPersistentColumnsForm"
+        		parameter="getAll">
+			<forward name="success" path="/jsp/toolbar/columns.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action>
+        <action path="/ToolbarColumnSetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarColumnAction"
+        		name="ToolbarPersistentColumnsForm"
+        		parameter="setAll">
+			<forward name="success" path="/jsp/toolbar/update_opener.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action> 
+        
+        <action path="/ToolbarPageSizeGetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarPageSizeAction"
+        		name="ToolbarPageSizeForm"
+        		parameter="getAll">
+			<forward name="success" path="/jsp/toolbar/page_size.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action>
+        <action path="/ToolbarPageSizeSetAll"
+        		type="com.pragma.toolbar.web.action.ToolbarPageSizeAction"
+        		name="ToolbarPageSizeForm"
+        		parameter="setAll">
+			<forward name="success" path="/jsp/toolbar/update_opener.jsp"/>
+			<forward name="failure" path="FailureDef"/>			
+        </action>        
+    </action-mappings>
+</struts-config>

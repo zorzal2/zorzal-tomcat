@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+      <bean name="/SeguimientoProyectoInventario" class="com.fontar.web.action.seguimientos.seguimientos.SeguimientoInventarioAction">
+           <property name="sessionFactory">
+                <ref bean="sessionFactory"/>
+          </property>     
+          <property name="hqlQueryString" value="from SeguimientoBean o"/>
+           <property name="idToolbar" value="seguimientoProyecto"/>     
+     </bean>
+
+	<bean name="/SeguimientoProyectoInventarioFiltrar" parent="/SeguimientoProyectoInventario"/>
+
+	<bean name="/SeguimientoInventario" class="com.fontar.web.action.seguimientos.seguimientos.InventarioSeguimientoAction">
+   		<property name="sessionFactory">
+   			<ref bean="sessionFactory"/>
+   		</property>	    
+   	
+   		<property name="hqlQueryString" value="from SeguimientoBean o"/>
+		<property name="idToolbar" value="seguimiento"/>
+
+	   	<property name="administrarInstrumentosService">
+	   		<ref bean="administrarInstrumentosService"/>
+	   	</property>		
+	</bean>
+  
+	<bean name="/SeguimientoInventarioFiltrar" parent="/SeguimientoInventario"/>  
+
+	<!-- Adjuntos Seguimiento -->
+	<bean id="AdjuntoSeguimientoActionBase"
+	      class="com.fontar.web.action.adjuntos.AdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoSeguimientoServicio"/>
+	  	</property>	     
+	</bean>
+	
+	<bean name="/SeguimientoBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+		<property name="adjuntoServicio">
+			<ref bean="adjuntoSeguimientoServicio"/>
+		</property>	     
+	</bean>	
+	
+	<bean name="/SeguimientoBeanGuardarAdjuntoAction" parent="AdjuntoSeguimientoActionBase"/>
+	<bean name="/SeguimientoBeanCargarAdjuntoAction" parent="AdjuntoSeguimientoActionBase"/>
+	<bean name="/SeguimientoBeanInventarioAdjuntoAction" parent="AdjuntoSeguimientoActionBase"/>
+	<bean name="/SeguimientoBeanEliminarAdjuntoAction" parent="AdjuntoSeguimientoActionBase"/>	
+
+	<!--  Seguimiento TAB : Agregar un Adjunto -->
+	
+	<bean id="AdjuntoSeguimientoTabActionBase"
+	      class="com.fontar.web.action.seguimientos.seguimientos.AdjuntosSeguimientoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoSeguimientoServicio"/>
+	  	</property>	     
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+	</bean>
+
+	<bean name="/SeguimientoTabInventarioAdjuntoAction" parent="AdjuntoSeguimientoTabActionBase"/>	
+	<bean name="/SeguimientoTabCargarAdjuntoAction" parent="AdjuntoSeguimientoTabActionBase"/>
+	<bean name="/SeguimientoTabGuardarAdjuntoAction" parent="AdjuntoSeguimientoTabActionBase"/>	
+	<bean name="/SeguimientoTabEliminarAdjuntoAction" parent="AdjuntoSeguimientoTabActionBase"/>	
+
+	<!-- Seguimiento TAB : Rendición de cuentas -->
+	
+	<!-- Rendición de cuentas ANR -->
+	<bean name="/RendicionCuentasANRInventario" class="com.fontar.web.action.seguimientos.rendiciones.anr.RendicionCuentasANRInventarioAction">
+	   	<property name="sessionFactory">
+	   		<ref bean="sessionFactory"/>
+	   	</property>	    
+	   	<property name="hqlQueryString" value="from RendicionCuentasBean o"/>
+	   	<property name="idToolbar" value="rendicionesANR"/>
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+	</bean>
+  
+	<bean id="AdministrarRendicionCuentasANRActionBase"
+		  class="com.fontar.web.action.seguimientos.rendiciones.anr.AdministrarRendicionCuentasANRAction" abstract="true">
+
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+
+	</bean>
+
+	<bean name="/RendicionCuentasANRAgregar" parent="AdministrarRendicionCuentasANRActionBase" />
+	<bean name="/RendicionCuentasANRGuardar" parent="AdministrarRendicionCuentasANRActionBase" />
+	<bean name="/RendicionCuentasANREditar" parent="AdministrarRendicionCuentasANRActionBase" />
+	
+    <bean name="/RendicionCuentasANRBorrar" class="com.fontar.web.action.seguimientos.rendiciones.anr.RendicionCuentasANRBorrarAction">
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+    </bean>
+
+	<bean name="/RendicionCuentasANRResumen"
+		  class="com.fontar.web.action.seguimientos.rendiciones.anr.RendicionCuentasANRResumenAction">
+
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     	  	
+	</bean>
+
+	<!-- Fin Rendicion de cuentas ANR -->
+	<!-- Rendición de cuentas CF -->
+	<bean name="/RendicionCuentasCFInventario" class="com.fontar.web.action.seguimientos.rendiciones.cf.RendicionCuentasCFInventarioAction">
+	   	<property name="sessionFactory">
+	   		<ref bean="sessionFactory"/>
+	   	</property>	    
+	   	<property name="hqlQueryString" value="from RendicionCuentasBean o"/>
+	   	<property name="idToolbar" value="rendicionesCF"/>
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+	</bean>
+  
+	<bean id="AdministrarRendicionCuentasCFActionBase"
+		  class="com.fontar.web.action.seguimientos.rendiciones.cf.AdministrarRendicionCuentasCFAction" abstract="true">
+
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+
+	</bean>
+
+	<bean name="/RendicionCuentasCFAgregar" parent="AdministrarRendicionCuentasCFActionBase" />
+	<bean name="/RendicionCuentasCFGuardar" parent="AdministrarRendicionCuentasCFActionBase" />
+	<bean name="/RendicionCuentasCFEditar" parent="AdministrarRendicionCuentasCFActionBase" />
+	
+    <bean name="/RendicionCuentasCFBorrar" class="com.fontar.web.action.seguimientos.rendiciones.cf.RendicionCuentasCFBorrarAction">
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+    </bean>
+
+	<bean name="/RendicionCuentasCFResumen"
+		  class="com.fontar.web.action.seguimientos.rendiciones.cf.RendicionCuentasCFResumenAction">
+
+	  	<property name="administrarSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     	  	
+	</bean>
+
+	<!-- Fin Rendicion de cuentas CF -->
+	
+	<bean id="AdministrarSeguimientoActionBase" class="com.fontar.web.action.seguimientos.seguimientos.AdministrarSeguimientoAction" abstract="true">
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+
+	</bean>
+
+    <bean name="/SeguimientoEditar" parent="AdministrarSeguimientoActionBase" />  
+	<bean name="/SeguimientoGuardarEdicion" parent="AdministrarSeguimientoActionBase" />	
+
+	<!-- Visualización -->
+	<bean name="/SeguimientoVisualizar" 
+		  class="com.fontar.web.action.seguimientos.seguimientos.VisualizarSeguimientoAction">		  
+
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+
+	</bean>
+
+	<!-- Anular Seguimiento -->
+  	<bean name="/AnularSeguimiento" 
+  		class="com.fontar.web.action.seguimientos.seguimientos.AnularSeguimientoAction">
+	   	<property name="wfSeguimientoServicio">
+	   		<ref bean="wfSeguimientoService"/>
+	   	</property>  		
+	</bean>
+  
+	<bean name="/AnularSeguimientoGuardar" 
+  		class="com.fontar.web.action.seguimientos.seguimientos.AnularSeguimientoAction">
+	   	<property name="wfSeguimientoServicio">
+	   		<ref bean="wfSeguimientoService"/>
+	   	</property>  		
+	</bean> 	
+
+	<!-- Análisis de Pertinencia de Gastos para un Seguimiento -->	
+	<bean name="SeguimientoAnalisisGastosBase"
+		  class="com.fontar.web.action.seguimientos.seguimientos.SeguimientoAnalisisGastosAction"
+		  abstract="true">
+		<property name="analisisGastosSeguimientoServicio">
+			<ref bean="analisisGastosSeguimientoService" />
+		</property>		
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>		
+		<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+	</bean>
+	<bean name="/SeguimientoAnalisisGastosEvaluacion" parent="SeguimientoAnalisisGastosBase" />
+	<bean name="/SeguimientoAnalisisGastosEvaluacionImprimir" parent="SeguimientoAnalisisGastosBase" />
+	
+	<bean name="/SeguimientoAnalisisGastosVisualizacionSeguimiento" parent="SeguimientoAnalisisGastosBase" />
+	<bean name="/SeguimientoAnalisisGastosVisualizacionSeguimientoImprimir" parent="SeguimientoAnalisisGastosBase" />
+	
+	<bean name="/SeguimientoAnalisisGastosEvaluarGestionDePago" parent="SeguimientoAnalisisGastosBase" />
+	<bean name="/SeguimientoAnalisisGastosEvaluarGestionDePagoImprimir" parent="SeguimientoAnalisisGastosBase" />
+
+	<!-- EVALUACIÓN DE SEGUIMIENTO -->
+	<!-- Evaluacion Seguimiento Inventario -->
+	<bean name="/EvaluacionSeguimientoInventario" class="com.fontar.web.action.seguimientos.evaluaciones.EvaluacionSeguimientoInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+		<property name="hqlQueryString" value="from EvaluacionSeguimientoBean o"/>	   	
+	   	<property name="idToolbar" value="evaluacionesSeguimiento"/>	
+	   	<property name="administrarInstrumentosService">
+	   		<ref bean="administrarInstrumentosService"/>
+	   	</property>
+	</bean>
+	<bean name="/EvaluacionSeguimientoInventarioFiltrar" parent="/EvaluacionSeguimientoInventario" />	
+	
+	<!-- Visualizar Evaluación Seguimiento -->
+	<bean name="/VisualizarEvaluacionSeguimiento"
+		class="com.fontar.web.action.seguimientos.evaluaciones.VisualizarEvaluacionSeguimientoAction">		  
+		<property name="administrarSeguimientoServicio">
+			<ref bean="administracionSeguimientoService" />
+		</property>
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>
+	</bean>	
+
+	<bean name="/SeguimientoControlarFacturas"
+		  class="com.fontar.web.action.seguimientos.seguimientos.SeguimientoControlarFacturasAction">
+
+		<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+
+	</bean>
+	
+	<!-- Rendición Cuentas Evaluación Seguimiento Inventario -->
+	<bean 
+		name="RendicionEvaluacionSeguimientoInventarioBase" 
+		abstract="true"
+		class="com.fontar.web.action.seguimientos.evaluaciones.rendiciones.RendicionEvaluacionSeguimientoInventarioAction">
+	   	<property name="sessionFactory">
+	   		<ref bean="sessionFactory"/>
+	   	</property>	    
+	   	<property name="hqlQueryString" value="from RendicionCuentasBean o"/>
+	  	<property name="evaluarProyectoServicio">
+	  		<ref bean="evaluarProyectoService"/>
+	  	</property>	     
+	</bean>	
+	<bean name="/RendicionEvaluacionSeguimientoANRInventario" parent="RendicionEvaluacionSeguimientoInventarioBase">
+	   	<property name="idToolbar" value="rendicionesEvaluacionSeguimientoANR"/>
+	</bean>	
+	<bean name="/RendicionEvaluacionSeguimientoCFInventario" parent="RendicionEvaluacionSeguimientoInventarioBase">
+	   	<property name="idToolbar" value="rendicionesEvaluacionSeguimientoCF"/>
+	</bean>	
+	
+	<!-- Editar Montos de Rendición Cuentas Evaluación Seguimiento -->
+	<bean name="EditarMontosRendicionEvaluacionSeguimientoBase"	abstract="true">
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>		
+	</bean>		
+	<bean 
+		name="/EditarMontosRendicionEvaluacionSeguimientoANR" 
+		parent="EditarMontosRendicionEvaluacionSeguimientoBase"
+		class="com.fontar.web.action.seguimientos.evaluaciones.rendiciones.anr.EditarMontoRendicionEvaluacionSeguimientoANRAction"/>
+	<bean
+		name="/EditarMontosRendicionEvaluacionSeguimientoCF" 
+		parent="EditarMontosRendicionEvaluacionSeguimientoBase"
+		class="com.fontar.web.action.seguimientos.evaluaciones.rendiciones.cf.EditarMontoRendicionEvaluacionSeguimientoCFAction"/>
+
+
+	<bean name="GuardarEdicionMontosRendicionEvaluacionSeguimientoBase" abstract="true">
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>			
+	</bean>
+	<bean 
+		name="/GuardarEdicionMontosRendicionEvaluacionSeguimientoANR"
+		parent="GuardarEdicionMontosRendicionEvaluacionSeguimientoBase"
+		class="com.fontar.web.action.seguimientos.evaluaciones.rendiciones.anr.EditarMontoRendicionEvaluacionSeguimientoANRAction"/>
+	<bean 
+		name="/GuardarEdicionMontosRendicionEvaluacionSeguimientoCF" 
+		parent="GuardarEdicionMontosRendicionEvaluacionSeguimientoBase"
+		class="com.fontar.web.action.seguimientos.evaluaciones.rendiciones.cf.EditarMontoRendicionEvaluacionSeguimientoCFAction"/>
+	
+	<!-- Datos Generales de Evaluación Seguimientos -->
+	<bean name="/DatosGeneralesEvaluacionSeguimiento"
+		class="com.fontar.web.action.seguimientos.evaluaciones.DatosGeneralesEvaluacionSeguimientoAction">
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>
+	</bean>
+	<bean name="/DatosGeneralesEvaluacionSeguimientoImprimir" parent="/DatosGeneralesEvaluacionSeguimiento" />
+	
+	<!-- Editar Datos Generales de Evaluación Seguimientos -->
+	<bean name="/EditarEvaluacionSeguimiento"
+		class="com.fontar.web.action.seguimientos.evaluaciones.DatosGeneralesEvaluacionSeguimientoAction">		  
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>
+	</bean>
+	
+	<bean name="/ObservacionesAction"
+	      class="com.fontar.web.action.seguimientos.evaluaciones.ObservacionesAction">
+	   	<property name="administrarSeguimientoServicio">
+	   		<ref bean="administracionSeguimientoService"/>
+	   	</property>
+	</bean>
+	
+	<bean name="/ObservacionEditar" parent="/ObservacionesAction"/>
+	<bean name="/ObservacionGuardar" parent="/ObservacionesAction"/>
+
+	<!-- Confirmar Evaluación Seguimiento -->
+	<bean name="/EvaluarAutorizacionPagoSeguimiento"
+		class="com.fontar.web.action.seguimientos.seguimientos.EvaluarAutorizacionPagoSeguimientoAction">		  
+		<property name="wfEvaluacionServicio">
+			<ref bean="wfEvaluacionService" />
+		</property>
+		<property name="wfSeguimientoServicio">
+			<ref bean="wfSeguimientoService" />
+		</property>
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+	</bean>	
+
+	<bean name="/EvaluarAutorizacionPagoSeguimientoGuardar"
+		class="com.fontar.web.action.seguimientos.seguimientos.EvaluarAutorizacionPagoSeguimientoAction">
+		<property name="wfEvaluacionServicio">
+			<ref bean="wfEvaluacionService" />
+		</property>
+		<property name="wfSeguimientoServicio">
+			<ref bean="wfSeguimientoService" />
+		</property>
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+	</bean>
+
+	<!-- SEGUIMIENTO - Inventario de Rendicion de Cuentas Gestión de Pago -->
+	<bean name="/RendicionCuentasGestionPagoInventario" 
+		class="com.fontar.web.action.seguimientos.gestionPagos.RendicionCuentasGestionPagoInventarioAction">
+	   	<property name="sessionFactory">
+	   		<ref bean="sessionFactory"/>
+	   	</property>	    
+	   	<property name="hqlQueryString" value="select new com.fontar.data.impl.domain.dto.RendicionCuentasDTO(o) from RendicionCuentasBean o"/>
+	   	<!-- Prefijo al que se le agregará ANR o CF -->
+	   	<property name="idToolbar" value="rendicionesGestionPago"/>
+	   	<property name="administrarSeguimientoServicio">
+	   		<ref bean="administracionSeguimientoService"/>
+	   	</property>
+	</bean>	
+	
+	<!-- SEGUIMIENTO - Datos Generales de Gestión de Pagos -->
+	<bean name="/DatosGeneralesGestionPago"
+		class="com.fontar.web.action.seguimientos.gestionPagos.DatosGeneralesGestionPagoAction">		  
+		<property name="administrarSeguimientoServicio">
+			<ref bean="administracionSeguimientoService"/>	
+		</property>
+	</bean>
+	
+	<!-- SEGUIMIENTO - Editar Datos Generales de Gestión de Pagos -->
+	<bean name="/EditarDatosGeneralesGestionPago"
+		class="com.fontar.web.action.seguimientos.gestionPagos.DatosGeneralesGestionPagoAction">
+		<property name="administrarSeguimientoServicio">
+			<ref bean="administracionSeguimientoService"/>	
+		</property>
+	</bean>
+	
+	<!-- SEGUIMIENTO - Editar Montos de Rendición Cuentas Gestión de Pagos -->
+	<bean name="/EditarMontosGestionadosRendicion"
+		class="com.fontar.web.action.seguimientos.gestionPagos.EditarMontoGestionPagoAction">
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>		
+	</bean>		
+
+	<bean name="/GuardarEdicionMontosGestionadosRendicion"
+		class="com.fontar.web.action.seguimientos.gestionPagos.EditarMontoGestionPagoAction">
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>			
+	</bean>		
+
+	<!-- CONTROL ADQUISICIÓN - Inventario Procedimientos -->	
+	<bean name="/ProcedimientoInventario" class="com.fontar.web.action.seguimientos.controlAdquisiciones.ProcedimientoInventarioAction">
+   		<property name="sessionFactory">
+   			<ref bean="sessionFactory"/>
+   		</property>	    
+   	
+   		<property name="hqlQueryString" value="from ProcedimientoBean o"/>
+		<property name="idToolbar" value="procedimientos"/>
+		
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>
+  
+	<bean name="/ProcedimientoInventarioFiltrar" parent="/ProcedimientoInventario"/>  	
+	
+	<!-- CONTROL ADQUISICION - Visualizar Datos Generales Procedimiento -->
+	<bean name="/VisualizarDatosGeneralesProcedimiento"
+	      class="com.fontar.web.action.seguimientos.controlAdquisiciones.VisualizarProcedimientoAction">
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>	
+	
+	<!-- CONTROL ADQUISICION - Visualizar Inventario Items Procedimiento -->
+	<bean name="/VisualizarItemsProcedimientoInventario"
+	      class="com.fontar.web.action.seguimientos.controlAdquisiciones.VisualizarProcedimientoAction">
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+
+	<!-- CONTROL ADQUISICION - Inventario Items Procedimiento -->
+	<bean name="/ItemsProcedimientoInventario" class="com.fontar.web.action.seguimientos.controlAdquisiciones.ItemsProcedimientoInventarioAction">
+   		<property name="sessionFactory">
+   			<ref bean="sessionFactory"/>
+   		</property>	    
+   	
+   		<property name="hqlQueryString" value="from ProcedimientoItemBean o"/>
+		<property name="idToolbar" value="itemsProcedimiento"/>
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>				
+	</bean>
+	<bean name="/ItemsProcedimientoInventarioFiltrar" parent="/ItemsProcedimientoInventario"/>  	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - Inventario de Items del procedimiento -->
+	<bean name="/CircuitoAutorizacionItemsInventario" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionItemsInventarioAction">
+   		<property name="sessionFactory">
+   			<ref bean="sessionFactory"/>
+   		</property>	    
+   	
+   		<property name="hqlQueryString" value="from ProcedimientoItemBean o"/>
+		<property name="idToolbar" value="itemsProcedimiento"/>
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>				
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - Visualizar Datos Gestión -->
+	<bean name="/CircuitoAutorizacionVisualizarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - Imprimir Datos de Gestion -->
+	<bean name="/CircuitoAutorizacionImprimir"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - Imprimir Inventario Items del Procedimiento -->
+	<bean name="/ImprimirItemsInventario" class="com.fontar.web.action.seguimientos.controlAdquisiciones.ItemsProcedimientoInventarioAction">
+   		<property name="sessionFactory">
+   			<ref bean="sessionFactory"/>
+   		</property>	    
+   	
+   		<property name="hqlQueryString" value="from ProcedimientoItemBean o"/>
+		<property name="idToolbar" value="itemsProcedimiento"/>
+		<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>	
+	</bean>		
+
+	<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TÉCNICO - Editar Datos Gestión -->
+	<bean name="/DesignarEvaluadorEditarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>	
+
+	<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TÉCNICO - Guardar Datos Gestión -->
+	<bean name="/DesignarEvaluadorGuardarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Editar Datos Gestión -->
+	<bean name="/CargarFundamentacionEvaluadorEditarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Guardar Datos Gestión -->
+	<bean name="/CargarFundamentacionEvaluadorGuardarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO FONTAR - Editar -->
+	<bean name="/EditarResultadoFontar"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.EditarResultadoFontarAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO FONTAR - Guardar -->
+	<bean name="/GuardarResultadoFontar"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.EditarResultadoFontarAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Editar -->
+	<bean name="/EditarResultadoUffa"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.EditarResultadoUffaAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Guardar -->
+	<bean name="/GuardarResultadoUffa"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.EditarResultadoUffaAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Editar -->
+	<bean name="/EditarResultadoBid"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.EditarResultadoBidAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Guardar -->
+	<bean name="/GuardarResultadoBid"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.EditarResultadoBidAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>			
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Editar Datos Gestión -->
+	<bean name="/RemitirUffaEditarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Guardar Datos Gestión -->
+	<bean name="/RemitirUffaGuardarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Editar Datos Gestión -->
+	<bean name="/RemitirBidEditarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Guardar Datos Gestión -->
+	<bean name="/RemitirBidGuardarDatosGestion"
+		class="com.fontar.web.action.seguimientos.controlAdquisiciones.CircuitoAutorizacionDatosGestionAction">		  
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>			
+	</bean>		
+	<!-- Carga de rendiciones desde Excel -->
+	<bean id="RendicionesExcelActionBase"
+	      class="com.fontar.web.action.seguimientos.rendiciones.excel.RendicionesExcelAction" abstract="true">
+	  	<property name="seguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/RendicionesExcelIngresar" parent="RendicionesExcelActionBase"/>
+	<bean name="/RendicionesExcelCargar" parent="RendicionesExcelActionBase"/>
+	<bean name="/RendicionesExcelCancelar" parent="RendicionesExcelActionBase"/>
+	
+	<!-- Editar Evaluadores de Evaluación Seguimiento -->
+	<bean name="/EditarEvaluacion"
+		class="com.fontar.web.action.seguimientos.evaluaciones.EditarEvaluacionAction">		  
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>
+	</bean>
+	
+	<!-- Guardar Edición Evaluadores de Evaluación Seguimiento -->
+	<bean name="/GuardarEdicionEvaluacion"
+		class="com.fontar.web.action.seguimientos.evaluaciones.EditarEvaluacionAction">		  
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+	</bean>
+
+	<!-- Accion base para la modificacion de campos del analisis de gastos -->
+	<bean id="ModificarCamposDeAnalisisDeGastosActionBase"
+	      class="com.fontar.web.action.seguimientos.seguimientos.ModificarCamposDeAnalisisDeGastosAction" abstract="true">
+	  	<property name="analisisGastosSeguimientoService">
+	  		<ref bean="analisisGastosSeguimientoService"/>
+	  	</property>
+	  	<property name="administracionSeguimientoService">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>
+	</bean>
+	<!-- Modificar presupuesto segun avance -->
+	<bean name="/ModificarPresupuestoSegunAvance" parent="ModificarCamposDeAnalisisDeGastosActionBase"/>
+	<bean name="/ModificarPresupuestoSegunAvanceGuardar" parent="ModificarCamposDeAnalisisDeGastosActionBase"/>
+	<bean name="/ModificarPendienteDeRendicion" parent="ModificarCamposDeAnalisisDeGastosActionBase"/>
+	<bean name="/ModificarPendienteDeRendicionGuardar" parent="ModificarCamposDeAnalisisDeGastosActionBase"/>
+</beans>

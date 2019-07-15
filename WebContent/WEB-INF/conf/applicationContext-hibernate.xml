@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- DATASOURCE FONTAR -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName"><value>java:/FontarDS</value></property>
+	</bean>
+
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 
+		<property name="dataSource">
+			<ref local="dataSource"/>
+		</property>
+		 -->
+		<property name="entityInterceptor" ref="genericCryptoInterceptor"/>
+		
+		<property name="mappingResources">
+			<list>
+				<value>com/fontar/data/impl/domain/hibernate/security.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/CarteraBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/PacBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/CotizacionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/DesembolsoUFFABean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/TipoAdquisicionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/TributariaBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/PresentacionConvocatoriaBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoRaizBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoDatosBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoReconsideracionBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/BandejaDeEntradaBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/PaqueteBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ClavesPaqueteEvaluador.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ClavesPaqueteResultado.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ComisionBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/JurisdiccionBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoEvaluacionCriterioBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/TipoProyectoBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/EntidadBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ExpedienteBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ExpedienteMovimientoBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/FacturacionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ComposicionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/EntidadBeneficiariaBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/CiiuBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/EmpleoPermanenteBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/MatrizPresupuestoBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/FuenteFinanciamientoBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/InstrumentoDefBean.hbm.xml</value>								
+				<value>com/fontar/data/impl/domain/hibernate/LocalizacionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/InstrumentoBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ClavesBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoEntidadBeneficiariaBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/PersonaBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoAdmisionBean.hbm.xml</value>								
+				<value>com/fontar/data/impl/domain/hibernate/BitacoraBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/SeguimientoBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoJurisdiccionBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoPresupuestoBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/EvaluacionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/RegionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/DistribucionFinanciamientoBean.hbm.xml</value>		
+				<value>com/fontar/data/impl/domain/hibernate/EntidadEvaluadoraBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/EntidadBancariaBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoPaqueteBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/InstrumentoVersionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/EvaluacionEvaluadorBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/EntidadIntervinientesBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/EvaluadorBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/EspecialidadEvaluadorBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/DistribucionTipoProyectoBean.hbm.xml</value>								
+				<value>com/fontar/data/impl/domain/hibernate/MatrizCriterioItemBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/MatrizCriterioBean.hbm.xml</value>				
+				<value>com/pragma/toolbar/data/hibernate/config_item.hbm.xml</value>
+				<value>com/pragma/toolbar/data/hibernate/toolbar_filter.hbm.xml</value>
+				<value>com/pragma/toolbar/data/hibernate/variant.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/AdjuntoBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/AdjuntoContenidoBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/RendicionCuentasBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/RubroBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/NotificacionBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/presupuesto/plan/EtapaBean.hbm.xml</value>				
+				<value>com/fontar/data/impl/domain/hibernate/presupuesto/plan/ActividadBean.hbm.xml</value>		
+				<value>com/fontar/data/impl/domain/hibernate/CambioEstadoProyecto.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ProcedimientoBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ProcedimientoItemBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/MonedaBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/ProyectoDesembolsoBean.hbm.xml</value>
+				<value>com/fontar/data/impl/domain/hibernate/SeguridadObjetoBean.hbm.xml</value>
+			</list>			
+		</property>
+				
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+                <!-- prop key="hibernate.hbm2ddl.auto">create</prop> -->
+				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</prop>
+				<prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</prop>
+				<prop key="jta.UserTransaction">java:comp/UserTransaction</prop>
+			    <prop key="hibernate.transaction.flush_before_completion">true</prop>
+			    <prop key="hibernate.connection.release_mode">after_statement</prop>
+			    <prop key="hibernate.transaction.auto_close_session">true</prop>
+			    <prop key="hibernate.connection.datasource">java:/FontarDS</prop>
+			    <prop key="hibernate.cglib.use_reflection_optimizer">true</prop>	
+   			    <prop key="hibernate.default_schema">${db.defaultSchema}</prop>		    
+			    <prop key="hibernate.default_batch_fetch_size">50</prop>
+			</props>
+		</property>
+		<property name="eventListeners">
+			<map>
+				<entry key="merge">
+					<bean class="org.springframework.orm.hibernate3.support.IdTransferringMergeEventListener"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<!-- Spring Data Access Exception Translator Defintion -->
+	<bean id="jdbcExceptionTranslator" class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator"> 
+		<property name="dataSource"><ref bean="dataSource"/></property> 
+	</bean> 
+	
+	<!-- Hibernate Template Defintion -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+	   <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+	   <property name="jdbcExceptionTranslator"><ref bean="jdbcExceptionTranslator"/></property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+
+	<!--
+	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+		 <property name="userTransactionName" value="java:comp/UserTransaction"/> 
+		<property name="transactionManagerName" value="java:/TransactionManager"/>
+	</bean>
+	 -->	
+  
+</beans>

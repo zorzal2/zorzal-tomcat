@@ -1,0 +1,39 @@
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	
+	<form-beans>
+		<!--  Create -->
+		<form-bean name="InitializeEncryptionForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="password" type="java.lang.String" />						
+			<form-property name="confPassword" type="java.lang.String" />						
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/ApplicationManager"
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				parameter="init"
+				scope="request"
+	 			validate="false">
+				<forward name="success"  path=".ApplicationManagerDef"/>
+			</action>
+
+
+		<action path="/ApplicationManagerInitializeEncryption"
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				parameter="initializeEncryptionContext"
+				scope="request"
+	 			validate="true"
+	 			input="/ApplicationManager.do"
+	 			name="InitializeEncryptionForm">
+				<forward name="success"  path=".ApplicationManagerDef"/>
+			</action>
+
+
+
+	</action-mappings>
+
+</struts-config>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+
+  	<!-- Criptografía -->
+  	<definition 
+  		name=".LogonCriptoDef"
+  		extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/cripto/logonCripto.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".PopUpModificarPasswordDef"
+  		extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/cripto/popUpModificarPassword.jsp" >
+  		</put>
+  	</definition>
+  	
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

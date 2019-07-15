@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+
+	<definition name=".SeguimientoInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/seguimientos/inventario.jsp"/>
+	</definition>
+	
+	<definition name=".SeguimientosProyectoDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/seguimientos/inventarioProyecto.jsp"/>
+	</definition>
+
+	<!-- Adjuntos Seguimiento -->
+
+	<definition name=".SeguimientoBeanAdjuntosUpload" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/seguimientos/adjuntos/adjuntos.jsp"/>
+	</definition>     
+
+	<definition name=".SeguimientoBeanAdjuntosInventario" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/seguimientos/adjuntos/adjuntosDownload.jsp"/>
+	</definition>
+
+	<!-- Alta de un Seguimiento  -->
+	<definition name=".SeguimientoEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/seguimientos/editar.jsp"/>
+	</definition>
+
+	<!-- Visualización de Seguimiento  -->
+   	<definition name=".SeguimientoVisualizarDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.seguimientos.visualizarSeguimiento"/>
+  		<put name="subTitle" value="app.title.seguimientos.datosGenerales"/>  		
+		<put name="cabecera" value="/jsp/cabecera/cabeceraSeguimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/seguimientos/menuSeguimiento.jsp"/>
+  		<put name="body" value="/jsp/seguimientos/seguimientos/visualizar.jsp" />
+  		<put name="linkInventario" value="/jsp/seguimientos/seguimientos/linkInventario.jsp" />
+  	</definition>
+
+
+	<!--  Inventario de Adjuntos del Seguimiento q se está cargando en el TAB  -->
+	<definition name=".SeguimientoTabAdjuntosInventario" extends=".SeguimientoVisualizarDef">
+		<put name="subTitle" value="app.title.adjuntos.administracion"/>
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/adjuntos/adjuntosSeguimientoDownloadTab.jsp" >
+  		</put>
+	</definition>
+
+	<definition name=".SeguimientoTabAdjuntosUpload" extends=".SeguimientoVisualizarDef">
+		<put name="subTitle" value="app.title.seguimientos"/>
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/adjuntos/adjuntosTab.jsp" >
+		</put>
+	</definition>
+
+    <definition name=".AnularSeguimientoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/anular.jsp" >
+  		</put>
+  	</definition>  	
+    
+    <!--  Inventario de Rendiciones de Cuentas del Seguimiento q se está cargando en el TAB  -->
+	<definition name=".RendicionCuentasANRInventarioDef" extends=".SeguimientoVisualizarDef">
+		<put name="subTitle" value="app.title.seguimientos.rendicionCuentas"/>
+		<put name="body"
+			 value="/jsp/seguimientos/seguimientos/rendicionCuentas/anr/inventario.jsp" >
+ 		</put>
+	</definition>
+	<definition name=".RendicionCuentasCFInventarioDef" extends=".SeguimientoVisualizarDef">
+		<put name="subTitle" value="app.title.seguimientos.rendicionCuentas"/>
+		<put name="body"
+			 value="/jsp/seguimientos/seguimientos/rendicionCuentas/cf/inventario.jsp" >
+ 		</put>
+	</definition>
+	
+	<definition name=".EditarRendicionCuentasANRDef" extends=".baseMenuDef">
+  		<put name="body"
+			 value="/jsp/seguimientos/seguimientos/rendicionCuentas/anr/editar.jsp" >
+  		</put>
+	</definition>
+	<definition name=".EditarRendicionCuentasCFDef" extends=".baseMenuDef">
+  		<put name="body"
+			 value="/jsp/seguimientos/seguimientos/rendicionCuentas/cf/editar.jsp" >
+  		</put>
+	</definition>
+	
+	<definition name=".RendicionCuentasANRResumenDef" extends=".SeguimientoVisualizarDef">
+		<put name="subTitle" value="app.title.resumenRendicionCuentas"/>
+  		<put name="body"
+			 value="/jsp/seguimientos/seguimientos/rendicionCuentas/anr/resumenRendicionesANR.jsp" >
+  		</put>
+	</definition>
+	<definition name=".RendicionCuentasCFResumenDef" extends=".SeguimientoVisualizarDef">
+		<put name="subTitle" value="app.title.resumenRendicionCuentas"/>
+  		<put name="body"
+			 value="/jsp/seguimientos/seguimientos/rendicionCuentas/cf/resumenRendicionesCF.jsp" >
+  		</put>
+	</definition>
+ 
+  	<!-- Tabla de Análisis de Pertinencia de Gastos de un Seguimiento (Visualizacion) -->
+ 	<definition name=".SeguimientoAnalisisGastosVisualizacionDef" extends=".SeguimientoVisualizarDef">
+		<put name="subTitle" value="app.title.analisisGastos"/>
+  		<put name="body" value="/jsp/seguimientos/analisisGastos.jsp"/>
+	</definition>
+
+	<!-- Tabla de Análisis de Pertinencia de Gastos de un Seguimiento (Visualizacion) - Imprimir -->
+   	<definition name=".SeguimientoAnalisisGastosVisualizacionImprimirDef" extends=".baseImprimirDef" >
+ 		<put name="title" value="app.title.seguimientos.visualizarSeguimiento"/>
+  		<put name="subTitle" value="app.title.analisisGastos"/>
+  		<put name="body" value="/jsp/seguimientos/analisisGastos.jsp"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraSeguimiento.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/seguimientos/linkVolverAVisualizacion.jsp"/>
+  	</definition>
+
+  	<!-- Tabla de Análisis de Pertinencia de Gastos de un Seguimiento (Eval Gestion de Pago) -->
+ 	<definition name=".SeguimientoAnalisisGastosEvaluarGestionDePagoDef" extends=".SeguimientoVisualizarDef">
+ 		<put name="title" value="app.title.evaluarGestionPago"/>
+		<put name="subTitle" value="app.title.analisisGastos"/>
+		<put name="tabs" value="/jsp/seguimientos/seguimientos/gestionPagos/menuSeguimientoGestionPago.jsp"/>
+  		<put name="body" value="/jsp/seguimientos/analisisGastos.jsp"/>
+	</definition>
+
+	<!-- Tabla de Análisis de Pertinencia de Gastos de un Seguimiento (Eval Gestion de Pago) - Imprimir -->
+   	<definition name=".SeguimientoAnalisisGastosEvaluarGestionDePagoImprimirDef" extends=".baseImprimirDef" >
+ 		<put name="title" value="app.title.evaluarGestionPago"/>
+  		<put name="subTitle" value="app.title.analisisGastos"/>
+  		<put name="body" value="/jsp/seguimientos/analisisGastos.jsp"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraSeguimiento.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/seguimientos/linkVolverAGestionDePago.jsp"/>
+  	</definition>
+
+	<!-- EVALUACION SEGUIMIENTO -->
+	<!-- Cargar Resultado Evaluación Seguimiento -->
+   	<definition name=".DatosEvaluacionSeguimientoDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.evaluacionSeguimiento.evaluacionesSeguimiento"/>
+  		<put name="subTitle" value="app.title.evaluacionSeguimiento.datosGenerales"/>  		
+		<put name="cabecera" value="/jsp/cabecera/cabeceraEvaluacionSeguimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/evaluacion/menuEvaluacionSeguimiento.jsp"/>
+  		<put name="body" value="/jsp/seguimientos/evaluacion/visualizar.jsp" />
+  		<put name="linkInventario" value="/jsp/seguimientos/evaluacion/linkVolverImprimirDatosGenerales.jsp" />
+  	</definition>
+   	<definition name=".DatosEvaluacionSeguimientoImprimirDef" extends=".baseImprimirDef" >
+  		<put name="title" value="app.title.evaluacionSeguimiento.evaluacionesSeguimiento"/>
+  		<put name="subTitle" value="app.title.evaluacionSeguimiento.datosGenerales"/>  		
+		<put name="cabecera" value="/jsp/cabecera/cabeceraEvaluacionSeguimiento.jsp"/>
+  		<put name="body" value="/jsp/seguimientos/evaluacion/visualizar.jsp" />
+  		<put name="linkInventario" value="/jsp/seguimientos/evaluacion/linkVolverADatosGenerales.jsp"/>
+  	</definition>
+  	
+  	<!-- Tabla de Análisis de Pertinencia de Gastos en Evaluaciones de Seguimiento -->
+	<definition name=".EvaluacionDeSeguimientoAnalisisGastosDef" extends=".DatosEvaluacionSeguimientoDef">
+		<put name="subTitle" value="app.title.analisisGastos"/>
+  		<put name="body" value="/jsp/seguimientos/analisisGastos.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/evaluacion/linkCerrarImprimir.jsp" />  		
+	</definition>
+
+  	<!-- Tabla de Análisis de Pertinencia de Gastos de un Seguimiento - Imprimir -->
+   	<definition name=".EvaluacionDeSeguimientoAnalisisGastosImprimirDef" extends=".baseImprimirDef" >
+  		<put name="title" value="app.title.evaluacionSeguimiento.evaluacionesSeguimiento"/>
+  		<put name="subTitle" value="app.title.analisisGastos"/>
+  		<put name="cabecera" value="/jsp/cabecera/cabeceraEvaluacionSeguimiento.jsp"/>
+  		<put name="body" value="/jsp/seguimientos/analisisGastos.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/evaluacion/linkCerrar.jsp"/>
+  	</definition>
+	
+	<!--  Editar Datos Generales Evaluación Seguimiento  -->
+	<definition name=".EditarEvaluacionSeguimientoDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/evaluacion/editar.jsp"/>
+	</definition>
+	
+	<!-- Editar Evaluadores de Evaluación Seguimiento -->
+	<definition name=".EditarEvaluacionDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/evaluacion/editarEvaluacion.jsp"/>
+	</definition>
+
+	<!-- Evaluacion Seguiminento Inventario -->	
+   	<definition name=".EvaluacionSeguimientoInventarioDef" extends=".baseMenuDef"> 
+  		<put name="body"
+  			value="/jsp/seguimientos/evaluacion/inventario.jsp" >
+  		</put>
+  	</definition>  
+	 
+	<!-- Controlar Facturas Seguimiento -->
+   	<definition name=".SeguimientoControlarFacturasDef" extends=".popUpDef" >
+  		<put name="body"
+  			value="/jsp/seguimientos/evaluacion/facturasRepetidas.jsp" >
+  		</put>
+  	</definition>
+
+    <!--  Rendición Cuentas Evaluacion Seguimiento CF Inventario -->
+	<definition name=".RendicionEvaluacionSeguimientoCFInventarioDef" extends=".DatosEvaluacionSeguimientoDef">
+		<put name="subTitle" value="app.title.evaluacionSeguimiento.rendicionCuentas"/>
+		<put name="body" value="/jsp/seguimientos/evaluacion/rendicionCuentas/cf/inventario.jsp" >
+ 		</put>
+	</definition>
+
+    <!--  Rendición Cuentas Evaluacion Seguimiento ANR Inventario -->
+	<definition name=".RendicionEvaluacionSeguimientoANRInventarioDef" extends=".DatosEvaluacionSeguimientoDef">
+		<put name="subTitle" value="app.title.evaluacionSeguimiento.rendicionCuentas"/>
+		<put name="body" value="/jsp/seguimientos/evaluacion/rendicionCuentas/anr/inventario.jsp" >
+ 		</put>
+	</definition>
+
+    <!--  Editar Montos Rendición Cuentas Evaluacion Seguimiento -->
+	<definition name=".EditarMontosRendicionEvaluacionSeguimientoANRDef" extends=".popUpDef">
+		<put name="body" value="/jsp/seguimientos/evaluacion/rendicionCuentas/anr/editar.jsp" >
+ 		</put>
+	</definition>
+	<definition name=".EditarMontosRendicionEvaluacionSeguimientoCFDef" extends=".popUpDef">
+		<put name="body" value="/jsp/seguimientos/evaluacion/rendicionCuentas/cf/editar.jsp" >
+ 		</put>
+	</definition>
+	
+   	<definition name=".PlanTrabajoSeguimientoDef" extends=".DatosEvaluacionSeguimientoDef" >
+		<put name="subTitle" value="app.title.evaluacionSeguimiento.planSeguimiento"/>
+  		<put name="title" value="app.title.evaluacionSeguimiento.planSeguimiento"/>
+   		<put name="body"
+  			value="/jsp/seguimientos/evaluacion/inventarioPlan.jsp" >
+  		</put>
+ 	</definition>	
+	
+	<definition name=".ObservacionEditarDef" extends=".popUpDef" >
+  		<put name="title" value="Editar"/>
+   		<put name="body"
+  			value="/jsp/seguimientos/evaluacion/editarPlan.jsp" >
+  		</put>
+ 	</definition>	
+	
+  	<definition name=".ConfirmarEvaluacionSeguimientoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/evaluacion/confirmar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".EvaluarAutorizacionPagoSeguimientoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/authorizar.jsp" >
+  		</put>
+  	</definition>
+
+	<!-- SEGUIMIENTO - Datos Generales Gestión de Pago -->
+   	<definition name=".DatosGeneralesGestionPagoDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.evaluarGestionPago"/>
+  		<put name="subTitle" value="app.title.resumenRendiciones"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraSeguimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/seguimientos/gestionPagos/menuSeguimientoGestionPago.jsp"/>
+  		<put name="body" value="/jsp/seguimientos/seguimientos/gestionPagos/visualizarGestionPago.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/seguimientos/linkInventario.jsp" />
+  	</definition>  	
+  	
+	<!-- SEGUIMIENTO - Editar Datos Generales Gestión de Pago -->
+	<definition name=".EditarDatosGeneralesGestionPagoDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/seguimientos/gestionPagos/editarGestionPago.jsp"/>
+	</definition>
+	
+	<!-- SEGUIMIENTO - Inventario Rendición Cuentas Gestión de Pago -->
+	<definition name=".InventarioRendicionGestionPagoDef" extends=".DatosGeneralesGestionPagoDef">
+		<put name="subTitle" value="app.title.seguimientos.rendicionCuentas"/>
+		<put name="body" value="/jsp/seguimientos/seguimientos/gestionPagos/inventarioGestionPago.jsp"/>
+	</definition> 
+	
+    <!-- SEGUIMIENTO - Editar Montos Rendición Cuentas de Gestión de Pago -->
+	<definition name=".EditarMontosGestionPagoDef" extends=".popUpDef">
+		<put name="body" value="/jsp/seguimientos/seguimientos/gestionPagos/editarMontosGestion.jsp" >
+ 		</put>
+	</definition>
+
+	<!-- CONTROL ADQUISICION - Procedimientos inventario -->
+	<definition name=".ProcedimientoInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/inventario.jsp"/>
+	</definition>
+	
+	<!-- CONTROL ADQUISICION - Datos Generales de un procedimiento -->
+   	<definition name=".DatosGeneralesProcedimientoDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.procedimientos.visualizarProcedimientos"/>
+  		<put name="subTitle" value="app.title.procedimientos.datosGenerales"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraProcedimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/controlAdquisiciones/menuVisualizarProcedimiento.jsp"/>
+  		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/visualizarDatosGeneralesProcedimiento.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/controlAdquisiciones/linkCerrar.jsp" />
+  	</definition>  	
+  	
+	<!-- CONTROL ADQUISICION - Inventario de los Items de un procedimiento -->
+	<definition name=".ItemsProcedimientoInventarioDef" extends=".DatosGeneralesProcedimientoDef">
+		<put name="subTitle" value="app.title.procedimientos.items"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/inventarioItems.jsp"/>
+	</definition> 
+
+	<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TECNICO - Inventario de Items de un procedimiento -->
+   	<definition name=".DesignarEvaluadorTecnicoDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.procedimientos.designarEvaluadorTecnico"/>
+  		<put name="subTitle" value="app.title.procedimientos.items"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraProcedimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/controlAdquisiciones/menuDesignarEvaluadorProcedimiento.jsp"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/inventarioItemsDesignarEvaluador.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/controlAdquisiciones/linksTarea.jsp" />
+  	</definition>  	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TECNICO - Visualizar Datos Gestion -->
+	<definition name=".DesignarEvaluadorTecnicoVisualizarDatosGestionDef" extends=".DesignarEvaluadorTecnicoDef">
+		<put name="subTitle" value="app.title.procedimientos.visualizarDatosGestion"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/visualizarDesignarEvaluadorTecnico.jsp"/>
+	</definition> 
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - Editar Datos Gestion -->
+	<definition name=".EditarDatosGestionDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/editar.jsp"/>
+	</definition>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TECNICO - Imprimir Datos Gestion e Items -->
+	<definition name=".ImprimirCircuitoEvaluacion" extends=".basePrintDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/imprimir.jsp"/>
+	</definition>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION - Inventario de Items de un procedimiento -->
+   	<definition name=".CargarFundamentacionEvaluadorDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.procedimientos.cargarFundamentacionEvaluador"/>
+  		<put name="subTitle" value="app.title.procedimientos.items"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraProcedimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/controlAdquisiciones/menuCargarFundamentacionProcedimiento.jsp"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/inventarioItemsCargarFundamentacion.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/controlAdquisiciones/linksTarea.jsp" />
+  	</definition>  	
+  	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION - Visualizar Datos Gestion -->
+	<definition name=".CargarFundamentacionEvaluadorVisualizarDatosGestionDef" extends=".CargarFundamentacionEvaluadorDef">
+		<put name="subTitle" value="app.title.procedimientos.visualizarDatosGestion"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/visualizarCargarFundamentacionEvaluador.jsp"/>
+	</definition> 
+
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO FONTAR - editar -->
+	<definition name=".EditarResultadoFontarDef" extends=".popUpDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/editarResultadoFontar.jsp"/>
+	</definition>  	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - editar -->
+	<definition name=".EditarResultadoUffaDef" extends=".popUpDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/editarResultadoUffa.jsp"/>
+	</definition>  	
+
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - editar -->
+	<definition name=".EditarResultadoBidDef" extends=".popUpDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/editarResultadoBid.jsp"/>
+	</definition> 
+		
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Inventario de Items de un procedimiento -->
+   	<definition name=".RemitirUffaDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.procedimientos.remitirUffa"/>
+  		<put name="subTitle" value="app.title.procedimientos.items"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraProcedimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/controlAdquisiciones/menuRemitirUffa.jsp"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/inventarioItemsRemitirUffa.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/controlAdquisiciones/linksTarea.jsp" />
+  	</definition>  	
+  	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Visualizar Datos Gestion -->
+	<definition name=".RemitirUffaVisualizarDatosGestionDef" extends=".RemitirUffaDef">
+		<put name="subTitle" value="app.title.procedimientos.visualizarDatosGestion"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/visualizarRemitirUffa.jsp"/>
+	</definition> 
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Inventario de Items de un procedimiento -->
+   	<definition name=".RemitirBidDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.procedimientos.remitirBid"/>
+  		<put name="subTitle" value="app.title.procedimientos.items"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraProcedimiento.jsp"/>
+		<put name="tabs" value="/jsp/seguimientos/controlAdquisiciones/menuRemitirBid.jsp"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/inventarioItemsRemitirBid.jsp"/>
+  		<put name="linkInventario" value="/jsp/seguimientos/controlAdquisiciones/linksTarea.jsp" />
+  	</definition>  	
+  	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Visualizar Datos Gestion -->
+	<definition name=".RemitirBidVisualizarDatosGestionDef" extends=".RemitirBidDef">
+		<put name="subTitle" value="app.title.procedimientos.visualizarDatosGestion"/>
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/visualizarRemitirBid.jsp"/>
+	</definition> 	
+  	<!-- Carga de rendiciones desde Excel -->
+  	<definition name=".RendicionesExcelIngresarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/rendicionCuentas/excel/ingresar.jsp" >
+  		</put>
+  	</definition>
+   	<!-- /Carga de rendiciones desde Excel -->  	
+	
+	<!-- Mis Evaluaciones De Seguimiento -->
+	<definition name=".MisEvaluacionesDeSeguimientoDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/evaluacion/misEvaluacionesDeSeguimiento.jsp"/>
+	</definition>
+	<!-- Modificacion del presupuesto segun informe de avance -->
+	<definition name=".ModificarPresupuestoSegunAvanceDef" extends=".popUpDef" >
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/modificarPresupuestoSegunAvance.jsp" >
+  		</put>
+  	</definition>
+	<!-- Modificacion del monto pendiente de rendicion -->
+	<definition name=".ModificarPendienteDeRendicionDef" extends=".popUpDef" >
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/modificarPendienteDeRendicion.jsp" >
+  		</put>
+  	</definition>
+</tiles-definitions>

@@ -1,0 +1,274 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<!-- ================================================ Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="AdjuntoUploadForm" type="com.fontar.web.form.AdjuntoUploadForm">
+			<form-property name="id" type="java.lang.Long" />
+			<form-property name="fecha" type="java.util.Date" />
+			<form-property name="nombre" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+			<form-property name="content" type="org.apache.struts.upload.FormFile" />
+		</form-bean>	
+		
+		<form-bean name="AdjuntoDownloadForm" type="com.fontar.web.form.AdjuntoDownloadForm">
+			<form-property name="id" type="java.lang.Long" />
+			<form-property name="filename" type="java.lang.String" />
+			<form-property name="contentType" type="java.lang.String" />
+		</form-bean>	
+		
+	</form-beans>
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions>
+	
+		<!-- exception key="runtime.exception" 
+          type="com.pragma.PragmaException"
+       handler="com.pragma.web.PragmaExceptionHandler"
+          path="/jsp/error.jsp"/-->
+
+		<exception key="runtime.exception" type="java.lang.Exception" handler="com.pragma.web.PragmaExceptionHandler" path="/jsp/error.jsp" />
+          
+          
+	
+		<!-- sample exception handler
+			<exception
+			key="expired.password"
+			type="app.ExpiredPasswordException"
+			path="/changePassword.jsp"/>
+			end sample -->
+	</global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+		<!-- Default forward to "Welcome" action -->
+		<!-- Demonstrates using index.jsp to forward 
+		<forward name="welcome" path="/Welcome.do" />
+		<forward name="failure" path="/index.jsp" />
+		<forward name="failureRedirect" path="/Login.do?accion=redirectLogin" />
+		<forward name="policyFailure" path=".policyErrorDef" />
+		-->
+		<forward name="bandejaDeEntrada" path="/WFBandejaDeEntrada.do" />
+	</global-forwards>
+
+	
+
+	<!-- =========================================== Action Mapping Definitions -->
+	<action-mappings>
+
+		<action path="/*Inventario" type="org.springframework.web.struts.DelegatingActionProxy" parameter="inventario" name="DummyDynaForm" scope="request">
+			<forward name="success" path=".{1}InventarioDef" />
+		</action>
+
+
+		<action path="/*Agregar" type="org.springframework.web.struts.DelegatingActionProxy" name="DummyDynaForm" parameter="agregar" scope="request">
+			<forward name="success" path=".{1}EditarDef" />
+		</action>
+
+		<action path="/*Editar" type="org.springframework.web.struts.DelegatingActionProxy" name="{1}EditarDynaForm" parameter="editar" scope="request" validate="false">
+			<forward name="success" path=".{1}EditarDef" />
+			<forward name="invalid" path="/{1}Inventario.do" />	
+		</action>
+		
+		<action path="/*Cancelar" type="org.springframework.web.struts.DelegatingActionProxy" parameter="cancelar" scope="request" validate="false">
+			<forward name="success" path="/{1}Inventario" />
+		</action>
+		
+		<action path="/*Guardar" type="org.springframework.web.struts.DelegatingActionProxy" name="{1}EditarDynaForm" parameter="guardar" scope="request" validate="true" input="/{1}Agregar.do">
+			<forward name="success" path="/{1}Inventario.do" redirect="true">
+			</forward>
+			<forward name="invalid" path="/{1}Agregar.do">
+			</forward>			
+		</action>
+		
+		<action path="/*SelectorGuardar" type="org.springframework.web.struts.DelegatingActionProxy" name="{1}EditarDynaForm" parameter="guardar" scope="request" validate="true" input="/{1}SelectorAgregar.do">
+			<forward name="success" path="/{1}Inventario.do">
+			</forward>
+			<forward name="invalid" path="/{1}Agregar.do">
+			</forward>			
+		</action>
+		
+		<action path="/*Borrar" type="org.springframework.web.struts.DelegatingActionProxy" parameter="borrar" name="DummyDynaForm" scope="request" input="/{1}Inventario.do">
+			<forward name="success" path="/{1}Inventario.do" />
+			<forward name="invalid" path="/{1}Inventario.do" />	
+		</action>		
+
+		<action path="/*Visualizar" type="org.springframework.web.struts.DelegatingActionProxy" name="{1}EditarDynaForm" parameter="visualizar" scope="request" validate="false">
+			<forward name="success" path=".{1}VisualizarDef" />
+		</action>		
+
+		<action path="/*GetInstrumentoDefData" type="org.springframework.web.struts.DelegatingActionProxy" parameter="getData" name="{1}EditarDynaForm" scope="request" validate="false">
+			<forward name="success" path=".{1}EditarDef" />
+		</action>
+
+		<action path="/*SelectorPopUp" type="org.springframework.web.struts.DelegatingActionProxy" name="DummyDynaForm" parameter="selector" scope="request">
+								
+			<forward name="success" path=".{1}SelectorDef" />
+		</action>
+
+        <!-- FF / Funcionalidad de Adjuntos  -->
+		<action path="/*InventarioAdjuntoAction"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AdjuntoUploadForm" 
+			parameter="cargarDownload"
+			scope="request"
+ 			validate="false">
+			<forward 
+				name="success" 
+				path=".{1}AdjuntosInventario"/>
+		</action>
+		
+		<action path="/*CargarAdjuntoAction"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AdjuntoUploadForm" 
+			parameter="cargar"
+			scope="request"
+ 			validate="false">
+			<forward 
+				name="success" 
+				path=".{1}AdjuntosUpload"/>
+		</action>
+		
+		<action path="/*GuardarAdjuntoAction"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AdjuntoUploadForm" 
+			parameter="uploadAdjunto"
+			scope="request"
+ 			validate="true"
+ 			input="/{1}CargarAdjuntoAction.do">
+			<forward 
+				name="success" 
+				path="/{1}InventarioAdjuntoAction.do"/>
+		</action>
+		
+		<action path="/*DownloadAdjuntoAction"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AdjuntoDownloadForm" 
+			scope="request"
+			parameter="streamInfo"
+ 			validate="false">
+			<forward 
+				name="success" 
+				path=".{1}AdjuntosInventario"/>
+		</action>
+		
+		<action path="/*EliminarAdjuntoAction"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AdjuntoUploadForm" 
+			parameter="eliminar"
+			scope="request"
+ 			validate="false">
+			<forward 
+				name="success" 
+				path="/{1}InventarioAdjuntoAction.do"/>
+		</action>
+		
+	</action-mappings>
+	<!-- ============================================= Controller Configuration -->
+	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
+
+	<!-- ======================================== Message Resources Definitions -->
+	<!-- Mensajes Generales -->
+	<message-resources parameter="resources.Messages" />
+
+	<!-- Mensajes de Error -->
+	<message-resources parameter="resources.ErrorMessages" key="errors" />
+
+	<!-- Mensajes Informativos -->
+	<message-resources parameter="resources.InformationalMessages" key="informationals" />
+
+	<!-- Etiquetas de Campos -->
+	<message-resources parameter="resources.FieldLabels" key="labels" />
+
+	<!-- Cabeceras de Tablas -->
+	<message-resources parameter="resources.TableHeader" key="headers" />
+	
+	<!-- Textos de Celdas -->
+	<message-resources parameter="resources.CellText" key="cells" />
+
+	<!-- Menús y Opciones de Menú -->
+	<message-resources parameter="resources.OptionsMenu" key="menus" />
+
+	<!-- Titulos de paginas, reportes -->
+	<message-resources parameter="resources.Titles" key="titles" />
+
+	<!-- Mensages emergentes de imagenes, iconos-->
+	<message-resources parameter="resources.Alt" key="alts" />
+
+	<!-- Labels para combos de estados y descripción de datos obtenidos desde Base de Datos -->
+	<message-resources parameter="resources.Codes" key="codes" />
+
+	<!-- =============================================== Plug Ins Configuration -->
+
+	<!-- ======================================================= Tiles plugin -->
+	<!--
+		This plugin initialize Tiles definition factory. This later can takes some
+		parameters explained here after. The plugin first read parameters from
+		web.xml, thenoverload them with parameters defined here. All parameters
+		are optional.
+		The plugin should be declared in each struts-config file.
+		- definitions-config: (optional)
+		Specify configuration file names. There can be several comma
+		separated file names (default: ?? )
+		- moduleAware: (optional - struts1.1)
+		Specify if the Tiles definition factory is module aware. If true
+		(default), there will be one factory for each Struts module.
+		If false, there will be one common factory for all module. In this
+		later case, it is still needed to declare one plugin per module.
+		The factory will be initialized with parameters found in the first
+		initialized plugin (generally the one associated with the default
+		module).
+		true : One factory per module. (default)
+		false : one single shared factory for all modules
+		- definitions-parser-validate: (optional)
+		Specify if xml parser should validate the Tiles configuration file.
+		true : validate. DTD should be specified in file header (default)
+		false : no validation
+		
+		Paths found in Tiles definitions are relative to the main context.
+	-->
+
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+
+		<!-- Path to XML definition file -->
+		<set-property property="definitions-config" value="/WEB-INF/conf/tiles-defs.xml,         /WEB-INF/conf/instrumentos/tiles-defs-instrumentos.xml,         /WEB-INF/conf/administracion/tiles-defs-administracion.xml,         /WEB-INF/conf/seguimientos/tiles-defs-seguimientos.xml,         /WEB-INF/conf/workflow/tiles-defs-workflow.xml,         /WEB-INF/conf/configuracion/tiles-defs-configuracion.xml,         /WEB-INF/conf/cripto/tiles-defs-cripto.xml ,   /WEB-INF/conf/consultas/tiles-defs.xml,/WEB-INF/conf/manager/tiles-defs.xml" />
+					   
+		<!-- Set Module-awareness to true -->
+		<set-property property="moduleAware" value="true" />
+	</plug-in>
+
+	<plug-in className="net.sf.navigator.menu.MenuPlugIn">
+		<set-property property="menuConfig" value="/WEB-INF/conf/menu-config.xml" />
+	</plug-in>
+	
+<!-- 	<plug-in className="com.fontar.seguridad.sf.ServiceFactoryPlugin">
+	    <set-property property="securityService" 
+	            value="com.fontar.seguridad.sf.MemorySecurityService"/>
+	</plug-in>	 -->
+	
+	<!-- =================================================== Validator plugin -->
+	<!-- 
+		<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="definitions-debug" value="2" />
+		<set-property property="definitions-parser-details" value="2" />
+		<set-property property="definitions-parser-validate" value="true" />
+		</plug-in>
+	-->
+
+	<!-- Validator Configuration -->
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/conf/validator-rules.xml,/WEB-INF/conf/validation.xml,     /WEB-INF/conf/administracion/validation-administracion.xml,     /WEB-INF/conf/configuracion/validation-configuracion.xml,     /WEB-INF/conf/cripto/validation-cripto.xml,     /WEB-INF/conf/instrumentos/validation-instrumentos.xml,     /WEB-INF/conf/seguimientos/validation-seguimientos.xml,         /WEB-INF/conf/seguridad/validation-seguridad.xml,     /WEB-INF/conf/workflow/validation-workflow.xml , /WEB-INF/conf/manager/validation.xml" />
+	</plug-in>
+	
+	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation" value="/WEB-INF/conf/beans-context-web.xml" />
+	</plug-in>
+
+	<!-- Bean Converters -->
+	<plug-in className="com.fontar.util.bean.BeanUtilsConverterPlugin" />
+	
+	<plug-in className="com.fontar.initialization.ApplicationContextPlugin"/>
+	
+</struts-config>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans> 
+
+<!-- PRESENTACION CONVOCATORIA  -->
+
+  <!-- InstrumentosDef -->
+  <bean id="PresentacionConvocatoriaActionBase"
+        class="com.fontar.web.action.instrumento.convocatoria.presentaciones.PresentacionConvocatoriaAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.PresentacionConvocatoriaBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="presentacionConvocatoriaService"/>
+	   	</property>	     
+  </bean>
+ 
+  <bean name="/PresentacionConvocatoriaInventario" class="com.fontar.web.action.instrumento.convocatoria.presentaciones.PresentacionConvocatoriaInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from PresentacionConvocatoriaBean o"/>
+   	<property name="idToolbar" value="presentaciones"/>	
+   	<property name="llamadoConvocatoriaServicio">
+   		<ref bean="llamadoConvocatoriaService" />
+   	</property>
+  </bean>
+  <bean name="/PresentacionConvocatoriaInventarioFiltrar" parent="/PresentacionConvocatoriaInventario"/>
+  
+  <bean name="/PresentacionConvocatoriaAgregar" parent="PresentacionConvocatoriaActionBase"/>
+  <bean name="/PresentacionConvocatoriaGuardar" parent="PresentacionConvocatoriaActionBase"/>
+  <bean name="/PresentacionConvocatoriaEditar" parent="PresentacionConvocatoriaActionBase"/>
+  <bean name="/PresentacionConvocatoriaBorrar" parent="PresentacionConvocatoriaActionBase"/>
+
+  <!-- Llamados Convocatoria -->
+	<bean id="LlamadoConvocatoriaActionBase"
+		class="com.fontar.web.action.instrumento.convocatoria.llamados.LlamadoConvocatoriaAction" abstract="true">
+	  	<property name="servicio">
+	  		<ref bean="llamadoConvocatoriaService"/>
+	  	</property>	     
+	</bean>
+	
+	<bean name="/LlamadoConvocatoriaBorrar" parent="LlamadoConvocatoriaActionBase"/>
+	<bean name="/LlamadoConvocatoriaInstrumentoVersionEditar" parent="LlamadoConvocatoriaActionBase"/>  
+	
+	<bean name="/LlamadoConvocatoriaInventario" class="com.fontar.web.action.instrumento.convocatoria.llamados.LlamadoConvocatoriaInventarioAction">
+	 	<property name="sessionFactory">
+	 		<ref bean="sessionFactory"/>
+	 	</property>	    
+	 	<property name="hqlQueryString" value="from LlamadoConvocatoriaBean o"/>
+	 	<property name="idToolbar" value="convocatorias"/>	
+	</bean> 
+	
+	<bean name="/LlamadoConvocatoriaInventarioFiltrar" parent="/LlamadoConvocatoriaInventario"/>
+
+
+	<!-- Wizard Llamados Convocatoria - Agregar/Editar Llamados Convocatoria  -->
+	<bean id="LlamadoConvocatoriaWizardActionBase"
+		class="com.fontar.web.action.instrumento.convocatoria.llamados.LlamadoConvocatoriaWizardAction" 
+		abstract="true">
+		<property 
+			name="servicio">
+			<ref bean="llamadoConvocatoriaService"/>
+		</property>
+	</bean>
+  
+	<bean name="/LlamadoConvocatoriaAgregar" parent="LlamadoConvocatoriaWizardActionBase"/>
+	<bean name="/LlamadoConvocatoriaEditar" parent="LlamadoConvocatoriaWizardActionBase"/>
+	<bean name="/LlamadoConvocatoriaEditarNext" parent="LlamadoConvocatoriaWizardActionBase"/>
+	<bean name="/LlamadoConvocatoriaVersionar" parent="LlamadoConvocatoriaWizardActionBase"/>
+	<bean name="/LlamadoConvocatoriaVersionarFinish" parent="LlamadoConvocatoriaWizardActionBase"/>
+	<bean name="/LlamadoConvocatoriaGuardar" parent="LlamadoConvocatoriaWizardActionBase"/>
+	<bean name="/LlamadoConvocatoriaGetInstrumentoDefData" parent="LlamadoConvocatoriaWizardActionBase"/>
+
+	<!-- LLAMADO CONVOCATORIA - Visualizar Datos Generales -->
+	<bean name="/VisualizarLlamadoConvocatoriaDatosGenerales"
+	      class="com.fontar.web.action.instrumento.convocatoria.llamados.VisualizarLlamadoConvocatoriaAction">
+		<property name="instrumentosServicio">
+			<ref bean="administrarInstrumentosService"/>
+		</property>
+	</bean>	
+
+	<!-- LLAMADO CONVOCATORIA - Visualizar Distribucion Financiamiento -->
+	<bean name="/VisualizarLlamadoConvocatoriaDistribucionFinanciamiento"
+	      class="com.fontar.web.action.instrumento.convocatoria.llamados.VisualizarLlamadoConvocatoriaAction">
+		<property name="instrumentosServicio">
+			<ref bean="administrarInstrumentosService"/>
+		</property>
+	</bean>	
+
+	<!-- LLAMADO CONVOCATORIA - Visualizar Distribucion Tipo Proyecto -->
+	<bean name="/VisualizarLlamadoConvocatoriaDistribucionTipoProyecto"
+	      class="com.fontar.web.action.instrumento.convocatoria.llamados.VisualizarLlamadoConvocatoriaAction">
+		<property name="instrumentosServicio">
+			<ref bean="administrarInstrumentosService"/>
+		</property>
+	</bean>	
+
+
+	<!-- VENTANILLA PERMANENTE - Visualizar Datos Generales -->
+	<bean name="/VisualizarVentanillaPermanenteDatosGenerales"
+	      class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VisualizarVentanillaPermanenteAction">
+		<property name="instrumentosServicio">
+			<ref bean="administrarInstrumentosService"/>
+		</property>
+	</bean>	
+
+	<!-- VENTANILLA PERMANENTE - Visualizar Distribucion Financiamiento -->
+	<bean name="/VisualizarVentanillaPermanenteDistribucionFinanciamiento"
+	      class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VisualizarVentanillaPermanenteAction">
+		<property name="instrumentosServicio">
+			<ref bean="administrarInstrumentosService"/>
+		</property>
+	</bean>	
+
+	<!-- VENTANILLA PERMANENTE - Visualizar Distribucion Tipo Proyecto -->
+	<bean name="/VisualizarVentanillaPermanenteDistribucionTipoProyecto"
+	      class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VisualizarVentanillaPermanenteAction">
+		<property name="instrumentosServicio">
+			<ref bean="administrarInstrumentosService"/>
+		</property>
+	</bean>	
+
+  <!-- Ventanilla Permanente -->
+  <bean id="VentanillaPermanenteActionBase" class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VentanillaPermanenteAction" abstract="true">
+	   	<property name="servicio" ref="ventanillaPermanenteService"/>
+	   	<property name="proyectoServicio" ref="wfProyectoService"/>
+  </bean>
+    
+  <bean name="/VentanillaPermanenteInventario" class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VentanillaPermanenteInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from VentanillaPermanenteBean o"/>
+   	<property name="idToolbar" value="ventanillas"/>	
+  </bean>
+  <bean name="/VentanillaPermanenteInventarioFiltrar" parent="/VentanillaPermanenteInventario"/> 
+  
+  <bean name="/VentanillaPermanenteBorrar" parent="VentanillaPermanenteActionBase"/>
+  <bean name="/VentanillaPermanenteInstrumentoVersionEditar" parent="VentanillaPermanenteActionBase"/>  
+  
+  <!-- Wizard Ventanilla Permanente - Agregar/Editar Ventanilla Permanente  -->
+  <bean id="VentanillaPermanenteWizardActionBase"
+        class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VentanillaPermanenteWizardAction" 
+        abstract="true">
+	   	<property 
+	   		name="servicio">
+	   		<ref bean="ventanillaPermanenteService"/>
+	   	</property>
+  </bean>
+
+  <bean name="/VentanillaPermanenteAgregar" parent="VentanillaPermanenteWizardActionBase"/>
+  <bean name="/VentanillaPermanenteEditar" parent="VentanillaPermanenteWizardActionBase"/>
+  <bean name="/VentanillaPermanenteEditarNext" parent="VentanillaPermanenteWizardActionBase"/>
+  <bean name="/VentanillaPermanenteVersionar" parent="VentanillaPermanenteWizardActionBase"/>
+  <bean name="/VentanillaPermanenteVersionarFinish" parent="VentanillaPermanenteWizardActionBase"/>
+  <bean name="/VentanillaPermanenteGuardar" parent="VentanillaPermanenteWizardActionBase"/>  
+  <bean name="/VentanillaPermanenteGetInstrumentoDefData" parent="VentanillaPermanenteWizardActionBase"/>
+  
+    <!--bean name="/VentanillaPermanenteAsignarMontoGlobal" parent="VentanillaPermanenteActionBase">
+  </bean>
+  bean name="/VentanillaPermanenteAsignarMontoGlobal"
+        class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VentanillaPermanenteAction">
+    	<property name="ventanillaPermanenteServicio">
+    		<ref bean="ventanillasPermanentesServiceTarget"/>
+    	</property>    	
+  </bean -->
+
+  <bean name="/VentanillaPermanenteGuardarMontoGlobal" parent="VentanillaPermanenteActionBase">  
+  </bean>
+  <!-- bean name="/VentanillaPermanenteGuardarMontoGlobal"
+        class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VentanillaPermanenteAction">
+    	<property name="ventanillaPermanenteServicio">
+    		<ref bean="ventanillasPermanentesServiceTarget"/>
+    	</property>
+  </bean
+  --> 
+
+  <bean name="/VentanillaPermanenteDistribuir" parent="VentanillaPermanenteActionBase">
+  </bean>
+  <!--  bean name="/VentanillaPermanenteDistribuir"
+        class="com.fontar.web.action.instrumento.ventanilla.ventanilla.VentanillaPermanenteAction">
+    	<property name="ventanillaPermanenteServicio">
+    		<ref bean="ventanillasPermanentesServiceTarget"/>
+    	</property>
+  </bean -->  
+  
+  <!-- Proyectos CAE -->
+  <bean name="/VentanillaPermanenteCargaProyecto" parent="VentanillaPermanenteActionBase"/>
+  <bean name="/VentanillaPermanenteCargarProyecto" parent="VentanillaPermanenteActionBase"/>
+
+ <!-- Instrumentos -> Ventanilla Permanente -> | -->	
+  <bean id="IdeaProyectoActionBase"
+        class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoAction" 
+        abstract="true">
+	   	<property 
+	   		name="servicio">
+	   		<ref bean="ideaProyectoService"/>
+	   	</property>
+		<property name="wfIdeaProyectoServicio">
+	   		<ref bean="wfIdeaProyectoService"/>
+	   	</property>
+		<property name="administrarIdeaProyectoServicio">
+	   		<ref bean="administrarIdeaProyectoService"/>
+	   	</property>
+  </bean>
+  <bean name="/IdeaProyectoInventario" class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from IdeaProyectoBean o"/>
+   	<property name="idToolbar" value="ideasProyecto"/>	
+  </bean>
+  <bean name="/IdeaProyectoInventarioFiltrar" parent="/IdeaProyectoInventario"/>
+  
+  <bean name="/IdeaProyectoAgregar" parent="IdeaProyectoActionBase"/>
+  <bean name="/IdeaProyectoGuardar" parent="IdeaProyectoActionBase"/>
+  <bean name="/IdeaProyectoEditar" parent="IdeaProyectoActionBase"/>
+  
+  <bean name="/IdeaProyectoVisualizar" 
+		class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.VisualizarIdeaProyectoAction">
+		<property name="administrarIdeaProyectoServicio">
+	   		<ref bean="administrarIdeaProyectoService"/>
+	   	</property>
+  </bean>  
+
+  <!-- Wizard Idea Proyecto - Carga de Proyecto 
+  <bean id="IdeaProyectoWizardActionBase"
+        class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoWizardAction" 
+        abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="ideaProyectoService"/>
+	   	</property>
+	   	<property name="administrarIdeaProyectoServicio">
+	   		<ref bean="administrarIdeaProyectoService"/>
+	   	</property>
+  </bean>
+  <bean name="/IdeaProyectoCargarVentanilla" parent="IdeaProyectoWizardActionBase"/>
+  <bean name="/IdeaProyectoProcesarCargarVentanilla" parent="IdeaProyectoWizardActionBase"/>
+  <bean name="/IdeaProyectoCargarProyecto" parent="IdeaProyectoWizardActionBase"/>
+  <bean name="/IdeaProyectoProcesarCargarProyecto" parent="IdeaProyectoWizardActionBase"/>
+  -->
+
+  <!--  Agregar Evaluación -->
+  <bean name="/IdeaProyectoAgregarEvaluacion" parent="IdeaProyectoActionBase"/>
+  <bean name="/IdeaProyectoEvaluacionGuardar" parent="IdeaProyectoActionBase"/>
+  
+  <!--  Cargar Resultado Evaluación -->
+  <bean name="/IdeaProyectoCargarResultadoEvaluacion" parent="IdeaProyectoActionBase"/>
+  <bean name="/IdeaProyectoResultadoEvaluacionGuardar" parent="IdeaProyectoActionBase"/>
+
+  <!--  Confirmar Evaluación -->
+  <bean name="/IdeaProyectoConfirmarEvaluacion" parent="IdeaProyectoActionBase"/>
+  <bean name="/IdeaProyectoConfirmarEvaluacionGuardar" parent="IdeaProyectoActionBase"/>
+  
+  
+  <bean id="DistribucionFinanciamientoActionBase"
+        class="com.fontar.web.action.instrumento.convocatoria.llamados.DistribucionFinanciamientoAction"
+		abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="distribucionFinanciamientoService"/>
+	   	</property>	     
+  </bean>
+  
+  <bean name="/DistribucionFinanciamiento" parent="DistribucionFinanciamientoActionBase"/>
+  <bean name="/DistribucionFinanciamientoGuardar" parent="DistribucionFinanciamientoActionBase"/>
+  
+  <bean id="InstrumentoVersionActionBase"
+        class="com.fontar.web.action.instrumento.convocatoria.llamados.InstrumentoVersionAction"
+		abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="instrumentoVersionService"/>
+	   	</property>	     
+  </bean>
+  
+  <bean name="/InstrumentoVersion" parent="InstrumentoVersionActionBase"/>
+  
+  <bean id="DistribucionTipoProyectoBase"
+        class="com.fontar.web.action.instrumento.convocatoria.general.DistribucionTipoProyectoAction"
+		abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="distribucionTipoProyectoService"/>
+	   	</property>	     
+  </bean>
+  
+  <bean name="/DistribucionTipoProyectoEditar" parent="DistribucionTipoProyectoBase"/>
+  <bean name="/DistribucionTipoProyectoAgregar" parent="DistribucionTipoProyectoBase"/>  
+  <bean name="/DistribucionTipoProyectoGuardar" parent="DistribucionTipoProyectoBase"/>  
+	
+  <!--  Idea Proyecto PITEC  -->
+
+  <bean id="AdministrarIdeaProyectoPitecActionBase" class="com.fontar.web.action.instrumento.pitec.AdministrarIdeaProyectoPitecAction" abstract="true">
+		<property name="wfProyectoServicio" ref="wfIdeaProyectoPitecService"/>
+  </bean>
+  
+  <bean name="/CargarIdeaProyectoPitec" parent="AdministrarIdeaProyectoPitecActionBase"/>
+  <bean name="/IdeaProyectoPitecGuardar" parent="AdministrarIdeaProyectoPitecActionBase"/>
+  <!--   bean name="/IdeaProyectoPitecEditar" parent="AdministrarIdeaProyectoPitecActionBase" / -->
+  <!--  <bean name="/IdeaProyectoPitecGuardarEdicion" parent="AdministrarIdeaProyectoPitecActionBase" / -->
+
+  <!-- Inventario Idea Proyecto PITEC -->
+  <bean name="/IdeaProyectoPitecInventario" class="com.fontar.web.action.instrumento.pitec.IdeaProyectoPitecInventarioAction">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	  	<property name="hqlQueryString" value="from IdeaProyectoPitecBean o"/>
+  		<property name="idToolbar" value="ideasProyectoPitec"/>	
+	  	<property name="administrarInstrumentosService">
+  			<ref bean="administrarInstrumentosService"/>
+	  	</property>
+  </bean>
+  <bean name="/IdeaProyectoPitecInventarioFiltrar" parent="/IdeaProyectoPitecInventario"/>
+
+  <!-- Wizard Idea Proyecto Pitec - Carga de Proyecto Pitec -->
+  <bean id="IdeaProyectoPitecWizardActionBase"
+        class="com.fontar.web.action.instrumento.pitec.IdeaProyectoPitecWizardAction" 
+        abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="ideaProyectoService"/>
+	   	</property>
+	   	<property name="administrarIdeaProyectoServicio">
+	   		<ref bean="administrarIdeaProyectoService"/>
+	   	</property>
+  </bean>
+  <bean name="/IdeaProyectoPitecCargarVentanilla" parent="IdeaProyectoPitecWizardActionBase"/>
+  <bean name="/IdeaProyectoPitecProcesarCargarVentanilla" parent="IdeaProyectoPitecWizardActionBase"/>
+  <bean name="/IdeaProyectoPitecCargarProyecto" parent="IdeaProyectoPitecWizardActionBase"/>
+  <bean name="/IdeaProyectoPitecProcesarCargarProyecto" parent="IdeaProyectoPitecWizardActionBase"/>
+
+	<!-- Evaluacion Toolbar -->
+	<bean name="/EvaluacionesIdeaProyectoInventario" class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.EvaluacionesIdeaProyectoInventario">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from EvaluacionBean o"/>
+	   	<property name="idToolbar" value="evaluacionesProyecto"/>	
+	   	<property name="administrarIdeaProyectoServicio">
+		   	 <ref bean="administrarIdeaProyectoService"/>
+	   	 </property>
+	   	
+	</bean>
+	
+	<!-- FF / Adjuntos InstrumentoDef  -->
+	<bean id="AdjuntoInstrumentoDefActionBase"
+	      class="com.fontar.web.action.configuracion.instrumentos.InstrumentoDefAdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoInstrumentoDefServicio"/>
+	  	</property>	     
+	  	<property name="administrarInstrumentosServicio">
+  			<ref bean="administrarInstrumentosService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/InstrumentoDefBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoInstrumentoDefServicio"/>
+	  	</property>	     
+	</bean>	
+	
+	<bean name="/InstrumentoDefBeanGuardarAdjuntoAction" parent="AdjuntoInstrumentoDefActionBase"/>
+	<bean name="/InstrumentoDefBeanCargarAdjuntoAction" parent="AdjuntoInstrumentoDefActionBase"/>
+	<bean name="/InstrumentoDefBeanInventarioAdjuntoAction" parent="AdjuntoInstrumentoDefActionBase"/>
+	<bean name="/InstrumentoDefBeanEliminarAdjuntoAction" parent="AdjuntoInstrumentoDefActionBase"/>
+
+</beans>
+
+
+
+

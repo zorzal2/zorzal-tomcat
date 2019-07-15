@@ -1,0 +1,471 @@
+body
+{
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-size: 7pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+}
+
+table
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+	border-color: #006EAA;
+	border-spacing: 0px;
+}
+
+td{
+	empty-cells: show;
+}
+
+table.recuadro
+{	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+	font-weight: normal;
+	width: 100%;
+	color: #003366;
+	background-color: #E9EFF5;
+	border-style:solid;
+	border-width:1px;
+}
+
+table.recuadro td
+{
+	font-weight: bold;
+	text-align: left;
+	border-width:0px;
+}
+table.recuadro td.label
+{
+	font-weight: normal;
+	text-align: right;
+}
+
+th.titulo
+{
+	height: 26px;
+	font-family: tahoma, sans-serif;
+	font-size: 7pt;
+	font-weight: bold;
+	color: #006fa9;
+	background-color: #E9EFF5;
+}
+
+td.obligatorio {
+	font-size: 7pt;
+	color: #006fa9; 
+	font-family: tahoma, sans-serif;
+	border-style: solid;
+	border-color: white;
+	font-weight: bold;
+}
+
+td.negrita {
+	font-size: 7pt;
+	color: #000000; 
+	font-family: tahoma, sans-serif;
+	border-style: solid;
+	border-color: white;
+	font-weight: bold;
+}
+
+td.opcional {
+	font-size: 7pt;
+	color: #006fa9;
+	font-family: tahoma, sans-serif;
+	border-style: solid;
+	border-color: white;
+}
+
+h1 {
+	font-size: 7pt;
+	color: #006fa9;
+	font-family: arial;
+}
+
+h2 {
+	font-size: 7pt;
+	color: #006fa9;
+	font-family: arial;
+	background-color: #ffffff
+}
+
+h3 {
+	margin-bottom: 3pt;
+	font-size: 7pt;
+	color: #006fa9;
+	font-family: tahoma, sans-serif;
+	background-color: #ffffff
+}
+
+h4 {
+	font-size: 7pt;
+	color: #006fa9;
+	font-family: tahoma, sans-serif;
+	background-color: #ffffff
+}
+
+select {
+	font-size: 7pt;
+	color: #003366;
+	font-family: arial;
+}
+
+button {
+	font-size: 7pt;
+	color: #003366;
+	font-family: arial;
+}
+
+input {
+	font-size: 7pt;
+	color: #003366;
+	font-family: arial;
+}
+
+textarea {
+	font-size: 7pt;
+	color: #003366;
+	font-family: arial;
+}
+
+table.formulario {
+	font-size: 7pt;
+	text-align: left;
+	width: 100%;	
+}
+
+table.formulario th {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: white;
+}
+
+table.formulario td {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: white;
+	background-color: white;
+}
+
+
+table.filtros {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+	font-weight: normal;
+	width: 100%;
+	color: #003366;
+	background-color: #E9EFF5;
+	border-style:solid;
+	border-width:1px;
+}
+
+table.inventario {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+	width: 100%;
+	border-style:solid;
+	border-width:1px;
+	border-spacing:0px;
+	border-collapse:collapse;
+}
+
+table.inventario th {
+	color: #006EA9;
+	background-color: #B4C9E0;
+	text-align: left;
+	font-weight: bold;
+	border-style:solid;
+	height: 20px;
+	padding-right: 4px;
+	padding-left: 4px;
+	border-width: 1px;
+	border-color: #006EAA;
+}
+
+table.inventario th.accionesInventario {
+	display: none;
+}
+
+table.inventario th.obligatorio {
+	font-family: tahoma, sans-serif;
+	font-weight: bold;
+}
+
+table.inventario th.opcional {
+	font-family: tahoma, sans-serif;
+	font-weight: normal;
+}
+
+TABLE.inventario tfoot TR {
+	VERTICAL-ALIGN: middle; 
+	background-color: #B4C9E0;
+}
+table.inventario tfoot td.title {
+	color: #006EA9;
+	border-style: solid;
+	height: 20px;
+	padding-right: 4px;
+	padding-left: 4px;
+	border-width: 1px;
+	border-color: #006EAA;
+	font-weight: bold;
+}
+
+table.inventario td.accionesInventario {
+	text-align: center;
+}
+
+table.inventario col {
+	padding-right: 4px;
+	padding-left: 4px;
+	font-size: 7pt;
+	vertical-align: middle;
+	color: #000000;
+	font-family: tahoma,sans-serif;
+	background-color: #FFFFFF;
+	text-align: left	
+}
+
+TABLE.inventario TR.odd {
+	VERTICAL-ALIGN: middle; 
+	background-color: #F2F2F2;
+	TEXT-ALIGN: left;
+	font-weight: normal;
+}
+
+TABLE.inventario TR.even {
+	VERTICAL-ALIGN: middle; 
+	background-color: #FFFFFF;
+	TEXT-ALIGN: left;
+	font-weight: normal;
+}
+
+TABLE.inventario TD {
+	padding-right: 4px;
+	padding-left: 4x;
+	border-width: 1px;
+	border-color: #006EAA;
+	border-style:solid;
+	height:18px;
+}
+
+table.login {
+	border-color: white;
+}
+
+table.login th {
+	color: #006EA9;
+	background-color: #B4C9E0;
+	border-width: 0px;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+table.login td {
+	color: #006EA9;
+	background-color: #F2F2F2;
+	border-width: 0px;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: left;
+}
+
+table.login td.footer {
+	background-color: #F2F2F2;
+	border-width: 0px;
+	text-align: center;
+	spacing:0px;
+	padding:0px;
+	width: 50%;
+}
+
+button {
+	font-size: 9px;
+	color: #003366;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+	align:right;
+	cursor: hand;
+}
+
+span.pagelinks{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #003366;
+	text-align: right;
+	width:100%;
+}
+
+span.exportbanner{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #003366;
+	text-align: left;
+	width:100%;
+}
+
+span.pagebanner{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #003366;
+	text-align: right;
+	width:100%;
+}
+
+span.pagebanner a:link{
+	color: #006EA9;
+}
+
+span.pagelinks a:link{
+	color: #006EA9;
+}
+
+a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #006EA9;
+}
+
+a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #006EA9;
+}
+
+error{
+	font-size: 7pt;
+	color: red; 
+	font-family: tahoma, sans-serif;
+	font-weight: bold;
+}
+
+table.flujo th.periodo {
+	color: #006EA9;
+	background-color: #B4C9E0;
+	text-align: center;
+	font-weight: bold;
+	border-style:solid;
+	height: 20px;
+	padding-right: 4px;
+	padding-left: 4px;
+	border-width: 1px;
+	border-color: #006EAA;
+	width: 5.5%;
+}
+table.flujo th.rubro {
+	color: #006EA9;
+	background-color: #B4C9E0;
+	text-align: center;
+	font-weight: bold;
+	border-style:solid;
+	height: 20px;
+	padding-right: 4px;
+	padding-left: 4px;
+	border-width: 1px;
+	border-color: #006EAA;
+	width: 34%;
+}
+table.flujo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	width: 100%;
+	border-style:solid;
+	border-width:1px;
+	border-spacing:0px;
+	border-collapse:collapse;
+}
+TABLE.flujo TD {
+	padding-right: 4px;
+	padding-left: 4x;
+	border-width: 1px;
+	border-color: #006EAA;
+	border-style:solid;
+	height:18px;
+}
+TABLE.flujo TR.odd {
+	VERTICAL-ALIGN: middle; 
+	background-color: #F2F2F2;
+	font-weight: normal;
+}
+TABLE.flujo TR.even {
+	VERTICAL-ALIGN: middle; 
+	background-color: #FFFFFF;
+	font-weight: normal;
+}
+TABLE.flujo tfoot TR {
+	VERTICAL-ALIGN: middle; 
+	background-color: #B4C9E0;
+}
+table.flujo tfoot td.title {
+	color: #006EA9;
+	border-style: solid;
+	height: 20px;
+	padding-right: 4px;
+	padding-left: 4px;
+	border-width: 1px;
+	border-color: #006EAA;
+	font-weight: bold;
+}
+p {
+	font-size: 8pt;
+	color: #006fa9;
+	font-family: tahoma, sans-serif;
+}
+.money {
+	text-align: right !important;
+}
+.imageButton {
+	display: none;
+}
+.textButton {
+	display: none;
+}
+/* Tabla de resumen de datos numericos */
+table.resumen {
+	font-size: 8pt;
+	text-align: left;
+	width: 100%;
+	border-collapse: collapse;
+	border-width: 0px;
+	margin: 10px;
+	width: 40%;
+	border: #ECF1F8 1px solid;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+table.resumen tr.total td {
+	border-top: #006EAA 1px solid;
+	padding: 4px;
+	background-color: #E9EFF5;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+table.resumen tr.total th {
+	color: #006EA9;
+	border-top: #006EAA 1px solid;
+	padding: 4px;
+	background-color: #E9EFF5;
+	font-weight: bold;
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+table.resumen th {
+	border-top: #ECF1F8 1px solid;
+	color: #006EA9;
+	padding: 4px;
+}
+
+table.resumen td {
+	border-top: #ECF1F8 1px solid;
+	padding: 4px;
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	
+
+
+	<!-- CONFIGURACION CRIPTOGRAFIA -->
+	
+	<bean id="EvaluacionEvaluadorCryptoInfo" class="com.pragma.util.interceptors.EntityCryptoInfo">
+		<property name="entityName" value="EvaluacionEvaluadorBean"/>
+		<property name="crytoFields" >
+			<map>
+				<entry key="institucion" value="institucionData" />
+				<entry key="evaluador" value="evaluadorData" />
+				<entry key="lugarEvaluacion" value="lugarEvaluacionData" />				
+			</map>
+		</property>
+	</bean>	
+
+	
+	<bean id="genericCryptoWorker" class="com.pragma.util.interceptors.GenericCryptoWorker">
+		<property name="criptoInfo">
+			<map>
+				<entry key="EvaluacionEvaluadorBean" value-ref="EvaluacionEvaluadorCryptoInfo" />				
+			</map>
+		</property>
+		<property name="criptoSistema" ref="criptoSistema"/>
+	</bean>
+	
+	<bean id="genericCryptoInterceptor" class="com.pragma.util.interceptors.GenericInterceptor" singleton="true">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="matches">
+			<map>
+				<entry key="EvaluacionEvaluadorBean" value-ref="genericCryptoWorker" />
+			</map>
+		</property>
+	</bean>
+  
+</beans>				

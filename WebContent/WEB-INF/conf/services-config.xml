@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!-- BEAN Transaction base, por default se extiende de este -->
+<bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+     abstract="true">
+   <property name="transactionManager" ref="transactionManager"/>
+   <property name="transactionAttributes">
+     <props>
+		<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="save*">PROPAGATION_REQUIRED</prop>
+		<prop key="create*">PROPAGATION_REQUIRED</prop>		
+		<prop key="update*">PROPAGATION_REQUIRED</prop>		
+		<prop key="delete*">PROPAGATION_REQUIRED</prop>
+		<prop key="get*">PROPAGATION_REQUIRED</prop>
+ 		<prop key="autorizar*">PROPAGATION_REQUIRED</prop>
+		<prop key="actualizar*">PROPAGATION_REQUIRED</prop>
+		<prop key="analizar*">PROPAGATION_REQUIRED</prop>		
+		<prop key="cargar*">PROPAGATION_REQUIRED</prop>		
+		<prop key="eliminar*">PROPAGATION_REQUIRED</prop>
+		<prop key="anular*">PROPAGATION_REQUIRED</prop>
+ 		<prop key="parse*">PROPAGATION_REQUIRED</prop>
+ 		<prop key="registrar*">PROPAGATION_REQUIRED</prop>
+ 		<prop key="pagar*">PROPAGATION_REQUIRED</prop>
+ 		<prop key="permitir*">PROPAGATION_REQUIRED</prop>
+        <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+     </props>
+   </property>
+ </bean>
+
+<!-- 
+	Spring : RTFM ! LEMMBLPQTP PQMEM !
+ -->
+<bean id="wfTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+     abstract="true">
+   <property name="transactionManager" ref="transactionManager"/>
+   <property name="transactionAttributes">
+     <props>
+		<prop key="cargar*">PROPAGATION_REQUIRED</prop>
+		<prop key="agregar*">PROPAGATION_REQUIRED</prop>
+		<prop key="confirmar*">PROPAGATION_REQUIRED</prop>
+		<prop key="anular*">PROPAGATION_REQUIRED</prop>
+		<prop key="autorizar*">PROPAGATION_REQUIRED</prop>
+		<prop key="armar*">PROPAGATION_REQUIRED</prop>		
+		<prop key="finalizar*">PROPAGATION_REQUIRED</prop>			
+		<prop key="pasar*">PROPAGATION_REQUIRED</prop>					
+		<prop key="cerrar*">PROPAGATION_REQUIRED</prop>			
+		<prop key="controlar*">PROPAGATION_REQUIRED</prop>
+		<prop key="evaluar*">PROPAGATION_REQUIRED</prop>		
+		<prop key="obtenerEstado*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="modificar*">PROPAGATION_REQUIRED</prop>
+		<prop key="guardar*">PROPAGATION_REQUIRED</prop>
+		<prop key="crear*">PROPAGATION_REQUIRED</prop>
+		<prop key="analizar*">PROPAGATION_REQUIRED</prop>		
+		<prop key="reconsiderar*">PROPAGATION_REQUIRED</prop>
+		<prop key="eliminar*">PROPAGATION_REQUIRED</prop>
+		<prop key="solicitar*">PROPAGATION_REQUIRED</prop>
+		<prop key="generar*">PROPAGATION_REQUIRED</prop>
+		<prop key="parse*">PROPAGATION_REQUIRED</prop>
+		<prop key="getIdProyectoDeSeguimiento">PROPAGATION_REQUIRED,readOnly</prop>
+     </props>
+   </property>
+</bean>
+
+<bean id="allRequeriedTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+     abstract="true">
+   <property name="transactionManager" ref="transactionManager"/>
+   <property name="transactionAttributes">
+     <props>
+		<prop key="*">PROPAGATION_REQUIRED</prop>
+     </props>
+   </property>
+</bean>
+
+<bean id="adjuntoTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+     abstract="true">
+   <property name="transactionManager" ref="transactionManager"/>
+   <property name="transactionAttributes">
+     <props>
+		<prop key="upload*">PROPAGATION_REQUIRED</prop>
+		<prop key="borrar*">PROPAGATION_REQUIRED</prop>		
+     </props>
+   </property>
+ </bean>
+ 
+<bean name="adjuntoServicioTarget" class="com.fontar.bus.impl.varios.AdjuntoServicioImpl" abstract="true"> 
+	<property name="adjuntoDao">
+		<ref bean="adjuntosDao" />
+	</property>
+	<property name="adjuntoContenidoDao">
+		<ref bean="adjuntoContenidoDao" />
+	</property>
+</bean>	
+
+</beans>

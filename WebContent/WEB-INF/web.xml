@@ -1,12 +1,365 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>zorzal</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+
+<!--
+  - Web app deployment descriptor that just loads an "example" DispatcherServlet
+  - with a specific context.
+  -
+  - Depends on the following libraries in WEB-INF/lib:
+  - * spring.jar
+  - * commons-logging.jar
+  -->
+	<!--   **********   Acegi Security Configuration - BEGIN  **********   -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/conf/seguridad/applicationContext-acegi.xml
+			/WEB-INF/conf/seguridad/applicationContext-spring-ldap.xml
+		</param-value>
+	</context-param>
+
+    <filter>
+        <filter-name>Acegi Filter Chain Proxy</filter-name>
+        <filter-class>org.acegisecurity.util.FilterToBeanProxy</filter-class>
+        <init-param>
+            <param-name>targetClass</param-name>
+            <param-value>org.acegisecurity.util.FilterChainProxy</param-value>
+        </init-param>
+    </filter>
+   	<filter>
+	    <filter-name>ResponseOverrideFilter</filter-name>
+	    <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+	</filter>
+	
+	
+  	<filter>
+	    <filter-name>NavigationStackFilter</filter-name>
+	    <filter-class>com.pragma.web.NavigationStackFilter</filter-class>
+        <init-param>
+            <param-name>defaultAction</param-name>
+            <param-value>WFBandejaDeEntrada</param-value>
+		</init-param>         
+        <init-param>
+            <param-name>stackableActions</param-name>
+            <param-value>
+				BitacoraInventario,
+				CompletarDatosIniciales,
+				EntidadBancariaConfiguracionInventario,
+				EntidadBancariaConfiguracionInventarioFiltrar,
+				EntidadBeneficiariaConfiguracionInventario,
+				EntidadBeneficiariaConfiguracionInventarioFiltrar,
+				EntidadBeneficiariaSelectorPopUp,
+				EntidadConfiguracionInventario,
+				EntidadConfiguracionInventarioFiltrar,
+				EntidadEvaluadoraConfiguracionInventario,
+				EntidadEvaluadoraConfiguracionInventarioFiltrar,
+				EntidadInventario,
+				EntidadSelectorFiltrar,
+				EntidadSelectorPopUp,
+				EvaluacionInventario,
+				EvaluacionInventarioFiltrar,
+				EvaluacionSeguimientoInventario,
+				EvaluacionSeguimientoInventarioFiltrar,
+				EvaluacionesIdeaProyectoInventario,
+				EvaluacionesProyectoInventario,
+				HistoriaPACInventario,
+				HistoriaPACVisualizar,
+				IdeaProyectoInventario,
+				IdeaProyectoInventarioFiltrar,
+				InstrumentosDefInventario,
+				InstrumentosDefInventarioFiltrar,
+				LlamadoConvocatoriaInventario,
+				LlamadoConvocatoriaInventarioFiltrar,
+				MisEvaluacionesDeSeguimiento,
+				MisEvaluacionesGenerales,
+				NotificacionInventario,
+				NotificacionInventarioFiltrar,
+				PaqueteInventario,
+				PaqueteInventarioFiltrar,
+				PersonaDirectorSelectorPopUp,
+				PersonaInventario,
+				PersonaLegalSelectorPopUp,
+				PersonaRendicionSelectorPopUp,
+				PersonaRepresentanteSelectorPopUp,
+				PersonaSelectorPopUp,
+				PresentacionConvocatoriaInventario,
+				PresentacionConvocatoriaInventarioFiltrar,
+				ProcedimientoInventario,
+				ProcedimientoInventarioFiltrar,
+				ProyectoInventario,
+				ProyectoInventarioFiltrar,
+				ProyectoPACInventario,
+				ProyectoPACInventarioFiltrar,
+				Reconsiderar,
+				RegistrarPedidoReconsideracion,
+				RendicionCuentasANRInventario,
+				RendicionCuentasCFInventario,
+				SeguimientoInventario,
+				SeguimientoInventarioFiltrar,
+				SeguimientoProyectoInventario,
+				VentanillaPermanenteInventario,
+				VentanillaPermanenteInventarioFiltrar,
+				WFBandejaDeEntrada
+            </param-value>
+        </init-param>
+	</filter>
+
+	<!-- Start JBPM -->
+	<filter>
+	    <filter-name>JbpmContextFilter</filter-name>
+	    <filter-class>com.pragma.web.JbpmContextFilter</filter-class>
+	</filter>
+	<!-- End JBPM -->
+
+	<filter-mapping>
+	    <filter-name>ResponseOverrideFilter</filter-name>
+	    <url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+	    <filter-name>ResponseOverrideFilter</filter-name>
+	    <url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+    <filter-mapping>
+      <filter-name>Acegi Filter Chain Proxy</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<filter-mapping>
+    	<filter-name>JbpmContextFilter</filter-name>
+	    <url-pattern>*.do</url-pattern>
+  	</filter-mapping>
+
+	<filter-mapping>
+    	<filter-name>JbpmContextFilter</filter-name>
+	    <url-pattern>/processimage</url-pattern>
+  	</filter-mapping>
+  	
+	<filter-mapping>
+    	<filter-name>NavigationStackFilter</filter-name>
+  	    <url-pattern>*.do</url-pattern>
+  	</filter-mapping>
+
+	<!--
+	  - Loads the root application context of this web app at startup.
+	  - The application context is then available via 
+	  - WebApplicationContextUtils.getWebApplicationContext(servletContext).
+    -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!--   **********   Acegi Security Configuration - END  **********   -->
+	
+
+  <!--
+    - Servlet that dispatches request to registered handlers (Controller implementations).
+    - Has its own application context, by default defined in "{servlet-name}-servlet.xml",
+    - i.e. "example-servlet.xml".
+    -
+    - A web app can contain any number of such servlets.
+    - Note that this web app does not have a shared root application context,
+    - therefore the DispatcherServlet contexts do not have a common parent.
+    -->
+      <!-- jBPM FileServlet -->
+  <servlet>
+    <servlet-name>ProcessImageServlet</servlet-name>
+    <servlet-class>org.jbpm.webapp.servlet.ProcessImageServlet</servlet-class>
+  </servlet>
+
+	<!-- Standard Action Servlet Configuration (with debugging) -->
+
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<!--  ERA org.apache.struts.action.ActionServlet  -->
+		<servlet-class>
+			com.pragma.web.PragmaActionServlet
+		</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>
+				/WEB-INF/conf/struts-config.xml,
+				/WEB-INF/conf/instrumentos/struts-config-instrumentos.xml,
+				/WEB-INF/conf/seguimientos/struts-config-seguimientos.xml,			
+				/WEB-INF/conf/workflow/struts-config-workflow.xml,
+				/WEB-INF/conf/configuracion/struts-config-configuracion.xml,
+				/WEB-INF/conf/cripto/struts-config-cripto.xml,
+				/WEB-INF/conf/seguridad/struts-config-logon.xml,
+				/WEB-INF/conf/administracion/struts-config-administracion.xml,
+				/WEB-INF/conf/toolbar/struts-config-toolbar.xml,	
+				/WEB-INF/conf/consultas/struts-config.xml,	
+				/WEB-INF/conf/manager/struts-config.xml	
+			</param-value>
+		</init-param>
+
+<!-- 		<init-param>		
+			<param-name>config/admin</param-name>
+			<param-value>
+
+			</param-value>
+		</init-param>
+ -->		
+	
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ProcessReportServlet</servlet-name>
+		<servlet-class>com.fontar.web.action.consultas.ProcessReportServlet</servlet-class>
+	</servlet>
+	
+	
+	<servlet-mapping>
+	    <servlet-name>ProcessImageServlet</servlet-name>
+    	<url-pattern>/processimage</url-pattern>
+	</servlet-mapping>
+  
+  	<!-- Standard Action Servlet Mapping -->
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	    <servlet-name>ProcessReportServlet</servlet-name>
+    	<url-pattern>/processReport/*</url-pattern>
+	</servlet-mapping>
+	
+  	
+  <!--
+    - Maps the example dispatcher to /example/*. All handler mappings in
+    - example-servlet.xml will by default be applied to this subpath.
+    - If a mapping isn't a /* subpath, the handler mappings are considered
+    - relative to the web app root.
+    -
+    - A single dispatcher could get mapped to multiple paths, like any servlet.
+    -->
+ 	
+		    
+	<welcome-file-list>
+	 	<welcome-file>index.jsp</welcome-file> 
+	</welcome-file-list>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/spring</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/spring.tld</taglib-location>
+		</taglib>
+		
+	  	<taglib>
+			<taglib-uri>/tags/struts-bean</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-bean.tld</taglib-location>
+		</taglib>
+	
+		<taglib>
+			<taglib-uri>/tags/struts-bean-el</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-bean-el.tld</taglib-location>
+		</taglib>	
+	
+		<taglib>
+			<taglib-uri>/tags/struts-html</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-html.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+			<taglib-uri>/tags/struts-html-el</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-html-el.tld</taglib-location>
+		</taglib>	
+	
+		<taglib>
+			<taglib-uri>/tags/struts-logic</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-logic.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+			<taglib-uri>/tags/struts-logic-el</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-logic-el.tld</taglib-location>
+		</taglib>	
+	
+		<taglib>
+			<taglib-uri>/tags/struts-nested</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-nested.tld</taglib-location>
+		</taglib>
+	
+		<taglib>
+			<taglib-uri>/tags/struts-tiles</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-tiles.tld</taglib-location>
+		</taglib>
+	
+		<taglib>
+			<taglib-uri>/tags/pragma</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/pragma.tld</taglib-location>
+		</taglib>
+	    
+	    <taglib>
+			<taglib-uri>/tags/displaytag-12</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/displaytag-12.tld</taglib-location>
+		</taglib>
+	
+	    <taglib>
+			<taglib-uri>/tags/displaytag-el-12</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/displaytag-el.tld</taglib-location>
+		</taglib>
+		
+	   <!-- taglib>
+			<taglib-uri>/tags/pragmatags</taglib-uri>
+			<taglib-location>/WEB-INF/tags/pragmatags/botonera.tag</taglib-location>
+		</taglib-->
+	
+	   <taglib>
+			<taglib-uri>/tags/struts-menu</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-menu.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+			<taglib-uri>/tags/struts-menu-el</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-menu-el.tld</taglib-location>
+		</taglib>
+		
+	    <taglib>
+			<taglib-uri>/tags/jbpm</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/jbpm.tld</taglib-location>
+		</taglib>
+	
+	    <taglib>
+			<taglib-uri>/tags/jbpm-el</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/jbpm-el.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+	  		<taglib-uri>/tags/authz</taglib-uri>
+	  		<taglib-location>/WEB-INF/tlds/authz.tld</taglib-location>
+		</taglib> 
+	
+	
+		<!-- Para compatibilidad con RT  -->
+		<taglib>
+	  		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+	  		<taglib-location>/WEB-INF/tlds/c.tld</taglib-location>
+		</taglib>
+	
+		<taglib>
+	  		<taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
+	  		<taglib-location>/WEB-INF/tlds/fmt.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+	  		<taglib-uri>http://jakarta.apache.org/taglibs/core</taglib-uri>
+	  		<taglib-location>/WEB-INF/tlds/c.tld</taglib-location>
+		</taglib>
+	
+		<taglib>
+			<taglib-uri>/tags/displaytag-el</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/displaytag-el.tld</taglib-location>
+		</taglib>
+	</jsp-config>			
+
 </web-app>

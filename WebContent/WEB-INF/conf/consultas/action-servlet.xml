@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- Consultas  -->
+	<bean id="ConsultasBaseAction" class="com.fontar.web.action.consultas.ConsultasAction" abstract="true" >
+		<property name="consultaService" ref="consultaService" />
+	</bean>
+	
+	<bean name="/Consultas" parent="ConsultasBaseAction"/>
+ 	<bean name="/ConsultasFiltrar" parent="ConsultasBaseAction"/>
+ 	<bean name="/InicializarConsulta" parent="ConsultasBaseAction"/>
+ 	<bean name="/EjecutarConsulta" parent="ConsultasBaseAction"/>
+ 	<bean name="/LimpiarConsulta" parent="ConsultasBaseAction"/>
+ 	
+ 	<!-- Reportes -->
+ 	
+	<bean id="ReportesBaseAction" class="com.fontar.web.action.consultas.ReportesAction" abstract="true" >
+		<property name="reporteService" ref="reporteService" />
+	</bean>
+	
+ 	<bean name="/Reportes" parent="ReportesBaseAction"/>
+ 	<bean name="/ReportesFiltrar" parent="ReportesBaseAction"/>
+ 	<bean name="/InicializarReporte" parent="ReportesBaseAction"/>
+ 	<bean name="/EjecutarReporte" parent="ReportesBaseAction"/>
+ 	<bean name="/LimpiarReporte" parent="ReportesBaseAction"/>
+
+</beans>

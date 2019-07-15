@@ -1,0 +1,137 @@
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="reporteFiltersForm" type="com.fontar.consultas.ReporteFilterForm" />
+		<form-bean name="consultaFiltersForm" type="com.fontar.consultas.ConsultaFilterForm" />
+	</form-beans>
+
+	<action-mappings>
+
+		<!-- Consultas -->
+	
+		<action path="/Consultas"  type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="inventario" scope="request">
+			<forward name="success" path=".ConsultasInventarioDef"/>
+		</action> 
+
+		<action path="/ConsultasFiltrar"  type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="filtrar" scope="request">
+			<forward name="success" path=".ConsultasInventarioDef"/>
+		</action> 
+
+
+		<action path="/InicializarConsulta"  type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="initConsulta" scope="request" validate="false">
+			
+			<forward name="success" path=".ConsultasInventarioDef"/>
+			<forward name="consulta0001" path=".Consulta0001"/>
+			<forward name="proyectos-region" path=".ProyectosRegion"/>
+			<forward name="proyectos-empresa-convocatoria" path=".ProyectosEmpresaConvocatoria"/>
+			<forward name="proyectos-indicando-representante-director-empresas" path=".ProyectosRepresentanteDirectorEmpresas"/>
+			<forward name="proyectos-aprobados" path=".ProyectosAprobados"/>
+			<forward name="montoSolicitado-proyecto" path=".MontoSolicitadoPorProyecto"/>
+			<forward name="representantes-proyecto-empresa" path=".RepresentantesProyectoEmpresa"/>
+
+			<forward name="proyectos-ciiu" path=".ProyectosCIIU"/>
+			<forward name="proyectos-provincias" path=".ProyectosProvincia"/>
+			<forward name="proyectos-ciiu-resolucion" path=".ProyectosCIIUResolucion"/>
+			<forward name="empresas" path=".ListadoEmpresa"/>
+		
+			<forward name="proyectos-rechazados" path=".ProyectosRechazados"/>
+			<forward name="proyectos-evaluadores" path=".ProyectosEvaluadores"/>
+			<forward name="evaluaciones-institucion" path=".EvaluacionesInstitucion"/>
+			<forward name="proyectos-datos-empresa" path=".ProyectosDatosEmpresa"/>
+			<forward name="proyectos" path=".Proyectos"/>
+		</action> 
+		
+		<action path="/EjecutarConsulta"  type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="ejecutarConsulta" scope="request" name="consultaFiltersForm" 
+			validate="true" input="/InicializarConsulta.do">
+			
+			<forward name="success" path=".ConsultasInventarioDef"/>
+			<forward name="consulta0001" path=".Consulta0001"/>
+			<forward name="proyectos-region" path=".ProyectosRegion"/>
+			<forward name="proyectos-empresa-convocatoria" path=".ProyectosEmpresaConvocatoria"/>
+			<forward name="proyectos-indicando-representante-director-empresas" path=".ProyectosRepresentanteDirectorEmpresas"/>
+			<forward name="proyectos-aprobados" path=".ProyectosAprobados"/>
+			<forward name="montoSolicitado-proyecto" path=".MontoSolicitadoPorProyecto"/>
+			<forward name="representantes-proyecto-empresa" path=".RepresentantesProyectoEmpresa"/>
+			<forward name="proyectos-ciiu" path=".ProyectosCIIU"/>
+			<forward name="proyectos-provincias" path=".ProyectosProvincia"/>
+			<forward name="proyectos-ciiu-resolucion" path=".ProyectosCIIUResolucion"/>
+			<forward name="proyectos-datos-empresa" path=".ProyectosDatosEmpresa"/>
+			<forward name="empresas" path=".ListadoEmpresa"/>
+			
+			<forward name="proyectos-rechazados" path=".ProyectosRechazados"/>
+			<forward name="proyectos-evaluadores" path=".ProyectosEvaluadores"/>
+			<forward name="evaluaciones-institucion" path=".EvaluacionesInstitucion"/>
+			<forward name="proyectos" path=".Proyectos"/>
+		</action> 
+
+		<action path="/LimpiarConsulta"  type="org.springframework.web.struts.DelegatingActionProxy" name="consultaFiltersForm"
+			parameter="resetConsulta" scope="request" validate="false">
+			<forward name="success" path="/InicializarConsulta.do"/>
+		</action> 
+
+		<!-- Reportes -->
+
+		<action path="/Reportes"  type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="inventario" scope="request">
+			<forward name="success" path=".ReportesInventarioDef"/>
+		</action> 
+
+		<action path="/ReportesFiltrar"  type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="inventario" scope="request">
+			<forward name="success" path=".ReportesInventarioDef"/>
+		</action> 
+		
+		<action path="/InicializarReporte"  type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="initReport" scope="request">
+			<forward name="success" path=".ReportesInventarioDef"/>
+			<forward name="situacion-convocatoria" path=".ReporteSituacionConvocatoria"/>
+			<forward name="reporte-proyectos-aprobados" path=".ReporteProyectoAprobado"/>
+			<forward name="reporte-proyectos-aprobados-provincias" path=".ReporteProyectoProvinciaAprobado"/>
+			<forward name="proyectos-instrumento-anio-fuenteFinanciamiento" path=".ReporteProyectoInstrumentoAnioFuenteFinanciamiento"/>
+			<forward name="empresas-nuevas" path=".ReporteEmpresasNuevas"/>
+			<forward name="empresas-antiguas" path=".ReporteEmpresasAntiguas"/>
+			<forward name="proyectos-admitidos" path=".ReporteProyectosAdmitidos"/>
+			<forward name="reporte-proyectos-adjudicados-rubro" path=".ReporteProyectoAdjudicadoRubro"/>			
+			<forward name="reporte-proyectos-provincias-entidades" path=".ReporteProyectoProvinciaEntidad"/>
+			<forward name="reporte-proyectos-adjudicados-rubro" path=".ReporteProyectoAdjudicadoRubro"/>
+			<forward name="situacion-ideasproyecto" path=".ReporteSituacionIdeaProyecto"/>
+			<forward name="consejerias-datos" path=".ReporteConsejeriasDatosProyecto"/>
+			<forward name="consejerias-cantidad" path=".ReporteConsejeriasCantidadProyecto"/>
+			<forward name="consejerias-cantidad" path=".ReporteConsejeriasCantidadProyecto"/>
+			<forward name="alerta-por-demora-proyectos-sin-rendicion" path=".ReporteProyectosSinRendicion"/>
+			<forward name="alerta-por-demora-proyectos-con-rendicion-demorada" path=".ReporteProyectosConRendicionDemorada"/>
+			<forward name="alerta-por-demora-proyectos-con-demora-en-desembolsos" path=".ReporteProyectosConDemoraEnDesembolsos"/>
+			<forward name="alerta-por-demora-proyectos-con-rendicion-pendiente" path=".ReporteProyectosConRendicionPendiente"/>
+			<forward name="facturacion-por-empresa" path=".FacturacionPorEmpresa"/>
+		</action> 
+				
+		<action path="/EjecutarReporte" name="reporteFiltersForm" parameter="executeReport" 
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				 scope="request" input="/InicializarReporte.do">
+ 			<forward name="success" path=".ReportesInventarioDef"/>
+			<forward name="invalid" path="/InicializarReporte.do"/>
+		</action>
+
+		<action path="/LimpiarReporte"  name="reporteFiltersForm" parameter="resetReport" 
+				type="org.springframework.web.struts.DelegatingActionProxy" 
+				scope="request" validate="false">
+				
+			<forward name="success" path="/InicializarReporte.do"/>
+		</action> 
+		
+	</action-mappings>
+
+</struts-config>
+
+
+
+
+

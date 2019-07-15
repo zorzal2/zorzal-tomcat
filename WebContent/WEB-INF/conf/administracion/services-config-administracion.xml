@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean name="bitacoraService" parent="baseTransactionProxy">
+   		<property name="target" ref="bitacoraServiceTarget"/>
+    </bean>	
+    
+   	<bean name="bitacoraServiceTarget" class="com.fontar.bus.impl.bitacora.BitacoraEditarServicioImpl"> 
+ 		<constructor-arg>
+     		<value>com.fontar.data.impl.domain.bean.BitacoraBean</value>
+		</constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="BitacoraBean" value-ref="bitacoraDao" />				
+				<entry key="ProyectoBean" value-ref="proyectoDao" />				
+			</map>
+		</property>
+	</bean>
+
+	<bean name="admisibilidadProyectoService" parent="baseTransactionProxy">
+   		<property name="target" ref="admisibilidadProyectoServiceTarget"/>
+	</bean>
+
+	<bean name="admisibilidadProyectoServiceTarget" class="com.fontar.bus.impl.proyecto.AdmisibilidadProyectoServicioImpl"> 
+	   <property name="dao" ref="proyectoAdmisionDao"/>
+	   <!--  FF / 16-Feb: lo comento pq luego de sincronizar me da error
+	   	<property name="proyectoReconsideracionDAO" ref="proyectoReconsideracionDao"/>
+	    -->
+	</bean>
+	
+	
+
+	<!-- Junta Evaluacion  -->
+
+	<bean name="evaluarPaqueteService" parent="allRequeriedTransactionProxy">
+   		<property name="target" ref="evaluarPaqueteServiceTarget"/>
+    </bean>	
+
+	<bean name="evaluarPaqueteServiceTarget" class="com.fontar.bus.impl.paquete.EvaluarPaqueteServicioImpl">
+   		<property name="proyectoDAO" ref="proyectoDao"/>
+   		<property name="paqueteDAO" ref="paqueteDao"/>   		
+   		<property name="evaluacionDAO" ref="evaluacionDao"/>
+   		<property name="evaluacionPaqueteDAO" ref="evaluacionPaqueteDao"/>  
+   		<property name="proyectoPaqueteDAO" ref="proyectoPaqueteDao"/>
+   		<property name="wfNotificacionServicio" ref="wfNotificacionService"  />
+	</bean>
+	
+	<bean name="evaluacionService" parent="baseTransactionProxy">
+   		<property name="target" ref="evaluacionServiceTarget"/>
+	</bean>
+
+	<bean name="evaluacionServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.EvaluacionBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="evaluacionDao"/>
+	</bean>
+	
+	<!-- Evaluaciones -->
+   	<bean name="administrarEvaluacionesServiceTarget" class="com.fontar.bus.impl.evaluacion.AdministrarEvaluacionesServicioImpl">   		
+   		<property name="dao" ref="evaluacionDao"/>	
+   	</bean>
+   	
+	<bean name="administrarEvaluacionesService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarEvaluacionesServiceTarget"/>
+    </bean>	
+			
+	<!-- Bitacora -->
+	<bean name="administrarBitacoraService" parent="baseTransactionProxy">
+   		<property name="target" ref="administrarBitacoraServicioTarget"/>
+    </bean>	
+        
+   	<bean name="administrarBitacoraServicioTarget" class="com.fontar.bus.impl.bitacora.AdministrarBitacoraServicioImpl">
+   		<property name="dao" ref="bitacoraDao"/>	
+   	</bean>
+    
+    <!-- Adjunto Proyecto -->    
+	<bean name="adjuntoProyectoServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="proyectoDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoProyectoServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoProyectoServicioTarget"/>
+	</bean>
+	
+    <!-- Adjunto Idea Proyecto -->    
+	<bean name="adjuntoIdeaProyectoServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="ideaProyectoDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoIdeaProyectoServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoIdeaProyectoServicioTarget"/>
+	</bean>
+	
+    <!-- Adjunto Llamado Convocatoria -->    
+	<bean name="adjuntoLlamadoConvocatoriaServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="llamadoConvocatoriaDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoLlamadoConvocatoriaServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoLlamadoConvocatoriaServicioTarget"/>
+	</bean>	  	 
+	
+	
+    <!-- Adjunto Ventanilla Permanente  -->    
+	<bean name="adjuntoVentanillaPermanenteServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="ventanillaPermanenteDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoVentanillaPermanenteServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoVentanillaPermanenteServicioTarget"/>
+	</bean>		
+
+    <!-- Adjunto Evaluacion  -->    
+	<bean name="adjuntoEvaluacionServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="evaluacionDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoEvaluacionServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoEvaluacionServicioTarget"/>
+	</bean>		
+	 
+    <!-- Adjunto Paquete  -->    
+	<bean name="adjuntoPaqueteServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="paqueteDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoPaqueteServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoPaqueteServicioTarget"/>
+	</bean>		
+	 
+	<!-- Prespuesto -->
+	<bean name="proyectoPresupuestoServiceTarget" class="com.fontar.bus.impl.proyecto.presupuesto.ProyectoPresupuestoServicioImpl"> 
+	   <property name="proyectoPresupuestoDAO" ref="proyectoPresupuestoDao"/>
+	   <property name="etapaDao" ref="etapaDao"/>
+	   <property name="actividadDao" ref="actividadDao"/>
+	   <property name="proyectoDao" ref="proyectoDao"/>
+	   <property name="adjuntoServicio" ref="adjuntoPresupuestoServicio"/>
+	</bean>	 
+	<bean name="proyectoPresupuestoServicio" parent="baseTransactionProxy">
+   		<property name="target" ref="proyectoPresupuestoServiceTarget"/>
+	</bean>
+    <!-- Adjunto Presupuesto -->    
+	<bean name="adjuntoPresupuestoServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="proyectoPresupuestoDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoPresupuestoServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoPresupuestoServicioTarget"/>
+	</bean>
+
+    <!-- Notificacion  -->    
+   	<bean name="administrarNotificacionServiceTarget" class="com.fontar.bus.impl.notificacion.AdministrarNotificacionServicioImpl">   		
+   		<property name="notificacionDAO" ref="notificacionDao"/>	
+   	</bean>
+   	
+	<bean name="administrarNotificacionService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarNotificacionServiceTarget"/>
+    </bean>	
+
+    <!-- PAC  -->    
+   	<bean name="administrarPACServiceTarget" class="com.fontar.bus.impl.proyecto.pac.AdministrarPACServicioImpl">   		
+   		<property name="pacDAO" ref="pacDao"/>	
+   		<property name="desembolsoDAO" ref="desembolsoDao"/>	
+   		<property name="cotizacionService" ref="cotizacionService"/>	
+		<property name="proyectoDesembolsoDAO" ref="proyectoDesembolsoDao"/>
+		<property name="administrarProcedimientoService" ref="administrarProcedimientoService"/>
+   	</bean>
+   	
+	<bean name="administrarPACService" parent="baseTransactionProxy">
+   		<property name="target" ref="administrarPACServiceTarget"/>
+    </bean>	
+
+	<bean name="proyectoDesembolsoService" parent="baseTransactionProxy">
+		<property name="target" ref="proyectoDesembolsoServiceTarget" />
+	</bean>
+	<bean name="proyectoDesembolsoServiceTarget" class="com.fontar.bus.impl.proyecto.desembolso.ProyectoDesembolsoServiceImpl">
+		<property name="proyectoDesembolsoDAO" ref="proyectoDesembolsoDao"/>
+		<property name="proyectoDao" ref="proyectoDao"/>
+		<property name="seguimientoDao" ref="seguimientoDao"/>
+		<property name="evaluacionSeguimientoDao" ref="evaluacionSeguimientoDao"/>
+		<property name="bitacoraDao" ref="bitacoraDao"/>
+	</bean>
+	<bean name="proyectoReconsideracionService" parent="baseTransactionProxy">
+   		<property name="target">
+			<bean class="com.fontar.bus.impl.proyecto.ProyectoReconsideracionServiceImpl">
+				<property name="proyectoReconsideracionDao" ref="proyectoReconsideracionDao"/>
+				<property name="bitacoraDao" ref="bitacoraDao"/>
+			</bean>
+   		</property>
+	</bean>
+</beans>

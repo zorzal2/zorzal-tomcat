@@ -1,0 +1,1028 @@
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<!-- === Form Bean Definitions -->
+	<form-beans>
+		
+		<form-bean name="PresentacionConvocatoriaDynaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="filtroConvocatoria" type="java.lang.String" />
+			<form-property name="filtroNroPresentacion" type="java.lang.String" />
+			<form-property name="filtroEstado" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="PresentacionConvocatoriaEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="idInstrumento" type="java.lang.String" />
+			<form-property name="codigo" type="java.lang.String" />			
+			<form-property name="nombreEntidad" type="java.lang.String" />						
+			<form-property name="estado" type="java.lang.String" />			
+			<form-property name="version" type="java.lang.String" />			
+			<form-property name="idJurisdiccion" type="java.lang.String" />
+			<form-property name="fechaIngreso" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="IdeaProyectoEditarDynaForm" type="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoForm">		
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="codigoIdeaProyecto" type="java.lang.String" />
+			<form-property name="fechaIngreso" type="java.lang.String" />
+			<form-property name="titulo" type="java.lang.String" />
+			<form-property name="resumen" type="java.lang.String" />
+			<form-property name="instrumentoSolicitado" type="java.lang.String" />
+			<form-property name="montoTotal" type="java.lang.String" />
+			<form-property name="montoSolicitado" type="java.lang.String" />
+			<form-property name="idJurisdiccion" type="java.lang.String" />
+			
+			<form-property name="idPersonaLegal" type="java.lang.String"/>
+			<form-property name="txtPersonaLegal" type="java.lang.String"/>
+			<form-property name="idPersonaDirector" type="java.lang.String"/>
+			<form-property name="txtPersonaDirector" type="java.lang.String"/>
+			<form-property name="idPersonaRepresentante" type="java.lang.String"/>
+			<form-property name="txtPersonaRepresentante" type="java.lang.String"/>
+			
+			<form-property name="idEntidadBeneficiaria" type="java.lang.String" />
+			<form-property name="txtEntidadBeneficiaria" type="java.lang.String" />
+
+			<form-property name="observaciones" type="java.lang.String" />
+			<form-property name="idTipoProyecto" type="java.lang.String" />
+			<form-property name="estadoProyecto" type="java.lang.String" />
+			
+			<form-property name="duracion" type="java.lang.Integer" />
+		</form-bean>
+		
+		<form-bean name="IdeaProyectoCargarVentanillaDynaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="codigo" type="java.lang.String" />
+			<form-property name="idEntidadBeneficiaria" type="java.lang.String" />
+			<form-property name="entidadBeneficiaria" type="java.lang.String" />
+			<form-property name="idInstrumento" type="java.lang.String" />
+		</form-bean>		
+		
+		<form-bean name="IdeaProyectoEvaluacionEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="nroIdeaProyecto" type="java.lang.String" />
+			<form-property name="estado" type="java.lang.String" />
+									
+			<form-property name="numero" type="java.lang.String" />
+			<form-property name="estadoEvaluacion" type="java.lang.String" />
+			<form-property name="tipo" type="java.lang.String" />
+			<form-property name="fechaInicial" type="java.lang.String" />
+			<form-property name="fechaEntregaComprometida" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />
+			<form-property name="id" type="java.lang.String" />
+		</form-bean>		
+
+		<form-bean name="IdeaProyectoResultadoEvaluacionDynaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="nroIdeaProyecto" type="java.lang.String" />
+			<form-property name="evaluacion" type="java.lang.String" />									
+			
+			<form-property name="fechaEvaluacion" type="java.lang.String" />
+			
+			<form-property name="objetivos" type="java.lang.String" />
+			<form-property name="cronograma" type="java.lang.String" />
+			<form-property name="presupuesto" type="java.lang.String" />
+			<form-property name="indicadoresExito" type="java.lang.String" />
+			<form-property name="riesgoTecnico" type="java.lang.String" />
+			<form-property name="cvDirector" type="java.lang.String" />
+			
+			<form-property name="aceptaProyecto" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+
+			<form-property name="id" type="java.lang.String" />
+		</form-bean>				
+		
+		<form-bean name="IdeaProyectoConfirmarEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="proyecto" type="java.lang.String" />
+			<form-property name="evaluacion" type="java.lang.String" />
+			<form-property name="fechaEvaluacion" type="java.lang.String" />		
+			<form-property name="aceptaProyecto" type="java.lang.String" />		
+			<form-property name="fundamentacion" type="java.lang.String" />		
+			<form-property name="observaciones" type="java.lang.String" />		
+
+			<form-property name="id" type="java.lang.String" />		
+		</form-bean>
+
+
+		<!--  Ventanilla Permanente -->
+		<form-bean name="VentanillaPermanenteEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="idCartera" type="java.lang.String" />						
+			<form-property name="emerix" type="java.lang.String" />
+			<form-property name="varianteEmerix" type="java.lang.String" />
+			<form-property name="idInstrumentoVersion" type="java.lang.String" />
+			<form-property name="idInstrumentoDef" type="java.lang.String" />					
+			<form-property name="identificador" type="java.lang.String" />
+			<form-property name="denominacion" type="java.lang.String" />
+
+			<form-property name="modalidad" type="java.lang.String" />
+			<form-property name="permiteFinanciamientoBancario" type="java.lang.String" />
+
+			<form-property name="permiteComision" type="java.lang.String" />						
+			<form-property name="idComision" type="java.lang.String" />			
+			<form-property name="txtComision" type="java.lang.String" />			
+			
+			<form-property name="permiteSecretaria" type="java.lang.String" />
+			<form-property name="permiteAdjudicacion" type="java.lang.String" />
+			<form-property name="paraProyectoHistorico" type="java.lang.String" initial="true"/>
+			
+			<form-property name="plazoReconsideracion" type="java.lang.String" />
+			<form-property name="firmaContrato" type="java.lang.String" />
+			<form-property name="permiteMultipleJurisdiccion" type="java.lang.String" initial="true"/>
+			<form-property name="permitePropiciado" type="java.lang.String" initial="true"/>
+			<form-property name="aceptaIdeaProyecto" type="java.lang.String" initial="true"/>
+			<!-- Financiamiento -->
+			<form-property name="montoFinanciamientoTotal" type="java.lang.String" />
+			<form-property name="tipoDistribucionFinanciamiento" type="java.lang.String" />
+			<form-property name="distribucionTipoDeProyecto" type="java.lang.String" />
+
+			<form-property name="codigoTipoFinanciamiento" type="java.lang.String" />
+			<form-property name="montoFinanciamiento" type="java.lang.String" />
+			<form-property name="proporcionApoyo" type="java.lang.String" />
+			<form-property name="periodoGracia" type="java.lang.String" />
+			<form-property name="plazoEjecucion" type="java.lang.String" />
+			<form-property name="plazoAmortizacion" type="java.lang.String" />
+			<form-property name="tasaInteres" type="java.lang.String" />
+			<form-property name="garantia" type="java.lang.String" />
+			<form-property name="idMatrizPresupuesto" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />			
+			
+			<form-property name="codigoTipoFinanciamientoAsignacion" type="java.lang.String" />
+
+			<!-- Versionado del llamado a convocatoria -->
+			<form-property name="version" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="codigo" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+			
+			<!-- Atributos auxiliares -->
+			<form-property name="page" type="java.lang.Integer" initial="1"/>
+			<form-property name="permiteComision_" type="java.lang.String" />
+			<form-property name="permiteFinanciamientoBancario_" type="java.lang.String" />			
+			<form-property name="permiteSecretaria_" type="java.lang.String" />			
+			<form-property name="permiteAdjudicacion_" type="java.lang.String" />
+
+			<!--  Datos relacionados a Distribución por Tipo de Proyecto -->
+			<form-property name="idTipoProyecto" type="java.lang.String[]" />
+			<form-property name="tipoProyecto" type="java.lang.String[]" />
+			<form-property name="montoTotalAsignado" type="java.lang.String[]" />
+			<form-property name="limiteMaximoProyecto" type="java.lang.String[]" />
+			<form-property name="plazosEjecucion" type="java.lang.String[]" />
+			<form-property name="criterios" type="java.lang.String[]" />
+			<form-property name="tipoProyectos" type="java.lang.String[]" />
+			
+			<form-property name="windowClose" type="java.lang.String" />
+			<form-property name="criterioList" type="java.lang.String" />
+
+		</form-bean>
+
+		<!--  Llamados Convocatoria -->
+							     
+		<form-bean name="LlamadoConvocatoriaEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="emerix" type="java.lang.String" />
+			<form-property name="idCartera" type="java.lang.String" />						
+			<form-property name="varianteEmerix" type="java.lang.String" />
+			<form-property name="idInstrumentoDef" type="java.lang.String" />
+			<form-property name="identificador" type="java.lang.String" />
+			<form-property name="esIdeaProyectoPitec" type="java.lang.String" initial="true" />			
+			
+			<form-property name="fechaApertura" type="java.lang.String" />
+			<form-property name="fechaCierre" type="java.lang.String" />
+			<form-property name="denominacion" type="java.lang.String" />
+			<form-property name="resolucionAperturaLlamado" type="java.lang.String" />
+ 
+			<form-property name="fechaReconocimientoGastos" type="java.lang.String" />
+
+			<form-property name="montoFinanciamientoTotal" type="java.lang.String" />
+
+			<form-property name="codigoTipoFinanciamiento" type="java.lang.String" />
+			<form-property name="montoFinanciamiento" type="java.lang.String" />
+			<form-property name="codigoTipoFinanciamientoAsignacion" type="java.lang.String" />			
+			
+			<form-property name="modalidad" type="java.lang.String" />
+			<form-property name="limitesFinanciamiento" type="java.lang.String" />
+			
+			<form-property name="paraProyectoHistorico" type="java.lang.String" initial="true"/>			
+						
+			<form-property name="tipoDistribucionFinanciamiento" type="java.lang.String" />
+			<form-property name="distribucionTipoDeProyecto" type="java.lang.String" />
+
+			<form-property name="proporcionApoyo" type="java.lang.String" />		
+			<form-property name="periodoGracia" type="java.lang.String" />
+			<form-property name="plazoEjecucion" type="java.lang.String" />
+			
+			<form-property name="plazoAmortizacion" type="java.lang.String" />						
+			<form-property name="tasaInteres" type="java.lang.String" />						
+			<form-property name="garantia" type="java.lang.String" />						
+			<form-property name="circuitoEvaluacion" type="java.lang.String" />						
+			
+			<form-property name="plazoReadmision" type="java.lang.String" />
+			<form-property name="plazoReconsideracion" type="java.lang.String" />						
+			<form-property name="firmaContrato" type="java.lang.String" />						
+			<form-property name="idMatrizPresupuesto" type="java.lang.String" />						
+
+			<form-property name="permiteMultipleJurisdiccion" type="java.lang.String" initial="true" />						
+			<form-property name="permitePropiciado" type="java.lang.String" initial="true" />
+
+			<form-property name="observaciones" type="java.lang.String" />
+			
+			<form-property name="permiteFinanciamientoBancario" type="java.lang.String" />
+			
+			<form-property name="permiteComision" type="java.lang.String" />
+			<form-property name="idComision" type="java.lang.String" />
+			<form-property name="txtComision" type="java.lang.String" />
+			
+			<form-property name="permiteSecretaria" type="java.lang.String" />
+			<form-property name="permiteAdjudicacion" type="java.lang.String" />
+
+			<!-- VER -->
+			<!--  <form-property name="asignaciones" type="com.fontar.data.api.domain.ListaAsignacionesForm" />-->
+			
+			<!-- Versionado del llamado a convocatoria -->
+			<form-property name="version" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="codigo" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+			
+			<!-- Atributos auxiliares -->
+			<form-property name="page" type="java.lang.Integer" initial="1"/>
+			<form-property name="permiteComision_" type="java.lang.String" />
+			<form-property name="permiteFinanciamientoBancario_" type="java.lang.String" />			
+			<form-property name="permiteSecretaria_" type="java.lang.String" />			
+			<form-property name="permiteAdjudicacion_" type="java.lang.String" />
+	
+			<!--  Datos relacionados a Distribución por Tipo de Proyecto -->
+			<form-property name="idTipoProyecto" type="java.lang.String[]" />
+			<form-property name="tipoProyecto" type="java.lang.String[]" />
+			<form-property name="montoTotalAsignado" type="java.lang.String[]" />
+			<form-property name="limiteMaximoProyecto" type="java.lang.String[]" />
+			<form-property name="plazosEjecucion" type="java.lang.String[]" />
+			<form-property name="criterios" type="java.lang.String[]" />
+			<form-property name="tipoProyectos" type="java.lang.String[]" />
+			
+			<form-property name="windowClose" type="java.lang.String" />
+			<form-property name="criterioList" type="java.lang.String" />
+		</form-bean>
+	
+		<form-bean name="InstrumentoVersionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idInstrumento" type="java.lang.String" />
+		</form-bean>
+	
+		<form-bean name="DistribucionFinanciamientoForm" type="com.fontar.web.form.instrumento.ventanilla.DistribucionFinanciamientoForm"/>
+		
+		<form-bean name="DistribucionTipoProyectoEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idTipoProyecto" type="java.lang.String[]" />
+			<form-property name="tipoProyecto" type="java.lang.String[]" />
+			<form-property name="montoTotalAsignado" type="java.lang.String[]" />
+			<form-property name="limiteMaximoProyecto" type="java.lang.String[]" />
+			<form-property name="plazoEjecucion" type="java.lang.String[]" />
+			<form-property name="idMatrizCriterio" type="java.lang.String[]" />
+			<form-property name="tipoProyectos" type="java.lang.String[]" />
+			
+			<form-property name="idTipoProyectoSelect" type="java.lang.String" />
+			<form-property name="windowClose" type="java.lang.String" />
+			<form-property name="criterioList" type="java.lang.String" />
+			<form-property name="montoTotalInstrumento" type="java.lang.String" />			
+		</form-bean>
+		
+	</form-beans>
+
+
+	<!-- === Action Mapping Definitions -->
+	<action-mappings>
+		<!-- Llamados a Convocatoria -->
+		
+		<action path="/LlamadoConvocatoriaListar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="listar"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".ListarDef">
+			</forward>
+		</action>
+				
+		<!-- Llamados a Convocatoria Wizard -->
+		<!-- Paso 1: Editar Llamado Convocatoria -->
+		<action path="/LlamadoConvocatoriaGetInstrumentoDefData"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="getData" 
+			name="LlamadoConvocatoriaEditarDynaForm" 
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success" 
+				path=".LlamadoConvocatoriaEditarDef" />
+		</action>		
+		
+		<action path="/LlamadoConvocatoriaAgregar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LlamadoConvocatoriaEditarDynaForm" 
+			parameter="agregar"
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".LlamadoConvocatoriaEditarDef">
+			</forward>
+		</action>		
+		
+		<action path="/LlamadoConvocatoriaEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LlamadoConvocatoriaEditarDynaForm" 
+			parameter="editar"
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".LlamadoConvocatoriaEditarDef">
+			</forward>
+		</action>
+
+		<action path="/LlamadoConvocatoriaEditarNext"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LlamadoConvocatoriaEditarDynaForm" 
+			parameter="doNext"
+			scope="session"
+ 			validate="true"
+			input="/LlamadoConvocatoriaEditar.do">
+			<forward 
+				name="next"  
+				path="/LlamadoConvocatoriaVersionar.do"/>
+			<forward 
+				name="invalid"  
+				path="/LlamadoConvocatoriaAgregar.do"/>
+		</action>
+		
+		<!-- Paso 2: Cargar Version de Llamado Convocatoria -->
+		<action path="/LlamadoConvocatoriaVersionar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LlamadoConvocatoriaEditarDynaForm" 
+			parameter="versionar"
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success" 
+				path=".LlamadoConvocatoriaVersionarDef"/>			
+		</action>
+
+		<action path="/LlamadoConvocatoriaVersionarFinish"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LlamadoConvocatoriaEditarDynaForm" 
+			parameter="doFinish"
+			scope="session"
+ 			validate="true"
+			input="/LlamadoConvocatoriaVersionar.do">
+			<forward 
+				name="finish" 
+				path="/LlamadoConvocatoriaGuardar.do"/>
+		</action>
+				
+		<action path="/LlamadoConvocatoriaGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="LlamadoConvocatoriaEditarDynaForm" 
+			parameter="guardar"
+			scope="session"
+			validate="true"
+			input="/LlamadoConvocatoriaVersionar.do">
+			<forward 
+				name="success" 
+				path="/LlamadoConvocatoriaInventario.do" redirect="true"/>
+		</action>				
+        
+		<!-- Instrumentos -> Convocatoria -> Presentación a Convocatoria -->
+		<!--action path="/PresentacionesConvocatoriaInventario"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresentacionConvocatoriaEditarDynaForm" 
+			parameter="verInventario"
+			scope="request">
+			<forward 
+				name="inventario"
+				path=".PresentacionesConvocatoriaDef">
+			</forward>
+		</action-->
+				
+		
+
+		<!-- action path="/PresentacionesConvocatoriaEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresentacionesConvocatoriaEditarDynaForm" 
+			parameter="editar"
+			scope="request">
+			<forward 
+				name="editar"
+				path=".PresentacionesConvocatoriaEditarDef">
+			</forward>
+		</action>
+
+		<action path="/PresentacionesConvocatoriaAgregar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresentacionesConvocatoriaEditarDynaForm" 
+			parameter="agregar"
+			scope="request">
+			<forward 
+				name="agregar"
+				path=".PresentacionesConvocatoriaEditarDef">
+			</forward>
+		</action>
+				
+		<action path="/PresentacionConvocatoriaGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresentacionConvocatoriaEditarDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/PresentacionConvocatoriaEditar.do">
+						
+			<forward 
+				name="inventario"
+				path="/PresentacionConvocatoriaInventario.do">
+			</forward>
+		</action>
+
+		<action path="/PresentacionesConvocatoriaEliminar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresentacionesConvocatoriaDynaForm" 
+			parameter="eliminar"
+			scope="request">
+			<forward 
+				name="inventario"
+				path=".PresentacionesConvocatoriaDef">
+			</forward>		
+		</action>
+		
+		<action path="/PresentacionesConvocatoriaGuardarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresentacionesConvocatoriaCargarProyectoDynaForm" 
+			parameter="guardarProyecto"
+			scope="request"
+			validate="true"
+			input=".PresentacionesConvocatoriaCargarProyectoDef">
+
+			<forward 
+				name="inventario"
+				path=".PresentacionesConvocatoriaDef">
+			</forward>
+		</action>
+
+		<action path="/PresentacionesConvocatoriaListar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="listar"
+			scope="request">			
+			<forward 
+				name="listar"
+				path=".ListarDef">
+			</forward>
+		</action-->
+		
+		<!-- Instrumentos -> Ventanilla Permanente -->		
+
+		<action path="/VentanillaPermanenteAsignarMontoGlobal"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AsignarMontoGlobalDynaForm" 
+			parameter="asignarMonto"
+			scope="request"
+ 			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".AsignarMontoGlobalDef">
+			</forward>
+		</action>
+
+		<action path="/VentanillaPermanenteGuardarMontoGlobal"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AsignarMontoGlobalDynaForm" 
+			parameter="guardarMonto"
+			scope="request"
+			validate="true"						
+			input="">
+			<forward 
+				name="success"
+				path="/VentanillaPermanenteAgregar.do">
+			</forward>
+		</action>
+
+		<action path="/VentanillaPermanenteDistribuir"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="distribuir"
+			scope="request"
+ 			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".VentanillaPermanenteDistribuirDef">
+			</forward>
+		</action>
+		
+		<!-- Ventanilla Permanente Wizard -->
+		<!-- Paso 1: Editar Ventanilla Permanente -->
+		<action path="/VentanillaPermanenteGetInstrumentoDefData"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="getData" 
+			name="VentanillaPermanenteEditarDynaForm" 
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success" 
+				path=".VentanillaPermanenteEditarDef" />
+		</action>		
+		
+		<action path="/VentanillaPermanenteAgregar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VentanillaPermanenteEditarDynaForm" 
+			parameter="agregar"
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".VentanillaPermanenteEditarDef">
+			</forward>
+		</action>		
+		
+		<action path="/VentanillaPermanenteEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VentanillaPermanenteEditarDynaForm" 
+			parameter="editar"
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".VentanillaPermanenteEditarDef">
+			</forward>
+		</action>
+
+		<action path="/VentanillaPermanenteEditarNext"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VentanillaPermanenteEditarDynaForm" 
+			parameter="doNext"
+			scope="session"
+ 			validate="true"
+			input="/VentanillaPermanenteEditar.do">
+			<forward 
+				name="next" 
+				path="/VentanillaPermanenteVersionar.do"/>
+			<forward 
+				name="invalid"  
+				path="/VentanillaPermanenteAgregar.do"/>
+		</action>
+		
+		<!-- Paso 2: Cargar Version de Ventanilla Permanente -->
+		<action path="/VentanillaPermanenteVersionar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VentanillaPermanenteEditarDynaForm" 
+			parameter="versionar"
+			scope="session"
+			validate="false"
+			input="">
+			<forward 
+				name="success" 
+				path=".VentanillaPermanenteVersionarDef"/>			
+		</action>
+
+		<action path="/VentanillaPermanenteVersionarFinish"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VentanillaPermanenteEditarDynaForm" 
+			parameter="doFinish"
+			scope="session"
+ 			validate="true"
+			input="/VentanillaPermanenteVersionar.do">
+			<forward 
+				name="finish" 
+				path="/VentanillaPermanenteGuardar.do"/>
+		</action>
+				
+		<action path="/VentanillaPermanenteGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VentanillaPermanenteEditarDynaForm" 
+			parameter="guardar"
+			scope="session"
+			validate="true"
+			input="/VentanillaPermanenteVersionar.do">
+			<forward 
+				name="success" 
+				path="/VentanillaPermanenteInventario.do" redirect="true"/>
+		</action>				
+		
+		<!--  Proyecto CAE  -->						
+		<action path="/VentanillaPermanenteCargaProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="cargaProyecto"
+			name="CargarProyectoDynaForm" 
+			scope="request"
+			validate="false">
+			<forward  name="success" path=".VentanillaPermanenteCargaProyecto"/>
+		</action>	
+		
+		<action path="/VentanillaPermanenteCargarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm"
+			parameter="cargarProyecto"
+			validate="true"  
+			scope="request"
+			input="/VentanillaPermanenteCargaProyecto.do">
+			<forward name="success" path="/VentanillaPermanenteInventario.do" redirect="true"/>
+		</action>
+		
+		<!-- Instrumentos -> Ventanilla Permanente -> Ideas Proyecto -->
+
+		<!-- Wizard para Idea Proyecto PITEC -->
+		<!-- Paso 1: Cargar Ventanilla -->
+		<action path="/IdeaProyectoPitecCargarVentanilla"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="cargarVentanilla"
+			scope="session"
+			validate="false">
+			
+			<forward 
+				name="success"
+				path=".IdeaProyectoCargarVentanillaDef">
+			</forward>
+		</action>
+
+		<action path="/IdeaProyectoPitecProcesarCargarVentanilla"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="doNext"
+			scope="session"
+ 			validate="true"
+			input="/IdeaProyectoPitecCargarVentanilla.do">
+			<forward 
+				name="next" 
+				path="/IdeaProyectoPitecCargarProyecto.do"/>
+		</action>
+		
+		<!-- Paso 2: Cargar Proyecto -->
+		<action path="/IdeaProyectoPitecCargarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="cargarProyecto"
+			scope="session"
+			validate="false">
+			
+			<forward 
+				name="success" 
+				path=".CargarProyectoDef"/>			
+		</action>
+
+		<action path="/IdeaProyectoPitecProcesarCargarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="doFinish"
+			scope="session"
+			validate="true"
+			input="/IdeaProyectoPitecCargarProyecto.do">
+ 			 			
+			<forward 
+				name="finish" 
+				path="/ProyectoPitecGuardar.do"/>
+		</action>
+
+		<!-- Vaya a saber Dios -->
+		<action path="/IdeaProyectoAgregarEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoEvaluacionEditarDynaForm" 
+			parameter="agregarEvaluacion"
+			scope="request"
+ 			validate="false">
+			<forward 
+				name="agregarEvaluacion"
+				path=".IdeaProyectoAgregarEvaluacionDef">
+			</forward>
+		</action>
+
+		<action path="/IdeaProyectoEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoEvaluacionEditarDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input=".IdeaProyectoDef">						
+			<forward 
+				name="inventario"
+				path="/IdeaProyectoInventario.do">
+			</forward>
+		</action>
+
+		<action path="/IdeaProyectoCargarResultadoEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoResultadoEvaluacionDynaForm" 
+			parameter="cargarResultadoEvaluacion"
+			scope="request"
+ 			validate="false"
+			input="">
+			<forward 
+				name="cargarResultadoEvaluacion"
+				path=".IdeaProyectoCargarResultadoEvaluacionDef">
+			</forward>
+		</action>
+
+		<action path="/IdeaProyectoResultadoEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoResultadoEvaluacionDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input=".IdeaProyectoDef">						
+			<forward 
+				name="inventario"
+				path="/IdeaProyectoInventario.do">
+			</forward>
+		</action>
+		
+		<action path="/IdeaProyectoConfirmarEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoConfirmarEvaluacionDynaForm" 
+			parameter="confirmarEvaluacion"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="confirmarEvaluacion"
+				path=".IdeaProyectoConfirmarEvaluacionDef">
+			</forward>
+		</action>
+
+		<action path="/IdeaProyectoConfirmarEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoConfirmarEvaluacionDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true" 
+			input=".IdeaProyectoDef">
+			<forward 
+				name="inventario"
+				path="/IdeaProyectoInventario.do">
+			</forward>
+		</action>		
+		
+		<action path="/DistribucionFinanciamiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DistribucionFinanciamientoForm" 
+			parameter="cargar"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".DistribucionFinanciamientoDef">
+			</forward>
+		</action>
+
+		<action path="/DistribucionFinanciamientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DistribucionFinanciamientoForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/DistribucionFinanciamiento.do">
+			<forward 
+				name="success"
+				path=".DistribucionFinanciamientoDef">
+			</forward>
+		</action>
+		
+		<action path="/InstrumentoVersion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="InstrumentoVersionDynaForm" 
+			parameter="inventario"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".InstrumentoVersionDef">
+			</forward>
+		</action>	
+
+		<action path="/*InstrumentoVersionEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="{1}EditarDynaForm" 
+			parameter="cargar"
+			scope="request"
+ 			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".InstrumentoVersionEditarDef">
+			</forward>
+		</action>
+
+		<action path="/*InstrumentoVersionEditarGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="{1}EditarDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true" 
+			input=".InstrumentoVersionEditarDef">
+			<forward 
+				name="inventario"
+				path="/{1}Inventario.do">
+			</forward>
+		</action>	
+		
+		<action path="/DistribucionTipoProyectoAgregar" 
+				type="org.springframework.web.struts.DelegatingActionProxy" 
+				name="DistribucionTipoProyectoEditarDynaForm"
+				parameter="agregar" 
+				scope="request"
+				validate="false"
+				input=".DistribucionTipoProyectoEditarDef">
+			<forward 
+				name="success" 
+				path=".DistribucionTipoProyectoEditarDef" />
+		</action>
+		
+		
+		<action path="/DistribucionTipoProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DistribucionTipoProyectoEditarDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/DistribucionTipoProyectoAgregar.do">
+			<forward 
+				name="success"
+				path=".DistribucionTipoProyectoEditarDef">
+			</forward>
+		</action>		
+		
+		<!-- Idea Proyecto PITEC -->
+	
+	<action path="/IdeaProyectoPitecInventarioFiltrar" 
+			type="org.springframework.web.struts.DelegatingActionProxy" 
+			name="ProyectoFiltersForm" 
+			parameter="filtrar" 
+			validate="true" 
+			input="/IdeaProyectoPitecInventario.do">
+			
+			<forward name="success" 
+					 path=".IdeaProyectoPitecInventarioDef"/>
+	</action>
+       
+	<action path="/IdeaProyectoPitecInventario" 
+     		type="org.springframework.web.struts.DelegatingActionProxy" 
+     		name="ProyectoFiltersForm" 
+     		parameter="inventario" 
+     		validate="false">
+     		
+			<forward name="success" 
+					 path=".IdeaProyectoPitecInventarioDef"/>
+	</action>
+      
+	<action path="/CargarIdeaProyectoPitec"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="agregar"
+			scope="request"
+			validate="false">
+			
+			<forward 
+				name="success"
+				path=".CargarProyectoDef">
+			</forward>
+			
+			<forward 
+				name="edicionInvalida"
+				path=".ProyectoEditarDef">
+			</forward>
+		</action>
+
+		<action path="/IdeaProyectoPitecGuardar" 
+			type="org.springframework.web.struts.DelegatingActionProxy" 
+			name="CargarProyectoDynaForm" 
+			parameter="guardar" 												
+			scope="request"
+			validate="true"
+			input="/CargarIdeaProyectoPitec.do">
+
+			<!-- TODO: GB/ Ver cuando esté definido del todo IPP : ¿son necesarios los dos forwards?  -->
+			<forward name="successPresentacionConvocatoria" path="/PresentacionConvocatoriaInventario.do" />
+			<forward name="successIdeaProyecto" path="/IdeaProyectoInventario.do" />
+			
+			<forward 
+				name="invalid"
+				path="/CargarIdeaProyectoPitec.do">
+			</forward>
+		</action>
+        
+      	<action path="/IdeaProyectoPitecGuardarEdicion"
+			type="org.springframework.web.struts.DelegatingActionProxy" 
+     		name="ProyectoEditarDynaForm"
+  	  		parameter="guardarEdicion" 
+			scope="request"
+    		validate="true"
+    		input="/CargarIdeaProyectoPitec.do">
+			
+			<forward name="success" path="/IdeaProyectoPitecInventario.do" />				
+        </action>
+		
+      	<action path="/IdeaProyectoVisualizar"
+			type="org.springframework.web.struts.DelegatingActionProxy" 
+  	  		parameter="visualizar" 
+			scope="request"
+    		validate="false">
+    		
+			<forward name="success" 
+					 path=".IdeaProyectoVisualizarDef"/>			
+        </action>
+        
+		<!-- LLAMADO CONVOCATORIA - Visualizar Datos Generales -->        
+		<action path="/VisualizarLlamadoConvocatoriaDatosGenerales"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDatosGenerales"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".LlamadoConvocatoriaDatosGeneralesDef">
+			</forward>
+		</action>
+		
+		<!-- LLAMADO CONVOCATORIA - Visualizar Distribucion Financiamiento -->
+		<action path="/VisualizarLlamadoConvocatoriaDistribucionFinanciamiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDistribucionFinanciamiento"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".LlamadoConvocatoriaDistribucionFinanciamiento">
+			</forward>
+		</action>
+
+		<!-- LLAMADO CONVOCATORIA - Visualizar Distribucion Tipo Proyecto -->
+		<action path="/VisualizarLlamadoConvocatoriaDistribucionTipoProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDistribucionTipoProyecto"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".LlamadoConvocatoriaDistribucionTipoProyecto">
+			</forward>
+		</action>
+
+		<!-- VENTANILLA PERMANENTE - Visualizar Datos Generales -->        
+		<action path="/VisualizarVentanillaPermanenteDatosGenerales"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDatosGenerales"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".VentanillaPermanenteDatosGeneralesDef">
+			</forward>
+		</action>
+		
+		<!-- VENTANILLA PERMANENTE - Visualizar Distribucion Financiamiento -->
+		<action path="/VisualizarVentanillaPermanenteDistribucionFinanciamiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDistribucionFinanciamiento"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".VentanillaPermanenteDistribucionFinanciamiento">
+			</forward>
+		</action>
+
+		<!-- VENTANILLA PERMANENTE - Visualizar Distribucion Tipo Proyecto -->
+		<action path="/VisualizarVentanillaPermanenteDistribucionTipoProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="visualizarDistribucionTipoProyecto"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".VentanillaPermanenteDistribucionTipoProyecto">
+			</forward>
+		</action>
+
+
+	</action-mappings>
+</struts-config>

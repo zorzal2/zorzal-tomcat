@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!-- Paginas generales del sistema -->
+
+  <bean name="/*PaginaError"
+        class="com.fontar.web.action.administracion.PaginaErrorAction">    
+  </bean>
+        
+  <!-- Proyecto -->
+  
+  <bean id="AdministrarProyectoActionBase" class="com.fontar.web.action.administracion.AdministrarProyectoAction" abstract="true">
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+		<property name="administrarProyectoServicio" ref="administrarProyectoService"/>
+  </bean>
+  
+  <bean name="/CargarProyecto" parent="AdministrarProyectoActionBase"/>
+  <bean name="/ProyectoEditar" parent="AdministrarProyectoActionBase" />
+  <bean name="/ProyectoGuardar" parent="AdministrarProyectoActionBase"/>
+  <bean name="/ProyectoGuardarEdicion" parent="AdministrarProyectoActionBase" />
+  <bean name="/ProyectoActualizarRecomendacion" parent="AdministrarProyectoActionBase" />
+  
+  <bean name="/ProyectoVisualizar" 
+		class="com.fontar.web.action.administracion.VisualizarProyectoAction">
+	<property name="wfProyectoServicio" ref="wfProyectoService"/>
+  </bean>  
+
+  <bean name="/VisualizarAdmisibilidadProyecto" 
+		class="com.fontar.web.action.proyecto.VisualizarAdmisibilidadAction">
+	<property name="admisibilidadProyectoServicio" ref="admisibilidadProyectoService"/>
+  </bean>  
+  
+ <bean name="/PrintAdmisibilidadProyecto" parent="/VisualizarAdmisibilidadProyecto" />
+  
+
+  <!--  Proyecto PITEC  -->
+
+  <bean id="AdministrarProyectoPitecActionBase" class="com.fontar.web.action.instrumento.pitec.AdministrarProyectoPitecAction" abstract="true">
+		<property name="wfProyectoServicio" ref="wfProyectoPitecService"/>
+  </bean>
+  
+  <bean name="/CargarProyectoPitec" parent="AdministrarProyectoPitecActionBase"/>
+  <bean name="/ProyectoPitecGuardar" parent="AdministrarProyectoPitecActionBase"/>
+
+  <!-- Proyectos PITEC -->
+
+  <bean id="ProyectoPitecActionBase"
+		class="com.fontar.web.action.instrumento.pitec.ProyectoPitecAction" abstract="true">
+  	<property name="servicio">
+  		<ref bean="proyectoPitecService"/>
+	</property>	     
+  </bean>	
+
+  <bean name="/ProyectoPitecSelectorPopUp" parent="ProyectoPitecActionBase" />
+  <bean name="/ProyectoPitecInventario" parent="ProyectoPitecActionBase"/>
+ 
+	<!-- Paquetes -->
+	<bean name="/VisualizarPaquete" 
+		class="com.fontar.web.action.administracion.paquete.VisualizarPaqueteAction">
+		<property name="administracionPaqueteService" ref="administracionPaqueteService"/>
+	</bean>  
+  
+	<bean name="/VisualizarPaqueteBitacora" 
+		class="com.fontar.web.action.administracion.paquete.VisualizarPaqueteAction">
+		<property name="administracionPaqueteService" ref="administracionPaqueteService"/>
+	</bean>  
+  
+	<bean id="PaqueteActionBase"
+		class="com.fontar.web.action.administracion.PaqueteAction" 
+	    abstract="true">     
+		<property name="wfPaqueteServicio">
+	  		<ref bean="wfPaqueteService"/>
+	  	</property>
+	</bean>
+	    
+	<bean name="/PaqueteGuardar" parent="PaqueteActionBase"/>
+	<bean name="/PaqueteMostrarProyectos" parent="PaqueteActionBase"/>
+	<bean name="/PaqueteAsociarProyectos" parent="PaqueteActionBase"/>
+	<bean name="/PaqueteArmar" parent="PaqueteActionBase"/>  
+
+	<!-- Paquete Toolbar -->
+	<bean name="/PaqueteInventario" class="com.fontar.web.action.administracion.paquete.PaqueteInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from PaqueteBean o"/>
+	   	<property name="idToolbar" value="paquetes"/>	
+	   	<property name="administrarInstrumentosService">
+	   		<ref bean="administrarInstrumentosService"/>
+	   	</property>
+	</bean>
+	<bean name="/PaqueteInventarioFiltrar" parent="/PaqueteInventario"/>
+
+
+	<!-- Bitacora -->
+	  <bean id="BitacoraActionBase"
+	        class="com.fontar.web.action.bitacora.BitacoraAction"  abstract="true">     
+		   	<property name="administrarBitacoraServicio">
+		   		<ref bean="administrarBitacoraService"/>
+		   	</property>	      
+	  </bean>
+
+    <bean name="/BitacoraEditar" parent="BitacoraActionBase" />
+    <bean name="/BitacoraGuardar" parent="BitacoraActionBase" />
+    
+    <bean name="/BitacoraBorrar" class="com.fontar.web.action.bitacora.BitacoraBorrarAction">
+		   	<property name="administrarBitacoraServicio">
+		   		<ref bean="administrarBitacoraService"/>
+		   	</property>    	
+    </bean>
+        
+   	<bean name="/BitacoraInventario" class="com.fontar.web.action.bitacora.BitacoraInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from BitacoraBean o"/>
+	   	<property name="idToolbar" value="bitacora"/>	
+	</bean>
+	<bean name="/BitacoraInventarioFiltrar" parent="/BitacoraInventario"/>  
+	  
+	<bean id="AlicuotaActionBase" class="com.fontar.web.action.administracion.AlicuotaAction"  abstract="true">     
+	   	<property name="wfProyectoServicio"><ref bean="wfProyectoService"/></property>
+	   	<property name="administrarEvaluacionesServicio"><ref bean="administrarEvaluacionesService"/></property>
+	   	<property name="administrarProyectoServicio"><ref bean="administrarProyectoService"/></property>
+	</bean>
+	<bean name="/AlicuotaEditar" parent="AlicuotaActionBase" />
+	<bean name="/AlicuotaEditarGuardar" parent="AlicuotaActionBase" />
+
+	<bean id="EvaluadorActionBase" class="com.fontar.web.action.configuracion.evaluadores.EvaluadorAction" abstract="true">
+	   	 <constructor-arg>
+	       	 <value>com.fontar.data.impl.domain.bean.EvaluadorBean</value>
+	     </constructor-arg>   
+	 	<property name="servicio">
+	 		<ref bean="evaluadorService"/>
+	 	</property>	     
+	</bean>  
+	<!-- PopUP de evaluacion -->
+	<bean name="/EvaluadorSelectorPopUp" parent="EvaluadorActionBase"/>
+	
+	
+  	<bean name="/EvaluacionEvaluador" 
+  		class="com.fontar.web.action.evaluacion.EvaluacionEvaluadorAction">
+	</bean> 
+  
+	<bean name="/EvaluacionEvaluadorGuardar" 
+  		class="com.fontar.web.action.evaluacion.EvaluacionEvaluadorAction">
+	</bean>  
+		 
+  	<bean name="/EntidadIntervinientes" 
+  		class="com.fontar.web.action.configuracion.entidades.entidad.EntidadIntervinientesAction">
+	</bean> 
+  
+	<bean name="/EntidadIntervinientesGuardar" 
+  		class="com.fontar.web.action.configuracion.entidades.entidad.EntidadIntervinientesAction">
+	</bean>  	 
+	
+	<!-- Paquetes -->
+	<bean name="/VisualizarEvaluacion" 
+		class="com.fontar.web.action.administracion.evaluacion.VisualizarEvaluacionAction">
+		<property name="servicio" ref="administrarEvaluacionesService"/>
+	   	<property name="administrarMatrizCriteriosServicio">
+	   		<ref bean="administrarMatrizCriteriosService"/>
+	   	</property>
+	   	<property name="wfEvaluacionServicio">
+	   		<ref bean="wfEvaluacionService"/>
+	   	</property>
+	</bean>  
+  
+	<!-- Evaluacion Toolbar -->
+	<bean name="/EvaluacionInventario" class="com.fontar.web.action.administracion.evaluacion.EvaluacionInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from EvaluacionGeneralBean o where o.bitacora.idSeguimiento is null"/>
+	   	<property name="idToolbar" value="evaluaciones"/>	
+	   	<property name="administrarInstrumentosService">
+	   		<ref bean="administrarInstrumentosService"/>
+	   	</property>
+	</bean>
+	<bean name="/EvaluacionInventarioFiltrar" parent="/EvaluacionInventario" />	
+	
+	<!-- ACTION SERVLETS DE INVENTARIO TOOLBAR  -->
+	<bean name="/ProyectoInventario" class="com.fontar.web.action.administracion.ProyectoInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from ProyectoBean o where o.class!=IdeaProyectoPitecBean"/>
+	   	<property name="idToolbar" value="proyectos"/>	
+	   	<property name="administrarInstrumentosService">
+	   		<ref bean="administrarInstrumentosService"/>
+	   	</property>
+	</bean>
+	<bean name="/ProyectoInventarioFiltrar" parent="/ProyectoInventario"/>
+	
+	<!-- Evaluacion Toolbar -->
+	<bean name="/EvaluacionesProyectoInventario" class="com.fontar.web.action.administracion.EvaluacionesProyectoInventario">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from EvaluacionBean o where o.bitacora.idSeguimiento is null"/>
+	   	<property name="idToolbar" value="evaluacionesProyecto"/>	
+	   	<property name="administrarProyectoServicio">
+		   	 <ref bean="administrarProyectoService"/>
+	   	 </property>
+	</bean>
+	
+	
+	<bean name="/ExpedienteProyectoAction"
+	      class="com.fontar.web.action.administracion.ExpedienteProyectoAction">
+	   	<property name="wfProyectoServicio">
+	   		<ref bean="wfProyectoService"/>
+	   	</property>
+	</bean>	
+	
+	<bean name="/ExpedienteProyectoAgregar" parent="/ExpedienteProyectoAction"/>
+	<bean name="/ExpedienteProyectoEditar" parent="/ExpedienteProyectoAction"/>
+	<bean name="/ExpedienteProyectoGuardar" parent="/ExpedienteProyectoAction"/>
+	<bean name="/ExpedienteProyecto" parent="/ExpedienteProyectoAction"/>
+	
+	<bean name="/ExpedienteMovimientoProyectoAction"
+	      class="com.fontar.web.action.administracion.ExpedienteMovimientoProyectoAction">
+	      <property name="administrarProyectoServicio">
+	  		<ref bean="administrarProyectoService"/>
+	  	</property>	     
+	   	<property name="wfProyectoServicio">
+	   		<ref bean="wfProyectoService"/>
+	   	</property>
+	</bean>	
+	
+	<bean name="/ExpedienteMovimiento" parent="/ExpedienteMovimientoProyectoAction"/>
+	<bean name="/ExpedienteMovimientoGuardar" parent="/ExpedienteMovimientoProyectoAction"/>
+	<bean name="/ExpedienteMovimientoDevolver" parent="/ExpedienteMovimientoProyectoAction"/>
+	<bean name="/ExpedienteMovimientoDevolverGuardar" parent="/ExpedienteMovimientoProyectoAction"/>
+	
+	<bean name="/CargarCriteriosResultadoAction"
+	      class="com.fontar.web.action.administracion.CargarCriteriosResultadoAction">
+	   	<property name="wfEvaluacionServicio">
+	   		<ref bean="wfEvaluacionService"/>
+	   	</property>
+	   	<property name="administrarMatrizCriteriosServicio">
+	   		<ref bean="administrarMatrizCriteriosService"/>
+	   	</property>
+	</bean>	
+	
+	<bean name="/CargarCriteriosResultado" parent="/CargarCriteriosResultadoAction"/>
+	<bean name="/CargarCriteriosResultadoGuardar" parent="/CargarCriteriosResultadoAction"/>
+
+
+
+	<!-- Adjuntos Proyecto -->
+	<bean id="AdjuntoProyectoActionBase"
+	      class="com.fontar.web.action.proyecto.ProyectoAdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoProyectoServicio"/>
+	  	</property>	     
+	   	<property name="wfProyectoServicio">
+	   		<ref bean="wfProyectoService"/>
+	   	</property>
+	</bean>
+	
+	<bean name="/ProyectoBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoProyectoServicio"/>
+	  	</property>	     
+	</bean>	
+	
+	<bean name="/ProyectoBeanGuardarAdjuntoAction" parent="AdjuntoProyectoActionBase"/>
+	<bean name="/ProyectoBeanCargarAdjuntoAction" parent="AdjuntoProyectoActionBase"/>
+	<bean name="/ProyectoBeanInventarioAdjuntoAction" parent="AdjuntoProyectoActionBase"/>
+	<bean name="/ProyectoBeanEliminarAdjuntoAction" parent="AdjuntoProyectoActionBase"/>	
+	
+	<!-- Adjuntos Idea Proyecto -->
+	<bean id="AdjuntoIdeaProyectoActionBase"
+	      class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoAdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoIdeaProyectoServicio"/>
+	  	</property>	     
+	   	<property name="administrarIdeaProyectoServicio">
+	   		<ref bean="administrarIdeaProyectoService"/>
+	   	</property>
+	</bean>
+	
+	<bean name="/IdeaProyectoBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoIdeaProyectoServicio"/>
+	  	</property>	     
+	</bean>	
+	
+	<bean name="/IdeaProyectoBeanGuardarAdjuntoAction" parent="AdjuntoIdeaProyectoActionBase"/>
+	<bean name="/IdeaProyectoBeanCargarAdjuntoAction" parent="AdjuntoIdeaProyectoActionBase"/>
+	<bean name="/IdeaProyectoBeanInventarioAdjuntoAction" parent="AdjuntoIdeaProyectoActionBase"/>
+	<bean name="/IdeaProyectoBeanEliminarAdjuntoAction" parent="AdjuntoIdeaProyectoActionBase"/>	
+	
+
+	<!-- Adjuntos LlamadosConvocatoria -->
+	<bean id="AdjuntoLlamadosConvocatoriaActionBase"
+	      class="com.fontar.web.action.adjuntos.InstrumentoAdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoLlamadoConvocatoriaServicio"/>
+	  	</property>	     
+	  	<property name="administrarInstrumentosServicio">
+  			<ref bean="administrarInstrumentosService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/LlamadoConvocatoriaBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoLlamadoConvocatoriaServicio"/>
+	  	</property>	     
+	</bean>	
+	
+	<bean name="/LlamadoConvocatoriaBeanGuardarAdjuntoAction" parent="AdjuntoLlamadosConvocatoriaActionBase"/>
+	<bean name="/LlamadoConvocatoriaBeanCargarAdjuntoAction" parent="AdjuntoLlamadosConvocatoriaActionBase"/>
+	<bean name="/LlamadoConvocatoriaBeanInventarioAdjuntoAction" parent="AdjuntoLlamadosConvocatoriaActionBase"/>
+	<bean name="/LlamadoConvocatoriaBeanEliminarAdjuntoAction" parent="AdjuntoLlamadosConvocatoriaActionBase"/>	
+	
+	
+	<!-- Adjuntos Ventanilla Permanente -->
+	<bean id="AdjuntoVentanillaActionBase"
+	      class="com.fontar.web.action.adjuntos.InstrumentoAdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoVentanillaPermanenteServicio"/>
+	  	</property>	     
+	  	<property name="administrarInstrumentosServicio">
+  			<ref bean="administrarInstrumentosService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/VentanillaPermanenteBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoVentanillaPermanenteServicio"/>
+	  	</property>	     
+	</bean>	
+	
+	<bean name="/VentanillaPermanenteBeanGuardarAdjuntoAction" parent="AdjuntoVentanillaActionBase"/>
+	<bean name="/VentanillaPermanenteBeanCargarAdjuntoAction" parent="AdjuntoVentanillaActionBase"/>
+	<bean name="/VentanillaPermanenteBeanInventarioAdjuntoAction" parent="AdjuntoVentanillaActionBase"/>
+	<bean name="/VentanillaPermanenteBeanEliminarAdjuntoAction" parent="AdjuntoVentanillaActionBase"/>	
+
+	<!-- Editar presupesto general -->
+
+	<bean id="EditarPresupuestoBase"
+	      class="com.fontar.web.action.presupuesto.EditarPresupuestoAction" abstract="true">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+	</bean>
+
+	<bean name="/PresupuestoDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoPresupuestoServicio"/>
+	  	</property>	     
+	</bean>
+	
+	<bean name="/EditarPresupuestoIgresar" parent="EditarPresupuestoBase"/>
+	<bean name="/EditarPresupuestoCerrar" parent="EditarPresupuestoBase"/>
+	<bean name="/EditarPresupuestoCargar" parent="EditarPresupuestoBase"/>
+	<bean name="/EditarPresupuestoCancelar" parent="EditarPresupuestoBase"/>
+	<bean name="/EditarPresupuestoDownload" parent="EditarPresupuestoBase"/>
+
+	<bean name="/GuardarPresupuesto"
+		      class="com.fontar.web.action.presupuesto.GuardarPresupuestoAction">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+    </bean>
+	
+	<!-- Editar presupesto desde Proyecto -->
+	<bean id="EditarPresupuestoProyectoBase"
+	      class="com.fontar.web.action.proyecto.presupuesto.EditarPresupuestoProyectoImplementationAction" abstract="true">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+	</bean>
+	<bean name="/EditarPresupuestoProyectoImplementationIngresar" parent="EditarPresupuestoProyectoBase"/>
+	<bean name="/EditarPresupuestoProyectoImplementationCerrar" parent="EditarPresupuestoProyectoBase"/>
+	<bean name="/EditarPresupuestoProyectoImplementationCancelar" parent="EditarPresupuestoProyectoBase"/>
+	<bean name="/EditarPresupuestoProyectoImplementationCargar" parent="EditarPresupuestoProyectoBase"/>
+	
+	<bean name="/GuardarPresupuestoProyecto"
+		      class="com.fontar.web.action.proyecto.presupuesto.GuardarPresupuestoProyectoAction">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+    </bean>
+    
+    <!-- Editar presupuesto desde la carga de resultado de evaluacion -->
+	<bean id="EditarPresupuestoEvaluacionBase"
+	      class="com.fontar.web.action.evaluacion.presupuesto.EditarPresupuestoEvaluacionImplementationAction" abstract="true">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+	   	<property name="evaluacionServicio">
+	   		<ref bean="administrarEvaluacionesService"/>
+	   	</property>
+	</bean>
+	<bean name="/EditarPresupuestoEvaluacionIngresar" parent="EditarPresupuestoEvaluacionBase"/>
+	<bean name="/EditarPresupuestoEvaluacionCerrar" parent="EditarPresupuestoEvaluacionBase"/>
+	<bean name="/EditarPresupuestoEvaluacionCancelar" parent="EditarPresupuestoEvaluacionBase"/>
+	<bean name="/EditarPresupuestoEvaluacionCargar" parent="EditarPresupuestoEvaluacionBase"/>	
+
+    <!-- Editar presupuesto desde la evaluacion de paquete -->
+	<bean id="EditarPresupuestoEvaluarPaqueteBase"
+	      class="com.fontar.web.action.administracion.paquete.presupuesto.EditarPresupuestoEvaluarPaqueteImplementationAction" abstract="true">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+	   	<property name="evaluacionServicio">
+	   		<ref bean="administrarEvaluacionesService"/>
+	   	</property>
+	</bean>
+	<bean name="/EditarPresupuestoEvaluarPaqueteIngresar" parent="EditarPresupuestoEvaluarPaqueteBase"/>
+	<bean name="/EditarPresupuestoEvaluarPaqueteCerrar" parent="EditarPresupuestoEvaluarPaqueteBase"/>
+	<bean name="/EditarPresupuestoEvaluarPaqueteCancelar" parent="EditarPresupuestoEvaluarPaqueteBase"/>
+	<bean name="/EditarPresupuestoEvaluarPaqueteCargar" parent="EditarPresupuestoEvaluarPaqueteBase"/>	
+
+
+    <!-- Editar presupuesto desde finalizar control de la evaluacion -->
+	<bean id="EditarPresupuestoFinalizarControlBase"
+	      class="com.fontar.web.action.proyecto.presupuesto.EditarPresupuestoFinalizarControlImplementationAction" abstract="true">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+	</bean>
+	<bean name="/EditarPresupuestoFinalizarControlIngresar" parent="EditarPresupuestoFinalizarControlBase"/>
+	<bean name="/EditarPresupuestoFinalizarControlCerrar" parent="EditarPresupuestoFinalizarControlBase"/>
+	<bean name="/EditarPresupuestoFinalizarControlCancelar" parent="EditarPresupuestoFinalizarControlBase"/>
+	<bean name="/EditarPresupuestoFinalizarControlCargar" parent="EditarPresupuestoFinalizarControlBase"/>	
+
+	<!-- Visualizacion de presupuesto -->
+	<bean name="/ProyectoPresupuestoVisualizar"
+	      class="com.fontar.web.action.proyecto.presupuesto.ProyectoPresupuestoVisualizarAction">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+	</bean>
+	<bean name="/VisualizarPresupuesto"
+	      class="com.fontar.web.action.proyecto.presupuesto.ProyectoPresupuestoVisualizarAction">
+	  	<property name="presupuestoServicio">
+	  		<ref bean="proyectoPresupuestoServicio"/>
+	  	</property>
+	   	<property name="proyectoServicio">
+	   		<ref bean="administrarProyectoRaizService"/>
+	   	</property>
+	</bean>
+
+	<!-- Adjuntos Evaluacion -->
+	<bean id="AdjuntoEvaluacionActionBase"
+	      class="com.fontar.web.action.evaluacion.EvaluacionAdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoEvaluacionServicio"/>
+	  	</property>	     
+	  	<property name="administrarEvaluacionesServicio">
+  			<ref bean="administrarEvaluacionesService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/EvaluacionBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoEvaluacionServicio"/>
+	  	</property>	     
+	</bean>	
+	
+	<bean name="/EvaluacionBeanGuardarAdjuntoAction" parent="AdjuntoEvaluacionActionBase"/>
+	<bean name="/EvaluacionBeanCargarAdjuntoAction" parent="AdjuntoEvaluacionActionBase"/>
+	<bean name="/EvaluacionBeanInventarioAdjuntoAction" parent="AdjuntoEvaluacionActionBase"/>
+	<bean name="/EvaluacionBeanEliminarAdjuntoAction" parent="AdjuntoEvaluacionActionBase"/>	
+
+	<!-- Adjuntos Paquete -->
+	<bean id="AdjuntoPaqueteActionBase"
+	      class="com.fontar.web.action.administracion.paquete.PaqueteAdjuntoAction" abstract="true">
+	  	<property name="adjuntoServicio">
+	  		<ref bean="adjuntoPaqueteServicio"/>
+	  	</property>	     
+	  	<property name="administracionPaqueteServicio">
+  			<ref bean="administracionPaqueteService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/PaqueteBeanDownloadAdjuntoAction"
+	      class="com.fontar.web.action.adjuntos.AdjuntoDownloadAction">
+	      <property name="adjuntoServicio">
+	  		<ref bean="adjuntoPaqueteServicio"/>
+	  	</property>	     
+	</bean>	
+	
+	<bean name="/PaqueteBeanGuardarAdjuntoAction" parent="AdjuntoPaqueteActionBase"/>
+	<bean name="/PaqueteBeanCargarAdjuntoAction" parent="AdjuntoPaqueteActionBase"/>
+	<bean name="/PaqueteBeanInventarioAdjuntoAction" parent="AdjuntoPaqueteActionBase"/>
+	<bean name="/PaqueteBeanEliminarAdjuntoAction" parent="AdjuntoPaqueteActionBase"/>	
+
+	<!-- Notificacion Toolbar -->
+	<bean name="/NotificacionInventario" class="com.fontar.web.action.administracion.notificacion.NotificacionInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from NotificacionBean o"/>
+	   	<property name="idToolbar" value="notificacion"/>	
+	   	<property name="administrarNotificacionServicio">
+	   		<ref bean="administrarNotificacionService"/>
+	   	</property>
+	</bean>
+	<bean name="/NotificacionInventarioFiltrar" parent="/NotificacionInventario" />	
+
+	<!-- Notificacion Visualizar -->
+	<bean name="/VisualizarNotificacion"
+	      class="com.fontar.web.action.administracion.notificacion.VisualizarNotificacionAction">
+		<property name="administrarNotificacionServicio">
+			<ref bean="administrarNotificacionService"/>
+		</property>
+		<property name="administrarIdeaProyectoServicio">
+			<ref bean="administrarIdeaProyectoService"/>
+		</property>
+		<property name="administrarProyectoServicio">
+			<ref bean="administrarProyectoService"/>
+		</property>  
+	</bean>	
+	
+	<!-- Plan de Proyecto Visualizar -->
+	<bean name="/PlanProyecto"
+	      class="com.fontar.web.action.administracion.VisualizarPlanProyectoAction">
+	</bean>	
+	
+	<!-- Carga de proyectos desde un archivo Excel -->
+	<bean id="ProyectosExcelActionBase"
+	      class="com.fontar.web.action.proyecto.datos.ProyectosExcelAction" abstract="true">
+	  	<property name="proyectosExcelServicio">
+	  		<ref bean="proyectosExcelService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/ProyectosExcelIngresar" parent="ProyectosExcelActionBase"/>
+	<bean name="/ProyectosExcelReintentar" parent="ProyectosExcelActionBase"/>
+	<bean name="/ProyectosExcelCargar" parent="ProyectosExcelActionBase"/>
+	<!-- /Carga de proyectos desde un archivo Excel -->
+	<!-- Detalle del presupuesto por rubro -->
+	<bean name="/PresupuestoDetalleRubrosANR"
+	      class="com.fontar.web.action.presupuesto.PresupuestoDetalleRubrosANRAction">
+	</bean>	
+	<bean name="/PresupuestoDetalleRubrosCF"
+	      class="com.fontar.web.action.presupuesto.PresupuestoDetalleRubrosCFAction">
+	</bean>	
+	<bean name="/PresupuestoDetalleRubrosPatente"
+	      class="com.fontar.web.action.presupuesto.PresupuestoDetalleRubrosPatenteAction">
+	</bean>	
+
+	<!-- PAC -->
+	<bean name="/ProyectoPACInventario" class="com.fontar.web.action.proyecto.pac.ProyectoPacInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from PacBean o"/>
+	   	<property name="idToolbar" value="pac"/>	
+	   	<property name="administrarPACServicio">
+	   		<ref bean="administrarPACService"/>
+	   	</property>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	</bean>
+	<bean name="/ProyectoPACInventarioFiltrar" parent="/ProyectoPACInventario" />	
+
+	<bean name="/ProyectoPACBaseAction"
+	      class="com.fontar.web.action.proyecto.pac.ProyectoPacAction" abstract="true">
+  	 	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.PacBean</value>
+	     </constructor-arg>
+	   	<property name="administrarPACServicio">
+	   		<ref bean="administrarPACService"/>
+	   	</property>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   </bean>	
+
+	<bean name="/ProyectoPACAgregar" parent="/ProyectoPACBaseAction"/>
+	<bean name="/ProyectoPACEditar" parent="/ProyectoPACBaseAction"/>
+	<bean name="/ProyectoPACGuardar" parent="/ProyectoPACBaseAction"/>
+	<bean name="/PACAgregarGuardar" parent="/ProyectoPACBaseAction"/>
+	<bean name="/ProyectoPACAnularGuardar" parent="/ProyectoPACBaseAction"/>
+	<bean name="/ProyectoPACAnular" parent="/ProyectoPACBaseAction"/>
+	<bean name="/PACAnularGuardar" parent="/ProyectoPACBaseAction"/>
+	<bean name="/PACAnularAgregar" parent="/ProyectoPACBaseAction"/>
+	<bean name="/ProyectoPACEditarMontoAdjudicacion" parent="/ProyectoPACBaseAction"/>
+	<bean name="/ProyectoPACGuardarMontoAdjudicacion" parent="/ProyectoPACBaseAction"/>
+	
+	<bean name="/PedirDesembolsoAction"
+	      class="com.fontar.web.action.proyecto.pac.PedirDesembolsoAction" abstract="true">
+  	 	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.DesembolsoUFFABean</value>
+	     </constructor-arg>
+	   	<property name="administrarPACServicio">
+	   		<ref bean="administrarPACService"/>
+	   	</property>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   </bean>	
+
+	<bean name="/ProyectoPACPedir" parent="/PedirDesembolsoAction"/>
+	<bean name="/ProyectoPACPedirGuardar" parent="/PedirDesembolsoAction"/>
+	
+	
+	
+	<bean name="/IngresarPagoAction"
+	      class="com.fontar.web.action.proyecto.pac.IngresarPagoAction" abstract="true">
+  	 	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.DesembolsoUFFABean</value>
+	     </constructor-arg>
+	   	<property name="administrarPACServicio">
+	   		<ref bean="administrarPACService"/>
+	   	</property>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   </bean>	
+
+	<bean name="/ProyectoPACPago" parent="/IngresarPagoAction"/>
+	<bean name="/ProyectoPACPagoGuardar" parent="/IngresarPagoAction"/>
+	
+
+	<bean name="/VisualizarPacAction"
+	      class="com.fontar.web.action.proyecto.pac.VisualizarPacAction">
+	   	<property name="administrarPACServicio">
+	   		<ref bean="administrarPACService"/>
+	   	</property>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   	<property name="administrarProcedimientoServicio">
+	   		<ref bean="administrarProcedimientoService"/>
+	   	</property>
+	   </bean>	
+
+	<bean name="/HistoriaPACVisualizar" parent="/VisualizarPacAction"/>
+	
+	<bean name="/HistoriaPACInventario" class="com.fontar.web.action.proyecto.pac.HistoriaPacInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from ProcedimientoItemBean o"/>
+	   	<property name="idToolbar" value="historiaPac"/>	
+	   	<property name="administrarPACServicio">
+	   		<ref bean="administrarPACService"/>
+	   	</property>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	</bean>
+	
+	<bean name="/HistoriaPACInvBreve" class="com.fontar.web.action.proyecto.pac.HistoriaPacInventarioAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	    
+	   	<property name="hqlQueryString" value="from ProcedimientoItemBean o"/>
+	   	<property name="idToolbar" value="historiaPac"/>	
+	   	<property name="administrarPACServicio">
+	   		<ref bean="administrarPACService"/>
+	   	</property>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	</bean>
+	
+	<!-- Carga de PAC desde un archivo Excel -->
+	<bean id="PacExcelActionBase"
+	      class="com.fontar.web.action.proyecto.pac.PacExcelAction" abstract="true">
+	  	<property name="pacService">
+	  		<ref bean="administrarPACService"/>
+	  	</property>
+	</bean>
+	
+	<bean name="/PacExcelIngresar" parent="PacExcelActionBase"/>
+	<bean name="/PacExcelCargar" parent="PacExcelActionBase"/>
+
+  <bean id="ProyectoDesembolsoActionBase"
+        class="com.fontar.web.action.proyecto.desembolso.ProyectoDesembolsoAction" abstract="true">
+	   	<property name="proyectoDesembolsoService">
+	   		<ref bean="proyectoDesembolsoService"/>
+	   	</property>	     
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+  </bean>
+  <bean name="/ProyectoDesembolsoInventario" parent="ProyectoDesembolsoActionBase"/>
+  <bean name="/ProyectoDesembolsoVolver" parent="ProyectoDesembolsoActionBase"/>
+  <bean name="/ProyectoDesembolsoEditar" parent="ProyectoDesembolsoActionBase"/>
+  <bean name="/ProyectoDesembolsoGuardar" parent="ProyectoDesembolsoActionBase"/>
+  
+  <bean name="/ProyectoDesembolsoIngresarAutorizacion" parent="ProyectoDesembolsoActionBase"/>
+  <bean name="/ProyectoDesembolsoAutorizar" parent="ProyectoDesembolsoActionBase"/>
+  
+  <bean name="/ProyectoDesembolsoPagoDeAnticipo" parent="ProyectoDesembolsoActionBase"/>
+  <bean name="/ProyectoDesembolsoPagarAnticipo" parent="ProyectoDesembolsoActionBase"/>
+
+  <bean name="/ProyectoDesembolsoPagar" parent="ProyectoDesembolsoActionBase"/>
+  <bean name="/ProyectoDesembolsoRegistrarPago" parent="ProyectoDesembolsoActionBase"/>
+  
+  <bean name="/ProyectoDesembolsoAgregar" parent="ProyectoDesembolsoActionBase"/>
+  <bean name="/ProyectoDesembolsoCrear" parent="ProyectoDesembolsoActionBase"/>
+  
+  <bean name="/ProyectoDesembolsoEliminar" parent="ProyectoDesembolsoActionBase"/>
+  
+
+	<!-- Editar Evaluadores de Evaluación Proyecto -->
+	<bean name="/EditarEvaluacionProyecto"
+		class="com.fontar.web.action.evaluacion.EditarEvaluacionProyectoAction">		  
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+	</bean>
+	
+	<!-- Guardar Edición Evaluadores de Evaluación Proyecto -->
+	<bean name="/GuardarEdicionEvaluacionProyecto"
+		class="com.fontar.web.action.evaluacion.EditarEvaluacionProyectoAction">		  
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+	</bean>	
+	<!-- Mis Evaluaciones Generales -->
+	<bean name="/MisEvaluacionesGenerales" class="com.fontar.web.action.administracion.evaluacion.MisEvaluacionesGeneralesAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	 
+		<property name="idToolbar" value="misEvaluaciones" />
+	   	<property name="administrarInstrumentosService">
+	   		<ref bean="administrarInstrumentosService"/>
+	   	</property>
+	</bean>
+	<!-- Mis Evaluaciones De Seguimiento -->
+	<bean name="/MisEvaluacionesDeSeguimiento" class="com.fontar.web.action.administracion.evaluacion.MisEvaluacionesDeSeguimientoAction">
+	   	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>	 
+		<property name="idToolbar" value="misEvaluacionesDeSeguimiento" />
+	   	<property name="administrarInstrumentosService">
+	   		<ref bean="administrarInstrumentosService"/>
+	   	</property>
+	</bean>
+	
+	<bean name="/VisualizarReconsideracion" class="com.fontar.web.action.proyecto.VisualizarReconsideracionAction">
+	   	<property name="proyectoReconsideracionService">
+			<ref bean="proyectoReconsideracionService"/>
+		</property>	 
+	</bean>
+</beans>

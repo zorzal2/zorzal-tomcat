@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<!-- SERVICIO PARA LOS ABMS -->
+
+	<bean name="configuracionService" parent="baseTransactionProxy">
+   		<property name="target" ref="configuracionServiceTarget"/>
+	</bean>
+	<bean name="configuracionServiceTarget" class="com.fontar.bus.impl.configuracion.ConfiguracionServicioImpl">
+		<property name="proyectoRaizDao" ref="proyectoRaizDao"/>	
+		<property name="expedienteMovimientoDao" ref="expedienteMovimientoDao"/>	
+		<property name="rendicionCuentasDao" ref="rendicionCuentasDao"/>
+		<property name="personaDAO" ref="personaDao"/>	
+		<property name="localizacionDAO" ref="localizacionDao"/>		
+		<property name="entidadDAO" ref="entidadDao"/>		
+		<property name="entidadEvaluadoraDAO" ref="entidadEvaluadoraDao"/>		
+		<property name="entidadBeneficiariaDAO" ref="entidadBeneficiariaDao"/>		
+		<property name="entidadBancariaDAO" ref="entidadBancariaDao"/>
+		<property name="comisionDAO" ref="comisionDao"/>		
+		<property name="evaluadorDAO" ref="evaluadorDao"/>	
+		<property name="facturacionDAO" ref="facturacionDao"/>	
+		<property name="composicionDAO" ref="composicionDao"/>	
+		<property name="empleoPermanenteDAO" ref="empleoPermanenteDao"/>		
+		<property name="procedimientoDao" ref="procedimientoDao"/>		
+	</bean>
+
+	<!-- SERVICES TARGETS -->	
+	
+	<bean name="evaluadoresServiceTarget" 
+		class="com.pragma.bus.impl.GenericABMServiceImpl">
+		<constructor-arg>
+			<value>com.fontar.data.impl.domain.bean.EvaluadorBean</value>
+		</constructor-arg>     
+	   <property name="dao" ref="evaluadorDao"/>
+	</bean>
+
+	<bean name="instrumentosDefServiceTarget" class="com.fontar.bus.impl.configuracion.InstrumentoDefServicioImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.InstrumentoDefBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="instrumentoDefDao"/>
+	</bean>
+
+	<bean name="entidadServiceTarget" class="com.fontar.bus.impl.configuracion.EntidadServiceImpl">
+	 	<constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.EntidadBean</value>
+		</constructor-arg>     
+		<property name="dao" ref="entidadDao"/>
+	</bean>
+
+	<bean name="entidadBeneficiariaServiceTarget" class="com.fontar.bus.impl.entidad.EntidadBeneficiariaServicioImpl"> 
+	   <property name="entidadBeneficiariaDao" ref="entidadBeneficiariaDao"/>
+	   <property name="entidadDao" ref="entidadDao"/>
+	   <property name="localizacionDao" ref="localizacionDao"/>
+	   <property name="empleoPermanenteDao" ref="empleoPermanenteDao"/>
+	</bean>
+	
+	<bean name="entidadEvaluadoraServiceTarget" class="com.fontar.bus.impl.configuracion.EntidadEvaluadoraServicioImpl"> 
+	 	<constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.EntidadEvaluadoraBean</value>
+		</constructor-arg>     
+		<property name="dao" ref="entidadEvaluadoraDao" />
+	</bean>	
+	
+	<bean name="evaluadorServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	<constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.EvaluadorBean</value>
+		</constructor-arg>     
+		<property name="dao" ref="evaluadorDao"/>
+	</bean>	
+	<bean name="evaluadorService" parent="baseTransactionProxy">
+   		<property name="target" ref="evaluadorServiceTarget"/>
+    </bean>
+	
+	<bean name="personaServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.PersonaBean</value>
+	   </constructor-arg>     
+
+	   <property name="dao" ref="personaDao"/>
+	</bean>
+		  
+	<bean name="matrizPresupuestoServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+		<constructor-arg>
+			<value>com.fontar.data.impl.domain.bean.MatrizPresupuestoBean</value>
+		</constructor-arg>     
+	   <property name="dao" ref="matrizPresupuestoDao"/>
+	</bean>
+	
+	<bean name="comisionServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.ComisionBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="comisionDao"/>
+	</bean>
+
+	<bean name="jurisdiccionServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.JurisdiccionBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="jurisdiccionDao"/>
+	</bean>
+	
+	<bean name="regionServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.RegionBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="regionDao"/>
+	</bean>	
+
+	<bean name="fuenteFinanciamientoServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.FuenteFinanciamientoBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="fuenteFinanciamientoDao"/>
+	</bean>
+
+	<bean name="especialidadEvaluadorServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.EspecialidadEvaluadorBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="especialidadEvaluadorDao"/>
+	</bean>
+	
+	<bean name="localizacionServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.LocalizacionBean</value>
+	   </constructor-arg>  
+		<property name="hashDao">
+			<map>
+				<entry key="LocalizacionBean" value-ref="localizacionDao" />
+			</map>
+		</property>	 
+	</bean>	
+
+	<bean name="facturacionServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.FacturacionBean</value>
+	   </constructor-arg>  
+		<property name="hashDao">
+			<map>
+				<entry key="FacturacionBean" value-ref="facturacionDao" />
+			</map>
+		</property>	 
+	</bean>	
+
+	<bean name="composicionServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.ComposicionBean</value>
+	   </constructor-arg>  
+		<property name="hashDao">
+			<map>
+				<entry key="ComposicionBean" value-ref="composicionDao" />
+			</map>
+		</property>	 
+	</bean>	
+
+	<bean name="personaEvaluadorServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.EvaluadorBean</value>
+	   </constructor-arg>  
+		<property name="hashDao">
+			<map>
+				<entry key="EvaluadorBean" value-ref="evaluadorDao" />
+			</map>
+		</property>	 
+	</bean>	
+
+	<bean name="ciiuServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.CiiuBean</value>
+	   </constructor-arg>  
+		<property name="dao" ref="ciiuDao" />	 
+	</bean>	
+
+	<bean name="empleoPermanenteServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.EmpleoPermanenteBean</value>
+	   </constructor-arg>  
+		<property name="hashDao">
+			<map>
+				<entry key="EmpleoPermanenteBean" value-ref="empleoPermanenteDao" />
+			</map>
+		</property>	 
+	</bean>	
+
+	<bean name="tipoProyectoServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.TipoProyectoBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="tipoProyectoDao"/>
+	</bean>	
+
+
+    <bean name="administrarPaqueteProyectoServiceTarget" class="com.fontar.bus.impl.paquete.AdministrarPaqueteProyectoServicioImpl"> 
+   		<property name="evaluacionDAO" ref="evaluacionDao"/>
+   		<property name="paqueteDAO" ref="paqueteDao"/>  
+   	</bean>
+	
+	<bean name="administrarMatrizCriteriosServiceTarget" class="com.fontar.bus.impl.configuracion.AdministrarMatrizCriteriosServicioImpl"> 
+	   <property name="matrizCriterioDAO" ref="matrizCriterioDao"/>
+   	   <property name="matrizCriterioItemDAO" ref="matrizCriterioItemDao"/>
+	</bean>	
+
+	<bean name="matrizCriterioServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+		<constructor-arg>
+			<value>com.fontar.data.impl.domain.bean.MatrizCriterioBean</value>
+		</constructor-arg>     
+	   <property name="dao" ref="matrizCriterioDao"/>
+	</bean>
+	
+	<bean name="carteraServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.CarteraBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="carteraDao"/>
+	</bean>	
+
+	<bean name="tributariaServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.TributariaBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="tributariaDao"/>
+	</bean>	
+
+	<!-- SERVICES PROXIES -->
+	<!-- bean name="evaluadorService" parent="baseTransactionProxy">
+   		<property name="target" ref="evaluadoresServiceTarget"/>
+	</bean  -->
+	
+	<bean name="ciiuService" parent="baseTransactionProxy">
+   		<property name="target" ref="ciiuServiceTarget"/>
+	</bean>
+	
+	<bean name="instrumentosDefService" parent="baseTransactionProxy">
+   		<property name="target" ref="instrumentosDefServiceTarget"/>
+    </bean>	
+
+	<bean name="matrizPresupuestoService" parent="baseTransactionProxy">
+   		<property name="target" ref="matrizPresupuestoServiceTarget"/>
+	</bean>
+
+	<bean name="comisionService" parent="baseTransactionProxy">
+   		<property name="target" ref="comisionServiceTarget"/>
+	</bean>
+
+	<bean name="entidadService" parent="baseTransactionProxy">
+   		<property name="target" ref="entidadServiceTarget"/>
+    </bean>
+
+	<bean name="entidadBeneficiariaService" parent="baseTransactionProxy">
+   		<property name="target" ref="entidadBeneficiariaServiceTarget"/>
+    </bean>
+    
+	<bean name="entidadEvaluadoraService" parent="baseTransactionProxy">
+   		<property name="target" ref="entidadEvaluadoraServiceTarget"/>
+    </bean>    
+
+	<bean name="personaService" parent="baseTransactionProxy">
+   		<property name="target" ref="personaServiceTarget"/>
+    </bean>
+
+	<bean name="jurisdiccionService" parent="baseTransactionProxy">
+   		<property name="target" ref="jurisdiccionServiceTarget"/>
+	</bean>
+
+	<bean name="regionService" parent="baseTransactionProxy">
+   		<property name="target" ref="regionServiceTarget"/>
+	</bean>
+	
+	<bean name="fuenteFinanciamientoService" parent="baseTransactionProxy">
+   		<property name="target" ref="fuenteFinanciamientoServiceTarget"/>
+	</bean>
+
+	<bean name="especialidadEvaluadorService" parent="baseTransactionProxy">
+   		<property name="target" ref="especialidadEvaluadorServiceTarget"/>
+	</bean>
+	
+	<bean name="localizacionService" parent="baseTransactionProxy">
+   		<property name="target" ref="localizacionServiceTarget"/>
+	</bean>
+	
+	<bean name="personaEvaluadorService" parent="baseTransactionProxy">
+   		<property name="target" ref="personaEvaluadorServiceTarget"/>
+	</bean>
+	
+	<bean name="facturacionService" parent="baseTransactionProxy">
+   		<property name="target" ref="facturacionServiceTarget"/>
+	</bean>
+	
+	<bean name="composicionService" parent="baseTransactionProxy">
+   		<property name="target" ref="composicionServiceTarget"/>
+	</bean>
+	
+	<bean name="empleoPermanenteService" parent="baseTransactionProxy">
+   		<property name="target" ref="empleoPermanenteServiceTarget"/>
+	</bean>	
+
+	<bean name="tipoProyectoService" parent="baseTransactionProxy">
+   		<property name="target" ref="tipoProyectoServiceTarget"/>
+	</bean>
+
+	<bean name="carteraService" parent="baseTransactionProxy">
+   		<property name="target" ref="carteraServiceTarget"/>
+	</bean>
+	
+	<bean name="tributariaService" parent="baseTransactionProxy">
+   		<property name="target" ref="tributariaServiceTarget"/>
+	</bean>
+	
+
+	
+
+	<bean name="administrarMatrizCriteriosService" parent="baseTransactionProxy">
+   		<property name="target" ref="administrarMatrizCriteriosServiceTarget"/>
+	</bean>
+
+	<bean name="matrizCriterioService" parent="baseTransactionProxy">
+   		<property name="target" ref="matrizCriterioServiceTarget"/>
+	</bean>
+
+	<bean name="proyectosExcelService" parent="baseTransactionProxy">
+   		<property name="target">
+			<bean class="com.fontar.bus.impl.proyecto.datos.ProyectosExcelServicioImpl">
+				<property name="proyectoServicio" ref="proyectoService"/>
+				<property name="ciiuDao" ref="ciiuDao"/>
+				<property name="entidadBeneficiariaServicio" ref="entidadBeneficiariaService"/>
+				<property name="entidadDao" ref="entidadDao"/>
+				<property name="localizacionDao" ref="localizacionDao"/>
+				<property name="jurisdiccionDao" ref="jurisdiccionDao"/>
+				<property name="configuracionServicio" ref="configuracionService"/>
+				<property name="tipoProyectoDao" ref="tipoProyectoDao"/>
+				<property name="instrumentoDao" ref="instrumentoDao"/>
+				<property name="presentacionConvocatoriaDao" ref="presentacionConvocatoriaDao"/>
+			</bean>
+   		</property>
+	</bean>
+
+	<bean name="monedaService" parent="baseTransactionProxy">
+   		<property name="target">
+			<bean class="com.fontar.bus.impl.configuracion.MonedaServiceImpl">
+				<property name="monedaDAO" ref="monedaDao"/>
+			</bean>
+   		</property>
+	</bean>
+
+	<bean name="cotizacionService" parent="baseTransactionProxy">
+   		<property name="target">
+			<bean class="com.fontar.bus.impl.configuracion.CotizacionServiceImpl">
+				<property name="cotizacionDAO" ref="cotizacionDao"/>
+				<property name="monedaDAO" ref="monedaDao"/>
+			</bean>
+   		</property>
+	</bean>
+
+	<!-- Seguridad por instancias -->
+	<bean name="seguridadObjetoServicio" parent="baseTransactionProxy">
+   		<property name="target" ref="seguridadObjetoServicioTarget"/>
+	</bean>
+
+	<bean name="seguridadObjetoServicioTarget" class="com.fontar.bus.impl.seguridad.SeguridadObjetoServicioImpl"> 
+		<property name="seguridadObjetoDAO" ref="seguridadObjetoDao"/>	
+	</bean>		
+</beans>

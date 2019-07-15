@@ -1,0 +1,1938 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+
+
+	<!-- === Form Bean Definitions -->
+	<form-beans>
+		
+		<form-bean name="AlicuotaEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="alicuota" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />	
+		</form-bean>
+		
+		<form-bean name="CerrarProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="motivo" type="java.lang.String" />			
+			<form-property name="observacion" type="java.lang.String" />			
+		</form-bean>
+
+		<form-bean name="AnularProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="observacion" type="java.lang.String" />			
+		</form-bean>
+
+		<form-bean name="FinalizarProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="observacion" type="java.lang.String" />			
+		</form-bean>
+
+		<form-bean name="AnularSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="observacion" type="java.lang.String" />			
+		</form-bean>
+
+		<form-bean name="PaqueteEvaluarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />
+			<form-property name="codigoActa" type="java.lang.String" />
+			<form-property name="proyectoArray" type="java.lang.String[]" />
+			<form-property name="resultadoArray" type="java.lang.String[]" />
+			<form-property name="fundamentacionArray" type="java.lang.String[]" />
+			<form-property name="presupuestoArray" type="java.lang.String[]" />						
+			<form-property name="descInstrumento" type="java.lang.String" />						
+		</form-bean>
+
+		<form-bean name="EvaluarResultadoProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="idPaquete" type="java.lang.String" />
+			<form-property name="elegibleArray" type="java.lang.String[]"/>
+			<form-property name="resultado" type="java.lang.String" />
+			<form-property name="dictamen" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="alicuota" type="java.lang.String" />
+		</form-bean>
+					
+		<form-bean name="WFDynaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="id" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="WFBandejaDeEntradaFiltersForm" type="com.pragma.toolbar.web.form.ToolbarAllFiltersForm"/>
+		
+		<form-bean name="PresupuestoProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="codigo" type="java.lang.String" />		
+			<form-property name="montoTotal" type="java.lang.String" />		
+			<form-property name="montoSolicitado" type="java.lang.String" />
+		</form-bean>	
+
+		<form-bean name="EvaluarAdmisibilidadProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />		
+			<form-property name="disposicion" type="java.lang.String" />		
+			<form-property name="resultado" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />		
+		</form-bean>	
+	
+		<form-bean name="VisualizarAdmisibilidadProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+		</form-bean>	
+	
+		<form-bean name="EvaluarReadmisibilidadProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />		
+			<form-property name="disposicion" type="java.lang.String" />		
+			<form-property name="resolucion" type="java.lang.String" />
+			<form-property name="resultado" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />		
+		</form-bean>	
+	
+		<form-bean name="AnalizarReconsideracionProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />		
+			<form-property name="dictamen" type="java.lang.String" />		
+			<form-property name="resolucion" type="java.lang.String" />
+			<form-property name="resultado" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />		
+		</form-bean>	
+	
+		<form-bean name="SolicitarReadmisibilidadProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />		
+		</form-bean>	
+	
+		<form-bean name="SolicitarReconsideracionProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />		
+			<form-property name="evaluador" type="com.fontar.data.impl.domain.dto.EvaluarResultadoProyectoDTO" />		
+		</form-bean>	
+	
+		<form-bean name="ReconsiderarProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />		
+			<form-property name="evaluador" type="com.fontar.data.impl.domain.dto.EvaluarResultadoProyectoDTO" />		
+			<form-property name="idProximoPaso" type="java.lang.String" />
+		</form-bean>	
+	
+		<form-bean name="PasarProximaEtapaDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+		</form-bean>	
+		
+		<form-bean name="EvaluarProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="esTecnica" type="java.lang.String" />
+			<form-property name="esEconomica" type="java.lang.String" />
+			<form-property name="esFinanciera" type="java.lang.String" />			
+			<form-property name="tipoEvaluacionFinanciera" type="java.lang.String" />
+			<form-property name="idComision" type="java.lang.String" />
+			<form-property name="fechaInicial" type="java.lang.String" />
+			<form-property name="fechaEntrega" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />
+			
+			<form-property name="idEvaluador" type="java.lang.String[]" />
+			<form-property name="idEntidadEvaluadora" type="java.lang.String[]" />
+			<form-property name="lugar" type="java.lang.String[]" />	
+			<!--solo para validacion -->
+			<form-property name="tipoEvaluacion" type="java.lang.String" />					
+		</form-bean>
+		
+		<form-bean name="CargarEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="fechaEvaluacion" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="aceptaEvaluacion" type="java.lang.String" />			
+			<form-property name="idTipoProyecto" type="java.lang.String"/>			
+		</form-bean>
+		
+		<form-bean name="CargarEvaluacionSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="fechaEvaluacion" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="aceptaEvaluacion" type="java.lang.String" />			
+		</form-bean>
+		
+		<form-bean name="EvaluacionSeguimientoEditarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="esTecnica" type="java.lang.String" />
+			<form-property name="esVisita" type="java.lang.String" />
+			<form-property name="esContable" type="java.lang.String" />
+			<form-property name="esAuditoria" type="java.lang.String" />
+			<form-property name="fechaInicial" type="java.lang.String" />
+			<form-property name="fechaEntrega" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />
+			
+			<form-property name="idEvaluador" type="java.lang.String[]" />
+			<form-property name="idEntidadEvaluadora" type="java.lang.String[]" />
+			<form-property name="lugar" type="java.lang.String[]" />	
+			<!--solo para validacion -->
+			<form-property name="tipoEvaluacion" type="java.lang.String" />					
+		</form-bean>
+		
+		<form-bean name="ConfirmarEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="AprobarEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="aceptaEvaluacion" type="java.lang.String" />			
+		</form-bean>				
+		
+		<form-bean name="AutorizarEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="autorizaEvaluacion" type="java.lang.String" />			
+		</form-bean>	
+		
+		<form-bean name="FinalizarControlEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.Long" />
+			<form-property name="idProyecto" type="java.lang.Long" />
+			<form-property name="idPresupuestoInicial" type="java.lang.Long" />			
+			<form-property name="fechaEvaluacion" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="recomendacion" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="FinalizarControlSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="fechaEvaluacion" type="java.lang.String" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+			<form-property name="recomendacion" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="AnularEvaluacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>		
+
+		<form-bean name="AnularEvaluacionSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idEvaluacion" type="java.lang.String" />
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>		
+		
+		<!--  JuntaEvaluacionDynaForm -->
+		<form-bean name="IdeaProyectoEvaluarPorJuntaDynaForm" type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />			
+			<form-property name="fechaEvaluacion" type="java.lang.String" />	
+			<form-property name="recomendacion" type="java.lang.String" />
+			<form-property name="aceptaProyecto" type="java.lang.String" initial="SI" />
+			<form-property name="fundamentacion" type="java.lang.String" />
+		</form-bean>			
+		
+		<form-bean name="PaqueteControlarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="instrumento" type="java.lang.String" />
+			<form-property name="tratamiento" type="java.lang.String" />
+			<form-property name="proyectos" type="java.lang.String" />
+			<form-property name="proyectoArray" type="java.lang.String[]" />
+
+			<!-- Atributos contextuales -->
+			<form-property name="tipoPaquete" type="java.lang.String"/>			
+			<form-property name="instrumentoFiltrado" type="java.lang.String"/>
+			<form-property name="tratamientoFiltrado" type="java.lang.String"/>			
+		</form-bean>		
+			
+		<form-bean name="PaqueteAnularDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idPaquete" type="java.lang.String" />			
+			<form-property name="observaciones" type="java.lang.String" />
+	
+		</form-bean>			
+
+		<form-bean name="FinalizarReconsideracionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="descripcion" type="java.lang.String" />		
+			<form-property name="fechaAcuseNotificacion" type="java.lang.String" />		
+		</form-bean>	
+
+		<form-bean name="FirmarContratoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idProyecto" type="java.lang.String" />
+			<form-property name="idPersonaLegal" type="java.lang.String"/>
+			<form-property name="txtPersonaLegal" type="java.lang.String"/>
+			<form-property name="fechaFirma" type="java.lang.String" />
+			<form-property name="observaciones" type="java.lang.String" />
+		</form-bean>	
+		
+		<form-bean name="EnviarNotificacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="fechaEnvio" type="java.lang.String"/>
+		</form-bean>			
+
+		<form-bean name="RecibirNotificacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="fechaAcuse" type="java.lang.String"/>
+		</form-bean>			
+
+		<form-bean name="CerrarAnularNotificacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String"/>
+		</form-bean>			
+
+		<form-bean name="CargarSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+		</form-bean>
+		
+		<!-- // TODO: GB/ Ver si este form lo usa alguien  -->
+		<form-bean name="SolicitarReconsideracionIdeaProyectoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idIdeaProyecto" type="java.lang.String" />
+			<form-property name="fecha" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />		
+			<form-property name="evaluador" type="com.fontar.data.impl.domain.dto.EvaluarResultadoProyectoDTO" />		
+		</form-bean>		
+
+		<form-bean name="PlanTrabajoSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="CerrarSeguimientoDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="idSeguimiento" type="java.lang.String" />			
+			<form-property name="observacion" type="java.lang.String" />			
+		</form-bean>	
+		
+		<form-bean name="PedirAutorizacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="id" type="java.lang.String" />			
+			<form-property name="idTipoAdquisicion" type="java.lang.String" />			
+			<form-property name="itemsArray" type="java.lang.String[]" />
+			<form-property name="codigo" type="java.lang.String" />
+			<form-property name="fechaRecepcion" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+		</form-bean>	
+
+		<form-bean name="CargarResultadoFontarDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="fechaResultadoFontar" type="java.lang.String"/>
+			<form-property name="observacionResultadoFontar" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="CargarResultadoUffaDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="fechaResultadoUffa" type="java.lang.String"/>
+			<form-property name="observacionResultadoUffa" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="CargarResultadoBidDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="fechaResultadoBid" type="java.lang.String"/>
+			<form-property name="observacionResultadoBid" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="GenerarPedidoAutorizacionDynaForm" type="com.pragma.web.PragmaDynaValidatorForm">
+			<form-property name="fechaRecepcion" type="java.lang.String" />
+			<form-property name="descripcion" type="java.lang.String" />
+		</form-bean>	
+		
+		<form-bean name="CompletarDatosInicialesDynaForm" type="com.fontar.web.form.administracion.proyecto.CompletarDatosInicialesDynaForm">
+			<form-property name="recomendacionFinal" type="java.lang.String" />
+			<form-property name="fechaResolucion" type="java.lang.String" />
+			<form-property name="fechaFirmaDeContrato" type="java.lang.String" />
+			<form-property name="codigoResolucion" type="java.lang.String" />
+			<form-property name="aplicaCargaAlicuotaCF" type="java.lang.Boolean" />
+			<form-property name="porcentajeAlicuotaAdjudicada" type="java.lang.String" />
+			<form-property name="porcentajeAlicuotaSolicitada" type="java.lang.String" />
+			<form-property name="montoFontarRrhh" type="java.lang.String" />
+			<form-property name="montoContraparteRrhh" type="java.lang.String" />
+			<form-property name="montoFontarBienCapital" type="java.lang.String" />
+			<form-property name="montoContraparteBienCapital" type="java.lang.String" />
+			<form-property name="montoFontarConsultoriaServicio" type="java.lang.String" />
+			<form-property name="montoContraparteConsultoriaServicio" type="java.lang.String" />
+			<form-property name="montoFontarMaterialInsumo" type="java.lang.String" />
+			<form-property name="montoContraparteMaterialInsumo" type="java.lang.String" />
+			<form-property name="montoFontarOtro" type="java.lang.String" />
+			<form-property name="montoContraparteOtro" type="java.lang.String" />
+			<form-property name="observacion" type="java.lang.String" />
+		</form-bean>	
+	</form-beans>
+	
+	
+	
+	<!-- === Action Mapping Definitions -->
+	<action-mappings>
+	
+		<action path="/WFProcesosDefinidos"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="procesosDefinidos"
+			scope="request">
+			<forward 
+				name="success"
+				path=".ProcesosDefinidosDef">
+			</forward>
+		</action>
+		
+		<action path="/WFTareas"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="tareas"
+			scope="request">
+			<forward 
+				name="success"
+				path=".TareasDef">
+			</forward>
+		</action>			
+		
+		<action path="/WFNuevaInstanciaProceso"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="nuevaInstanciaProceso"
+			scope="request">
+			<forward 
+				name="success"
+				path="/WFProcesosDefinidos.do">
+			</forward>			
+		</action>
+
+		<action path="/WFCargarTarea"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="cargarTarea"
+			scope="request">
+		</action>
+		
+		<action path="/WFCancelarTarea"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="cancelarTarea"
+			scope="request">
+		</action>
+		
+		<action path="/WFTerminarTarea"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="terminarTarea"
+			scope="request">
+			<forward 
+				name="success"
+				path="/WFTareas.do">
+			</forward>
+		</action>
+
+		<action path="/WFLiberarTarea"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="liberar"
+			scope="request">
+			<forward 
+				name="success"
+				path="/WFBandejaDeEntrada.do">
+			</forward>
+		</action>		
+		
+		<action path="/WFInstanciasProceso"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="procesosInstanciados"
+			scope="request">
+			<forward 
+				name="success"
+				path=".InstanciasProcesoDef">
+			</forward>			
+		</action>
+		
+		<action path="/WFDetalleInstanciaProceso"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="detalleProceso"
+			scope="request">
+			<forward 
+				name="success"
+				path="/jsp/workflow/procesos/detalle.jsp">
+			</forward>
+		</action>
+			
+		<action path="/WFTareasInstanciaProceso"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="tareasProceso"
+			scope="request">
+			<forward 
+				name="success"
+				path="/jsp/workflow/procesos/tareasInstancia.jsp">
+			</forward>
+		</action>		
+	
+		<action path="/WFSignalToken"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFDynaForm" 
+			parameter="signal"
+			scope="request">
+			<forward 
+				name="success"
+				path="/WFTareas.do">
+			</forward>
+		</action>
+
+		<action path="/WFBorrarBD" 
+				type="org.springframework.web.struts.DelegatingActionProxy" 
+				parameter="borrarBD" 
+				scope="request">
+			<forward 
+				name="success"
+				path="/WFProcesosDefinidos.do">
+			</forward>	
+		</action>
+		
+		<action path="/WFBandejaDeEntrada"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="WFBandejaDeEntradaFiltersForm" 
+			parameter="bandeja">
+			<forward 
+				name="success"
+				path=".BandejaDeEntradaDef">
+			</forward>
+		</action>		
+		
+
+		<action path="/WFProcessDefinitionDeployment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter=".ProcessDefinitionDeploymentDef"/>		
+
+
+		<action path="/WFDeployProcessDefinition"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AdjuntoUploadForm" 
+			parameter="deployProcessDefinition"
+			input="" validate="false">
+			<forward 
+				name="success" redirect="true"
+				path="/WFProcesosDefinidos.do">
+			</forward>
+		</action>		
+		
+		
+		<!-- Acciones Admisibilidad -->
+		<action path="/EvaluarAdmisibilidadProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarAdmisibilidadProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectosEvaluarAdmisibilidadDef">
+			</forward>
+		</action>
+
+		<action path="/VisualizarAdmisibilidadProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VisualizarAdmisibilidadProyectoDynaForm" 
+			parameter="visualizar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectosVisualizarAdmisibilidadDef">
+			</forward>
+		</action>
+       
+		<action path="/PrintAdmisibilidadProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="VisualizarAdmisibilidadProyectoDynaForm" 
+			parameter="print"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectosPrintAdmisibilidadDef">
+			</forward>
+		</action>
+       
+		<action path="/EvaluarAdmisibilidadProyectoTerminar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarAdmisibilidadProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EvaluarAdmisibilidadProyecto.do">						
+		</action>
+		
+		<action path="/SolicitarReadmisibilidadProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SolicitarReadmisibilidadProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectosSolicitarReadmisibilidadDef">
+			</forward>
+		</action>
+
+		<action path="/SolicitarReadmisibilidadProyectoTerminar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SolicitarReadmisibilidadProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/SolicitarReadmisibilidadProyecto.do">						
+		</action>
+		
+		<action path="/RegistrarPedidoReconsideracion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SolicitarReconsideracionProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectosSolicitarReconsideracionDef">
+			</forward>
+		</action>
+
+		<action path="/RegistrarPedidoReconsideracionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SolicitarReconsideracionProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/RegistrarPedidoReconsideracion.do">						
+		</action>
+		
+		<action path="/Reconsiderar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ReconsiderarProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ReconsiderarDef">
+			</forward>
+		</action>
+
+		<action path="/ReconsiderarGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ReconsiderarProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/Reconsiderar.do">						
+		</action>
+		
+		<action path="/EvaluarReadmisibilidadProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarReadmisibilidadProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectosEvaluarReadmisibilidadDef">
+			</forward>
+		</action>
+
+		<action path="/EvaluarReadmisibilidadProyectoTerminar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarReadmisibilidadProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EvaluarReadmisibilidadProyecto.do">						
+		</action>
+		
+		<action path="/AnalizarReconsideracion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnalizarReconsideracionProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectosAnalizarReconsideracionDef">
+			</forward>
+		</action>
+
+		<action path="/AnalizarReconsideracionTerminar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnalizarReconsideracionProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AnalizarReconsideracion.do">						
+		</action>
+		
+		<!-- Pasar próxima etapa -->
+		<action path="/PasarProximaEtapa"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PasarProximaEtapaDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".PasarProximaEtapaDef">
+			</forward>
+		</action>
+		
+		<action path="/PasarProximaEtapaGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PasarProximaEtapaDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/PasarProximaEtapa.do">
+		</action>
+		
+		<!-- Evaluar proyecto -->
+		<action path="/EvaluarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false"
+			input="">
+			<forward 
+				name="success"
+				path=".EvaluarProyectoDef">
+			</forward>
+		</action>
+		
+		
+		<action path="/EvaluarProyectoNuevamente"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EvaluarProyectoDef">
+			</forward>
+		</action>
+				
+		<action path="/EvaluarProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EvaluarProyecto.do">
+		</action>
+
+		<!-- FF / queda igual que /EvaluarProyectoGuardar -->
+		<action path="/EvaluarProyectoNuevamenteGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EvaluarProyecto.do">
+		</action>		
+		
+		<!-- Cargar proyecto -->
+		<action path="/CargarEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarEvaluacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CargarEvaluacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/CargarEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarEvaluacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CargarEvaluacion.do">
+		</action>	
+		
+		<!-- Cargar evaluacion seguimiento -->
+		<action path="/EvaluarSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluacionSeguimientoEditarDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EvaluacionSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<action path="/EvaluarSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluacionSeguimientoEditarDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EvaluarSeguimiento.do">
+		</action>	
+		
+		<!-- Confirmar evaluación -->
+		<action path="/ConfirmarEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ConfirmarEvaluacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ConfirmarEvaluacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/ConfirmarEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="ConfirmarEvaluacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/ConfirmarEvaluacion.do">
+			<forward 
+				name="success"
+				path="/WFBandejaDeEntrada.do">
+			</forward>
+		</action>		
+		
+		
+		<!-- Confirmar evaluación -->
+		<action path="/AutorizarEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AutorizarEvaluacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".AutorizarEvaluacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/AutorizarEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AutorizarEvaluacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AutorizarEvaluacion.do">
+		</action>	
+		
+		<!-- Finalizar control evaluación -->
+		<action path="/FinalizarControlEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarControlEvaluacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".FinalizarControlEvaluacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/FinalizarControlEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarControlEvaluacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/FinalizarControlEvaluacion.do">
+		</action>
+
+		<!-- Finalizar control evaluación seguimiento-->
+		<action path="/FinalizarControlSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarControlSeguimientoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".FinalizarControlSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<action path="/FinalizarControlSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarControlSeguimientoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/FinalizarControlSeguimiento.do">
+		</action>
+
+		<!-- Evaluar Resultado Proyecto -->
+		<action path="/EvaluarResultadoProyectoEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarResultadoProyectoDynaForm" 
+			parameter="cargar"
+			scope="request"
+			validate="false">
+			<forward name="success" path=".EvaluarResultadoProyectoDef"/>
+		</action>	
+
+		<action path="/EvaluarResultadoProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EvaluarResultadoProyectoDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="true"
+			input="/EvaluarResultadoProyectoEditar.do">
+			<forward name="success" path="/jsp/util/closeAndParentReload.jsp"/>
+		</action>	
+		
+		<!-- Anular evaluación -->
+		<action path="/AnularEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularEvaluacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".AnularEvaluacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/AnularEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularEvaluacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AnularEvaluacion.do" >
+		</action>		
+
+		<!-- Anular evaluación -->
+		<action path="/AnularEvaluacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularEvaluacionSeguimientoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".AnularEvaluacionSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<action path="/AnularEvaluacionSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularEvaluacionSeguimientoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AnularEvaluacionSeguimiento.do" >
+		</action>		
+
+		<!--  JuntaEvaluacionDynaForm  -->
+		<action path="/IdeaProyectoEvaluarPorJunta"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoEvaluarPorJuntaDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EvaluarPorJuntaDef">
+			</forward>
+		</action>		
+		
+		<action path="/IdeaProyectoEvaluarPorJuntaGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="IdeaProyectoEvaluarPorJuntaDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/IdeaProyectoEvaluarPorJunta.do">
+		</action>							
+		
+		<!-- Ideas Proyecto Wizard - Cargar Proyecto desde Idea Proyecto -->
+		<!-- Paso 1: Cargar Ventanilla -->
+		<action path="/IdeaProyectoCargarVentanilla"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="session"
+			validate="false">
+			<forward 
+				name="success"
+				path=".IdeaProyectoCargarVentanillaDef">
+			</forward>
+		</action>
+
+		<action path="/IdeaProyectoProcesarCargarVentanilla"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="doNext"
+			scope="session"
+ 			validate="true"
+			input="/IdeaProyectoCargarVentanilla.do">
+			<forward 
+				name="next" 
+				path="/IdeaProyectoCargarProyecto.do"/>
+		</action>
+		
+		<!-- Paso 2: Cargar Proyecto -->
+		<action path="/IdeaProyectoCargarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="cargarProyecto"
+			scope="session"
+			validate="false">
+			<forward 
+				name="success" 
+				path=".CargarProyectoDef"/>			
+		</action>
+
+		<action path="/IdeaProyectoProcesarCargarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="doFinish"
+			scope="session"
+			validate="true"
+			input="/IdeaProyectoCargarProyecto.do">
+			<forward 
+				name="finish" 
+				path="/IdeaProyectoGuardarProyecto.do"/>
+		</action>
+		
+		<action path="/IdeaProyectoGuardarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="session"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/IdeaProyectoCargarProyecto.do"
+			/>
+		</action>		
+		
+		<!-- Editar Presupuesto Evaluacion -->
+		<action path="/EditarPresupuestoEvaluacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresupuestoProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ProyectoPresupuestoIngresarDef">
+			</forward>
+		</action>			
+				
+		<action path="/EditarPresupuestoEvaluacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresupuestoProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EditarPresupuestoEvaluacion.do">
+		</action>		
+		
+		<!-- Presupuesto proyecto -->
+		<action path="/EditarPresupuestoProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarPresupuestoForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward
+				name="success"
+ 				path="/EditarPresupuestoProyectoImplementationIngresar.do" redirect="true">
+			</forward>
+		</action>
+		<action path="/EditarPresupuestoProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresupuestoProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="false">
+		</action>
+		<action path="/EditarPresupuestoProyectoCerrar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PresupuestoProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="false">
+		</action>
+		
+		<!-- PROYECTO - Finalizar Posibilidad de Reconsideracion -->
+		<action path="/FinalizarPosibilidadReconsideracion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarReconsideracionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".FinalizarPosibilidadReconsideracionDef">
+			</forward>
+		</action>			
+				
+		<action path="/FinalizarPosibilidadReconsideracionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarReconsideracionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="false"
+			input="/FinalizarPosibilidadReconsideracion.do">
+		</action>			
+
+		<!-- PROYECTO - Firmar Contrato -->
+		
+		<action path="/FirmarContrato"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FirmarContratoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".FirmarContratoDef">
+			</forward>
+		</action>
+		
+		<action path="/FirmarContratoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FirmarContratoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/FirmarContrato.do">
+
+			<forward
+				name = "success"
+				path = "/ProyectoInventario.do"	/>
+				
+		</action>
+		
+		
+		<!-- PAQUETE -->
+		
+		<!-- Evaluacion -->
+		<action path="/EvaluarPaquete"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PaqueteEvaluarDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".PaqueteEvaluarDef">
+			</forward>
+		</action>
+		
+		<action path="/EvaluarPaqueteGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PaqueteEvaluarDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EvaluarPaquete.do">
+		</action>
+		
+		<!-- Confirmación -->
+		<action path="/ConfirmarPaquete"
+			type="org.springframework.web.struts.DelegatingActionProxy" 
+			name="PaqueteEvaluarDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".PaqueteConfirmarDef">
+			</forward>
+		</action>
+		
+		<action path="/ConfirmarPaqueteGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PaqueteEvaluarDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/ConfirmarPaquete.do">
+		</action>
+		
+		<!-- Modificación -->
+		<action path="/ModificarPaquete"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="PaqueteEditarDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".PaqueteEditarDef">
+			</forward>
+		</action>
+		
+		<action path="/ModificarPaqueteGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PaqueteEditarDynaForm"
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/ModificarPaquete.do">
+		</action>
+		
+		<!-- Controlar Paquete -->
+		<action path="/ControlarPaquete"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="PaqueteControlarDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ControlarPaqueteDef">
+			</forward>
+		</action>
+		
+		<action path="/ControlarPaqueteGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PaqueteControlarDynaForm"
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/ControlarPaquete.do">
+		</action>
+		
+		
+		<action path="/AnularPaquete"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="PaqueteAnularDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".PaqueteAnularDef">
+			</forward>
+		</action>
+		
+		<action path="/AnularPaqueteGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PaqueteAnularDynaForm"
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AnularPaquete.do">
+		</action>		
+
+		<!-- Cargar Alicuota -->
+		<action path="/AlicuotaEditar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AlicuotaEditarDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".AlicuotaEditarDef">
+			</forward>
+		</action>		
+		
+		<action path="/AlicuotaEditarGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AlicuotaEditarDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AlicuotaEditar.do">
+
+		</action>	
+		
+		<!-- Cerrar proyecto -->
+		<action path="/CerrarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CerrarProyectoDef">
+			</forward>
+		</action>		
+		
+		<action path="/CerrarProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CerrarProyecto.do">
+			<forward 
+				name="success"
+				path="/CerrarProyecto.do">
+			</forward>
+		</action>		
+
+		<!-- Anular proyecto -->
+		<action path="/AnularProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".AnularProyectoDef">
+			</forward>
+		</action>		
+		
+		<action path="/AnularProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AnularProyecto.do">
+			<forward 
+				name="success"
+				path="/AnularProyecto.do">
+			</forward>
+		</action>		
+
+		<!-- Finalizar proyecto -->
+		<action path="/FinalizarProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".FinalizarProyectoDef">
+			</forward>
+		</action>		
+		
+		<action path="/FinalizarProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="FinalizarProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/FinalizarProyecto.do">
+			<forward 
+				name="success"
+				path="/FinalizarProyecto.do">
+			</forward>
+		</action>
+
+		<!-- NOTIFICACION -->
+		<!-- Enviar Notificacion -->
+		<action path="/EnviarNotificacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EnviarNotificacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".EnviarNotificacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/EnviarNotificacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EnviarNotificacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EnviarNotificacion.do">
+			<forward 
+				name="success"
+				path="/EnviarNotificacion.do">
+			</forward>
+		</action>			
+		
+		<!-- Recibir Acuse Notificacion -->	
+		<action path="/RecibirAcuseNotificacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RecibirNotificacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".RecibirAcuseNotificacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/RecibirAcuseNotificacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RecibirNotificacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/RecibirAcuseNotificacion.do">
+			<forward 
+				name="success"
+				path="/RecibirAcuseNotificacion.do">
+			</forward>
+		</action>			
+
+		<!-- Cerrar Notificacion -->	
+		<action path="/CerrarNotificacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarAnularNotificacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CerrarNotificacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/CerrarNotificacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarAnularNotificacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CerrarNotificacion.do">
+			<forward 
+				name="success"
+				path="/NotificacionInventario.do">
+			</forward>
+		</action>			
+
+		<!-- Anular Notificacion -->	
+		<action path="/AnularNotificacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarAnularNotificacionDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".AnularNotificacionDef">
+			</forward>
+		</action>		
+		
+		<action path="/AnularNotificacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarAnularNotificacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AnularNotificacion.do">
+			<forward 
+				name="success"
+				path="/AnularNotificacion.do">
+			</forward>
+		</action>			
+
+		<!-- PROYECTO - Cargar Seguimiento -->
+		<action path="/CargarSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="SeguimientoEditarDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			
+			<forward name="success"
+					 path=".SeguimientoEditarDef" />			
+		</action>		
+		
+		<action path="/CargarSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SeguimientoEditarDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CargarSeguimiento.do">
+			
+		</action>
+
+		<!-- PROYECTOS - Ingresar Pedido Autorización -->
+		<action path="/PedirAutorizacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="PedirAutorizacionDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".PedirAutorizacionEditarDef" />			
+		</action>		
+		<action path="/PedirAutorizacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PedirAutorizacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/PedirAutorizacion.do">
+		</action>
+
+		<!-- Anular Seguimiento -->
+		<action path="/AnularSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularSeguimientoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".AnularSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<action path="/AnularSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="AnularSeguimientoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/AnularSeguimiento.do">
+			<forward 
+				name="success"
+				path="/AnularSeguimiento.do">
+			</forward>
+		</action>
+		
+		<!--  // TODO: VER SI ESTO LO USA ALGUIEN  -->
+		<!-- Reconsiderar IdeaProyecto -->		
+		<action path="/RegistrarPedidoReconsideracionIdeaProyecto"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SolicitarReconsideracionIdeaProyectoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".ReconsiderarDef">
+			</forward>
+		</action>
+
+		<action path="/RegistrarPedidoReconsideracionIdeaProyectoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="SolicitarReconsideracionIdeaProyectoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/Reconsiderar.do">						
+		</action>				
+		<!-- fin TODO:  -->
+		
+		<!--  EVALUACION SEGUIMIENTO  -->
+		<!-- Cargar Resultado Evaluacion -->		
+		<action path="/CargarResultadoEvaluacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".DatosEvaluacionSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<!-- Guardar Resultado Evaluación Seguimiento -->
+		<action path="/GuardarEdicionEvaluacionSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarEvaluacionSeguimientoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EditarEvaluacionSeguimiento.do">
+			<forward 
+				name="success"
+				path="/CargarResultadoEvaluacionSeguimiento.do">
+			</forward>
+		</action>	
+		
+		<!-- Editar Plan Trabajo Evaluación Seguimiento -->
+		<action path="/PlanSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PlanTrabajoSeguimientoDynaForm" 
+			parameter="visualizar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".PlanTrabajoSeguimientoDef">
+			</forward>
+		</action>		
+		
+		
+		<!-- Guardar Plan Trabajo Evaluación Seguimiento -->
+		<action path="/GuardarPlanSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="PlanTrabajoSeguimientoDynaForm" 
+			parameter="guardar"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/PlanSeguimiento.do">
+			</forward>
+		</action>	
+		
+		<!-- SEGUIMIENTO - Cargar Evaluar Gestion de Pago -->
+		<action path="/EvaluarGestionPagoSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="DummyDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/DatosGeneralesGestionPago.do">
+			</forward>
+		</action>		
+		
+		<!-- SEGUIMIENTO - No Gestionar Evaluar Gestion de Pago -->
+		<action path="/EvaluarGestionPagoSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarDatosGeneralesGestionPagoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/EditarDatosGeneralesGestionPago.do">
+			<forward 
+				name="success"
+				path="/SeguimientoInventario.do">
+			</forward>
+		</action>		
+		
+		<!-- SEGUIMIENTO - Gestionar Evaluar Gestion de Pago -->
+		<action path="/EvaluarGestionPagoSeguimientoGestionar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarDatosGeneralesGestionPagoDynaForm" 
+			parameter="gestionar"
+			scope="request"
+			validate="true"
+			input="/EditarDatosGeneralesGestionPago.do">
+			<forward 
+				name="success"
+				path="/SeguimientoInventario.do">
+			</forward>
+		</action>		
+		
+		<!-- SEGUIMIENTO - No Gestionar Evaluar Gestion de Pago -->
+		<action path="/EvaluarGestionPagoSeguimientoNoGestionar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarDatosGeneralesGestionPagoDynaForm" 
+			parameter="noGestionar"
+			scope="request"
+			validate="true"
+			input="/EditarDatosGeneralesGestionPago.do">
+			<forward 
+				name="success"
+				path="/SeguimientoInventario.do">
+			</forward>
+		</action>		
+
+		<!-- SEGUIMIENTO - Gestionar Evaluar Gestion de Pago -->
+		<action path="/EvaluarGestionPagoSeguimientoRevaluar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="EditarDatosGeneralesGestionPagoDynaForm" 
+			parameter="revaluar"
+			scope="request"
+			validate="true"
+			input="/EditarDatosGeneralesGestionPago.do">
+			<forward 
+				name="success"
+				path="/SeguimientoInventario.do">
+			</forward>
+		</action>		
+
+		<!-- SEGUIMIENTO - Cerrar Seguimientos -->
+		<action path="/CerrarSeguimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarSeguimientoDynaForm" 
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CerrarSeguimientoDef">
+			</forward>
+		</action>		
+		
+		<!-- Guardar Resultado Evaluación Seguimiento -->
+		<action path="/CerrarSeguimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CerrarSeguimientoDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CerrarSeguimiento.do">
+			<forward 
+				name="success"
+				path="/CerrarSeguimiento.do">
+			</forward>
+		</action>	
+		
+		
+			<action path="/WFActualizarPermisosTareas"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="actualizarPermisos"
+			scope="request"
+			input="/CerrarSeguimiento.do">
+			<forward name="success" path="/WFBandejaDeEntrada.do"></forward>
+		</action>	
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TÉCNICO - Cargar Tarea -->
+		<action path="/DesignarEvaluadorTecnico"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="DesignarEvaluadorDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionItemsInventario.do"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TÉCNICO - Finalizar Tarea-->
+		<action path="/DesignarEvaluadorTecnicoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarFundamentacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/DesignarEvaluadorTecnico.do">
+			</forward>			
+			<forward 
+				name="success"
+				path="/DesignarEvaluadorTecnico.do">
+			</forward>			
+		</action>
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Cargar Tarea -->
+		<action path="/CargarFundamentacionEvaluador"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="DummyDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionItemsInventario.do"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Finalizar Tarea-->
+		<action path="/CargarFundamentacionEvaluadorGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarFundamentacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/CargarFundamentacionEvaluador.do">
+			</forward>			
+			<forward 
+				name="success"
+				path="/CargarFundamentacionEvaluador.do">
+			</forward>			
+		</action>		
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO - Cargar Tarea -->
+		<action path="/CargarResultadoProcedimiento"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="DummyDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CargarResultadoDef"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO - Finalizar Tarea-->
+		<action path="/CargarResultadoProcedimientoGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarResultadoFontarDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CargarResultadoProcedimiento.do">
+			<forward 
+				name="success"
+				path="/CargarResultadoProcedimiento.do">
+			</forward>			
+		</action>			
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Cargar Tarea -->
+		<action path="/RemitirUffa"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="DummyDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionItemsInventario.do"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Finalizar Tarea-->
+		<action path="/RemitirUffaGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RemitirUffaDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/RemitirUffa.do">
+			</forward>			
+			<forward 
+				name="success"
+				path="/RemitirUffa.do">
+			</forward>			
+		</action>		
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Cargar Tarea -->
+		<action path="/RemitirBid"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="DummyDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path="/CircuitoAutorizacionItemsInventario.do"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Finalizar Tarea-->
+		<action path="/RemitirBidGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="RemitirBidDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="invalid"
+				path="/RemitirUffa.do">
+			</forward>			
+			<forward 
+				name="success"
+				path="/RemitirUffa.do">
+			</forward>			
+		</action>		
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Cargar Tarea -->
+		<action path="/CargarResultadoUffa"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="DummyDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CargarResultadoDef"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Finalizar Tarea-->
+		<action path="/CargarResultadoUffaGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarResultadoUffaDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CargarResultadoUffa.do">
+			<forward 
+				name="success"
+				path="/CargarResultadoUffa.do">
+			</forward>			
+		</action>			
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Cargar Tarea -->
+		<action path="/CargarResultadoBid"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="DummyDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CargarResultadoDef"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Finalizar Tarea-->
+		<action path="/CargarResultadoBidGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CargarResultadoBidDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CargarResultadoBid.do">
+			<forward 
+				name="success"
+				path="/CargarResultadoBid.do">
+			</forward>			
+		</action>			
+		
+		<!-- CIRCUITO AUTORIZACION COMPRA - GENERAR PEDIDO AUTORIZACION - Cargar Tarea -->
+		<action path="/GenerarPedidoAutorizacion"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="GenerarPedidoAutorizacionDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".GenerarPedidoAutorizacionDef"/>			
+		</action>
+
+		<!-- CIRCUITO AUTORIZACION COMPRA - GENERAR PEDIDO AUTORIZACION - Finalizar Tarea-->
+		<action path="/GenerarPedidoAutorizacionGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="GenerarPedidoAutorizacionDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/GenerarPedidoAutorizacion.do">
+			<forward 
+				name="success"
+				path="/GenerarPedidoAutorizacion.do">
+			</forward>			
+		</action>		
+		
+		<!-- PROYECTOS HISTÓRICOS - COMPLETAR DATOS INICIALES - Cargar Tarea -->
+		<action path="/CompletarDatosIniciales"
+			type="org.springframework.web.struts.DelegatingActionProxy"			
+			name="CompletarDatosInicialesDynaForm"
+			parameter="cargarTarea"
+			scope="request"
+			validate="false">
+			<forward 
+				name="success"
+				path=".CompletarDatosInicialesDef"/>			
+		</action>
+
+		<!-- PROYECTOS HISTÓRICOS - COMPLETAR DATOS INICIALES - Finalizar Tarea -->
+		<action path="/CompletarDatosInicialesGuardar"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="CompletarDatosInicialesDynaForm" 
+			parameter="ejecutarYTerminarTarea"
+			scope="request"
+			validate="true"
+			input="/CompletarDatosIniciales.do">
+			<forward 
+				name="success"
+				path="/CompletarDatosIniciales.do">
+			</forward>			
+		</action>			
+			
+	</action-mappings>
+</struts-config>
+
+

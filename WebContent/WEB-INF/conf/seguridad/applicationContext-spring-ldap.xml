@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="location" value="${jboss.server.config.url}fontar.properties" />		
+	</bean>
+
+	<!-- Authenticate using a fixed user -->
+	<bean id="contextSource" class="org.springframework.ldap.support.LdapContextSource" >
+		<property name="urls" value="${ldap.urls}" />
+		<property name="base" value="${ldap.base}" />
+		<property name="userName" value="${ldap.userName}" />
+		<property name="password" value="${ldap.password}" />
+		<property name="dirObjectFactory" value="org.springframework.ldap.support.DefaultDirObjectFactory" />
+	</bean>
+
+	<bean id="acegiAuthenticationSource" class="org.springframework.ldap.support.authentication.AcegiAuthenticationSource" />
+	
+	<bean id="ldapOperations" class="org.springframework.ldap.LdapTemplate">
+		<constructor-arg ref="contextSource" />
+	</bean>
+
+	<bean id="grupoLdapDao" class="com.fontar.data.impl.dao.ldap.GrupoDaoImpl">
+		<property name="ldapOperations" ref="ldapOperations" />
+		<property name="usuarioDao" ref="usuarioLdapDao"/>
+	</bean>
+	
+	<bean id="grupoAbstractoLdapDao" class="com.fontar.data.impl.dao.ldap.GrupoAbstractoDao">
+		<property name="ldapOperations" ref="ldapOperations"/>
+	</bean>
+	
+	<bean id="permisoLdapDao" class="com.fontar.data.impl.dao.ldap.PermisoDaoImpl">
+		<property name="ldapOperations" ref="ldapOperations" />
+	</bean>
+	
+	<bean id="permisoService" class="com.fontar.bus.impl.configuracion.PermisoServiceImpl">
+		<property name="permisoDao" ref="permisoLdapDao" />
+	</bean>	
+	
+	<bean id="usuarioLdapDao"  class="com.fontar.data.impl.dao.ldap.UsuarioDaoImpl">
+		<property name="ldapOperations" ref="ldapOperations" />
+		<property name="grupoService">
+			<bean class="com.fontar.bus.impl.configuracion.GrupoServiceImpl">
+				<property name="grupoDao" ref="grupoLdapDao"/>
+				<property name="grupoAbstractoDao" ref="grupoAbstractoLdapDao"/>
+				<property name="grupoInstrumentableDao" ref="grupoInstrumentableLdapDao"/>
+				<property name="grupoConInstrumentoDao" ref="grupoConInstrumentoLdapDao"/>
+				<property name="permisoDao" ref="permisoLdapDao"/>
+				<property name="interceptor" ref="securityConfigInterceptor"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- AssignerInterceptors -->		
+	<bean id="securityConfigInterceptor" class="com.fontar.jbpm.handler.assigner.ActorAssignerInterceptor"/>
+	<bean id="evaluacionEvaluadorSecurityConfigInterceptor" class="com.fontar.jbpm.handler.assigner.EvaluacionEvaluadorActorAssignerInterceptor"/>
+	
+	<bean id="grupoInstrumentableLdapDao" class="com.fontar.data.impl.dao.ldap.GrupoInstrumentableDaoImpl">
+		<property name="ldapOperations" ref="ldapOperations" />
+	</bean>
+	
+	<bean id="grupoInstrumentableService" class="com.fontar.bus.impl.configuracion.GrupoInstrumentableServiceImpl">
+		<property name="grupoInstrumentableDao" ref="grupoInstrumentableLdapDao" />
+	</bean>	
+	
+	<bean id="grupoConInstrumentoLdapDao" class="com.fontar.data.impl.dao.ldap.GrupoConInstrumentoDaoImpl">
+		<property name="ldapOperations" ref="ldapOperations"/>
+		<property name="usuarioDao" ref="usuarioLdapDao"/>
+	</bean>
+	
+</beans>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="true">
+
+	<import resource="./cripto/applicationContext-cripto.xml" />	
+	<import resource="./instrumentos/action-servlet-instrumentos.xml" />
+	<import resource="./administracion/action-servlet-administracion.xml" />
+	<import resource="./seguimientos/action-servlet-seguimientos.xml" />
+	<import resource="./workflow/action-servlet-workflow.xml" />
+	<import resource="./configuracion/action-servlet-configuracion.xml" /> 
+	<import resource="./cripto/action-servlet-cripto.xml" />         			
+	<import resource="./seguridad/action-servlet-logon.xml" />         			
+	<import resource="./seguridad/services-config.xml" />
+	<import resource="./instrumentos/services-config-instrumentos.xml" />
+	<import resource="./administracion/services-config-administracion.xml" />	
+	<import resource="./seguimientos/services-config-seguimientos.xml" />
+	<import resource="./workflow/services-config-workflow.xml" />
+	<import resource="./configuracion/services-config-configuracion.xml" />
+	<import resource="./consultas/action-servlet.xml" />
+	<import resource="./consultas/services-config.xml" />
+	<!-- import resource="/services-config-evaluacion.xml" /-->
+	<import resource="./cripto/services-config-cripto.xml" />
+	<import resource="./dao-config.xml" />
+	<import resource="./services-config.xml" />
+	<import resource="./manager/services-config.xml" />
+	<import resource="./manager/action-servlet.xml" />
+</beans>

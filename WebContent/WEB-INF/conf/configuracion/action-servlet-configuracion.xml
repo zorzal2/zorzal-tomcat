@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <!-- General -->
+  <bean id="EditarMontoBase" class="com.fontar.web.action.administracion.EditarMontoAction" abstract="true">
+		<property name="configService" ref="configuracionService"/>
+  </bean>
+  
+  <bean name="/CargarEdicionMonto" parent="EditarMontoBase"/>
+  <bean name="/GuardarEdicionMonto" parent="EditarMontoBase" />
+  
+  <!-- InstrumentosDef -->
+  <bean id="InstrumentosDefActionBase"
+        class="com.fontar.web.action.configuracion.instrumentos.InstrumentoDefAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.InstrumentoDefBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="instrumentosDefService"/>
+	   	</property>	     
+  </bean>
+  <bean name="/InstrumentosDefAgregar" parent="InstrumentosDefActionBase"/>
+  <bean name="/InstrumentosDefGuardar" parent="InstrumentosDefActionBase"/>
+  <bean name="/InstrumentosDefEditar" parent="InstrumentosDefActionBase"/>
+  <bean name="/InstrumentosDefBorrar" parent="InstrumentosDefActionBase"/>
+  <bean name="/InstrumentosDefVisualizar" parent="InstrumentosDefActionBase"/>
+
+  <bean name="/InstrumentosDefInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from InstrumentoDefBean o"/>
+   	<property name="idToolbar" value="instrumentosDef"/>	
+  </bean>
+  <bean name="/InstrumentosDefInventarioFiltrar" parent="/InstrumentosDefInventario"/>
+
+
+ <!-- Comisiones --> 
+  <bean id="ComisionActionBase"
+        class="com.fontar.web.action.configuracion.comisiones.ComisionAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.ComisionBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="comisionService"/>
+	   	</property>	     
+	   	<property name="configuracionService">
+	   		<ref bean="configuracionService"/>
+	   	</property>	     	   	
+  </bean>
+  <bean name="/ComisionAgregar" parent="ComisionActionBase"/>
+  <bean name="/ComisionGuardar" parent="ComisionActionBase"/>
+  <bean name="/ComisionEditar" parent="ComisionActionBase"/>  
+  <bean name="/ComisionBorrar" parent="ComisionActionBase"/>    
+
+
+  <bean name="/ComisionInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from ComisionBean o"/>
+   	<property name="idToolbar" value="comisiones"/>	
+  </bean>
+  <bean name="/ComisionInventarioFiltrar" parent="/ComisionInventario"/>
+
+
+ <bean name="/ComisionSelectorInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from ComisionBean o"/>
+   	<property name="idToolbar" value="comisionesSelector"/>	
+  </bean>
+  <bean name="/ComisionSelectorPopUp" parent="/ComisionSelectorInventario"/>
+  <bean name="/ComisionSelectorFiltrar" parent="/ComisionSelectorInventario"/>
+
+
+ <!-- Entidades -->
+  <bean id="EntidadActionBase"
+        class="com.fontar.web.action.configuracion.entidades.entidad.EntidadAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.EntidadBean</value>
+	     </constructor-arg>
+	   	<property name="servicio">
+	   		<ref bean="entidadService"/>
+	   	</property>
+	   	<property name="configuracionService">
+	   		<ref bean="configuracionService"/>
+	   	</property>
+  </bean>
+  <bean name="/EntidadAgregar" parent="EntidadActionBase"/>
+  <bean name="/EntidadGuardar" parent="EntidadActionBase"/>
+  <bean name="/EntidadEditar" parent="EntidadActionBase"/>
+  <bean name="/EntidadBorrar" parent="EntidadActionBase"/>
+  <bean name="/EntidadBancariaBorrar" parent="EntidadActionBase"/>
+  <bean name="/EntidadBeneficiariaBorrar" parent="EntidadActionBase"/>
+  <bean name="/EntidadEvaluadoraBorrar" parent="EntidadActionBase"/>
+  <!-- bean name="/EntidadSelector" parent="EntidadActionBase"/-->
+ 
+  <bean name="/EntidadVisualizar"
+        class="com.fontar.web.action.configuracion.entidades.entidad.EntidadVisualizarAction">
+  	   	<property name="configuracionService">
+	   		<ref bean="configuracionService"/>
+	   	</property>	
+  </bean>
+  
+  <bean name="/EntidadConfiguracionInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadBean o where o.borrado=false"/>
+   	<property name="idToolbar" value="entidadesConfiguracion"/>	
+   	<property name="filtrosData">	
+   		<map>
+   			<entry key="filtroEsActivo" value-ref="todosSiNoLabelValue"/>
+   		</map>
+   	</property>
+  </bean>
+  <bean name="/EntidadConfiguracionInventarioFiltrar" parent="/EntidadConfiguracionInventario"/>
+   
+  <bean name="/EntidadSelectorInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadBean o where o.borrado=false"/>
+   	<property name="idToolbar" value="entidadesSelector"/>	
+  </bean>
+ 
+  <bean name="/EntidadSelectorPopUp" parent="/EntidadSelectorInventario"/>
+  <bean name="/EntidadSelectorGuardar" parent="/EntidadGuardar"/>
+  <bean name="/EntidadSelectorFiltrar" parent="/EntidadSelectorInventario"/>
+  
+  <!-- Entidades Beneficiarias -->
+  <bean id="EntidadBeneficiariaActionBase"
+        class="com.fontar.web.action.configuracion.entidades.entidad.EntidadBeneficiariaAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.EntidadBeneficiariaBean</value>
+	     </constructor-arg>   
+	   	<property name="configuracionService">
+	   		<ref bean="configuracionService"/>
+	   	</property>	     
+   		<property name="servicio">
+	   		<ref bean="entidadBeneficiariaService"/>
+	   	</property>	 
+  </bean>
+  
+  <bean name="/EntidadBeneficiariaEditar" parent="EntidadBeneficiariaActionBase" />
+  <bean name="/EntidadBeneficiariaGuardar" parent="EntidadBeneficiariaActionBase" /> 
+
+   <bean name="/EntidadBeneficiariaInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadBeneficiariaBean o where o.entidad.borrado = false and o.entidad.activo = 1"/>
+   	<property name="idToolbar" value="entidadesBeneficiarias"/>	
+  </bean>
+  
+  <!--  Seleccion Entidad Beneficiaria -->  
+  <bean name="/EntidadBeneficiariaSelInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadBeneficiariaBean o where o.entidad.beneficiaria = 1 and o.entidad.borrado = false "/>
+   	<property name="idToolbar" value="entidadBeneficiaria"/>	
+  </bean>
+  <bean name="/EntidadBeneficiariaInventarioFiltrar" parent="/EntidadBeneficiariaInventario"/>
+  <bean name="/EntidadBeneficiariaSelInventarioFiltrar" parent="/EntidadBeneficiariaSelInventario"/>
+  
+  <bean name="/EntidadBeneficiariaSelectorPopUp" parent="/EntidadBeneficiariaInventario" />
+  <bean name="/EntidadBeneficiariaSelSelectorPopUp" parent="/EntidadBeneficiariaSelInventario" />
+  <bean name="/EntidadBeneficiariaSelectorFiltrar" parent="/EntidadBeneficiariaInventario"/>
+  <bean name="/EntidadBeneficiariaSelSelectorFiltrar" parent="/EntidadBeneficiariaSelInventario"/>
+  <bean name="/EntidadSelectorAgregar" parent="/EntidadAgregar"/>
+  <bean name="/EntidadBeneficiariaSelectorGuardar" parent="/EntidadAgregar"/>
+  
+  <!-- Entidades Beneficiarias -->
+  <bean id="PersonaEvaluadorActionBase"
+        class="com.fontar.web.action.configuracion.entidades.persona.PersonaEvaluadorAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.EvaluadorBean</value>
+	     </constructor-arg>   
+	   	<property name="configuracionService">
+	   		<ref bean="configuracionService"/>
+	   	</property>	     
+  </bean>
+  
+  <bean name="/PersonaEvaluadorEditar" parent="PersonaEvaluadorActionBase" />
+  <bean name="/PersonaEvaluadorGuardar" parent="PersonaEvaluadorActionBase" /> 
+
+  
+  <!-- Personas -->
+  <bean id="PersonaActionBase"
+        class="com.fontar.web.action.configuracion.entidades.persona.PersonaAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.PersonaBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="personaService"/>
+	   	</property>	     
+	   	<property name="configuracionService">
+	   		<ref bean="configuracionService"/>
+	   	</property>	     	   	
+  </bean>
+    
+  <bean name="/PersonaAgregar" parent="PersonaActionBase"/>
+  <bean name="/PersonaGuardar" parent="PersonaActionBase"/>
+  <bean name="/PersonaEditar" parent="PersonaActionBase"/>
+  <bean name="/PersonaBorrar" parent="PersonaActionBase"/>
+  <bean name="/PersonaCancelar" parent="PersonaActionBase"/>
+    
+  <bean name="/PersonaInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from PersonaBean o where o.borrado = false"/>
+   	<property name="idToolbar" value="personas"/>	
+   	<property name="filtrosData">	
+   		<map>
+   			<entry key="filtroEsEvaluador" value-ref="todosSiNoLabelValue"/>
+   			<entry key="filtroEsActivo" value-ref="todosSiNoLabelValue"/>
+   		</map>
+   	</property>
+  </bean>
+  
+    <bean name="/PersonaVisualizar" 
+      class="com.fontar.web.action.configuracion.personas.PersonaVisualizarAction" abstract="false">
+              
+	   	<property name="servicio">
+	   		<ref bean="configuracionService"/>
+	   	</property>	
+	   	<property name="servicioEvaluador">
+	   		<ref bean="especialidadEvaluadorService"/>
+	   	</property>	     
+   	
+  </bean>
+  
+  <bean name="todosSiNoLabelValue" class="java.util.ArrayList">
+  	<constructor-arg>
+  		<list>
+  			<bean class="org.apache.struts.util.LabelValueBean">
+  				<constructor-arg index="0" value="----- seleccione -----"/>
+  				<constructor-arg index="1" value=""/>
+  			</bean>
+  			
+  			<bean class="org.apache.struts.util.LabelValueBean">
+  				<constructor-arg index="0">
+  					<value>Si</value>
+  				</constructor-arg>
+  				<constructor-arg index="1">
+  					<value>true</value>
+  				</constructor-arg>
+  			</bean>
+  			
+  			<bean class="org.apache.struts.util.LabelValueBean">
+  				<constructor-arg index="0">
+  					<value>No</value>
+  				</constructor-arg>
+  				<constructor-arg index="1">
+  					<value>false</value>
+  				</constructor-arg>
+  			</bean>  			  			
+  		</list>
+  	</constructor-arg>
+  </bean>
+  
+  <bean name="/PersonaInventarioFiltrar" parent="/PersonaInventario"/>  
+
+  <!-- Selector -->
+  <bean name="/PersonaSelectorInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from PersonaBean o where o.borrado = false"/>
+   	<property name="idToolbar" value="personasSelector"/>	
+  </bean>
+  <bean name="/PersonaSelectorPopUp" parent="/PersonaSelectorInventario"/>
+  <bean name="/PersonaRendicionSelectorPopUp" parent="/PersonaSelectorInventario"/>
+  <bean name="/PersonaLegalSelectorPopUp" parent="/PersonaSelectorInventario" />
+  <bean name="/PersonaDirectorSelectorPopUp" parent="/PersonaSelectorInventario" />
+  <bean name="/PersonaRepresentanteSelectorPopUp" parent="/PersonaSelectorInventario" />
+  <bean name="/PersonaSelectorFiltrar" parent="/PersonaSelectorInventario" />
+  <bean name="/PersonaRendicionSelectorFiltrar" parent="/PersonaSelectorInventario" />
+  <bean name="/PersonaLegalSelectorFiltrar" parent="/PersonaSelectorInventario" />
+  <bean name="/PersonaRepresentanteSelectorFiltrar" parent="/PersonaSelectorInventario" />	
+  <bean name="/PersonaDirectorSelectorFiltrar" parent="/PersonaSelectorInventario" />
+  <bean name="/PersonaSelectorAgregar" parent="PersonaActionBase"/>
+  <bean name="/PersonaSelectorGuardar" parent="PersonaActionBase"/>
+  
+  <!-- Jurisdicciones -->
+  <bean id="JurisdiccionActionBase"
+        class="com.fontar.web.action.configuracion.jurisdicciones.JurisdiccionAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.JurisdiccionBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="jurisdiccionService"/>
+	   	</property>	     
+  </bean>
+  <bean name="/JurisdiccionSelectorPopUp" parent="JurisdiccionActionBase"/>
+
+  <bean name="/JurisdiccionInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from JurisdiccionBean o"/>
+   	<property name="idToolbar" value="jurisdicciones"/>	
+  </bean>
+  <bean name="/JurisdiccionInventarioFiltrar" parent="/JurisdiccionInventario"/>
+
+  <bean name="/JurisdiccionAgregar" parent="JurisdiccionActionBase"/>
+  <bean name="/JurisdiccionGuardar" parent="JurisdiccionActionBase"/>
+  <bean name="/JurisdiccionEditar" parent="JurisdiccionActionBase"/>
+
+  <!-- Regiones -->    
+  <bean id="RegionActionBase"
+        class="com.fontar.web.action.configuracion.regiones.RegionAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.RegionBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="regionService"/>
+	   	</property>	     
+  </bean> 
+  <bean name="/RegionAgregar" parent="RegionActionBase"/>
+  <bean name="/RegionGuardar" parent="RegionActionBase"/>
+  <bean name="/RegionEditar" parent="RegionActionBase"/>
+  <bean name="/RegionBorrar" parent="RegionActionBase"/>
+  <bean name="/RegionVisualizar" parent="RegionActionBase"/>
+
+  <bean name="/RegionInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from RegionBean o"/>
+   	<property name="idToolbar" value="regiones"/>	
+  </bean>
+  <bean name="/RegionInventarioFiltrar" parent="/RegionInventario"/>
+
+
+  <bean id="EntidadEvaluadoraActionBase"
+        class="com.fontar.web.action.configuracion.entidades.entidad.EntidadEvaluadoraAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.EntidadEvaluadoraBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="entidadEvaluadoraService"/>
+	   	</property>	     
+  </bean>  
+  
+  <bean name="/EntidadEvaluadoraSelectorInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadEvaluadoraBean o where o.entidad.borrado=false"/>
+   	<property name="idToolbar" value="entidadEvaluadoraSelector"/>	
+  </bean>
+  <bean name="/EntidadEvaluadoraSelectorPopUp" parent="/EntidadEvaluadoraSelectorInventario" />
+  <bean name="/EntidadEvaluadoraInventarioFiltrar" parent="/EntidadEvaluadoraSelectorInventario"/>
+  
+  
+  <!-- Fuente Financiamiento -->
+  <bean id="FuenteFinanciamientoActionBase"
+        class="com.fontar.web.action.configuracion.fuenteFinanciamiento.FuenteFinanciamientoAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.FuenteFinanciamientoBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="fuenteFinanciamientoService"/>
+	   	</property>	     
+  </bean> 
+  <bean name="/FuenteFinanciamientoAgregar"		parent="FuenteFinanciamientoActionBase"/>
+  <bean name="/FuenteFinanciamientoGuardar"		parent="FuenteFinanciamientoActionBase"/>
+  <bean name="/FuenteFinanciamientoEditar"		parent="FuenteFinanciamientoActionBase"/>
+  <bean name="/FuenteFinanciamientoBorrar"		parent="FuenteFinanciamientoActionBase"/>
+  <bean name="/FuenteFinanciamientoVisualizar"	parent="FuenteFinanciamientoActionBase"/>
+  <bean name="/FuenteFinanciamientoSelectorPopUp" parent="FuenteFinanciamientoActionBase" />
+
+  <bean name="/FuenteFinanciamientoInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from FuenteFinanciamientoBean o"/>
+   	<property name="idToolbar" value="fuentesFinanciamiento"/>	
+  </bean>
+  <bean name="/FuenteFinanciamientoInventarioFiltrar" parent="/FuenteFinanciamientoInventario"/>
+
+  <!-- Especialidad de Evaluadores -->
+  <bean id="EspecialidadEvaluadorActionBase"
+        class="com.fontar.web.action.configuracion.especialidadEvaluador.EspecialidadEvaluadorAction" abstract="true">
+		<constructor-arg>
+			<value>com.fontar.data.impl.domain.bean.EspecialidadEvaluadorBean</value>
+		</constructor-arg>
+	   	<property name="servicio">
+	   		<ref bean="especialidadEvaluadorService"/>
+	   	</property>	     
+  </bean> 
+  <bean name="/EspecialidadEvaluadorAgregar"	parent="EspecialidadEvaluadorActionBase"/>
+  <bean name="/EspecialidadEvaluadorGuardar"	parent="EspecialidadEvaluadorActionBase"/>
+  <bean name="/EspecialidadEvaluadorEditar"		parent="EspecialidadEvaluadorActionBase"/>
+  <bean name="/EspecialidadEvaluadorBorrar"		parent="EspecialidadEvaluadorActionBase"/>
+  <bean name="/EspecialidadEvaluadorVisualizar"	parent="EspecialidadEvaluadorActionBase"/>
+
+  <bean name="/EspecialidadEvaluadorInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EspecialidadEvaluadorBean o"/>
+   	<property name="idToolbar" value="especialidadesEvaluador"/>	
+  </bean>
+  <bean name="/EspecialidadEvaluadorInventarioFiltrar" parent="/EspecialidadEvaluadorInventario"/>
+
+  <!--  Seleccion Especialidad Evaluador -->
+  <bean name="/EspecialidadEvaluadorSelectorInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EspecialidadEvaluadorBean o"/>
+   	<property name="idToolbar" value="especialidadEvaluadorSelector"/>	
+  </bean>
+  <bean name="/EspecialidadEvaluadorSelectorFiltrar" parent="/EspecialidadEvaluadorSelectorInventario"/>
+  <bean name="/EspecialidadEvaluadorSelectorPopUp" parent="/EspecialidadEvaluadorSelectorInventario" />
+  <bean name="/PrimariaSelectorPopUp" parent="/EspecialidadEvaluadorSelectorPopUp"/>
+  <bean name="/SecundariaSelectorPopUp" parent="/EspecialidadEvaluadorSelectorPopUp"/>
+  <bean name="/PrimariaSelectorFiltrar" parent="/EspecialidadEvaluadorSelectorFiltrar"/>
+  <bean name="/SecundariaSelectorFiltrar" parent="/EspecialidadEvaluadorSelectorFiltrar"/>
+
+
+  <!-- Tipos de Proyectos -->
+  <bean id="TipoProyectoActionBase"
+        class="com.fontar.web.action.configuracion.tipoProyecto.TipoProyectoAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.TipoProyectoBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="tipoProyectoService"/>
+	   	</property>
+  </bean> 
+  
+  <bean name="/TipoProyectoAgregar" parent="TipoProyectoActionBase"/>
+  <bean name="/TipoProyectoGuardar" parent="TipoProyectoActionBase"/>
+  <bean name="/TipoProyectoEditar" parent="TipoProyectoActionBase"/>
+  <bean name="/TipoProyectoBorrar" parent="TipoProyectoActionBase"/>
+  <bean name="/TipoProyectoVisualizar" parent="TipoProyectoActionBase"/>
+
+  <bean name="/TipoProyectoInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from TipoProyectoBean o"/>
+   	<property name="idToolbar" value="tipoProyectos"/>	
+  </bean>
+  <bean name="/TipoProyectoInventarioFiltrar" parent="/TipoProyectoInventario"/>
+
+
+  <bean id="LocalizacionActionBase"
+        class="com.fontar.web.action.configuracion.localizacion.LocalizacionAction" abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="localizacionService"/>
+	   	</property>	     
+  </bean> 
+  <bean name="/LocalizacionEditar" parent="LocalizacionActionBase" />
+  <bean name="/LocalizacionGuardar" parent="LocalizacionActionBase" />  
+
+  <bean id="FacturacionActionBase"
+        class="com.fontar.web.action.configuracion.facturacion.FacturacionAction" abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="facturacionService"/>
+	   	</property>	     
+  </bean> 
+  <bean name="/FacturacionEditar" parent="FacturacionActionBase" />
+  <bean name="/FacturacionGuardar" parent="FacturacionActionBase" />  
+  
+  <bean name="/FacturacionData" 
+  		class="com.fontar.web.action.configuracion.facturacion.FacturacionDataAction">
+  </bean> 
+  
+  <bean name="/FacturacionDataGuardar" 
+  		class="com.fontar.web.action.configuracion.facturacion.FacturacionDataAction">
+  </bean>  	 
+	
+
+
+  <bean id="EmpleoPermanenteBase"
+        class="com.fontar.web.action.configuracion.empleoPermanente.EmpleoPermanenteAction" abstract="true">
+	   	<property name="servicio">
+	   		<ref bean="empleoPermanenteService"/>
+	   	</property>	     
+  </bean> 
+  <bean name="/EmpleoPermanenteEditar" parent="EmpleoPermanenteBase" />
+  <bean name="/EmpleoPermanenteGuardar" parent="EmpleoPermanenteBase" /> 
+
+  <!-- CIIU -->
+  <bean id="CiiuActionBase"
+        class="com.fontar.web.action.configuracion.ciiu.CiiuAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.CiiuBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="ciiuService"/>
+	   	</property>	     
+  </bean>
+    
+   <bean name="/CiiuSelectorInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from CiiuBean o where o not in (select c.padre from CiiuBean c where c.padre is not null ) "/>
+   	<property name="idToolbar" value="inventarioCiiu"/>	
+  </bean>
+
+  <bean name="/CiiuSelectorPopUp" parent="/CiiuSelectorInventario" />
+  
+  <bean name="/CiiuInventarioFiltrar" parent="/CiiuSelectorInventario"/>
+
+  <!-- CRITERIOS -->  
+  
+  <bean name="/MatrizCriteriosInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from MatrizCriterioBean o"/>
+   	<property name="idToolbar" value="matrizCriterios"/>	
+  </bean>
+  
+  <bean name="/MatrizCriteriosInventarioFiltrar" parent="/MatrizCriteriosInventario"/>  
+  
+  <bean id="MatrizCriteriosActionBase"
+        class="com.fontar.web.action.configuracion.criterios.MatrizCriteriosAction" abstract="true">
+       	<constructor-arg>
+        	<value>com.fontar.data.impl.domain.bean.MatrizCriterioBean</value>
+	    </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="matrizCriterioService"/>
+	   	</property>
+	   	<property name="administrarMatrizCriteriosServicio">
+	   		<ref bean="administrarMatrizCriteriosService"/>
+	   	</property>
+  </bean> 
+  
+  <bean name="/MatrizCriteriosAgregar" parent="MatrizCriteriosActionBase"/>
+  <bean name="/MatrizCriteriosEditar"  parent="MatrizCriteriosActionBase"/>
+  <bean name="/MatrizCriteriosGuardar" parent="MatrizCriteriosActionBase"/>
+  
+  <!-- Administracion Seguridad -->
+  
+  <bean name="/AdministracionGrupos" class="com.fontar.web.action.configuracion.seguridad.AdministracionGruposAction">
+   	<property name="grupoService">
+		<ref bean="grupoService"/>
+   	</property>
+  </bean>
+  
+  <bean name="/GruposInventario" parent="/AdministracionGrupos"/>
+   <bean name="/GruposSelectorInventario" parent="/AdministracionGrupos"/>
+  <bean name="/GruposBorrar" parent="/AdministracionGrupos"/>
+  <bean name="/GruposInstrumentoBorrar" parent="/AdministracionGrupos"/>
+  <bean name="/GruposVisualizar" parent="/AdministracionGrupos"/>
+  <bean name="/GruposInstrumentoVisualizar" parent="/AdministracionGrupos"/>
+  <bean name="/GruposAgregar" parent="/AdministracionGrupos"/>
+  <bean name="/GruposEditar" parent="/AdministracionGrupos"/>
+  <bean name="/GruposGuardar" parent="/AdministracionGrupos"/>
+  
+  <bean name="/AdministracionUsuarios" class="com.fontar.web.action.configuracion.seguridad.AdministracionUsuariosAction">
+   	<property name="usuarioService">
+   	   		<ref bean="usuarioService"/>
+   	</property>
+  </bean> 
+
+  <bean name="/UsuariosInventario" parent="/AdministracionUsuarios"/>
+  <bean name="/UsuariosBorrar" parent="/AdministracionUsuarios"/>
+  <bean name="/UsuariosVisualizar" parent="/AdministracionUsuarios"/>
+
+  <!-- creacion -->
+  <bean name="/UsuariosAgregar" parent="/AdministracionUsuarios"/>
+  <bean name="/UsuariosGuardar" parent="/AdministracionUsuarios"/>
+
+  <!-- edicion -->
+  <bean name="/UsuariosEditar" parent="/AdministracionUsuarios"/>
+  <bean name="/UsuariosActualizar" parent="/AdministracionUsuarios"/>
+  
+  <bean name="/UsuariosRegistrarClavePrivada" parent="/AdministracionUsuarios"/>
+  <bean name="/UsuariosRegistracionClavePrivada" parent="/AdministracionUsuarios"/>
+  <bean name="/UsuariosResetearClaveAutenticacion" parent="/AdministracionUsuarios"/>  
+  <bean name="/UsuariosResetearClaveAutenticacionInput" parent="/AdministracionUsuarios"/>  
+  <!-- Cambiar clave -->
+  <bean name="/CambiarClaveAutenticacionInput" parent="/AdministracionUsuarios"/>  
+  <bean name="/CambiarClaveAutenticacion" parent="/AdministracionUsuarios"/>  
+  <bean name="/CambiarClaveAutenticacionCancelar" parent="/AdministracionUsuarios"/>  
+  
+  <!-- Inventario Entidades Beneficiarias -->
+  <bean name="/EntidadBeneficiariaConfiguracionInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadBeneficiariaBean o where o.entidad.borrado=false"/>
+   	<property name="idToolbar" value="entidadesBeneficiariasConfiguracion"/>	
+   	<property name="filtrosData">	
+   		<map>
+   			<entry key="tipos" value-ref="tiposEmpresasLabelValue"/>
+   			<entry key="filtroEsActivo" value-ref="todosSiNoLabelValue"/>
+   		</map>
+   	</property>
+  </bean>
+  
+  <bean name="tiposEmpresasLabelValue" class="java.util.ArrayList">
+  	<constructor-arg>
+  		<list>
+  			<bean class="org.apache.struts.util.LabelValueBean">
+  				<constructor-arg index="0" value="----- seleccione -----"/>
+  				<constructor-arg index="1" value=""/>
+  			</bean>
+  			
+  			<bean class="org.apache.struts.util.LabelValueBean">
+  				<constructor-arg index="0">
+  					<value>Empresa</value>
+  				</constructor-arg>
+  				<constructor-arg index="1">
+  					<value>EMPRESA</value>
+  				</constructor-arg>
+  			</bean>
+  			
+  			<bean class="org.apache.struts.util.LabelValueBean">
+  				<constructor-arg index="0">
+  					<value>No Empresa</value>
+  				</constructor-arg>
+  				<constructor-arg index="1">
+  					<value>NO_EMPRESA</value>
+  				</constructor-arg>
+  			</bean>  			  			
+  		</list>
+  	</constructor-arg>
+  </bean>
+  
+  <bean name="/EntidadBeneficiariaConfiguracionInventarioFiltrar" parent="/EntidadBeneficiariaConfiguracionInventario"/>
+  
+  <!-- Inventario Entidades Evaluadoras -->
+  <bean name="/EntidadEvaluadoraConfiguracionInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadEvaluadoraBean o where o.entidad.borrado=false"/>
+   	<property name="idToolbar" value="entidadesEvaluadorasConfiguracion"/>
+   	<property name="filtrosData">	
+   		<map>
+   			<entry key="filtroEsActivo" value-ref="todosSiNoLabelValue"/>
+   		</map>
+   	</property>	
+  </bean>
+  <bean name="/EntidadEvaluadoraConfiguracionInventarioFiltrar" parent="/EntidadEvaluadoraConfiguracionInventario"/>  
+
+  <!-- Inventario Entidades Evaluadoras -->
+  <bean name="/EntidadBancariaConfiguracionInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from EntidadBancariaBean o where o.entidad.borrado = false"/>
+   	<property name="idToolbar" value="entidadesBancariasConfiguracion"/>	
+   	<property name="filtrosData">	
+   		<map>
+   			<entry key="filtroEsActivo" value-ref="todosSiNoLabelValue"/>
+   		</map>
+   	</property>	
+  </bean>
+  <bean name="/EntidadBancariaConfiguracionInventarioFiltrar" parent="/EntidadBancariaConfiguracionInventario"/>  
+      
+ <!-- Tributaria --> 
+  <bean name="/TributariaInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from TributariaBean o"/>
+   	<property name="idToolbar" value="tributaria"/>	
+  </bean>
+
+  <bean name="/TributariaInventarioFiltrar" parent="/TributariaInventario"/>  
+  
+  <bean id="TributariaActionBase"
+        class="com.fontar.web.action.configuracion.emerix.TributariaAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.TributariaBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="tributariaService"/>
+	   	</property>	     
+  </bean>
+  <bean name="/TributariaAgregar" parent="TributariaActionBase"/>
+  <bean name="/TributariaGuardar" parent="TributariaActionBase"/>
+  <bean name="/TributariaEditar" parent="TributariaActionBase"/>  
+  <bean name="/TributariaBorrar" parent="TributariaActionBase"/>    
+
+ <!-- Cartera --> 
+  <bean name="/CarteraInventario" class="com.pragma.web.action.BaseInventarioAction">
+   	<property name="sessionFactory">
+   		<ref bean="sessionFactory"/>
+   	</property>	    
+   	<property name="hqlQueryString" value="from CarteraBean o"/>
+   	<property name="idToolbar" value="cartera"/>	
+  </bean>
+ 
+  <bean name="/CarteraInventarioFiltrar" parent="/CarteraInventario"/>  
+  
+  <bean id="CarteraActionBase"
+        class="com.fontar.web.action.configuracion.emerix.CarteraAction" abstract="true">
+    	 <constructor-arg>
+        	 <value>com.fontar.data.impl.domain.bean.CarteraBean</value>
+	     </constructor-arg>   
+	   	<property name="servicio">
+	   		<ref bean="carteraService"/>
+	   	</property>	     
+  </bean>
+  <bean name="/CarteraAgregar" parent="CarteraActionBase"/>
+  <bean name="/CarteraGuardar" parent="CarteraActionBase"/>
+  <bean name="/CarteraEditar" parent="CarteraActionBase"/>  
+  <bean name="/CarteraBorrar" parent="CarteraActionBase"/>    
+
+  
+  <bean id="MonedaActionBase"
+        class="com.fontar.web.action.configuracion.moneda.MonedaAction" abstract="true">
+	   	<property name="monedaService">
+	   		<ref bean="monedaService"/>
+	   	</property>	     
+  </bean>
+  <bean name="/MonedaInventario" parent="MonedaActionBase"/>
+  <bean name="/MonedaEditar" parent="MonedaActionBase"/>
+  <bean name="/MonedaGuardar" parent="MonedaActionBase"/>
+  <bean name="/MonedaAgregar" parent="MonedaActionBase"/>
+  <bean name="/MonedaCrear" parent="MonedaActionBase"/>
+  
+  <bean id="CotizacionActionBase"
+        class="com.fontar.web.action.configuracion.cotizacion.CotizacionAction" abstract="true">
+	   	<property name="cotizacionService">
+	   		<ref bean="cotizacionService"/>
+	   	</property>	     
+  </bean>
+  <bean name="/CotizacionInventario" parent="CotizacionActionBase"/>
+  <bean name="/CotizacionEditar" parent="CotizacionActionBase"/>
+  <bean name="/CotizacionGuardar" parent="CotizacionActionBase"/>
+  <bean name="/CotizacionAgregar" parent="CotizacionActionBase"/>
+  <bean name="/CotizacionCrear" parent="CotizacionActionBase"/>
+  <bean name="/CotizacionEliminar" parent="CotizacionActionBase"/>
+</beans>

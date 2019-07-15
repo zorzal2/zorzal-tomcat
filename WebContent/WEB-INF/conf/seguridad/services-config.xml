@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="location" value="${jboss.server.config.url}fontar.properties" />		
+	</bean>
+
+	<bean id="criptoSistema" class="com.fontar.seguridad.cripto.CriptoSistema">
+		<property name="rutaClavesPrivadasUsuarios" value="${criptografia.claves.path}"/>
+		<property name="rutaClavePublicaAplicacion" value="${criptografia.claves.path}"/>
+		<property name="rutaClavePrivadaAplicacion" value="${criptografia.claves.path}"/>
+	</bean>
+
+	<bean id="cryptographicService" class="com.fontar.seguridad.cripto.FontarCryptographicService">
+		<property name="privateKeysLocation" value="${criptografia.claves.path}"/>
+		<property name="applicationPrivateKeyLocation" value="${criptografia.claves.appPrivKey}"/>
+		<property name="applicationPublicKeyLocation" value="${criptografia.claves.appPubKey}"/>
+		<property name="clavesBeanDAO" ref="clavesBeanDao"/>
+
+		<!-- 
+			(fferrara) lista de beans que tienen datos encriptados, se utiliza durante el alta de usuarios 
+			para cargar las claves de encriptación del usuario por cada bean que las necesita
+		-->
+		<property name="requiredEncryptionData">
+			<list>
+				<value>ProyectoBean</value>
+				<value>ProyectoPresupuestoBean</value>
+				<value>EvaluacionBean</value>
+			</list>
+		</property>
+		
+		<!--
+			(fferrara) mapeo de EncryptedUserType con su correspondiente Bean para conseguir la clave que lo encripta
+		 -->
+		<property name="typeToEncryptionData">
+			<map>
+				<entry key="EvaluacionEvaluadorBean" value="EvaluacionBean"/>
+				<entry key="ResultadoEvaluacionUserType" value="EvaluacionBean"/>
+				<entry key="FundamentacionUserType" value="EvaluacionBean"/>
+				<entry key="RecomendacionUserType" value="ProyectoBean"/>
+				<entry key="EncryptedProyectoPresupuestoUserType" value="ProyectoPresupuestoBean"/>
+				<entry key="MontoPresupuestoTotalUserType" value="EvaluacionBean"/>
+				<entry key="MontoPresupuestoSolicitadoUserType" value="EvaluacionBean"/>				
+			</map>
+		</property>
+		
+		<property name="criptoSistema" ref="criptoSistema"/>
+		<property name="authenticationService" ref="authenticationService"/>
+	</bean>	
+	
+	
+	<bean name="authorizationService" class="com.fontar.seguridad.AuthorizationServiceImpl">
+   		<property name="grupoConInstrumentoDao" ref="grupoConInstrumentoLdapDao"/>
+   		<property name="grupoDao" ref="grupoLdapDao"/>
+	</bean>
+	
+	<bean name="authenticationService" class="com.fontar.seguridad.AuthenticationServiceImpl"/>
+	
+	
+	<bean name="usuarioServiceTarget" class="com.fontar.bus.impl.configuracion.UsuarioServiceImpl">
+		<property name="usuarioDao" ref="usuarioLdapDao"/>
+		<property name="personaDao" ref="personaDao"/>
+		<property name="cryptographicService" ref="cryptographicService"/>
+		<property name="interceptor" ref="securityConfigInterceptor"/>
+		<property name="authenticationService" ref="authenticationService"/>
+		<property name="grupoService" ref="grupoService"/>
+	</bean>
+	
+	<bean name="usuarioService" parent="baseTransactionProxy">
+   		<property name="target" ref="usuarioServiceTarget"/>
+	</bean>
+	
+	<bean name="grupoServiceTarget" class="com.fontar.bus.impl.configuracion.GrupoServiceImpl">
+		<property name="grupoDao" ref="grupoLdapDao"/>
+		<property name="grupoAbstractoDao" ref="grupoAbstractoLdapDao"/>
+		<property name="grupoInstrumentableDao" ref="grupoInstrumentableLdapDao"/>
+		<property name="grupoConInstrumentoDao" ref="grupoConInstrumentoLdapDao"/>
+		<property name="permisoDao" ref="permisoLdapDao"/>
+		<property name="interceptor" ref="securityConfigInterceptor"/>
+	</bean>
+	
+	<bean name="grupoService" parent="baseTransactionProxy">
+   		<property name="target" ref="grupoServiceTarget"/>
+	</bean>
+</beans>

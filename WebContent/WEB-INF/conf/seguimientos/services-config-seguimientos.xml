@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <!-- Adjunto Proyecto -->    
+	<bean name="adjuntoSeguimientoServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="seguimientoDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoSeguimientoServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoSeguimientoServicioTarget"/>
+	</bean>
+
+	<!-- Análisis de Gastos de un Seguimiento -->
+	<bean name="analisisGastosSeguimientoServiceTarget" class="com.fontar.bus.impl.seguimientos.seguimientos.AnalisisGastosSeguimientoServicioImpl"> 
+		<property name="seguimientoDao">
+			<ref bean="seguimientoDao" />
+		</property>		
+		<property name="rubroDao">
+			<ref bean="rubroDao" />
+		</property>		
+		<property name="evaluacionDAO" ref="evaluacionDao"/>
+		<property name="evaluacionSeguimientoDAO" ref="evaluacionSeguimientoDao"/>
+		<property name="rendicionCuentasDao" ref="rendicionCuentasDao"/>
+		<property name="proyectoDesembolsoService" ref="proyectoDesembolsoService"/>
+		<property name="bitacoraDao" ref="bitacoraDao"/>
+
+	</bean>
+
+	<bean name="analisisGastosSeguimientoService" parent="baseTransactionProxy">
+   		<property name="target" ref="analisisGastosSeguimientoServiceTarget"/>
+	</bean>
+
+    <!-- CONTROL ADQUISICION - Procedimientos  -->    
+   	<bean name="administrarProcedimientoServiceTarget" class="com.fontar.bus.impl.seguimientos.controlAdquisicion.AdministrarProcedimientoServicioImpl">   		
+   		<property name="tipoAdquisicionDAO" ref="tipoAdquisicionDao"/>	
+   		<property name="pacDAO" ref="pacDao"/>	
+   		<property name="procedimientoDAO" ref="procedimientoDao"/>	
+   		<property name="procedimientoItemDAO" ref="procedimientoItemDao"/>	
+   	</bean>
+   	
+	<bean name="administrarProcedimientoService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarProcedimientoServiceTarget"/>
+    </bean>	
+</beans>
+

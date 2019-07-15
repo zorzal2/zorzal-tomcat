@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+
+  	<!-- Configuracion -->
+	<definition name=".InstrumentosDefInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/instrumentos/inventario.jsp"/>
+	</definition>
+
+	<definition name=".InstrumentosDefEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/instrumentos/editar.jsp"/>
+	</definition>
+	
+	<definition name=".InstrumentosDefVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/instrumentos/visualizar.jsp"/>
+	</definition>
+
+	<!-- Jurisdiccion -->
+	<definition name=".JurisdiccionInventarioDef" 
+				extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/configuracion/jurisdiccion/inventario.jsp"/>
+	</definition>
+
+	<definition name=".JurisdiccionSelectorDef" 
+				extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/configuracion/definiciones/jurisdiccion/selector.jsp"/>
+	</definition>
+
+	<definition name=".JurisdiccionEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/jurisdiccion/editar.jsp"/>
+	</definition>
+
+	<definition 
+		name=".RegionInventarioDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/configuracion/regiones/inventario.jsp"/>
+	</definition>
+
+  	<definition 
+  		name=".RegionEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/regiones/editar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition 
+  		name=".RegionVisualizarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/regiones/visualizar.jsp" >
+  		</put>
+  	</definition>
+  	  	
+	<!-- Entidad Beneficiaria -->
+	
+	<definition name=".EntidadBeneficiariaEditarDef" 
+				extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/configuracion/entidades/entidadbeneficiaria/editar.jsp"/>
+	</definition> 
+
+	<definition name=".EntidadBeneficiariaSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/entidadbeneficiaria/selectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Entidades Beneficiarias"/>
+	</definition>
+
+	<definition name=".EntidadBeneficiariaSelSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/entidadbeneficiaria/selSelectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Entidades Beneficiarias"/>
+	</definition>
+	
+	<definition name=".EntidadBeneficiariaSelectorEditarDef" extends=".popUpDef">
+		<put name="body" value="/jsp/configuracion/entidades/entidad/editar.jsp"/>
+	</definition>
+	
+	
+
+	<definition name=".FacturacionEditarDef" 
+				extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/configuracion/entidades/entidadbeneficiaria/facturacion/editar.jsp"/>
+	</definition> 
+
+  	<definition name=".FacturacionDataDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidadbeneficiaria/facturacion/facturacion.jsp" >
+  		</put>
+  	</definition>  
+
+  	<definition name=".PersonaEvaluadorEditarDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/persona/evaluador/editar.jsp" >
+  		</put>
+  	</definition>  
+
+	<definition name=".EvaluadoresInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/evaluadores/inventario.jsp"/>
+	</definition>
+
+	<!-- Comision -->
+	<definition name=".ComisionInventarioDef" 
+				extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/configuracion/entidades/comision/inventario.jsp"/>
+	</definition>
+
+	<definition name=".ComisionSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/comision/selectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Comisiones"/>
+	</definition>	
+
+
+	<definition name=".BancosInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/bancos/inventario.jsp"/>
+	</definition>
+	
+	<definition name=".FuenteFinanciamientoInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/fuenteFinanciamiento/inventario.jsp"/>
+	</definition>
+
+	<definition name=".FuenteFinanciamientoVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/fuenteFinanciamiento/visualizar.jsp"/>
+	</definition>
+
+	<definition name=".FuenteFinanciamientoEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/fuenteFinanciamiento/editar.jsp"/>
+	</definition>
+
+	<definition name=".FuenteFinanciamientoSelectorDef" extends=".popUpDef">
+		<put name="body" value="/jsp/configuracion/fuenteFinanciamiento/selector.jsp"/>
+	</definition>
+
+	<definition name=".EspecialidadEvaluadorInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/especialidadEvaluador/inventario.jsp"/>
+	</definition>
+
+	<definition name=".EspecialidadEvaluadorVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/especialidadEvaluador/visualizar.jsp"/>
+	</definition>
+
+	<definition name=".EspecialidadEvaluadorEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/especialidadEvaluador/editar.jsp"/>
+	</definition>
+
+	<!--  Seleccion Especialidad Evaluador  -->
+	<definition name=".EspecialidadEvaluadorSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/especialidadEvaluador/selectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Especialidad Evaluador"/>
+	</definition>
+
+	<definition name=".PrimariaSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/especialidadEvaluador/selectorPrimariaInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Primaria"/>
+	</definition>
+
+	<definition name=".SecundariaSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/especialidadEvaluador/selectorSecundariaInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Secundaria"/>
+	</definition>
+	
+	
+	<!-- Tipo Proyecto -->
+	<definition 
+  		name=".TipoProyectoInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/tipoProyecto/inventario.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".TipoProyectoEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/tipoProyecto/editar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition 
+  		name=".TipoProyectoVisualizarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/tipoProyecto/visualizar.jsp" >
+  		</put>
+  	</definition>
+  	  	
+	<!-- Entidad -->
+	<definition 
+  		name=".EntidadConfiguracionInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidad/inventario.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition 
+  		name=".EntidadEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidad/editar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition 
+  		name=".EntidadVisualizarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidad/visualizar.jsp" >
+  		</put>
+  	</definition>
+  	
+	<definition name=".EntidadEvaluadoraSelectorDef"  extends=".selectorInventarioDef">
+		<put name="body"  value="/jsp/configuracion/entidades/entidadEvaluadora/selectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Entidad Evaluadora"/>
+	</definition>
+
+	<definition name=".EntidadSelectorDef"  extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/entidad/selectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Entidades"/>
+	</definition>
+
+	<definition name=".EntidadSelectorEditarDef"  extends=".popUpDef">
+		<put name="body" value="/jsp/configuracion/entidades/entidad/editar.jsp"/>
+	</definition>
+
+  	<definition 
+  		name=".EntidadEvaluadoraEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidadEvaluadora/editar.jsp" >
+  		</put>
+  	</definition>
+
+	<!-- Comision -->
+
+	<definition name=".ComisionEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/entidades/comision/editar.jsp"/>
+	</definition>
+
+
+	<!-- Persona -->
+
+	<definition name=".PersonaInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/inventario.jsp"/>
+	</definition>
+	<definition name=".PersonaVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/visualizar.jsp"/>
+	</definition>
+
+	<definition name=".EntidadVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/entidades/entidad/visualizar.jsp"/>
+	</definition>
+
+	<definition name=".PersonaEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/editar.jsp"/>
+	</definition>
+	<definition name=".PersonaSelectorEditarDef" extends=".popUpDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/editar.jsp"/>
+	</definition>
+	
+	<definition name=".PersonaLegalSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/selectorPersonaLegal.jsp"/>
+		<put name="tituloSeleccion" value="Selección Personas Legal"/>
+	</definition>	
+
+	<definition name=".PersonaDirectorSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/selectorPersonaDirector.jsp"/>
+		<put name="tituloSeleccion" value="Selección Personas Director"/>
+	</definition>	
+
+	<definition name=".PersonaRepresentanteSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/selectorPersonaRepresentante.jsp"/>
+		<put name="tituloSeleccion" value="Selección Personas"/>
+	</definition>	
+
+	<definition name=".PersonaRendicionSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/selectorPersonaRendicion.jsp"/>
+		<put name="tituloSeleccion" value="Selección Personas"/>
+	</definition>	
+
+	<definition name=".PersonaSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/persona/selectorPersona.jsp"/>
+		<put name="tituloSeleccion" value="Selección Personas"/>
+	</definition>	
+		
+	<!-- CIIU -->
+	<definition name=".CiiuSelectorDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/entidades/ciiu/selectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección CIIU"/>
+	</definition>	
+	
+
+
+	<definition name=".EvaluadorSelectorDef" 
+				extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/configuracion/evaluadores/selector.jsp"/>
+	</definition> 
+	
+	<definition name=".LocalizacionEditarDef" 
+				extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/configuracion/localizacion/editar.jsp"/>
+	</definition> 
+	
+	<definition name=".EmpleoPermanenteEditarDef" 
+				extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/configuracion/empleoPermanente/editar.jsp"/>
+	</definition> 
+	
+	
+	<!-- Administracion Seguridad -->	
+	
+	<definition name=".GruposInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/grupos/inventario.jsp"/>
+	</definition>
+	
+	<definition name=".GruposSelectorInventarioDef" extends=".selectorInventarioDef">
+		<put name="body" value="/jsp/configuracion/seguridad/grupos/selectorInventario.jsp"/>
+		<put name="tituloSeleccion" value="Selección Grupos"/>
+	</definition>
+	
+	<definition name=".GruposVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/grupos/visualizar.jsp"/>
+	</definition>
+	
+	<definition name=".GruposEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/grupos/editar.jsp"/>
+	</definition>
+	
+	<definition name=".UsuariosInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/usuarios/inventario.jsp"/>
+	</definition>	
+	
+	<definition name=".UsuariosVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/usuarios/visualizar.jsp"/>
+	</definition>	
+	
+	<definition name=".UsuariosEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/usuarios/editar.jsp"/>
+	</definition>	
+	
+	<definition name=".UsuariosActualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/usuarios/actualizar.jsp"/>
+	</definition>
+	
+	<definition name=".UsuariosRegistrarClaveDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/usuarios/registrarClave.jsp"/>
+	</definition>	
+	
+	<definition name=".UsuariosResetClaveDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/usuarios/resetearClaveAutenticacion.jsp"/>
+	</definition>	
+
+
+  	<!-- Matriz de Criterios -->
+  	
+	<definition name=".MatrizCriteriosInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/criterios/inventario.jsp"/>
+	</definition>
+<!-- 
+	<definition name=".MatrizCriteriosVisualizarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/criterios/visualizar.jsp"/>
+	</definition>
+ -->
+	<definition name=".MatrizCriteriosEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/criterios/editar.jsp"/>
+	</definition>
+	
+	<!-- Inventario Entidad Beneficiaria Configuración -->
+	<definition 
+  		name=".EntidadBeneficiariaConfiguracionInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidadbeneficiaria/inventario.jsp" >
+  		</put>
+  	</definition>
+
+	<!-- Inventario Entidad Evaluadora Configuración -->
+	<definition 
+  		name=".EntidadEvaluadoraConfiguracionInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidadEvaluadora/inventario.jsp" >
+  		</put>
+  	</definition>
+  	  	
+  	  	
+	<!-- Inventario Entidad Bancaria Configuración -->
+	<definition 
+  		name=".EntidadBancariaConfiguracionInventarioDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidadBancaria/inventario.jsp" >
+  		</put>
+  	</definition>  	  	
+
+	<!-- Tributaria -->
+	<definition name=".TributariaInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/emerix/tributaria/inventario.jsp"/>
+	</definition>
+
+	<definition name=".TributariaEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/emerix/tributaria/editar.jsp"/>
+	</definition>
+
+	<!-- Cartera -->
+	<definition name=".CarteraInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/emerix/cartera/inventario.jsp"/>
+	</definition>
+
+	<definition name=".CarteraEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/emerix/cartera/editar.jsp"/>
+	</definition>
+
+	<!-- Monedas -->
+	<definition name=".MonedaInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/moneda/inventario.jsp"/>
+	</definition>
+
+	<definition name=".MonedaEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/moneda/editar.jsp"/>
+	</definition>
+
+	<definition name=".MonedaAgregarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/moneda/agregar.jsp"/>
+	</definition>
+
+	<!-- Cotizaciones -->
+	<definition name=".CotizacionInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/cotizaciones/inventario.jsp"/>
+	</definition>
+
+	<definition name=".CotizacionEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/cotizaciones/editar.jsp"/>
+	</definition>
+
+	<definition name=".CotizacionAgregarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/cotizaciones/agregar.jsp"/>
+	</definition>
+
+	<!-- Cambio de clave -->
+	<definition name=".CambiarClaveDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/configuracion/seguridad/usuarios/cambiarClaveAutenticacion.jsp"/>
+	</definition>
+	
+	<definition name=".EdicionMontoDef" extends=".popUpDef">
+  		<put name="body" value="/jsp/general/editarMonto.jsp"/>
+  	</definition>  
+
+</tiles-definitions>

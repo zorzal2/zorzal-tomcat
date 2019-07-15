@@ -11,151 +11,181 @@
       <artifactId>tomcat-annotations-api</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-catalina-ant</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-catalina-ha</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-storeconfig</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-tribes</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-catalina</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.eclipse.jdt</groupId>
       <artifactId>ecj</artifactId>
       <version>3.16.0</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-el-api</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jasper-el</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jasper</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jaspic-api</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jsp-api</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-servlet-api</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-api</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-coyote</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-dbcp</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-cs</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-de</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-es</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-fr</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-ja</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-ko</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-pt-BR</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-ru</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-i18n-zh-CN</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jdbc</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jni</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-util-scan</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-util</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-websocket</artifactId>
       <version>9.0.21</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-websocket-api</artifactId>
@@ -175,6 +205,12 @@
 	    </exclusions>
 	</dependency>
 
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-beans</artifactId>
+	    <version>2.0.8</version>
+	</dependency>
 
 	<dependency>
 	    <groupId>org.springframework</groupId>
@@ -188,20 +224,6 @@
 	    <artifactId>spring-aop</artifactId>
 	    <version>2.0.8</version>
 	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.springframework.ldap/spring-ldap -->
-	<dependency>
-	    <groupId>org.springframework.ldap</groupId>
-	    <artifactId>spring-ldap</artifactId>
-	    <version>1.2.1</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
-	<!-- ddependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-orm</artifactId>
-	    <version>1.2.9</version>
-	</dependency-->
 	
 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-hibernate3 -->
 	<dependency>
@@ -218,11 +240,24 @@
 	    <version>2.0.8</version>
 	</dependency>
 
+	<!-- https://mvnrepository.com/artifact/org.springframework.ldap/spring-ldap -->
+	<dependency>
+	    <groupId>org.springframework.ldap</groupId>
+	    <artifactId>spring-ldap</artifactId>
+	    <version>1.2.1</version>
+	</dependency>
+
 
 	<dependency>
 	    <groupId>org.acegisecurity</groupId>
 	    <artifactId>acegi-security</artifactId>
 	    <version>1.0.7</version>
+        <exclusions>
+	        <exclusion>
+    	        <groupId>org.springframework</groupId>
+        	    <artifactId>spring-beans</artifactId>
+        	</exclusion>
+       	</exclusions>
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/org.acegisecurity/acegi-security-tiger -->
@@ -273,6 +308,12 @@
 	    <groupId>displaytag</groupId>
 	    <artifactId>displaytag</artifactId>
 	    <version>1.2</version>
+	    <exclusions>
+	    	<exclusion>
+	    		<groupId>org.slf4j</groupId>
+	    		<artifactId>slf4j-log4j12</artifactId>
+	    	</exclusion>
+	    </exclusions>
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
@@ -318,10 +359,28 @@
 	    <version>20030108</version>
 	</dependency>
 
+   <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-api</artifactId>
+       <version>1.7.5</version>
+   </dependency>
+   <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-simple</artifactId>
+       <version>1.6.4</version>
+   </dependency>
 
-
-	<!-- Dependencias legacy -->		
-
+	<!-- Dependencias legacy -->
+	
+	
+	<dependency>
+	    <groupId>org.jbpm</groupId>
+		<artifactId>jbpm-webapp</artifactId>
+		<version>3.1</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/lib/jbpm-webapp-3.1.jar</systemPath>
+	</dependency>
+	
 	<dependency>
 	    <groupId>com.pragma</groupId>
 		<artifactId>jbpm-pragma</artifactId>
@@ -338,19 +397,11 @@
 		
 		<systemPath>${project.basedir}/lib/excel_xml_lib.jar</systemPath>
 	</dependency>
-
-	<dependency>
-	    <groupId>org.springframework</groupId>
-		<artifactId>ldap</artifactId>
-		<version>1.1.2</version>
-		<scope>system</scope>
-		<systemPath>${project.basedir}/lib/spring-ldap-1.1.2.jar</systemPath>
-	</dependency>
     
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>test</testSourceDirectory>
+    <!--  testSourceDirectory>test</testSourceDirectory-->
     <resources>
       <resource>
         <directory>src</directory>
@@ -360,12 +411,12 @@
       </resource>
     </resources>
     <testResources>
-      <testResource>
+      <!-- estResource>
         <directory>test</directory>
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
-      </testResource>
+      </testResource-->
     </testResources>
     <plugins>
       <plugin>

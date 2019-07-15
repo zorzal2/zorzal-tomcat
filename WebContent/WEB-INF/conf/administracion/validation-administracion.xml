@@ -1,0 +1,363 @@
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN" "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+<form-validation>
+	<formset>
+		<!-- Queda definir todavia los requeridos y los tipos de dato -->
+		<form name="CargarProyectoDynaForm">
+			<field property="idInstrumento" depends="required" page="0">
+				<arg bundle="labels" key="app.label.ventanillaPermanente" position="0" />
+			</field>
+			<field property="codigo" depends="required,nroProyecto" page="1">
+				<arg bundle="labels" key="app.label.codigo" position="0" />
+			</field>
+			<field property="proyectoPitec" depends="maxLength" page="1">
+				<arg bundle="labels" key="app.label.proyectoPitecRelacionado" position="0" />
+				<var>
+					<var-name>maxLength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="idEntidadBeneficiaria" depends="required" page="1">
+				<arg bundle="labels" key="app.label.entidadBeneficiaria" position="0" />
+			</field>
+			<field property="titulo" depends="required,maxLength3500" page="1">
+				<arg bundle="labels" key="app.label.titulo"	position="0" />
+			</field>
+			<field property="objetivo" depends="maxLength3500" page="1">
+				<arg bundle="labels" key="app.label.objetivo" position="0" />
+			</field>
+			<field property="resumen" depends="maxLength3500" page="1">
+				<arg bundle="labels" key="app.label.resumen" position="0" />
+			</field>
+			<field property="palabraClave" depends="maxLength3500" page="1">
+				<arg bundle="labels" key="app.label.palabrasClave" position="0" />
+			</field>
+			<field property="duracion" depends="numPos" page="1">
+				<arg bundle="labels" key="app.label.duracionMeses" position="0" />
+			</field>
+			<field property="idTipoProyecto" depends="required" page="1">
+				<arg bundle="labels" key="app.label.tipoProyecto" position="0" />
+			</field>
+			<field property="porcentajeTasaInteres" depends="mask" page="1">
+				<arg bundle="labels" key="app.label.tasaInteres" position="0" />
+				<msg name="mask" key="errors.porcentaje" />		
+						
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${porcentaje}</var-value>
+				</var>
+			</field>
+			<field property="observacion" depends="maxLength3500" page="1">
+				<arg bundle="labels" key="app.label.observaciones" position="0" />
+			</field>
+			<field property="localizacion.direccion" depends="required" page="1">
+				<arg bundle="labels" key="app.label.direccion" position="0" />
+			</field>
+			<field property="localizacion.localidad" depends="required" page="1">
+				<arg bundle="labels" key="app.label.localidad" position="0" />
+			</field>
+			<field property="localizacion.idJurisdiccion" depends="required" page="1">
+				<arg bundle="labels" key="app.label.idJurisdiccion" position="0" />
+			</field>
+			<field property="localizacion.pais" depends="required" page="1">
+				<arg bundle="labels" key="app.label.pais" position="0"/>
+			</field>
+			<field property="localizacion.email" depends="email" page="1">
+				<arg bundle="labels" key="app.label.email" position="0" />
+			</field>
+			<field property="empleo.cantidadTecnicosStr" depends="numPos" page="1">
+				<arg bundle="labels" key="app.label.cantidadTecnicos" position="0" />
+			</field>
+			<field property="empleo.cantidadOperariosCalificadosStr" depends="numPos" page="1">
+				<arg bundle="labels" key="app.label.cantidadOperariosCalificados" position="0" />
+			</field>
+			<field property="empleo.cantidadOperariosNoCalificadosStr" depends="numPos" page="1">
+				<arg bundle="labels" key="app.label.cantidadOperariosNoCalificados" position="0" />
+			</field>
+			<field property="empleo.cantidadProfesionalesStr" depends="numPos" page="1">
+				<arg bundle="labels" key="app.label.cantidadProfesionales" position="0" />
+			</field>
+			<field property="emerix" depends="numPos" >			
+				<arg bundle="labels" key="app.label.emerix" position="0" />
+			</field>
+		</form>		
+		<form name="BitacoraEditarDynaForm">
+			<field property="fechaAsunto" depends="required,date">
+				<arg bundle="labels" key="app.label.fechaAsunto" position="0" />
+			    <var> 
+			        <var-name>datePattern</var-name> 
+			        <var-value>${dateFormat}</var-value> 
+	   	        </var> 						
+			</field>		
+			<field property="tema" depends="required">
+				<arg bundle="labels" key="app.label.tema" position="0" />
+			</field>		
+			<field property="observaciones" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones" position="0" />
+			</field>					
+		</form>	
+		
+		<form name="PaqueteEditarDynaForm">
+			<field property="instrumento" depends="required">
+				<arg bundle="labels" key="app.label.instrumento" position="0" />
+			</field>
+			<field property="tratamiento" depends="required">
+				<arg bundle="labels" key="app.label.tratamiento" position="0" />
+			</field>
+		</form>	
+		
+		<form name="PaqueteVisualizarDynaForm">
+			<field property="id" depends="">
+			</field>
+		</form>					
+		
+		<form name="EvaluacionEvaluadorEditarDynaForm">
+			<field property="idEntidadEvaluadora" depends="required">
+				<arg bundle="labels" key="app.label.entidadEvaluadora" position="0" />
+			</field>
+		</form>			
+
+		<form name="EvaluarResultadoProyectoDynaForm">
+			<field property="resultado" depends="required">
+				<arg bundle="labels" key="app.label.resultado" position="0" />
+			</field>
+			<field property="fundamentacion" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.fundamentacion" position="0" />
+			</field>
+		</form>			
+
+		<form name="EntidadIntervinientesEditarDynaForm">
+			<field property="txtEntidad" depends="required">
+				<arg bundle="labels" key="app.label.entidad" position="0" />
+			</field>
+			<field property="tipoEntidad" depends="required">
+				<arg bundle="labels" key="app.label.tipoEntidad" position="0" />
+			</field>
+			<field property="funcion" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.funcion" position="0" />
+			</field>
+			<field property="relacion" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.relacion" position="0" />
+			</field>
+		</form>			
+
+		<form name="ExpedienteProyectoMovimientoDynaForm">
+			<field property="ubicacion" depends="required">
+				<arg bundle="labels" key="app.label.ubicacion" position="0" />
+			</field>
+			<field property="fecha" depends="required,date">
+				<arg bundle="labels" key="app.label.fecha" position="0" />
+			</field>
+			<field property="txtPersonaRepresentante" depends="required">
+				<arg bundle="labels" key="app.label.responsable" position="0" />
+			</field>
+			<field property="observaciones" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones" position="0" />
+			</field>
+		</form>			
+
+
+		<form name="ExpedienteProyectoMovimientoDevolverDynaForm">
+			<field property="fecha" depends="required,date">
+				<arg bundle="labels" key="app.label.fecha" position="0" />
+			</field>
+			<field property="fechaDevolucion" depends="required,date,dateGreaterThan">
+				<arg bundle="labels" key="app.label.fechaDevolucion" position="0" />
+				<arg bundle="labels" key="app.label.fecha" position="1" />				
+				<msg name="dateGreaterThan" key="errors.mayorIgualDate"/>
+			  	<var>
+                    <var-name>dateGreaterThan</var-name>
+                    <var-value>fecha</var-value>
+                </var>
+			</field>
+		</form>			
+
+		<form name="ProyectoEditarDynaForm">
+			<field property="codigo" depends="required,nroProyecto">
+				<arg bundle="labels" key="app.label.codigo" position="0" />
+			</field>
+			<field property="proyectoPitec" depends="maxLength" page="1">
+				<arg bundle="labels" key="app.label.proyectoPitecRelacionado" position="0" />
+				<var>
+					<var-name>maxLength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="idEntidadBeneficiaria" depends="required">
+				<arg bundle="labels" key="app.label.entidadBeneficiaria" position="0" />
+			</field>
+			<field property="titulo" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.titulo" position="0" />
+			</field>
+			<field property="objetivo" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.objetivo" position="0" />
+			</field>
+			<field property="resumen" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.resumen" position="0" />
+			</field>
+			<field property="palabraClave" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.palabrasClave" position="0" />
+			</field>
+			<field property="duracion" depends="numPos" >			
+				<arg bundle="labels" key="app.label.duracionMeses" position="0" />
+			</field>
+			<field property="idTipoProyecto" depends="required">
+				<arg bundle="labels" key="app.label.tipoProyecto" position="0" />
+			</field>
+			<field property="tir" depends="porcentaje">
+				<arg bundle="labels" key="app.label.tir" position="0" />
+			</field>
+			<field property="van" depends="currency" >
+				<arg bundle="labels" key="app.label.van" position="0" />
+			</field>
+			<field property="porcentajeTasaInteres" depends="mask">
+				<arg bundle="labels" key="app.label.tasaInteres" position="0" />
+				<msg name="mask" key="errors.porcentaje" />				
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${porcentaje}</var-value>
+				</var>
+			</field>
+			<field property="observacion" depends="maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones" position="0" />
+			</field>
+			<field property="localizacion.direccion" depends="required" >			
+				<arg bundle="labels" key="app.label.direccion" position="0" />
+			</field>
+			<field property="localizacion.localidad" depends="required" >			
+				<arg bundle="labels" key="app.label.localidad" position="0" />
+			</field>
+			<field property="localizacion.idJurisdiccion" depends="required" >			
+				<arg bundle="labels" key="app.label.idJurisdiccion" position="0" />
+			</field>
+			<field property="localizacion.pais" depends="required" >			
+				<arg bundle="labels" key="app.label.pais" position="0" />
+			</field>
+			<field property="localizacion.telefono" depends="" >			
+				<arg bundle="labels" key="app.label.telefono" position="0" />
+			</field>
+			<field property="localizacion.fax" depends="" >			
+				<arg bundle="labels" key="app.label.fax" position="0" />
+			</field>
+			<field property="localizacion.email" depends="email" >			
+				<arg bundle="labels" key="app.label.email" position="0" />
+			</field>
+			<!-- field property="localizacion.paginaWeb" depends="" >			
+				<arg bundle="labels" key="app.label.paginaWeb" position="0" />
+			</field -->
+			<field property="empleo.cantidadTecnicosStr" depends="numPos" >			
+				<arg bundle="labels" key="app.label.cantidadTecnicos" position="0" />
+			</field>
+			<field property="empleo.cantidadOperariosCalificadosStr" depends="numPos" >			
+				<arg bundle="labels" key="app.label.cantidadOperariosCalificados" position="0" />
+			</field>
+			<field property="empleo.cantidadOperariosNoCalificadosStr" depends="numPos" >			
+				<arg bundle="labels" key="app.label.cantidadOperariosNoCalificados" position="0" />
+			</field>
+			<field property="empleo.cantidadProfesionalesStr" depends="numPos" >			
+				<arg bundle="labels" key="app.label.cantidadProfesionales" position="0" />
+			</field>
+			<field property="emerix" depends="numPos" >			
+				<arg bundle="labels" key="app.label.emerix" position="0" />
+			</field>
+		</form>
+		
+		<form name="ProyectoPACEditarDynaForm">
+			<field property="fecha" depends="required,date">
+				<arg bundle="labels" key="app.label.fecha" position="0" />
+			</field>
+			<field property="descripcion" depends="required">
+				<arg bundle="labels" key="app.label.descripcion" position="0" />
+			</field>
+			<field property="etapa" depends="required">
+				<arg bundle="labels" key="app.label.etapa" position="0" />
+			</field>
+			<field property="montoParte" depends="required,currency">
+				<arg bundle="labels" key="app.label.montoParte"	position="0" />
+			</field>
+			<field property="idRubro" depends="required,long">
+				<arg bundle="labels" key="app.label.rubro" position="0" />
+			</field>
+			<field property="idTipoAdquisicion" depends="required,long">
+				<arg bundle="labels" key="app.label.adquisicion" position="0" />
+			</field>
+		</form>
+		
+		<form name="ProyectoPACEditarMontoAdjudicacionDynaForm">
+			<field property="montoAdjudicacion" depends="required,currency">
+				<arg bundle="labels" key="app.label.montoAdjudicado" position="0" />
+			</field>
+		</form>			
+
+		<form name="ProyectoPACAnularDynaForm">
+			<field property="observaciones" depends="required,maxLength3500">
+				<arg bundle="labels" key="app.label.observaciones" position="0" />
+			</field>
+		</form>			
+
+		<form name="ProyectoPACDesembolsoDynaForm">
+			<field property="fechaPedido" depends="required,date">
+				<arg bundle="labels" key="app.label.fechaPedido" position="0" />
+			</field>
+			<field property="cuota" depends="required,numPos">
+				<arg bundle="labels" key="app.label.cuota" position="0" />
+			</field>
+			<field property="ordenPago" depends="required">
+				<arg bundle="labels" key="app.label.nroDesembolso" position="0" />
+			</field>
+			<field property="montoDesembolsado" depends="required,currency">
+				<arg bundle="labels" key="app.label.montoADesembolsar"	position="0" />
+			</field>
+			<field property="idMoneda" depends="required,long">
+				<arg bundle="labels" key="app.label.moneda" position="0" />
+			</field>
+		</form>			
+
+		<form name="ProyectoPACPagoDynaForm">
+			<field property="fechaPago" depends="required,date">
+				<arg bundle="labels" key="app.label.fechaPago" position="0" />
+			</field>
+			<field property="cuota" depends="required">
+				<arg bundle="labels" key="app.label.cuota" position="0" />
+			</field>
+			<field property="montoPago" depends="required,currency">
+				<arg bundle="labels" key="app.label.montoPago"	position="0" />
+			</field>
+		</form>			
+
+		<form name="ProyectoDesembolsoDynaForm">
+			<field property="concepto" depends="required">
+				<arg bundle="labels" key="app.label.desembolso.concepto" position="0" />
+			</field>
+			<field property="montoOriginal" depends="required,importe">
+				<arg bundle="labels" key="app.label.desembolso.montoOriginal" position="0" />
+			</field>
+			<field property="objetivo" depends="required,maxLength">
+				<arg bundle="labels" key="app.label.desembolso.objetivo" position="0" />
+				<var>
+					<var-name>maxLength</var-name>
+					<var-value>600</var-value>
+				</var>
+			</field>
+			
+			<field property="plazo" depends="required,numPos">
+				<arg bundle="labels" key="app.label.desembolso.plazo" position="0" />
+			</field>
+		</form>			
+
+		<form name="ProyectoDesembolsoPagarDynaForm">
+			<field property="monto" depends="required,importe">
+				<arg bundle="labels" key="app.label.desembolso.montoActual" position="0" />
+			</field>
+			<field property="fechaPago" depends="date,required">
+				<arg bundle="labels" key="app.label.desembolso.fechaPago" position="0" />
+			</field>
+		</form>			
+
+		<form name="ProyectoDesembolsoAutorizarDynaForm">
+			<field property="monto" depends="required,importe">
+				<arg bundle="labels" key="app.label.desembolso.montoAutorizado" position="0" />
+			</field>
+		</form>			
+
+	</formset>
+</form-validation>

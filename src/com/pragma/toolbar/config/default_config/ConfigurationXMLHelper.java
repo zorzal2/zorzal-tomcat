@@ -39,7 +39,6 @@ import com.pragma.toolbar.util.Validator;
 class ConfigurationXMLHelper {
     
     private static String CONFIG_FILE = "/configuracion-inicial.xml";
-    private static String SCHEMA_FILE = "/configuracion-inicial.xsd";
     
     private static Element root;
     private static Document configuration;
@@ -55,16 +54,7 @@ class ConfigurationXMLHelper {
         {
             configuration = reader.read(ConfigurationXMLHelper.class.getResourceAsStream(CONFIG_FILE));                        
 
-            // Validación del archivo de configuración usando el esquema XML
-            Validator validator = new Validator(configuration,SCHEMA_FILE);            
-            boolean isValid = validator.validate();
-                        
-            if (isValid) {
-                root = configuration.getRootElement();
-            }            
-            else {
-                log.error("Invalid configuration file. See error log under class com.pragma.toolbar.util.Validator");
-            }
+            root = configuration.getRootElement();
         }
         catch(DocumentException ex) {            
             log.error(ex.getMessage());

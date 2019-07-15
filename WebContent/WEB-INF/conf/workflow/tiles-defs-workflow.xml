@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+  	
+  	<!-- Workflow -->
+
+	<definition name=".BandejaDeEntradaDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/workflow/bandeja/inventario.jsp"/>
+	</definition>
+
+	<definition name=".TareasDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/workflow/tareas/pendientes.jsp"/>
+	</definition>
+	
+	<definition name=".ProcesosDefinidosDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/workflow/procesos/definiciones.jsp"/>
+	</definition>
+
+	<definition name=".InstanciasProcesoDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/workflow/procesos/instancias.jsp"/>
+	</definition>
+
+
+  	<definition name=".PasarProximaEtapaDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pasarProximaEtapa.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".EvaluarProyectoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/agregarEvaluacion.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".CargarEvaluacionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/evaluacion/cargar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".EvaluacionSeguimientoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/cargar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ConfirmarEvaluacionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/evaluacion/confirmar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".AutorizarEvaluacionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/evaluacion/autorizar.jsp" >
+  		</put>
+  	</definition>  	
+			
+  	<definition name=".FinalizarControlEvaluacionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/finalizarControl.jsp" >
+  		</put>
+  	</definition>   	
+  	
+  	<definition name=".FinalizarControlSeguimientoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/finalizarControl.jsp" >
+  		</put>
+  	</definition>   	
+  	
+  	<definition name=".AnularEvaluacionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/evaluacion/anular.jsp" >
+  		</put>
+  	</definition>  	
+  	
+  	<definition name=".AnularEvaluacionSeguimientoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/anularEvaluacion.jsp" >
+  		</put>
+  	</definition>  	
+  	
+  	<definition name=".EvaluarPorJuntaDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/evaluarPorJunta.jsp" >
+  		</put>
+  	</definition>  	
+  	
+  	<definition 
+  		name=".IdeaProyectoCargarVentanillaDef" 
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/ventanilla/ideaproyecto/seleccionarInstrumento.jsp" >
+  		</put>
+  	</definition>  
+		
+  	<definition name=".EvaluacionEvaluadorDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/evaluacion/evaluacionEvaluador.jsp" >
+  		</put>
+  	</definition>  
+
+  	<definition name=".EntidadIntervinientesDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/configuracion/entidades/entidadIntervinientes/editar.jsp" >
+  		</put>
+  	</definition>  
+
+  	<definition name=".FinalizarPosibilidadReconsideracionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/reconsideracion.jsp" >
+  		</put>
+  	</definition> 
+
+  	<definition name=".FirmarContratoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/firmarContrato.jsp" >
+  		</put>
+  	</definition> 
+  	  	
+	<!-- Paquete -->			
+	<definition 
+		name=".ControlarPaqueteDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/paquetes/controlar.jsp"/>
+	</definition>  	
+
+	<definition 
+		name=".EvaluarResultadoProyectoDef" extends=".popUpDef">
+		<put name="body" 
+			value="/jsp/administracion/paquetes/evaluarResultadoProyecto.jsp">
+		</put>
+	</definition>  	
+	
+	<!-- NOTIFICACION -->			
+	<!-- Enviar Notificacion -->
+	<definition 
+		name=".EnviarNotificacionDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/notificaciones/enviar.jsp"/>
+	</definition>  	
+
+	<!-- Recibir Acuse Notificacion -->
+	<definition 
+		name=".RecibirAcuseNotificacionDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/notificaciones/acuse.jsp"/>
+	</definition>  	
+	
+	<!-- Cerrar Notificacion -->
+	<definition 
+		name=".CerrarNotificacionDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/notificaciones/cerrar.jsp"/>
+	</definition>  	
+
+	<!-- Anular Notificacion -->
+	<definition 
+		name=".AnularNotificacionDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/notificaciones/anular.jsp"/>
+	</definition>  	
+
+	<!-- SEGUIMIENTO - Cerrar -->
+    <definition name=".CerrarSeguimientoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/cerrar.jsp" >
+  		</put>
+  	</definition>  	
+	
+	<!-- PROYECTO - Cerrar -->
+	<definition name=".CerrarProyectoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/cerrar.jsp" >
+  		</put>
+  	</definition>
+
+	<!-- PROYECTO - Anular -->
+	<definition name=".AnularProyectoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/anular.jsp" >
+  		</put>
+  	</definition>  	
+
+	<!-- PROYECTO - Finalizar -->
+	<definition name=".FinalizarProyectoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/finalizar.jsp" >
+  		</put>
+  	</definition>  	
+
+	<!-- PROYECTO - Ingresar Pedido Autorización  -->
+	<definition name=".PedirAutorizacionEditarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/pedidoAutorizacion.jsp"/>
+	</definition>
+  	
+  	<definition name=".ProcessDefinitionDeploymentDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/workflow/procesos/deploy.jsp"/>
+	</definition>
+
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO FONTAR - Pantalla Completa -->
+	<definition name=".CargarResultadoDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/cargar.jsp"/>
+	</definition>  	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - GENERAR PEDIDO AUTORIZACION - Crear pedido -->
+	<definition name=".GenerarPedidoAutorizacionDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/seguimientos/controlAdquisiciones/generarPedidoAutorizacion.jsp"/>
+	</definition>
+	
+	<!-- PROYECTOS HISTÓRICOS - COMPLETAR DATOS INICIALES - Ingresar datos -->
+	<definition name=".CompletarDatosInicialesDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/proyectos/completarDatosIniciales.jsp"/>
+	</definition>
+		
+</tiles-definitions>

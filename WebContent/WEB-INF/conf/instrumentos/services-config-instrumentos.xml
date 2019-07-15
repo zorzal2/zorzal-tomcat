@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- SERVICES TARGETS -->
+	<bean name="presentacionConvocatoriaServiceTarget" class="com.fontar.bus.impl.convocatoria.presentacion.PresentacionConvocatoriaServicioImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.PresentacionConvocatoriaBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="presentacionConvocatoriaDao"/>
+	</bean>
+
+	<bean name="llamadoConvocatoriaServiceTarget" class="com.fontar.bus.impl.convocatoria.LlamadoConvocatoriaServicioImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.LlamadoConvocatoriaBean</value>
+	   </constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="ProyectoBean" value-ref="proyectoDao" />
+				<entry key="LlamadoConvocatoriaBean" value-ref="llamadoConvocatoriaDao" />
+				<entry key="DistribucionFinanciamientoBean" value-ref="distribucionFinanciamientoDao" />				
+				<entry key="PresentacionConvocatoriaBean" value-ref="presentacionConvocatoriaDao" />				
+				<entry key="InstrumentoVersionBean" value-ref="instrumentoVersionDao" />				
+				<entry key="DistribucionTipoProyectoBean" value-ref="distribucionTipoProyectoDao" />				
+			</map>
+		</property>
+	</bean>	
+
+	<bean name="ventanillaPermanenteServiceTarget" class="com.fontar.bus.impl.convocatoria.VentanillaPermanenteServicioImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.VentanillaPermanenteBean</value>
+	   </constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="VentanillaPermanenteBean" value-ref="ventanillaPermanenteDao" />				
+				<entry key="DistribucionFinanciamientoBean" value-ref="distribucionFinanciamientoDao" />				
+				<entry key="PresentacionConvocatoriaBean" value-ref="presentacionConvocatoriaDao" />				
+				<entry key="InstrumentoVersionBean" value-ref="instrumentoVersionDao" />				
+				<entry key="DistribucionTipoProyectoBean" value-ref="distribucionTipoProyectoDao" />				
+			</map>
+		</property>
+	</bean>	
+	
+	<bean name="ideaProyectoServiceTarget" class="com.fontar.bus.impl.ventanilla.IdeaProyectoServiceImpl">
+	 	<constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.IdeaProyectoBean</value>
+	   	</constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="ProyectoRaizBean" value-ref="proyectoRaizDao" />
+				<entry key="ProyectoBean" value-ref="proyectoDao" />
+				<entry key="EntidadBeneficiariaBean" value-ref="entidadBeneficiariaDao" />				
+				<entry key="IdeaProyectoBean" value-ref="ideaProyectoDao" />				
+				<entry key="ProyectoDatosBean" value-ref="proyectoDatosDao" />				
+				<entry key="ProyectoJurisdiccionBean" value-ref="proyectoJurisdiccionDao" />
+				<entry key="ProyectoPresupuestoBean" value-ref="proyectoPresupuestoDao" />
+				<entry key="BitacoraBean" value-ref="bitacoraDao" />
+				<entry key="EntidadBean" value-ref="entidadDao" />
+				<entry key="EvaluacionBean" value-ref="evaluacionDao" />
+			</map>
+		</property>
+	</bean>	
+
+	<!--
+	<bean name="proyectoServiceTarget" class="com.fontar.bus.impl.convocatoria.ProyectoServicioImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.ProyectoBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="proyectoDao"/>
+	</bean>	
+	-->
+	<bean name="proyectoServiceTarget" class="com.fontar.bus.impl.convocatoria.ProyectoServicioImpl">
+	 	<constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.ProyectoBean</value>
+	   	</constructor-arg>     
+	   	<property name="entidadBeneficiariaServicio" ref="entidadBeneficiariaService"/>
+		<property name="hashDao">
+			<map>
+				<entry key="ProyectoBean" value-ref="proyectoDao" />
+				<entry key="PersonaBean" value-ref="personaDao" />
+				<entry key="ProyectoDatosBean" value-ref="proyectoDatosDao" />				
+				<entry key="BitacoraBean" value-ref="bitacoraDao" />
+				<entry key="EntidadBean" value-ref="entidadDao" />
+				<entry key="IdeaProyectoBean" value-ref="ideaProyectoDao" />
+				<entry key="PresentacionConvocatoriaBean" value-ref="presentacionConvocatoriaDao" />
+				<entry key="ProyectoJurisdiccionBean" value-ref="proyectoJurisdiccionDao" />
+				<entry key="LocalizacionBean" value-ref="localizacionDao" />
+				<entry key="EmpleoPermanenteBean" value-ref="empleoPermanenteDao" />
+			</map>
+		</property>
+	</bean>	
+	
+	<bean name="proyectoPitecServiceTarget" class="com.fontar.bus.impl.convocatoria.ProyectoPitecServicioImpl">
+	 	<constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.ProyectoPitecBean</value>
+	   	</constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="ProyectoBean" value-ref="proyectoDao" />
+				<entry key="ProyectoPitecBean" value-ref="proyectoPitecDao" />
+				<entry key="ProyectoDatosBean" value-ref="proyectoDatosDao" />				
+				<entry key="BitacoraBean" value-ref="bitacoraDao" />
+				<entry key="EntidadBean" value-ref="entidadDao" />
+				<entry key="IdeaProyectoBean" value-ref="ideaProyectoDao" />
+				<entry key="PresentacionConvocatoriaBean" value-ref="presentacionConvocatoriaDao" />
+				<entry key="ProyectoJurisdiccionBean" value-ref="proyectoJurisdiccionDao" />
+				<entry key="LocalizacionBean" value-ref="localizacionDao" />
+				<entry key="EmpleoPermanenteBean" value-ref="empleoPermanenteDao" />
+			</map>
+		</property>
+	</bean>		
+
+	<!-- 
+	<bean name="proyectoServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	<constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.ProyectoBean</value>
+	   	</constructor-arg>     
+	   	<property name="dao" ref="proyectoDao"/>
+	</bean>	
+	 -->
+	 
+	<bean name="proyectosServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.ProyectoDatosBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="proyectoDao"/>
+	</bean>
+
+	<!-- bean name="bitacoraServiceTarget" class="com.pragma.bus.impl.GenericABMServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.BitacoraBean</value>
+	   </constructor-arg>     
+	   <property name="dao" ref="bitacoraDao"/>
+	</bean -->	
+	 
+	<!-- SERVICES PROXIES -->
+	<!-- 
+	<bean id="evaluadorService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="evaluadoresServiceTarget"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRES_NEW</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+	
+	<bean name="llamadoConvocatoriaService" parent="baseTransactionProxy">
+   		<property name="target" ref="llamadoConvocatoriaServiceTarget"/>
+	</bean>
+
+	<bean name="ventanillaPermanenteService" parent="baseTransactionProxy">
+   		<property name="target" ref="ventanillaPermanenteServiceTarget"/>
+	</bean>
+
+	<bean name="presentacionConvocatoriaService" parent="baseTransactionProxy">
+   		<property name="target" ref="presentacionConvocatoriaServiceTarget"/>
+	</bean>
+
+	<bean name="proyectoService" parent="baseTransactionProxy">
+   		<property name="target" ref="proyectoServiceTarget"/>
+	</bean>
+	
+	<bean name="proyectoPitecService" parent="baseTransactionProxy">
+   		<property name="target" ref="proyectoPitecServiceTarget"/>
+	</bean>
+	
+	<bean name="proyectosExcelService" parent="baseTransactionProxy">
+   		<property name="target" ref="proyectosExcelServiceTarget"/>
+	</bean>	
+	
+	<bean name="ideaProyectoService" parent="baseTransactionProxy">
+   		<property name="target" ref="ideaProyectoServiceTarget"/>
+	</bean>
+
+	<bean name="distribucionFinanciamientoService" parent="baseTransactionProxy">
+   		<property name="target" ref="distribucionFinanciamientoServiceTarget"/>
+	</bean>
+	
+	<bean name="distribucionFinanciamientoServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.DistribucionFinanciamientoBean</value>
+	   </constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="DistribucionFinanciamientoBean" value-ref="distribucionFinanciamientoDao" />
+				<entry key="JurisdiccionBean" value-ref="jurisdiccionDao" />
+				<entry key="RegionBean" value-ref="regionDao" />				
+			</map>
+		</property>	   
+	</bean>	
+	
+	<bean name="distribucionTipoProyectoService" parent="baseTransactionProxy">
+   		<property name="target" ref="distribucionTipoProyectoServiceTarget"/>
+	</bean>
+	
+	<bean name="distribucionTipoProyectoServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.DistribucionTipoProyectoBean</value>
+	   </constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="DistribucionFinanciamientoBean" value-ref="distribucionFinanciamientoDao" />
+				<entry key="JurisdiccionBean" value-ref="jurisdiccionDao" />
+				<entry key="RegionBean" value-ref="regionDao" />				
+			</map>
+		</property>	   
+	</bean>	
+	
+	
+	<bean name="instrumentoVersionService" parent="baseTransactionProxy">
+   		<property name="target" ref="instrumentoVersionServiceTarget"/>
+	</bean>
+	
+	<bean name="instrumentoVersionServiceTarget" class="com.pragma.bus.impl.GenericServiceImpl"> 
+	 	 <constructor-arg>
+	     	 <value>com.fontar.data.impl.domain.bean.InstrumentoVersionBean</value>
+	   </constructor-arg>     
+		<property name="hashDao">
+			<map>
+				<entry key="InstrumentoVersionBean" value-ref="instrumentoVersionDao" />
+			</map>
+		</property>	   
+	</bean>		
+	
+	<!-- Instrumentos -->
+   	<bean name="administrarInstrumentosService" class="com.fontar.bus.impl.instrumento.AdministrarInstrumentosServicioImpl">   		
+   		<property name="instrumentoDao" ref="instrumentoDao"/>	
+  		<property name="instrumentoDefDao" ref="instrumentoDefDao"/>	
+   	</bean>
+		
+	<!-- Adjuntos -->
+	<bean name="adjuntoInstrumentoDefServicioTarget" parent="adjuntoServicioTarget"> 
+		<property name="adjuntableDao">
+			<ref bean="instrumentoDefDao" />
+		</property>		
+	</bean>
+	
+	<bean name="adjuntoInstrumentoDefServicio" parent="adjuntoTransactionProxy">
+   		<property name="target" ref="adjuntoInstrumentoDefServicioTarget"/>
+	</bean>	
+	
+</beans>

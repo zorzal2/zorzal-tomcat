@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="jbpmManager" class="com.pragma.jbpm.JbpmManager"
+		singleton="false" />
+
+	
+	
+	<bean id="WFActionBase"
+		class="com.fontar.web.action.workflow.JbpmManagerAction"
+		abstract="true">
+		<property name="jbpmManager">
+			<ref bean="jbpmManager" />
+		</property>
+	</bean>
+
+	<bean name="/WFProcesosDefinidos" parent="WFActionBase" />
+	<bean name="/WFTareas" parent="WFActionBase" />
+	<bean name="/WFNuevaInstanciaProceso" parent="WFActionBase" />
+	<bean name="/WFCargarTarea" parent="WFActionBase" />
+	<bean name="/WFCancelarTarea" parent="WFActionBase" />
+	<bean name="/WFTerminarTarea" parent="WFActionBase" />
+	<bean name="/WFInstanciasProceso" parent="WFActionBase" />
+	<bean name="/WFDetalleInstanciaProceso" parent="WFActionBase" />
+	<bean name="/WFTareasInstanciaProceso" parent="WFActionBase" />
+	<bean name="/WFBorrarBD" parent="WFActionBase" />
+	<bean name="/WFSignalToken" parent="WFActionBase" />
+	<bean name="/WFBandejaDeEntrada" parent="WFActionBase" />
+	<bean name="/WFLiberarTarea" parent="WFActionBase" />
+	<bean name="/WFActualizarPermisosTareas" parent="WFActionBase">
+		<property name="service" ref="jbpmManagerService"/>
+	</bean>
+	<bean name="/WFDeployProcessDefinition" parent="WFActionBase">
+		<property name="service" ref="jbpmManagerService"/>
+	</bean>
+
+	<!--  Evaluar Admisibilidad  -->
+	<bean name="/EvaluarAdmisibilidadProyecto"
+		class="com.fontar.web.action.proyecto.EvaluarAdmisibilidadAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/EvaluarAdmisibilidadProyectoTerminar"
+		class="com.fontar.web.action.proyecto.EvaluarAdmisibilidadAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/SolicitarReadmisibilidadProyecto"
+		class="com.fontar.web.action.proyecto.SolicitarReadmisibilidadAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+		<property name="administrarEvaluacionesServicio" ref="administrarEvaluacionesService" />
+	</bean>
+
+	<bean name="/SolicitarReadmisibilidadProyectoTerminar"
+		class="com.fontar.web.action.proyecto.SolicitarReadmisibilidadAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/RegistrarPedidoReconsideracion"
+		class="com.fontar.web.action.proyecto.SolicitarReconsideracionAction">
+		<property name="wfProyectoRaizServicio" ref="wfProyectoRaizService" />
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+		<property name="wfIdeaProyectoServicio" ref="wfIdeaProyectoService" />
+	</bean>
+
+	<bean name="/Reconsiderar"
+		class="com.fontar.web.action.proyecto.ReconsideracionAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+		<property name="administrarEvaluacionesServicio" ref="administrarEvaluacionesService" />
+	</bean>
+
+	<bean name="/ReconsiderarGuardar"
+		class="com.fontar.web.action.proyecto.ReconsideracionAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/RegistrarPedidoReconsideracionGuardar"
+		class="com.fontar.web.action.proyecto.SolicitarReconsideracionAction">
+		<property name="wfProyectoRaizServicio" ref="wfProyectoRaizService" />
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+		<property name="wfIdeaProyectoServicio" ref="wfIdeaProyectoService" />
+	</bean>
+
+	<bean name="/EvaluarReadmisibilidadProyecto"
+		class="com.fontar.web.action.proyecto.EvaluarReadmisibilidadAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+		<property name="admisibilidadProyectoServicio" ref="evaluarAdmisibilidadService" />		
+	</bean>
+
+	<bean name="/EvaluarReadmisibilidadProyectoTerminar"
+		class="com.fontar.web.action.proyecto.EvaluarReadmisibilidadAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/AnalizarReconsideracion"
+		class="com.fontar.web.action.proyecto.AnalizarReconsideracionAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/AnalizarReconsideracionTerminar"
+		class="com.fontar.web.action.proyecto.AnalizarReconsideracionAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+
+	<!-- Evaluación de proyectos -->
+	<bean name="/CargarEvaluacion"
+		class="com.fontar.web.action.evaluacion.CargarCriteriosEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+	<bean name="/CargarEvaluacionGuardar"
+		class="com.fontar.web.action.evaluacion.CargarCriteriosEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+	<!-- Evaluación de seguimiento -->
+	<bean name="/EvaluarSeguimiento"
+		class="com.fontar.web.action.evaluacion.CargarEvaluacionSeguimientoAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	  	<property name="wfSeguimientoServicio">
+	  		<ref bean="wfSeguimientoService"/>
+	  	</property>	     
+	</bean>
+
+	<bean name="/EvaluarSeguimientoGuardar"
+		class="com.fontar.web.action.evaluacion.CargarEvaluacionSeguimientoAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	  	<property name="wfSeguimientoServicio">
+	  		<ref bean="wfSeguimientoService"/>
+	  	</property>	     
+	</bean>
+
+	<bean name="/AutorizarEvaluacion"
+		class="com.fontar.web.action.evaluacion.AutorizarEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+	<bean name="/AutorizarEvaluacionGuardar"
+		class="com.fontar.web.action.evaluacion.AutorizarEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+
+	<bean name="/ConfirmarEvaluacion"
+		class="com.fontar.web.action.evaluacion.ConfirmarEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+	<bean name="/ConfirmarEvaluacionGuardar"
+		class="com.fontar.web.action.evaluacion.ConfirmarEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+	<bean name="/AnularEvaluacion"
+		class="com.fontar.web.action.evaluacion.AnularEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+	<bean name="/AnularEvaluacionGuardar"
+		class="com.fontar.web.action.evaluacion.AnularEvaluacionAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	</bean>
+
+	<bean name="/AnularEvaluacionSeguimiento"
+		class="com.fontar.web.action.seguimientos.seguimientos.AnularEvaluacionSeguimientoAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+	</bean>
+
+	<bean name="/AnularEvaluacionSeguimientoGuardar"
+		class="com.fontar.web.action.seguimientos.seguimientos.AnularEvaluacionSeguimientoAction">
+		<property name="wfEvaluacionServicio" ref="wfEvaluacionService" />
+	  	<property name="administrarSeguimientoServicio">
+	  		<ref bean="administracionSeguimientoService"/>
+	  	</property>	     
+	</bean>
+
+	<!-- IDEA PROYECTO -->
+
+	<bean name="/IdeaProyectoEvaluarPorJunta"
+		class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoEvaluarPorJuntaAction">
+		<property name="wfIdeaProyectoServicio"
+			ref="wfIdeaProyectoService" />
+	</bean>
+
+	<bean name="/IdeaProyectoEvaluarPorJuntaGuardar"
+		class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoEvaluarPorJuntaAction">
+		<property name="wfIdeaProyectoServicio"
+			ref="wfIdeaProyectoService" />
+	</bean>
+	
+	<!-- Ideas Proyecto Wizard - Cargar Proyecto desde Idea Proyecto -->
+	<bean id="IdeaProyectoCargarProyectoActionBase"
+	       class="com.fontar.web.action.instrumento.ventanilla.ideaproyecto.IdeaProyectoCargarProyectoAction" 
+	       abstract="true">
+		<property name="wfProyectoRaizServicio">
+			<ref bean="wfProyectoRaizService" />
+		</property>
+		<property name="wfProyectoServicio">
+			<ref bean="wfProyectoService" />
+		</property>
+		<property name="wfIdeaProyectoServicio">
+			<ref bean="wfIdeaProyectoService" />
+		</property>
+	</bean>
+	<bean name="/IdeaProyectoCargarVentanilla" parent="IdeaProyectoCargarProyectoActionBase"/>
+	<bean name="/IdeaProyectoProcesarCargarVentanilla" parent="IdeaProyectoCargarProyectoActionBase"/>
+	<bean name="/IdeaProyectoCargarProyecto" parent="IdeaProyectoCargarProyectoActionBase"/>
+	<bean name="/IdeaProyectoProcesarCargarProyecto" parent="IdeaProyectoCargarProyectoActionBase"/>	
+	<bean name="/IdeaProyectoGuardarProyecto" parent="IdeaProyectoCargarProyectoActionBase"/>	
+	
+	<bean name="/EvaluarProyecto"
+		class="com.fontar.web.action.proyecto.EvaluarProyectoAction">
+		<property name="wfProyectoRaizServicio">
+			<ref bean="wfProyectoRaizService" />
+		</property>
+		<property name="wfProyectoServicio">
+			<ref bean="wfProyectoService" />
+		</property>
+		<property name="wfIdeaProyectoServicio">
+			<ref bean="wfIdeaProyectoService" />
+		</property>
+	</bean>
+
+	<bean name="/PasarProximaEtapa"
+		class="com.fontar.web.action.proyecto.PasarProximaEtapaAction">
+		<property name="wfProyectoServicio">
+			<ref bean="wfProyectoService" />
+		</property>
+	</bean>
+
+	<bean name="/FinalizarControlEvaluacion"
+		class="com.fontar.web.action.proyecto.FinalizarControlEvaluacionAction">
+		<property name="wfProyectoServicio">
+			<ref bean="wfProyectoService" />
+		</property>
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+	</bean>
+
+	<bean name="/FinalizarControlEvaluacionGuardar"
+		class="com.fontar.web.action.proyecto.FinalizarControlEvaluacionAction">
+		<property name="wfProyectoServicio">
+			<ref bean="wfProyectoService" />
+		</property>
+	</bean>
+
+	<bean name="/FinalizarControlSeguimiento"
+		class="com.fontar.web.action.seguimientos.seguimientos.FinalizarControlSeguimientoAction">
+		<property name="wfSeguimientoServicio">
+			<ref bean="wfSeguimientoService" />
+		</property>
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+		<property name="administrarSeguimientoServicio">
+			<ref bean="administracionSeguimientoService" />
+		</property>
+	</bean>
+
+	<bean name="/FinalizarControlSeguimientoGuardar"
+		class="com.fontar.web.action.seguimientos.seguimientos.FinalizarControlSeguimientoAction">
+		<property name="wfSeguimientoServicio">
+			<ref bean="wfSeguimientoService" />
+		</property>
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+	</bean>
+
+	<bean name="/PasarProximaEtapaGuardar"
+		class="com.fontar.web.action.proyecto.PasarProximaEtapaAction">
+		<property name="wfProyectoServicio">
+			<ref bean="wfProyectoService" />
+		</property>
+	</bean>
+
+	<bean name="/EvaluarProyectoGuardar"
+		class="com.fontar.web.action.proyecto.EvaluarProyectoAction">
+		<property name="wfProyectoRaizServicio">
+			<ref bean="wfProyectoRaizService" />
+		</property>
+	</bean>
+
+	<!-- PROYECTOS -->
+	<bean name="/EditarPresupuestoProyecto"
+		class="com.fontar.web.action.proyecto.presupuesto.EditarPresupuestoProyectoAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/EditarPresupuestoProyectoGuardar"
+		class="com.fontar.web.action.proyecto.presupuesto.EditarPresupuestoProyectoAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/EditarPresupuestoProyectoCerrar"
+		class="com.fontar.web.action.proyecto.presupuesto.EditarPresupuestoProyectoAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+
+	<!-- PROYECTOS - Finalizar Posibilidad de Reconsideracion -->
+	<bean name="/FinalizarPosibilidadReconsideracion"
+		class="com.fontar.web.action.proyecto.FinalizarPosibilidadReconsideracionAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/FinalizarPosibilidadReconsideracionGuardar"
+		class="com.fontar.web.action.proyecto.FinalizarPosibilidadReconsideracionAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+    <!-- PROYECTO - Firma de Contrato -->
+	<bean name="/FirmarContrato" 
+		class="com.fontar.web.action.proyecto.FirmarContratoAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<bean name="/FirmarContratoGuardar" 
+		class="com.fontar.web.action.proyecto.FirmarContratoAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService" />
+	</bean>
+
+	<!-- PROYECTO - Cerrar -->
+  	<bean name="/CerrarProyecto" 
+  		class="com.fontar.web.action.administracion.CerrarProyectoAction">
+	   	<property name="wfProyectoRaizServicio" ref="wfProyectoRaizService" />
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   	<property name="wfIdeaProyectoServicio" ref="wfIdeaProyectoService"/>
+	</bean>
+  
+	<bean name="/CerrarProyectoGuardar" 
+  		class="com.fontar.web.action.administracion.CerrarProyectoAction">
+	   	<property name="wfProyectoRaizServicio" ref="wfProyectoRaizService" />
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   	<property name="wfIdeaProyectoServicio" ref="wfIdeaProyectoService"/>
+	</bean> 
+
+	<!-- PROYECTO - Anular -->
+  	<bean name="/AnularProyecto" 
+  		class="com.fontar.web.action.administracion.AnularProyectoAction">
+	   	<property name="wfProyectoRaizServicio" ref="wfProyectoRaizService" />
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   	<property name="wfIdeaProyectoServicio" ref="wfIdeaProyectoService"/>
+	</bean>
+  
+	<bean name="/AnularProyectoGuardar" 
+  		class="com.fontar.web.action.administracion.AnularProyectoAction">
+	   	<property name="wfProyectoRaizServicio" ref="wfProyectoRaizService" />
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	   	<property name="wfIdeaProyectoServicio" ref="wfIdeaProyectoService"/>
+	</bean> 	
+	
+	<!-- PROYECTO - Finalizar -->	
+  	<bean name="/FinalizarProyecto" 
+  		class="com.fontar.web.action.administracion.FinalizarProyectoAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	</bean>
+  
+	<bean name="/FinalizarProyectoGuardar" 
+  		class="com.fontar.web.action.administracion.FinalizarProyectoAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	</bean> 
+
+	<!-- PAQUETES -->
+	<bean name="/EvaluarPaquete"
+		class="com.fontar.web.action.administracion.paquete.EvaluarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+	<bean name="/EvaluarPaqueteGuardar"
+		class="com.fontar.web.action.administracion.paquete.EvaluarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+
+	<bean name="/ModificarPaquete"
+		class="com.fontar.web.action.administracion.paquete.ModificarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+	<bean name="/ModificarPaqueteGuardar"
+		class="com.fontar.web.action.administracion.paquete.ModificarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+	<bean name="/ConfirmarPaquete"
+		class="com.fontar.web.action.administracion.paquete.ConfirmarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+	<bean name="/ConfirmarPaqueteGuardar"
+		class="com.fontar.web.action.administracion.paquete.ConfirmarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+	<bean name="/ControlarPaquete"
+		class="com.fontar.web.action.administracion.paquete.ControlarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+	<bean name="/ControlarPaqueteGuardar"
+		class="com.fontar.web.action.administracion.paquete.ControlarPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+
+	<bean name="/AnularPaquete"
+		class="com.fontar.web.action.administracion.paquete.AnularPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+	<bean name="/AnularPaqueteGuardar"
+		class="com.fontar.web.action.administracion.paquete.AnularPaqueteAction">
+		<property name="wfPaqueteServicio" ref="wfPaqueteService" />
+	</bean>
+	
+	<bean id="EvaluarResultadoProyectoActionBase"
+		class="com.fontar.web.action.proyecto.EvaluarResultadoProyectoAction" abstract="true">
+		<property name="administrarEvaluacionesServicio">
+			<ref bean="administrarEvaluacionesService" />
+		</property>
+		<property name="administrarProyectoServicio">
+			<ref bean="administrarProyectoService" />
+		</property>
+		<property name="administrarPaqueteProyectoServicio">
+			<ref bean="administrarPaqueteProyectoService" />
+		</property>
+		<property name="evaluarPaqueteServicio">
+			<ref bean="evaluarPaqueteService" />
+		</property>
+				
+	</bean> 
+	<bean name="/EvaluarResultadoProyectoEditar"  parent="EvaluarResultadoProyectoActionBase"/>
+	<bean name="/EvaluarResultadoProyectoGuardar" parent="EvaluarResultadoProyectoActionBase"/>
+
+	<!-- NOTIFICACION -->	
+	<!-- Enviar Notificacion -->
+	<bean name="/EnviarNotificacion"
+		class="com.fontar.web.action.administracion.notificacion.EnviarNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+		<property name="administrarIdeaProyectoServicio">
+			<ref bean="administrarIdeaProyectoService"/>
+		</property>
+		<property name="administrarProyectoServicio">
+			<ref bean="administrarProyectoService"/>
+		</property>
+	</bean>
+	<bean name="/EnviarNotificacionGuardar"
+		class="com.fontar.web.action.administracion.notificacion.EnviarNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+	</bean>	
+
+	<!-- Recibir Acuse Notificacion -->	
+	<bean name="/RecibirAcuseNotificacion"
+		class="com.fontar.web.action.administracion.notificacion.RecibirAcuseNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+		<property name="administrarIdeaProyectoServicio">
+			<ref bean="administrarIdeaProyectoService"/>
+		</property>
+		<property name="administrarProyectoServicio">
+			<ref bean="administrarProyectoService"/>
+		</property>
+	</bean>
+	<bean name="/RecibirAcuseNotificacionGuardar"
+		class="com.fontar.web.action.administracion.notificacion.RecibirAcuseNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+	</bean>	
+	
+	<!-- Cerrar Notificacion -->
+	<bean name="/CerrarNotificacion"
+		class="com.fontar.web.action.administracion.notificacion.CerrarNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+		<property name="administrarIdeaProyectoServicio">
+			<ref bean="administrarIdeaProyectoService"/>
+		</property>
+		<property name="administrarProyectoServicio">
+			<ref bean="administrarProyectoService"/>
+		</property>
+	</bean>
+	<bean name="/CerrarNotificacionGuardar"
+		class="com.fontar.web.action.administracion.notificacion.CerrarNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+	</bean>	
+	
+	<!-- Anular Notificacion -->
+	<bean name="/AnularNotificacion"
+		class="com.fontar.web.action.administracion.notificacion.AnularNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+		<property name="administrarIdeaProyectoServicio">
+			<ref bean="administrarIdeaProyectoService"/>
+		</property>
+		<property name="administrarProyectoServicio">
+			<ref bean="administrarProyectoService"/>
+		</property>
+	</bean>
+	<bean name="/AnularNotificacionGuardar"
+		class="com.fontar.web.action.administracion.notificacion.AnularNotificacionAction">
+		<property name="wfNotificacionServicio">
+			<ref bean="wfNotificacionService"/>
+		</property>
+	</bean>		
+	
+	<!-- PROYECTOS - Cargar Seguimiento -->
+	<bean name="/CargarSeguimiento"	class="com.fontar.web.action.seguimientos.seguimientos.CargarSeguimientoAction">
+		<property name="wfSeguimientoServicio" ref="wfSeguimientoService" />
+	</bean>
+	<bean name="/CargarSeguimientoGuardar" class="com.fontar.web.action.seguimientos.seguimientos.CargarSeguimientoAction">
+		<property name="wfSeguimientoServicio" ref="wfSeguimientoService" />
+	</bean>
+	
+	<!-- PROYECTOS - Ingresar Pedido Autorización -->
+	<bean name="/PedirAutorizacion" class="com.fontar.web.action.seguimientos.controlAdquisiciones.PedirAutorizacionAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+
+	<bean name="/PedirAutorizacionGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.PedirAutorizacionAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+
+	<!-- EVALUACIÓN DE SEGUIMIENTO -->
+	<!-- Cargar Resultado Evaluación Seguimiento -->
+	<bean name="/CargarResultadoEvaluacionSeguimiento"
+		class="com.fontar.web.action.seguimientos.evaluaciones.CargarResultadoEvaluacionSeguimientoAction">		  
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>
+		<property name="wfEvaluacionServicio">
+			<ref bean="wfEvaluacionService" />
+		</property>
+	</bean>
+	
+	<!-- Guardar Resultado Evaluación Seguimiento -->
+	<bean name="/GuardarEdicionEvaluacionSeguimiento"
+		class="com.fontar.web.action.seguimientos.evaluaciones.CargarResultadoEvaluacionSeguimientoAction">		  
+		<property name="wfEvaluacionServicio">
+			<ref bean="wfEvaluacionService" />
+		</property>
+	</bean>		
+	
+	<!-- Confirmar Evaluación Seguimiento -->
+	<bean name="/ConfirmarEvaluacionSeguimiento"
+		class="com.fontar.web.action.seguimientos.evaluaciones.ConfirmarEvaluacionSeguimientoAction">		  
+		<property name="wfEvaluacionServicio">
+			<ref bean="wfEvaluacionService" />
+		</property>
+		<property name="gastosSeguimientoServicio" ref="analisisGastosSeguimientoService"/>
+	</bean>	
+
+	<bean name="/ConfirmarEvaluacionSeguimientoGuardar"
+		class="com.fontar.web.action.seguimientos.evaluaciones.ConfirmarEvaluacionSeguimientoAction">
+		<property name="wfEvaluacionServicio">
+			<ref bean="wfEvaluacionService" />
+		</property>
+	</bean>
+
+	<!-- Plan de Proyecto Visualizar -->
+	<bean name="/PlanSeguimiento"
+	      class="com.fontar.web.action.seguimientos.evaluaciones.PlanSeguimientoAction">
+		<property name="evaluarProyectoServicio">
+			<ref bean="evaluarProyectoService" />
+		</property>
+		<property name="wfEvaluacionServicio">
+			<ref bean="wfEvaluacionService" />
+		</property>
+		<property name="administrarSeguimientoServicio">
+			<ref bean="administracionSeguimientoService" />
+		</property>
+	</bean>	
+	
+	<!-- SEGUIMIENTO - Evaluar Gestión de Pago -->
+	<bean name="/EvaluarGestionPagoSeguimiento"
+		class="com.fontar.web.action.seguimientos.gestionPagos.EvaluarGestionPagoSeguimientoAction">		  
+		<property name="wfSeguimientoServicio">
+			<ref bean="wfSeguimientoService"/>
+		</property>
+		<property name="proyectoDesembolsoService">
+			<ref bean="proyectoDesembolsoService"/>
+		</property>
+		<property name="administrarSeguimientoServicio">
+			<ref bean="administracionSeguimientoService"/>
+		</property>
+	</bean>	
+
+	<bean name="/EvaluarGestionPagoSeguimientoGuardar"
+		class="com.fontar.web.action.seguimientos.gestionPagos.EvaluarGestionPagoSeguimientoAction">		  
+		<property name="wfSeguimientoServicio">
+			<ref bean="wfSeguimientoService"/>
+		</property>
+	</bean>	
+
+	<!-- SEGUIMIENTO - Cerrar -->
+  	<bean name="/CerrarSeguimiento" 
+  		class="com.fontar.web.action.seguimientos.seguimientos.CerrarSeguimientoAction">
+	   	<property name="wfSeguimientoServicio">
+	   		<ref bean="wfSeguimientoService"/>
+	   	</property>  		
+	</bean>
+  
+	<bean name="/CerrarSeguimientoGuardar" 
+  		class="com.fontar.web.action.seguimientos.seguimientos.CerrarSeguimientoAction">
+	   	<property name="wfSeguimientoServicio">
+	   		<ref bean="wfSeguimientoService"/>
+	   	</property>  		
+	</bean> 	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TÉCNICO - Cargar Tarea -->
+	<bean name="/DesignarEvaluadorTecnico" class="com.fontar.web.action.seguimientos.controlAdquisiciones.DesignarEvaluadorTecnicoAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - DESIGNAR EVALUADOR TÉCNICO - Finalizar Tarea-->
+	<bean name="/DesignarEvaluadorTecnicoGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.DesignarEvaluadorTecnicoAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Cargar Tarea -->
+	<bean name="/CargarFundamentacionEvaluador" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarFundamentacionEvaluadorAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR FUNDAMENTACION EVALUADOR - Finalizar Tarea-->
+	<bean name="/CargarFundamentacionEvaluadorGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarFundamentacionEvaluadorAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO - Cargar Tarea -->
+	<bean name="/CargarResultadoProcedimiento" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarResultadoFontarAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO - Finalizar Tarea-->
+	<bean name="/CargarResultadoProcedimientoGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarResultadoFontarAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>	
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Cargar Tarea -->
+	<bean name="/CargarResultadoUffa" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarResultadoUffaAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO UFFA - Finalizar Tarea-->
+	<bean name="/CargarResultadoUffaGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarResultadoUffaAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>		
+
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Cargar Tarea -->
+	<bean name="/CargarResultadoBid" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarResultadoBidAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - CARGAR RESULTADO BID - Finalizar Tarea-->
+	<bean name="/CargarResultadoBidGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.CargarResultadoBidAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Cargar Tarea -->
+	<bean name="/RemitirUffa" class="com.fontar.web.action.seguimientos.controlAdquisiciones.RemitirUffaAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A UFFA - Finalizar Tarea-->
+	<bean name="/RemitirUffaGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.RemitirUffaAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Cargar Tarea -->
+	<bean name="/RemitirBid" class="com.fontar.web.action.seguimientos.controlAdquisiciones.RemitirBidAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - REMITIR A BID - Finalizar Tarea-->
+	<bean name="/RemitirBidGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.RemitirBidAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>		
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - GENERAR PEDIDO AUTORIZACION - Cargar Tarea -->
+	<bean name="/GenerarPedidoAutorizacion" class="com.fontar.web.action.seguimientos.controlAdquisiciones.GenerarPedidoAutorizacionAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>
+	
+	<!-- CIRCUITO AUTORIZACION COMPRA - GENERAR PEDIDO AUTORIZACION - Finalizar Tarea-->
+	<bean name="/GenerarPedidoAutorizacionGuardar" class="com.fontar.web.action.seguimientos.controlAdquisiciones.GenerarPedidoAutorizacionAction">
+		<property name="wfProcedimientoServicio" ref="wfProcedimientoService"/>
+	</bean>		
+	
+	<!-- PROYECTOS HISTÓRICOS - COMPLETAR DATOS INICIALES - Cargar Tarea -->
+	<bean name="/CompletarDatosIniciales" class="com.fontar.web.action.proyecto.CompletarDatosInicialesAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	</bean>		
+	
+	<!-- PROYECTOS HISTÓRICOS - COMPLETAR DATOS INICIALES - Finalizar Tarea -->
+	<bean name="/CompletarDatosInicialesGuardar" class="com.fontar.web.action.proyecto.CompletarDatosInicialesAction">
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+	</bean>		
+</beans>

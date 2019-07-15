@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!--  Dao Layer generic config-->
+	<bean id="extendedFinderNamingStrategy"
+        class="com.pragma.data.genericdao.finder.impl.ExtendedFinderNamingStrategy" />
+        
+    <bean id="finderIntroductionAdvisor" class="com.pragma.data.genericdao.finder.impl.FinderIntroductionAdvisor"/>
+    
+    <bean id="abstractDaoTarget"
+          class="com.pragma.data.genericdao.impl.GenericDaoHibernateImpl" abstract="true">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+    </bean>
+    
+     <bean id="abstractAllowedInstancesDaoTarget"
+          class="com.pragma.data.genericdao.impl.AllowedInstancesDaoImpl" abstract="true">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+    </bean>
+    
+    <bean id="abstractDao"
+          class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+        <property name="interceptorNames">
+            <list>
+                <value>finderIntroductionAdvisor</value>
+            </list>
+        </property>
+    </bean>
+    
+	
+    <!-- bean id="proyectoDao" parent="abstractDao">
+      <property name="proxyInterfaces">
+      	<value>com.fontar.data.api.dao.ProyectoDAO</value>
+      </property>
+        
+      <property name="target">
+      	<bean parent="abstractDaoTarget">
+      		<constructor-arg>
+      			<value>com.fontar.data.impl.domain.bean.Proyecto</value>
+            </constructor-arg>
+        </bean>
+      </property>
+    </bean-->        
+    
+    <bean id="instrumentoDefDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.InstrumentoDefDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.InstrumentoDefBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="llamadoConvocatoriaDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.LlamadoConvocatoriaDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.LlamadoConvocatoriaBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="ventanillaPermanenteDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.VentanillaPermanenteDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.VentanillaPermanenteBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="ideasProyectoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.IdeasProyectoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.IdeaProyectoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>    
+
+    <bean id="entidadDao" class="com.fontar.data.impl.dao.hibernate.EntidadDaoImpl">
+		<property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+    </bean>   
+    
+    <bean id="ideaProyectoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.IdeaProyectoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.IdeaProyectoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+
+    <bean id="presentacionConvocatoriaDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.PresentacionConvocatoriaDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.PresentacionConvocatoriaBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>    
+    
+    <bean id="proyectoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ProyectoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ProyectoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+
+    <bean id="proyectoRaizDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ProyectoRaizDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ProyectoRaizBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+
+    
+    <bean id="proyectoPitecDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ProyectoPitecDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ProyectoPitecBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>     
+    
+    <bean id="matrizPresupuestoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.MatrizPresupuestoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.MatrizPresupuestoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+
+    <bean id="instrumentoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.InstrumentoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractAllowedInstancesDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.InstrumentoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+    
+      <bean id="instrumentoConfiguracionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.InstrumentoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.InstrumentoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+    
+    <bean id="evaluacionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.EvaluacionDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.EvaluacionBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+    
+    <bean id="evaluacionGeneralDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.EvaluacionGeneralDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.EvaluacionGeneralBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>     
+    
+    <bean id="evaluacionSeguimientoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.EvaluacionSeguimientoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.EvaluacionSeguimientoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>       
+    
+    <bean id="tipoProyectoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.TipoProyectoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.TipoProyectoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+    
+    <bean id="proyectoDatosDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ProyectoDatosDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ProyectoDatosBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean> 
+    
+
+    <bean id="bitacoraDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.BitacoraDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.BitacoraBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>    
+        
+    <bean id="jurisdiccionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.JurisdiccionDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.JurisdiccionBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="entidadBeneficiariaDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.EntidadBeneficiariaDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.EntidadBeneficiariaBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>    
+    
+    <bean id="entidadBancariaDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.EntidadBancariaDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.EntidadBancariaBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>    
+
+    <bean id="personaDao" class="com.fontar.data.impl.dao.hibernate.PersonaDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+    </bean>
+     
+    <bean id="ciiuDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.CiiuDAO</value>
+        </property>
+        <property name="target">
+		    <bean class="com.fontar.data.impl.dao.hibernate.CiiuDaoImpl">
+		        <property name="sessionFactory">
+		            <ref bean="sessionFactory"/>
+		        </property>
+		        <property name="namingStrategy">
+		            <ref bean="extendedFinderNamingStrategy" />
+		        </property>
+		    </bean>
+        </property>
+    </bean>        
+       
+    <bean id="proyectoJurisdiccionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ProyectoJurisdiccionDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ProyectoJurisdiccionBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>        
+       
+    <bean id="proyectoPresupuestoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ProyectoPresupuestoDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ProyectoPresupuestoBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="actividadDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.proyecto.presupuesto.plan.ActividadDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.proyecto.presupuesto.plan.ActividadBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="etapaDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.proyecto.presupuesto.plan.EtapaDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.proyecto.presupuesto.plan.EtapaBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    <bean id="rubroDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.proyecto.RubroDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.RubroBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="localizacionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.LocalizacionDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.LocalizacionBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="facturacionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.FacturacionDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.FacturacionBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="composicionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ComposicionDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ComposicionBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="empleoPermanenteDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.EmpleoPermanenteDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.EmpleoPermanenteBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="paqueteDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.PaqueteDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.PaqueteBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>    
+    
+    <bean id="proyectoPaqueteDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ProyectoPaqueteDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ProyectoPaqueteBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>    
+    
+  <!-- Hibernate -->
+          
+  <bean id="comisionDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.ComisionDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.ComisionBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>
+  
+  <bean id="evaluadorDao" class="com.fontar.data.impl.dao.hibernate.EvaluadorDaoImpl">
+		<property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+  </bean>
+  
+  <bean id="regionDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.RegionDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.RegionBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="distribucionFinanciamientoDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.DistribucionFinanciamientoDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.DistribucionFinanciamientoBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>   
+     
+  <bean id="distribucionTipoProyectoDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.DistribucionTipoProyectoDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.DistribucionTipoProyectoBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>   
+       
+  <bean id="fuenteFinanciamientoDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.FuenteFinanciamientoDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.FuenteFinanciamientoBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>
+
+  <bean id="especialidadEvaluadorDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.EspecialidadEvaluadorDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.EspecialidadEvaluadorBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>
+  
+  <bean id="proyectoAdmisionDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.ProyectoAdmisionDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.ProyectoAdmisionBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>
+  
+  <bean id="proyectoReconsideracionDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.ProyectoReconsideracionDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.ProyectoReconsideracionBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>
+      
+  <bean id="entidadEvaluadoraDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.EntidadEvaluadoraDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.EntidadEvaluadoraBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>
+  
+  <bean id="instrumentoVersionDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.InstrumentoVersionDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.InstrumentoVersionBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+
+  <bean id="evaluacionPaqueteDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.EvaluacionPaqueteDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.EvaluacionPaqueteBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>    
+  
+  <bean id="evaluacionEvaluadorDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.EvaluacionEvaluadorDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.EvaluacionEvaluadorBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+  
+  <bean id="entidadIntervinientesDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.EntidadIntervinientesDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.EntidadIntervinientesBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+  
+  <bean id="expedienteDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.ExpedienteDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.ExpedienteBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+  
+  <bean id="expedienteMovimientoDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.ExpedienteMovimientoDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.ExpedienteMovimientoBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+  
+  <bean id="matrizCriterioDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.MatrizCriterioDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.MatrizCriterioBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+  
+  <bean id="proyectoEvaluacionCriterioDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.ProyectoEvaluacionCriterioDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.ProyectoEvaluacionCriterioBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+  
+  <bean id="adjuntoContenidoDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.AdjuntoContenidoDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.AdjuntoContenidoBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>   
+  
+  <bean id="adjuntosDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.AdjuntosDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.AdjuntoBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>     
+
+  <bean id="matrizCriterioItemDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.MatrizCriterioItemDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.MatrizCriterioItemBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+
+	<bean id="seguimientoDao" parent="abstractDao">
+		<property name="proxyInterfaces">
+			<value>com.fontar.data.api.dao.SeguimientoDAO</value>
+		</property>
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>com.fontar.data.impl.domain.bean.SeguimientoBean</value>
+	            </constructor-arg>
+	        </bean>
+		</property>
+	</bean>	
+	
+	<bean id="rendicionCuentasDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.RendicionCuentasDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.RendicionCuentasBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>
+	    
+	<bean id="clavesBeanDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.ClavesBeanDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.ClavesBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="notificacionDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.NotificacionDAO</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.NotificacionBean</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    
+    
+     <bean id="cambioEstadoProyectoDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>com.fontar.data.api.dao.CambioEstadoProyectoDao</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>com.fontar.data.impl.domain.bean.CambioEstadoProyecto</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+  <bean id="carteraDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.CarteraDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.CarteraBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="tributariaDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.TributariaDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.TributariaBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="pacDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.PacDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.PacBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="tipoAdquisicionDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.TipoAdquisicionDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.TipoAdquisicionBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="procedimientoDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.ProcedimientoDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.ProcedimientoBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="procedimientoItemDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.ProcedimientoItemDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.ProcedimientoItemBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>   
+  
+  <bean id="desembolsoDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.DesembolsoUFFADAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.DesembolsoUFFABean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="monedaDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.MonedaDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.MonedaBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="cotizacionDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.CotizacionDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.CotizacionBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+  
+  <bean id="proyectoDesembolsoDao" parent="abstractDao">
+	<property name="proxyInterfaces">
+		<value>com.fontar.data.api.dao.ProyectoDesembolsoDAO</value>
+	</property>
+	<property name="target">
+	    <bean parent="abstractDaoTarget">
+	        <constructor-arg>
+	            <value>com.fontar.data.impl.domain.bean.ProyectoDesembolsoBean</value>
+	        </constructor-arg>
+	    </bean>
+	</property>
+  </bean>  
+	
+	<bean id="seguridadObjetoDao" parent="abstractDao">
+	   <property name="proxyInterfaces">
+	        <value>com.fontar.data.api.dao.SeguridadObjetoDAO</value>
+	   </property>
+	   <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.fontar.data.impl.domain.bean.seguridad.SeguridadObjetoBean</value>
+	            </constructor-arg>
+	        </bean>
+	   </property>
+  </bean>  
+</beans>
+
+
+
+
+
+

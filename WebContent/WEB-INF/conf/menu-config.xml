@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding='windows-1250'?>
+<MenuConfig>
+  <Displayers>
+    <Displayer   name="DropDown"
+                 type="net.sf.navigator.displayer.DropDownMenuDisplayer"/>
+    <Displayer   name="Simple"
+                 type="net.sf.navigator.displayer.SimpleMenuDisplayer"/>
+    <Displayer   name="CoolMenu"
+                 type="net.sf.navigator.displayer.CoolMenuDisplayer"/>
+    <Displayer   name="CoolMenu4"
+                 type="net.sf.navigator.displayer.CoolMenuDisplayer4"/>
+    <Displayer   name="MenuForm"
+                 type="net.sf.navigator.example.PermissionsFormMenuDisplayer"/>
+    <Displayer   name="ListMenu"
+                 type="net.sf.navigator.displayer.ListMenuDisplayer"/>
+    <Displayer   name="TabbedMenu"
+                 type="net.sf.navigator.displayer.TabbedMenuDisplayer"/>
+    <Displayer   name="XtreeMenu"
+                 type="net.sf.navigator.displayer.XtreeMenuDisplayer"/>
+    <Displayer   name="CSSListMenu"
+                 type="net.sf.navigator.displayer.CSSListMenuDisplayer"/>
+  </Displayers>
+
+	<Menus>		
+		<!-- Instrumentos -->
+		<Menu name="MenuInstrumentos" title="app.menu.instrumento">
+			<Item name="MenuConvocatoria" title="app.menu.convocatoria"
+				location="">
+				<Item name="MenuLlamadosConvocatoria" 
+					title="app.menu.llamadosConvocatoria"
+					location="LlamadoConvocatoriaInventario.do">
+				</Item>
+				<Item name="MenuPresentacionConvocatoria"
+					title="app.menu.presentacionesConvocatoria"
+					location="PresentacionConvocatoriaInventario.do">
+				</Item>
+			</Item>
+			<Item name="MenuVentanillaPermanenteMain"
+				title="app.menu.ventanillaPermanente" location="" >
+				<Item name="MenuVentanillaPermanente"
+					title="app.menu.ventanillaPermanente"
+					location="VentanillaPermanenteInventario.do">
+				</Item>
+				<Item name="MenuIdeasProyecto" title="app.menu.ideasProyecto"
+					location="IdeaProyectoInventario.do" >
+				</Item>
+				<!-- Item name="MenuIdeasProyectoPitec" title="app.menu.ideasProyectoPitec"
+					location="IdeaProyectoPitecInventario.do" >
+				</Item-->
+			</Item>
+		</Menu>
+		
+		<!-- Administración / Evaluación -->
+		<Menu name="MenuAdministracion" title="app.menu.administracion">
+			<Item name="MenuProyectos" title="app.menu.proyectos"
+				location="ProyectoInventario.do">
+			</Item>
+			<Item name="MenuPaquetes" title="app.menu.paquetes"
+				location="PaqueteInventario.do">
+			</Item>
+			<Item name="MenuEvaluaciones" title="app.menu.evaluaciones"
+				location="EvaluacionInventario.do">
+			</Item>
+			<Item name="MenuMisEvaluacionesGenerales" title="app.menu.misEvaluaciones"
+				location="MisEvaluacionesGenerales.do">
+			</Item>
+			<Item name="SeguimientosMain" title="app.menu.seguimientos" location="">
+				<Item name="Seguimientos" title="app.menu.seguimientos"
+					location="SeguimientoInventario.do">
+				</Item>
+				<Item name="MenuEvaluacionesSeguimiento" title="app.menu.evaluaciones"
+					location="EvaluacionSeguimientoInventario.do">
+				</Item>
+				<Item name="MenuMisEvaluacionesDeSeguimiento" title="app.menu.misEvaluaciones"
+					location="MisEvaluacionesDeSeguimiento.do">
+				</Item>
+				<Item name="Procedimientos" title="app.menu.procedimientos"
+					location="ProcedimientoInventario.do">
+				</Item>
+			</Item>			
+			<Item name="MenuNotificaciones" title="app.menu.notificaciones"
+				location="NotificacionInventario.do">
+			</Item>			
+		</Menu>
+	
+		<!-- Configuración -->
+		<Menu name="MenuConfiguracion" title="app.menu.configuracion">
+			<Item name="MenuDefiniciones" title="app.menu.definiciones" location="">
+				<Item name="Instrumentos" title="app.menu.instrumentos"
+					location="InstrumentosDefInventario.do">
+				</Item>
+				<Item name="Monedas" title="app.menu.monedas"
+					location="MonedaInventario.do">
+				</Item>
+				<Item name="Criterios" title="app.menu.criterios"
+					location="MatrizCriteriosInventario.do">
+				</Item>
+				<Item name="Jurisdicciones" title="app.menu.jurisdicciones"
+					location="JurisdiccionInventario.do">
+				</Item>
+				<Item name="Regiones" title="app.menu.regiones"
+					location="RegionInventario.do">
+				</Item>
+				<Item name="FuentesFinanciamiento" title="app.menu.fuenteFinanciamiento"
+					location="FuenteFinanciamientoInventario.do">
+				</Item>				
+				<Item name="TiposProyecto" title="app.menu.tipoProyecto"
+					location="TipoProyectoInventario.do">
+				</Item>				
+				<Item name="EspecialidadesEvaluador" title="app.menu.especialidadEvaluador"
+					location="EspecialidadEvaluadorInventario.do">
+				</Item>				
+				<!-- TODO: insertar menú MATRIZ PRESUPUESTO  -->
+				<Item name="Cartera" title="app.menu.cartera"
+					location="CarteraInventario.do">
+				</Item>
+				<Item name="CondicionTributaria" title="app.menu.tributaria"
+					location="TributariaInventario.do">
+				</Item>			
+			</Item>
+			
+			<Item name="Entidades" title="app.menu.entidades"
+				location="">
+				
+				<Item name="MenuEntidadesTodas" title="app.menu.entidades.todas"
+				location="EntidadConfiguracionInventario.do">
+				</Item>
+				
+				<Item name="MenuEntidadesBeneficiarias" title="app.menu.entidades.beneficiarias"
+				location="EntidadBeneficiariaConfiguracionInventario.do">
+				</Item>
+				
+				<Item name="MenuEntidadesEvaluadoras" title="app.menu.entidades.evaluadoras"
+				location="EntidadEvaluadoraConfiguracionInventario.do">
+				</Item>
+
+				<Item name="MenuEntidadesBancarias" title="app.menu.entidades.bancarias"
+				location="EntidadBancariaConfiguracionInventario.do">
+				</Item>
+									
+			</Item>
+			<Item name="Cotizaciones" title="app.menu.cotizaciones"
+				location="CotizacionInventario.do">
+			</Item>
+			<Item name="Personas" title="app.menu.personas"
+				location="PersonaInventario.do">
+			</Item>
+			<Item name="Comisiones" title="app.menu.comisiones"
+				location="ComisionInventario.do">
+			</Item>
+
+			<!--  Item name="MenuEvaluadores" title="app.menu.evaluadores"
+				location="EvaluadoresInventario.do">
+			</Item>
+		
+			<Item name="MenuBancos" title="app.menu.bancos"
+				location="BancosInventario.do">
+			</Item -->		
+			
+			<Item name="MenuSeguridad" title="app.menu.seguridad" location="">
+				<Item name="Grupos" title="app.menu.grupos"
+					location="GruposInventario.do">
+				</Item>
+				<Item name="Usuarios" title="app.menu.usuarios"
+					location="UsuariosInventario.do">
+				</Item>
+			</Item>			
+
+		</Menu>
+
+
+		<Menu name="MenuConsultasYReportes" title="app.menu.consultasreportes">
+			<Item name="Consultas" title="app.menu.consultas" location="Consultas.do"/>
+			<Item name="Reportes" title="app.menu.reportes" location="Reportes.do"/>
+		</Menu>
+
+		<!-- Workflow -->
+		<Menu name="MenuWorkflow" title="app.menu.workflow">
+
+			<Item name="BandejaEntrada" title="app.menu.bandejaEntrada"
+				location="WFBandejaDeEntrada.do">
+			</Item>
+
+			<Item name="ProcesosDefinidos" title="app.menu.procesosDefinidos"
+				location="WFProcesosDefinidos.do">
+			</Item>
+		</Menu>
+
+	    <Menu name="ProyectoDatos" title="Información" location="ProyectoVisualizar.do"/>
+	    <Menu name="ProyectoPresupuesto" title="Presupuesto" location="ProyectoPresupuestoVisualizar.do"/>
+	    <Menu name="ProyectoBitacora" title="Bitácora" location="BitacoraInventario.do?clase=P"/>
+	    <Menu name="ProyectoEvaluaciones" title="Evaluaciones" location="EvaluacionesProyectoInventario.do"/>
+    	<Menu name="ProyectoExpedientes" title="Expediente" location="ExpedienteProyecto.do"/>
+		<Menu name="ProyectoSeguimiento" title="Seguimiento" location="SeguimientoProyectoInventario.do"/>
+		<Menu name="ProyectoAdjuntos" title="Adjuntos" location="ProyectoBeanInventarioAdjuntoAction.do"/>	
+		<Menu name="ProyectoPlan" title="Plan de Trabajo" location="PlanProyecto.do"/>	
+	    <Menu name="ProyectoPAC" title="Control de Adquisiciones" location="ProyectoPACInventario.do"/>
+	    <Menu name="ProyectoDesembolso" title="Cronograma de Desembolsos" location="ProyectoDesembolsoInventario.do"/>
+
+
+	    <Menu name="IdeaProyectoDatos" title="Información" location="IdeaProyectoVisualizar.do"/>
+	    <Menu name="IdeaProyectoBitacora" title="Bitácora" location="BitacoraInventario.do?clase=IP"/>
+	    <Menu name="IdeaProyectoEvaluaciones" title="Evaluaciones" location="EvaluacionesIdeaProyectoInventario.do"/>
+		<Menu name="IdeaProyectoAdjuntos" title="Adjuntos" location="IdeaProyectoBeanInventarioAdjuntoAction.do"/>
+
+	    <Menu name="SeguimientoDatosGenerales" title="Datos Generales" location="SeguimientoVisualizar.do"/>
+		<Menu name="SeguimientoInformeAvance" title="Adjuntos" location="SeguimientoTabInventarioAdjuntoAction.do"/>
+	    <Menu name="SeguimientoDatosGeneralesGestionPago" title="Resumen Rendición" location="EvaluarGestionPagoSeguimiento.do"/>
+	    <Menu name="SeguimientoRendicionesGestionPago" title="Rendición de Cuentas" location="RendicionCuentasGestionPagoInventario.do"/>
+	    <Menu name="SeguimientoRendicionCuentasANR" title="Rendición de Cuentas" location="RendicionCuentasANRInventario.do"/>
+	    <Menu name="SeguimientoRendicionCuentasCF" title="Rendición de Cuentas" location="RendicionCuentasCFInventario.do"/>
+	    <Menu name="SeguimientoResumenRendicionesANR" title="Resumen de Rendiciones" location="RendicionCuentasANRResumen.do"/>
+	    <Menu name="SeguimientoResumenRendicionesCF" title="Resumen de Rendiciones" location="RendicionCuentasCFResumen.do"/>
+	    <Menu name="SeguimientoAnalisisGastosEvaluarGestionDePago" title="Análisis de Gastos" location="SeguimientoAnalisisGastosEvaluarGestionDePago.do"/>
+	    <Menu name="SeguimientoAnalisisGastosVisualizacionSeguimiento" title="Análisis de Gastos" location="SeguimientoAnalisisGastosVisualizacionSeguimiento.do"/>
+
+	    <Menu name="EvaluacionSeguimientoDatosGenerales" title="Datos Generales" location="DatosGeneralesEvaluacionSeguimiento.do"/>
+	    <Menu name="EvaluacionSeguimientoRendicionCuentasANR" title="Rendición de Cuentas" location="RendicionEvaluacionSeguimientoANRInventario.do"/>
+	    <Menu name="EvaluacionSeguimientoRendicionCuentasCF" title="Rendición de Cuentas" location="RendicionEvaluacionSeguimientoCFInventario.do"/>
+	    <Menu name="SeguimientoAnalisisGastosEvaluacion" title="Análisis de Gastos" location="SeguimientoAnalisisGastosEvaluacion.do"/>
+	    <Menu name="SeguimientoAnalisisGastosEvaluarGestionDePago" title="Análisis de Gastos" location="SeguimientoAnalisisGastosEvaluarGestionDePago.do"/>
+	    <Menu name="SeguimientoAnalisisGastosVisualizacionSeguimiento" title="Análisis de Gastos" location="SeguimientoAnalisisGastosVisualizacionSeguimiento.do"/>
+	    <Menu name="EvaluacionSeguimientoPlanProyecto" title="Plan de Trabajo" location="PlanSeguimiento.do"/>
+	    
+	    <Menu name="LlamadoConvocatoriaDatosGenerales" title="Datos Generales" location="VisualizarLlamadoConvocatoriaDatosGenerales.do"/>
+	    <Menu name="LlamadoConvocatoriaDistribucionFinanciamiento" title="Distribucion por Zona" location="VisualizarLlamadoConvocatoriaDistribucionFinanciamiento.do"/>
+	    <Menu name="LlamadoConvocatoriaDistribucionTipoProyecto" title="Distribucion Tipo Proyecto" location="VisualizarLlamadoConvocatoriaDistribucionTipoProyecto.do"/>
+
+	    <Menu name="VentanillaPermenenteDatosGenerales" title="Datos Generales" location="VisualizarVentanillaPermanenteDatosGenerales.do"/>
+	    <Menu name="VentanillaPermenenteDistribucionFinanciamiento" title="Distribucion por Zona" location="VisualizarVentanillaPermanenteDistribucionFinanciamiento.do"/>
+	    <Menu name="VentanillaPermenenteDistribucionTipoProyecto" title="Distribucion Tipo Proyecto" location="VisualizarVentanillaPermanenteDistribucionTipoProyecto.do"/>
+
+	    <Menu name="VisualizarDatosGeneralesProcedimiento" title="Datos Generales" location="VisualizarDatosGeneralesProcedimiento.do"/>
+	    <Menu name="VisualizarItemsProcedimientoInventario" title="Items" location="VisualizarItemsProcedimientoInventario.do"/>
+
+	    <Menu name="CircuitoAutorizacionVisualizarDatosGestion" title="Datos de Gestión" location="CircuitoAutorizacionVisualizarDatosGestion.do"/>
+	    <Menu name="DesignarEvaluadorTecnico" title="Items" location="DesignarEvaluadorTecnico.do"/>
+	    <Menu name="CargarFundamentacionEvaluador" title="Items" location="CargarFundamentacionEvaluador.do"/>
+	    <Menu name="RemitirUffa" title="Items" location="RemitirUffa.do"/>
+	    <Menu name="RemitirBid" title="Items" location="RemitirBid.do"/>
+
+	</Menus>
+</MenuConfig>

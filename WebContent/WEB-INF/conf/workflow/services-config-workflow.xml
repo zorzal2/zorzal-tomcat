@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean name="jbpmManagerServiceTarget" class="com.pragma.jbpm.JbpmManagerServiceImpl">
+		<property name="jbpmManager" ref="jbpmManager"/>
+		<property name="authenticationService" ref="authenticationService"/>
+	</bean>
+
+	<bean id="jbpmManagerTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+     abstract="true">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="actualizarPermisosTareas">PROPAGATION_REQUIRED</prop>
+				<prop key="executeEjecutarYTerminarTarea">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+     
+	<bean name="jbpmManagerService" parent="jbpmManagerTransactionProxy">
+   		<property name="target" ref="jbpmManagerServiceTarget"/>
+	</bean>	
+
+
+	<bean name="wfMiscelaneos" 
+		  class="com.fontar.bus.impl.workflow.WFMiscelaneosImpl">
+		  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean> 
+
+	<bean name="evaluarAdmisibilidadServiceTarget" 
+		  class="com.fontar.bus.impl.proyecto.AdmisibilidadProyectoServicioImpl">
+		  <property name="dao" ref="proyectoAdmisionDao"/>
+	</bean> 
+	<bean name="evaluarAdmisibilidadService" parent="wfTransactionProxy">
+   		<property name="target" ref="evaluarAdmisibilidadServiceTarget"/>
+    </bean>	
+
+	<bean name="administrarEvaluacionesServiceTarget" 
+		  class="com.fontar.bus.impl.evaluacion.AdministrarEvaluacionesServicioImpl">
+		<property name="dao" ref="evaluacionDao"/>
+		<property name="proyectoRaizDAO" ref="proyectoRaizDao"/>
+   		<property name="evaluacionGeneralDAO" ref="evaluacionGeneralDao"/>
+   		<property name="evaluacionEvaluadorDAO" ref="evaluacionEvaluadorDao"/>
+   		<property name="personaDao" ref="personaDao"/>
+   		<property name="seguridadObjetoServicio" ref="seguridadObjetoServicio"/>
+		<property name="interceptor" ref="evaluacionEvaluadorSecurityConfigInterceptor"/>
+	</bean>
+	<bean name="administrarEvaluacionesService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarEvaluacionesServiceTarget"/>
+    </bean>	
+    
+    <!-- OJO Son de proyectos y deberian ser más sencillos -->
+   	<bean name="evaluarProyectoServiceTarget" class="com.fontar.bus.impl.evaluacion.EvaluarProyectoServicioImpl"> 
+   		<property name="evaluacionDao" ref="evaluacionGeneralDao"/>
+   		<property name="bitacoraDao" ref="bitacoraDao"/>
+   		<property name="proyectoEvaluacionCriterioDAO" ref="proyectoEvaluacionCriterioDao"/>
+   		<property name="administrarSeguimientoServicio" ref="administracionSeguimientoService"/>
+   	</bean>
+   	
+	<bean name="evaluarProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="evaluarProyectoServiceTarget"/>
+    </bean>	
+    
+   	<bean name="evaluacionProyectoServiceTarget" class="com.fontar.bus.impl.proyecto.EvaluacionProyectoServicioImpl"> 
+   		<property name="evaluacionDao" ref="evaluacionDao"/>
+   		<property name="bitacoraDao" ref="bitacoraDao"/>
+   		<property name="proyectoDao" ref="proyectoDao"/>   
+   	</bean>
+   	
+	<bean name="evaluacionProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="evaluacionProyectoServiceTarget"/>
+    </bean>	
+
+    <bean name="administrarProyectoRaizServiceTarget" class="com.fontar.bus.impl.proyecto.AdministrarProyectoRaizServicioImpl"> 
+   		<property name="proyectoRaizDAO" ref="proyectoRaizDao"/>
+		<property name="bitacoraDAO" ref="bitacoraDao"/>
+		<property name="evaluacionGeneralDAO" ref="evaluacionGeneralDao"/>
+		<property name="evaluacionEvaluadorDAO" ref="evaluacionEvaluadorDao"/>
+		<property name="administrarEvaluacionesServicio" ref="administrarEvaluacionesService"/>
+		<property name="proyectoDAO" ref="proyectoDao"/>
+   	</bean>
+   	
+	<bean name="administrarProyectoRaizService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarProyectoRaizServiceTarget"/>
+    </bean>	
+
+    <bean name="administrarProyectoServiceTarget" class="com.fontar.bus.impl.proyecto.AdministrarProyectoServicioImpl"> 
+   		<property name="proyectoDAO" ref="proyectoDao"/>
+   		<property name="presentacionConvocatoriaDAO" ref="presentacionConvocatoriaDao"/>
+		<property name="proyectoDatosDAO" ref="proyectoDatosDao"/>  
+   		<property name="bitacoraDAO" ref="bitacoraDao"/>
+   		<property name="evaluacionDAO" ref="evaluacionDao"/>
+   		<property name="presupuestoDAO" ref="proyectoPresupuestoDao"/>   		
+		<property name="localizacionDAO" ref="localizacionDao"/>
+   		<property name="empleoPermanenteDAO" ref="empleoPermanenteDao"/>
+   		<property name="entidadIntervinientesDAO" ref="entidadIntervinientesDao"/>
+   		<property name="expedienteMovimientoDAO" ref="expedienteMovimientoDao"/>
+   		<property name="expedienteDAO" ref="expedienteDao"/>
+   		<property name="tipoProyectoDAO" ref="tipoProyectoDao"/>
+   		<property name="administrarSeguimientoServicio" ref="administracionSeguimientoService"/>
+   		<property name="authorizationService" ref="authorizationService"/>
+   	</bean>
+	<bean name="administrarProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarProyectoServiceTarget"/>
+    </bean>	
+   	
+    <bean name="administrarPaqueteProyectoServiceTarget" class="com.fontar.bus.impl.paquete.AdministrarPaqueteProyectoServicioImpl"> 
+   		<property name="evaluacionDAO" ref="evaluacionDao"/>
+   		<property name="paqueteDAO" ref="paqueteDao"/>  
+   	</bean>
+ 
+	<bean name="administrarPaqueteProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarPaqueteProyectoServiceTarget"/>
+    </bean>	
+
+	<!-- Proyecto PITEC -->
+	<bean name="administrarProyectoPitecServiceTarget" class="com.fontar.bus.impl.proyecto.AdministrarProyectoPitecServicioImpl"> 
+   		<property name="bitacoraDAO" ref="bitacoraDao"/>
+   		<property name="proyectoDAO" ref="proyectoDao"/>
+		<property name="proyectoDatosDAO" ref="proyectoDatosDao"/>   		
+   		<property name="presupuestoDAO" ref="proyectoPresupuestoDao"/>   		
+   		<property name="evaluacionDAO" ref="evaluacionDao"/>
+		<property name="localizacionDAO" ref="localizacionDao"/>
+   		<property name="empleoPermanenteDAO" ref="empleoPermanenteDao"/>
+   		<property name="presentacionConvocatoriaDAO" ref="presentacionConvocatoriaDao"/>
+   	</bean>
+   	
+	<bean name="administrarProyectoPitecService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarProyectoPitecServiceTarget"/>
+    </bean>	
+	
+	<!-- Idea Proyecto PITEC -->
+	<bean name="administrarIdeaProyectoPitecServiceTarget" class="com.fontar.bus.impl.proyecto.AdministrarIdeaProyectoPitecServicioImpl"> 
+   		<property name="bitacoraDAO" ref="bitacoraDao"/>
+   		<property name="proyectoDAO" ref="proyectoDao"/>
+		<property name="proyectoDatosDAO" ref="proyectoDatosDao"/>   		
+   		<property name="presupuestoDAO" ref="proyectoPresupuestoDao"/>   		
+   		<property name="evaluacionDAO" ref="evaluacionDao"/>
+		<property name="localizacionDAO" ref="localizacionDao"/>
+   		<property name="empleoPermanenteDAO" ref="empleoPermanenteDao"/>
+   		<property name="presentacionConvocatoriaDAO" ref="presentacionConvocatoriaDao"/>
+   	</bean>
+   	
+	<bean name="administrarIdeaProyectoPitecService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarIdeaProyectoPitecServiceTarget"/>
+    </bean>	
+	
+	
+    <!-- FIN OJO Son de proyectos y deberian ser más sencillos -->
+
+    <bean name="wfEvaluacionServiceTarget" class="com.fontar.bus.impl.workflow.WFEvaluacionServicioImpl"> 
+	   	<property name="evaluarProyectoServicio" ref="evaluarProyectoService"/>
+		<property name="administrarProyectoServicio" ref="administrarProyectoService"/>
+		<property name="administracionSeguimientoService" ref="administracionSeguimientoService"/>
+	</bean>
+
+	<bean name="wfEvaluacionService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfEvaluacionServiceTarget"/>
+    </bean>
+
+	<bean name="wfProyectoServiceTarget" class="com.fontar.bus.impl.workflow.WFProyectoServicioImpl">
+		<property name="evaluacionProyectoServicio" ref="evaluacionProyectoService"/>
+		<property name="administrarProyectoServicio" ref="administrarProyectoService"/>
+		<property name="administrarProyectoRaizServicio" ref="administrarProyectoRaizService"/>
+		<property name="admisibilidadProyectoServicio" ref="evaluarAdmisibilidadService"/>
+		<property name="wfNotificacionServicio" ref="wfNotificacionService" />
+		<property name="wfSeguimientoServicio" ref="wfSeguimientoService" />
+	</bean> 
+	
+	<bean name="wfProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfProyectoServiceTarget"/>
+    </bean>
+
+	<bean name="wfProyectoRaizServiceTarget" class="com.fontar.bus.impl.workflow.WFProyectoRaizServicioImpl">
+		<property name="administrarProyectoRaizServicio" ref="administrarProyectoRaizService"/>
+		<property name="administrarEvaluacionesServicio" ref="administrarEvaluacionesService"/>		
+		<property name="wfNotificacionServicio" ref="wfNotificacionService"/>
+		<property name="seguridadObjetoServicio" ref="seguridadObjetoServicio"/>
+	   <!-- Para captura de eventos de cambio -->
+	   <property name="usuarioService" ref="usuarioService"/>		
+	</bean> 
+	
+	<bean name="wfProyectoRaizService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfProyectoRaizServiceTarget"/>
+    </bean>
+
+	<!-- Proyecto PITEC -->
+	<bean name="wfProyectoPitecServiceTarget" class="com.fontar.bus.impl.workflow.WFProyectoPitecServicioImpl">
+		<property name="administrarProyectoServicio" ref="administrarProyectoPitecService"/>
+		<property name="evaluacionProyectoServicio" ref="evaluacionProyectoService"/>
+		<property name="admisibilidadProyectoServicio" ref="evaluarAdmisibilidadService"/>
+	</bean> 
+	
+	<bean name="wfProyectoPitecService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfProyectoPitecServiceTarget"/>
+    </bean>
+
+	<!-- Idea Proyecto PITEC -->
+	<bean name="wfIdeaProyectoPitecServiceTarget" class="com.fontar.bus.impl.workflow.WFIdeaProyectoPitecServicioImpl">
+		<property name="administrarProyectoServicio" ref="administrarIdeaProyectoPitecService"/>
+		<property name="evaluacionProyectoServicio" ref="evaluacionProyectoService"/>
+		<property name="admisibilidadProyectoServicio" ref="evaluarAdmisibilidadService"/>
+	</bean> 
+	
+	<bean name="wfIdeaProyectoPitecService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfIdeaProyectoPitecServiceTarget"/>
+    </bean>
+
+    
+	<!-- PAQUETE -->
+
+    <bean name="wfPaqueteServiceTarget" class="com.fontar.bus.impl.workflow.WFPaqueteServicioImpl">
+		<property name="evaluarPaqueteServicio" ref="evaluacionPaqueteService"/>
+		<property name="administrarPaqueteServicio" ref="administracionPaqueteService"/>
+		<property name="controlarPaqueteServicio" ref="controlPaqueteService"/>
+	</bean> 
+	
+	<bean name="wfPaqueteService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfPaqueteServiceTarget"/>
+    </bean>
+	
+	<!-- Paquete :: Evaluación -->
+   	
+   	<bean name="evaluacionPaqueteServiceTarget" class="com.fontar.bus.impl.paquete.EvaluarPaqueteServicioImpl">   		
+   		<property name="proyectoDAO" ref="proyectoDao"/>
+   		<property name="evaluacionDAO" ref="evaluacionDao"/>
+   		<property name="evaluacionPaqueteDAO" ref="evaluacionPaqueteDao"/>
+   		<property name="paqueteDAO" ref="paqueteDao"/>   
+   		<property name="proyectoPaqueteDAO" ref="proyectoPaqueteDao"/>   
+   		<property name="wfNotificacionServicio" ref="wfNotificacionService"  />
+   	</bean>
+   	
+	<bean name="evaluacionPaqueteService" parent="wfTransactionProxy">
+   		<property name="target" ref="evaluacionPaqueteServiceTarget"/>
+    </bean>	
+
+	<!-- Paquete :: Administración -->
+   	<bean name="administracionPaqueteServiceTarget" class="com.fontar.bus.impl.paquete.AdministrarPaqueteServicioImpl">   
+	   <property name="instrumentoDao" ref="instrumentoDao"/> 
+	   <property name="proyectoDao" ref="proyectoDao"/>
+	   <property name="proyectoPaqueteDao" ref="proyectoPaqueteDao"/>
+	   <property name="paqueteDao" ref="paqueteDao"/>   
+	   <property name="evaluacionPaqueteDao" ref="evaluacionPaqueteDao"/>   
+	   <property name="bitacoraDao" ref="bitacoraDao" />
+   </bean>
+   
+	<bean name="administracionPaqueteService" parent="wfTransactionProxy">
+   		<property name="target" ref="administracionPaqueteServiceTarget"/>
+    </bean>	
+
+	<!-- Control de Paquete -->
+   	<bean name="controlPaqueteServiceTarget" class="com.fontar.bus.impl.paquete.ControlarPaqueteServicioImpl">   		
+   		<property name="paqueteDAO" ref="paqueteDao"/>   		   		
+   		<property name="proyectoPaqueteDao" ref="proyectoPaqueteDao"/>
+   		<property name="proyectoDao" ref="proyectoDao"/>
+   		<property name="bitacoraDao" ref="bitacoraDao"/>
+   	</bean>
+   	
+	<bean name="controlPaqueteService" parent="allRequeriedTransactionProxy">
+   		<property name="target" ref="controlPaqueteServiceTarget"/>
+    </bean>
+
+	<!-- IDEA PROYECTO -->
+
+    <bean name="wfIdeaProyectoServiceTarget" class="com.fontar.bus.impl.workflow.WFIdeaProyectoServicioImpl">
+		<property name="evaluarPorJuntaIdeaProyectoServicio" ref="evaluarPorJuntaIdeaProyectoService"/>
+		<property name="administrarIdeaProyectoServicio" ref="administrarIdeaProyectoService"/>
+		<property name="wfProyectoServicio" ref="wfProyectoService"/>
+		<property name="wfNotificacionServicio" ref="wfNotificacionService"/>
+	</bean> 
+	
+	<bean name="wfIdeaProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfIdeaProyectoServiceTarget"/>
+    </bean>
+    
+    <!-- Idea Proyecto :: Evaluacion Por Junta -->
+	<bean name="evaluarPorJuntaIdeaProyectoServiceTarget" class="com.fontar.bus.impl.ventanilla.EvaluarPorJuntaIdeaProyectoServicioImpl"> 
+		<property name="ideaProyectoDao" ref="ideaProyectoDao"/>
+   	</bean>
+   	
+	<bean name="evaluarPorJuntaIdeaProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="evaluarPorJuntaIdeaProyectoServiceTarget"/>
+    </bean>	
+
+	<!-- Idea Proyecto :: Administración -->
+
+   	<bean name="administrarIdeaProyectoServiceTarget" class="com.fontar.bus.impl.ventanilla.AdministrarIdeaProyectoServicioImpl">   		
+		<property name="ideaProyectoDao" ref="ideaProyectoDao"/>	
+   		<property name="proyectoDatosDao" ref="proyectoDatosDao"/>
+   		<property name="proyectoPresupuestoDao" ref="proyectoPresupuestoDao"/>
+   		<property name="proyectoJurisdiccionDao" ref="proyectoJurisdiccionDao"/>
+   		<property name="bitacoraDao" ref="bitacoraDao"/>
+   	</bean>
+   	
+	<bean name="administrarIdeaProyectoService" parent="wfTransactionProxy">
+   		<property name="target" ref="administrarIdeaProyectoServiceTarget"/>
+    </bean>
+
+	<!-- SEGUIMIENTO -->
+
+    <bean name="wfSeguimientoServiceTarget" class="com.fontar.bus.impl.workflow.WFSeguimientoServicioImpl">
+		<property name="administrarSeguimientoServicio" ref="administracionSeguimientoService"/>	
+   		<property name="personaDao" ref="personaDao"/>
+   		<property name="seguridadObjetoServicio" ref="seguridadObjetoServicio"/>
+	</bean> 
+	
+	<bean name="wfSeguimientoService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfSeguimientoServiceTarget"/>
+    </bean>
+
+	<bean name="administracionSeguimientoServiceTarget" class="com.fontar.bus.impl.seguimientos.seguimientos.AdministrarSeguimientoServicioImpl">
+   		<property name="bitacoraDao" ref="bitacoraDao"/>
+   		<property name="seguimientoDao" ref="seguimientoDao"/>
+		<property name="rendicionCuentasDao" ref="rendicionCuentasDao"/>
+   		<property name="proyectoDao" ref="proyectoDao"/>
+   		<property name="evaluacionGeneralDAO" ref="evaluacionGeneralDao"/>
+   		<property name="evaluacionSeguimientoDAO" ref="evaluacionSeguimientoDao"/>
+   		<property name="evaluacionDao" ref="evaluacionDao"/>
+   		<property name="evaluacionEvaluadorDAO" ref="evaluacionEvaluadorDao"/>
+   		<property name="proyectoRaizDAO" ref="proyectoRaizDao"/>
+   		<property name="etapaDAO" ref="etapaDao"/>
+   		<property name="actividadDAO" ref="actividadDao"/>
+   		<property name="rubroDao" ref="rubroDao"/>
+   		<property name="personaDao" ref="personaDao"/>
+   		<property name="localizacionDao" ref="localizacionDao"/>
+   		<property name="seguridadObjetoServicio" ref="seguridadObjetoServicio"/>
+   		<property name="analisisGastosSeguimientoService" ref="analisisGastosSeguimientoService"/>
+   		<property name="configService" ref="configuracionService"/>
+   	</bean>
+   	
+	<bean name="administracionSeguimientoService" parent="wfTransactionProxy">
+   		<property name="target" ref="administracionSeguimientoServiceTarget"/>
+    </bean>	    
+    
+    
+	<bean id="wfNotificacionTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="cargarNotificacion">PROPAGATION_REQUIRED</prop>
+				<prop key="enviarNotificacion">PROPAGATION_REQUIRED</prop>
+				<prop key="recibirAcuseNotificacion">PROPAGATION_REQUIRED</prop>
+				<prop key="cerrarNotificacion">PROPAGATION_REQUIRED</prop>
+				<prop key="anularNotificacion">PROPAGATION_REQUIRED</prop>												
+			</props>
+		</property>
+	</bean>
+    
+	<!-- NOTIFICACION -->
+    <bean name="wfNotificacionServiceTarget" class="com.fontar.bus.impl.workflow.WFNotificacionServicioImpl">
+		<property name="administrarNotificacionServicio" ref="administrarNotificacionService"/>
+	</bean> 
+	
+	<bean name="wfNotificacionService" parent="wfNotificacionTransactionProxy">
+   		<property name="target" ref="wfNotificacionServiceTarget"/>
+    </bean>
+
+
+    <!-- CONTROL ADQUISICION - Procedimientos  -->    
+   	<bean name="wfProcedimientoServiceTarget" class="com.fontar.bus.impl.workflow.WFProcedimientoServicioImpl">   		
+   		<property name="administrarProcedimientoServicio" ref="administrarProcedimientoService"/>
+   	</bean>
+   	
+	<bean name="wfProcedimientoService" parent="wfTransactionProxy">
+   		<property name="target" ref="wfProcedimientoServiceTarget"/>
+    </bean>	    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+

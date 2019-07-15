@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <bean name="/LogonCripto"
+	    class="com.fontar.web.action.cripto.LogonCriptoAction">
+  </bean>
+
+  <bean name="/LogonCriptoValidate"
+	    class="com.fontar.web.action.cripto.LogonCriptoAction">
+  </bean>
+  
+  <bean name="/TestDecript"
+	    class="com.fontar.web.action.cripto.LogonCriptoAction">
+  </bean>
+  
+  <bean name="/TestEncript"
+	    class="com.fontar.web.action.cripto.LogonCriptoAction">
+  </bean>    
+  
+  <bean name="/LogoutCripto"
+	    class="com.fontar.web.action.cripto.LogonCriptoAction">
+  </bean>    
+
+  <bean name="/ChangePassword"
+	    class="com.fontar.web.action.cripto.LogonCriptoAction">
+  </bean>    
+  
+  <bean name="/ChangePasswordValidate"
+	    class="com.fontar.web.action.cripto.LogonCriptoAction">
+  </bean>
+</beans>
+
+
+
+
+

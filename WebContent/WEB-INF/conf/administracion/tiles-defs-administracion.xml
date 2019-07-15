@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+  	
+  	<!-- Paginas generales para la aplicación -->
+  	
+  	<definition name=".PaginaErrorDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/general/paginaError.jsp" >
+  		</put>
+  	</definition>  
+  	
+  	<!-- Proyectos -->
+	<definition name=".ProyectoInventarioDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/proyectos/inventario.jsp"/>
+	</definition>
+
+  	<definition name=".CargarProyectoDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/cargarProyecto.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".ProyectoEditarDef"
+  		extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/editarProyecto.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".ProyectosEvaluarAdmisibilidadDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/evaluarAdmisibilidad.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ProyectosSolicitarReadmisibilidadDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/solicitarReadmisibilidad.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ProyectosSolicitarReconsideracionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pedidoReconsideracion.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ReconsiderarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/reconsiderar.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ProyectosEvaluarReadmisibilidadDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/evaluarReadmisibilidad.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ProyectosAnalizarReconsideracionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/analizarReconsideracion.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ProyectosVisualizarAdmisibilidadDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/visualizarAdmisibilidad.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ProyectosPrintAdmisibilidadDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/printAdmisibilidadDatos.jsp" >
+  		</put>
+  	</definition>
+  	
+   	<definition name=".ProyectoVisualizarDef"
+  		extends=".baseMenuDef" path="/WEB-INF/jspf/layoutMenuTabs.jsp">
+  		<put name="title" value="app.title.visualizarProyecto"/>
+  		<put name="subTitle" value="app.title.informacion"/>  		
+		<put name="cabecera" value="/jsp/cabecera/cabeceraProyecto.jsp"/>
+		<put name="tabs" value="/jsp/administracion/proyectos/menuProyecto.jsp"/>
+  		<put name="body" value="/jsp/administracion/proyectos/visualizarDatos.jsp" />
+  		<put name="linkInventario" value="/jsp/administracion/proyectos/linkInventario.jsp" />
+  	</definition>
+
+  	<!-- Proyectos Pitec -->
+  	<definition name=".ProyectoPitecSelectorDef" 
+  				extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/instrumentos/pitec/selector.jsp" >
+  		</put>
+  	</definition>  	
+
+	<!--  Paquetes -->
+	<definition 
+		name=".PaqueteInventarioDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/paquetes/inventario.jsp">
+		</put>
+	</definition>
+	
+	<definition 
+		name=".PaqueteCrearDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/paquetes/nuevo.jsp">
+		</put>
+	</definition>
+
+	<definition 
+		name=".PaqueteEditarDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/paquetes/editar.jsp">
+		</put>
+	</definition>
+
+	<definition name=".PaqueteEvaluarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/paquetes/evaluacion.jsp"/>
+	</definition>	
+
+	<definition name=".PaqueteConfirmarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/paquetes/confirmar.jsp"/>
+	</definition>	
+	
+  	<definition name=".PaqueteAnularDef" extends=".baseMenuDef">
+  		<put name="body" value="/jsp/administracion/paquetes/anular.jsp" >
+  		</put>
+  	</definition> 
+	
+	<definition 
+		name=".PaqueteVisualizarDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/paquetes/visualizar.jsp">
+		</put>
+	</definition>
+	
+ 	<definition name=".BitacoraEditarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/bitacoras/editar.jsp" >
+  		</put>
+  	</definition>  
+  	
+ 	<definition name=".BitacoraInventarioDef" extends=".ProyectoVisualizarDef">
+  		<put name="subTitle" value="app.title.bitacora"/>
+  		<put name="body"
+  			value="/jsp/administracion/bitacoras/inventario.jsp" >
+  		</put>
+  	</definition>    	
+
+ 	<definition name=".SeguimientoProyectoInventarioDef" extends=".ProyectoVisualizarDef">
+  		<put name="subTitle" value="app.title.seguimiento"/>
+  		<put name="body"
+  			value="/jsp/seguimientos/seguimientos/inventarioProyecto.jsp" >
+  		</put>
+  	</definition>    	
+
+   	<definition name=".EvaluacionesProyectoInventarioDef" extends=".ProyectoVisualizarDef">
+  		<put name="subTitle" value="app.title.evaluaciones"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/inventarioEvaluaciones.jsp" >
+  		</put>
+  	</definition>
+  	  	
+   	<definition name=".ExpedienteProyectoInventarioDef" extends=".ProyectoVisualizarDef">
+  		<put name="subTitle" value="app.title.expedientes"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/inventarioExpediente.jsp" >
+  		</put>
+  	</definition>
+  	  	
+   	<definition name=".ExpedienteProyectoEditarDef" extends=".popUpDef">
+  		<put name="subTitle" value="app.title.expedientes"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/editarExpediente.jsp" >
+  		</put>
+  	</definition>
+  	  	
+   	<definition name=".ExpedienteProyectoEditarTableDef" extends=".baseMenuDef">
+  		<put name="subTitle" value="app.title.expedientes"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/editarExpedienteCuerpo.jsp" >
+  		</put>
+  	</definition>
+  	  	
+   	<definition name=".ExpedienteMovimientoDef" extends=".baseMenuDef">
+  		<put name="subTitle" value="app.title.expedientes"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/editarMovimiento.jsp" >
+  		</put>
+  	</definition>
+
+   	<definition name=".ExpedienteMovimientoDevolverDef" extends=".baseMenuDef">
+  		<put name="subTitle" value="app.title.expedientes"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/visualizarMovimiento.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".BitacoraVisualizarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/bitacoras/visualizar.jsp" >
+  		</put>
+  	</definition>
+  	
+  			
+  	<definition name=".AlicuotaEditarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/alicuota.jsp" >
+  		</put>
+  	</definition>   
+  	
+  	<definition name=".CargarCriteriosResultadoDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/evaluacion/criterios.jsp" >
+  		</put>
+  	</definition>   
+  	
+   	<definition name=".EvaluacionInventarioDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/evaluacion/inventario.jsp" >
+  		</put>
+  	</definition>  
+  	
+	<definition name=".EvaluacionVisualizarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/evaluacion/visualizarEvaluacion.jsp" >
+  		</put>
+  	</definition>	
+  	
+	<definition name=".EvaluacionGeneralVisualizarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/evaluacion/visualizar.jsp" >
+  		</put>
+  	</definition>		
+  	
+  	
+	<!-- Adjuntos Proyecto -->
+	<definition name=".ProyectoBeanAdjuntosUpload" extends=".ProyectoVisualizarDef">
+		<put name="body" value="/jsp/administracion/proyectos/adjuntos/adjuntos.jsp"/>
+	</definition>	
+	
+	<definition name=".ProyectoBeanAdjuntosInventario" extends=".ProyectoVisualizarDef">
+		<put name="body" value="/jsp/administracion/proyectos/adjuntos/adjuntosDownload.jsp"/>
+	</definition>
+	
+	<!-- Adjuntos IdeaProyecto -->
+	<definition name=".IdeaProyectoBeanAdjuntosUpload" extends=".IdeaProyectoVisualizarDef">
+		<put name="body" value="/jsp/instrumentos/ventanilla/ideaproyecto/adjuntos/adjuntos.jsp"/>
+	</definition>	
+	
+	<definition name=".IdeaProyectoBeanAdjuntosInventario" extends=".IdeaProyectoVisualizarDef">
+		<put name="body" value="/jsp/instrumentos/ventanilla/ideaproyecto/adjuntos/adjuntosDownload.jsp"/>
+	</definition>
+	
+	<!-- Adjuntos Llamados Convoctaria -->
+	<definition name=".LlamadoConvocatoriaBeanAdjuntosUpload" extends=".baseMenuDef">
+		<put name="body" value="/jsp/instrumentos/convocatoria/llamados/adjuntos/adjuntos.jsp"/>
+	</definition>	
+
+	<definition name=".LlamadoConvocatoriaBeanAdjuntosInventario" extends=".baseMenuDef">
+		<put name="body" value="/jsp/instrumentos/convocatoria/llamados/adjuntos/adjuntosDownload.jsp"/>
+	</definition>
+	
+	<!-- Adjuntos Ventanilla Permanente -->
+	<definition name=".VentanillaPermanenteBeanAdjuntosUpload" extends=".baseMenuDef">
+		<put name="body" value="/jsp/instrumentos/ventanilla/ventanillapermanente/adjuntos/adjuntos.jsp"/>
+	</definition>	
+	
+	<definition name=".VentanillaPermanenteBeanAdjuntosInventario" extends=".baseMenuDef">
+		<put name="body" value="/jsp/instrumentos/ventanilla/ventanillapermanente/adjuntos/adjuntosDownload.jsp"/>
+	</definition>		  	
+	
+	<!-- Adjuntos Evaluacion -->
+	<definition name=".EvaluacionBeanAdjuntosUpload" extends=".baseMenuDef">
+		<put name="body" value="/jsp/evaluacion/adjuntos/adjuntos.jsp"/>
+	</definition>	
+	
+	<definition name=".EvaluacionBeanAdjuntosInventario" extends=".baseMenuDef">
+		<put name="body" value="/jsp/evaluacion/adjuntos/adjuntosDownload.jsp"/>
+	</definition>		  	
+	
+	<!-- Adjuntos Paquete -->
+	<definition name=".PaqueteBeanAdjuntosUpload" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/paquetes/adjuntos/adjuntos.jsp"/>
+	</definition>	
+	
+	<definition name=".PaqueteBeanAdjuntosInventario" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/paquetes/adjuntos/adjuntosDownload.jsp"/>
+	</definition>		  	
+
+	<!-- Edicion de presupuesto general -->	
+ 	<definition name=".ProyectoPresupuestoVisualizarDef" extends=".ProyectoVisualizarDef">
+  		<put name="subTitle" value="app.title.presupuesto"/>
+		<put name="cabecera" value="/jsp/cabecera/cabeceraProyectoRaiz.jsp"/>
+		<put name="body" value="/jsp/administracion/proyectos/presupuesto/visualizar.jsp"/>
+  	</definition>  
+ 	<definition name=".VisualizarPresupuestoDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/proyectos/presupuesto/layout.jsp"/>
+  	</definition>  
+  	<definition name=".PresupuestoIngresarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/presupuesto/ingresar.jsp" >
+  		</put>
+  	</definition>
+  	<definition name=".PresupuestoVerNuevoDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/presupuesto/ver_nuevo.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".PresupuestoVerNuevoPopUpDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/presupuesto/ver_nuevo.jsp" >
+  		</put>
+  	</definition>
+  	<definition name=".PresupuestoIngresarPopUpDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/presupuesto/ingresar.jsp" >
+  		</put>
+  	</definition>
+  	
+
+
+	<!--  Notificacion Inventario -->
+	<definition 
+		name=".NotificacionInventarioDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/notificaciones/inventario.jsp">
+		</put>
+	</definition>
+
+	<!--  Notificacion Visualizar -->
+	<definition 
+		name=".VisualizarNotificacionDef" 
+		extends=".baseMenuDef">
+		<put name="body" 
+			value="/jsp/administracion/notificaciones/visualizar.jsp">
+		</put>
+	</definition>
+
+  	<definition name=".PlanProyectoDef" extends=".ProyectoVisualizarDef" >
+  		<put name="subTitle" value="app.title.planProyecto"/>
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/inventarioPlan.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<!-- Carga de Proyectos desde Excel -->
+  	<definition name=".ProyectosExcelIngresarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/datos/ingresar.jsp" >
+  		</put>
+  	</definition>
+  	<definition name=".ProyectosExcelFeedbackDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/datos/feedback.jsp" >
+  		</put>
+  	</definition>
+  	<definition name=".ProyectosExcelDetalleDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/datos/detalle.jsp" >
+  		</put>
+  	</definition>
+  	<!-- /Carga de Proyectos desde Excel -->
+
+	<!-- Detalle de presupuesto por rubro -->
+  	<definition name=".PresupuestoDetalleRubroDef" extends=".popUpDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/presupuesto/detalle_rubros.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".ProyectoPACDef" extends=".ProyectoVisualizarDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/inventario.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".ProyectoPACAgregarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/agregar.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".ProyectoPACEditarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/editar.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".ProyectoPACEditarMontoAdjudicacionDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/editarMontoAdjudicacion.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".ProyectoPACAnularDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/anular.jsp" >
+  		</put>
+  	</definition>
+ 	
+  	<!-- Carga de PAC desde Excel -->
+  	<definition name=".PacExcelIngresarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/excel/ingresar.jsp" >
+  		</put>
+  	</definition>
+   	<!-- /Carga de PAC desde Excel -->
+ 
+  	<definition name=".PedirDesembolsoEditarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/pedir.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".IngresarPagoEditarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/pagar.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".HistoriaPACVisualizarDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/visualizar.jsp" >
+  		</put>
+  	</definition>
+
+  	<definition name=".HistoriaPACInventarioDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/inventarioHistoria.jsp" >
+  		</put>
+  	</definition>
+  	
+  	<definition name=".HistoriaPACInvBreveDef" extends=".baseMenuDef">
+  		<put name="body"
+  			value="/jsp/administracion/proyectos/pac/inventarioHistoria.jsp" >
+  		</put>
+  	</definition>
+
+	<!-- ProyectoDesembolso -->
+	<definition name=".ProyectoDesembolsoInventarioDef" extends=".ProyectoVisualizarDef">
+		<put name="body" value="/jsp/administracion/proyectos/desembolso/inventario.jsp"/>
+	</definition>
+
+	<definition name=".ProyectoDesembolsoPagarAnticipoDef" extends=".popUpDef">
+		<put name="body" value="/jsp/administracion/proyectos/desembolso/pagarAnticipo.jsp"/>
+	</definition>
+
+	<definition name=".ProyectoDesembolsoIngresarAutorizacionDef" extends=".popUpDef">
+		<put name="body" value="/jsp/administracion/proyectos/desembolso/autorizar.jsp"/>
+	</definition>
+
+	<definition name=".ProyectoDesembolsoEditarDef" extends=".popUpDef">
+		<put name="body" value="/jsp/administracion/proyectos/desembolso/editar.jsp"/>
+	</definition>
+
+	<definition name=".ProyectoDesembolsoAgregarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/proyectos/desembolso/agregar.jsp"/>
+	</definition>
+
+	<definition name=".ProyectoDesembolsoPagarDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/proyectos/desembolso/pagar.jsp"/>
+	</definition>
+	
+	<!-- Mis Evaluaciones Generales -->
+	<definition name=".MisEvaluacionesGeneralesDef" extends=".baseMenuDef">
+		<put name="body" value="/jsp/administracion/evaluacion/misEvaluacionesGenerales.jsp"/>
+	</definition>
+
+	<definition name=".EditarEvaluacionProyectoDef" extends=".baseMenuDef">
+  		<put name="body" value="/jsp/administracion/evaluacion/editarEvaluacion.jsp"/>
+  	</definition>		
+
+	<!-- Visualizacion de reconsideracion de proyectos -->
+	<definition name=".VisualizarReconsideracionDef" extends=".baseMenuDef">
+  		<put name="body" value="/jsp/administracion/proyectos/visualizarReconsideracion.jsp"/>
+  	</definition>		
+
+</tiles-definitions>

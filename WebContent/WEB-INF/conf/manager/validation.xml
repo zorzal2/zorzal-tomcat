@@ -1,0 +1,14 @@
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN" "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+<form-validation>
+	<formset>
+		<form name="InitializeEncryptionForm">
+			<field property="password" depends="required,password">
+				<arg bundle="labels" key="app.label.password" position="0" />
+			</field>
+			<field property="confPassword" depends="required">
+				<arg bundle="labels" key="app.label.confPassword" position="0" />
+			</field>
+		</form>
+	</formset>
+	
+</form-validation>
