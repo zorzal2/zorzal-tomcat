@@ -6,7 +6,7 @@ import javax.naming.directory.Attributes;
 
 import org.acegisecurity.userdetails.ldap.LdapUserDetailsImpl;
 import org.acegisecurity.userdetails.ldap.LdapUserDetailsMapper;
-import org.springframework.ldap.AttributesMapper;
+import org.springframework.ldap.core.AttributesMapper;
 
 import com.fontar.data.impl.domain.ldap.UserStatus;
 import com.fontar.data.impl.domain.ldap.Usuario;

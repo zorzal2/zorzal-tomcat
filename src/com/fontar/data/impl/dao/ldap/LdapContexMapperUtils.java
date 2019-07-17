@@ -1,6 +1,6 @@
 package com.fontar.data.impl.dao.ldap;
 
-import org.springframework.ldap.support.DirContextOperations;
+import org.springframework.ldap.core.DirContextOperations;
 
 public class LdapContexMapperUtils extends UsuarioContextMapper {
 

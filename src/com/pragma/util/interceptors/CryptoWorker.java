@@ -1,6 +1,6 @@
 package com.pragma.util.interceptors;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.hibernate.Session;
 
@@ -20,9 +20,9 @@ public interface CryptoWorker {
 	 */
 	void decrypt();
 
-	HashMap<String, EntityCryptoInfo> getCriptoInfo();
+	Map<String, EntityCryptoInfo> getCriptoInfo();
 
-	void setCriptoInfo(HashMap<String, EntityCryptoInfo> criptoInfo);
+	void setCriptoInfo(Map<String, EntityCryptoInfo> criptoInfo);
 
 	Session getSession();
 

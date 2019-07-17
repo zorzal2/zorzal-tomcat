@@ -2,11 +2,13 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<!-- DATASOURCE FONTAR -->
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<!-- DATASOURCE FONTAR Comentado llobeto (17/07/2019) -->
+	<!-- bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName"><value>java:/FontarDS</value></property>
+	</bean-->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	    <property name="jndiName" value="java:comp/env/jdbc/ZorzalDS"/>
 	</bean>
-
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<!-- 
@@ -93,16 +95,16 @@
 				
 		<property name="hibernateProperties">
 			<props>
+			    <prop key="hibernate.connection.datasource">java:comp/env/jdbc/ZorzalDS</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
 				<prop key="hibernate.show_sql">false</prop>
                 <!-- prop key="hibernate.hbm2ddl.auto">create</prop> -->
-				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</prop>
+				<!-- prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</prop>
 				<prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</prop>
 				<prop key="jta.UserTransaction">java:comp/UserTransaction</prop>
-			    <prop key="hibernate.transaction.flush_before_completion">true</prop>
-			    <prop key="hibernate.connection.release_mode">after_statement</prop>
 			    <prop key="hibernate.transaction.auto_close_session">true</prop>
-			    <prop key="hibernate.connection.datasource">java:/FontarDS</prop>
+			    <prop key="hibernate.transaction.flush_before_completion">true</prop-->
+			    <prop key="hibernate.connection.release_mode">after_statement</prop>
 			    <prop key="hibernate.cglib.use_reflection_optimizer">true</prop>	
    			    <prop key="hibernate.default_schema">${db.defaultSchema}</prop>		    
 			    <prop key="hibernate.default_batch_fetch_size">50</prop>

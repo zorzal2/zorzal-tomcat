@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.springframework.ldap.EntryNotFoundException;
+import org.springframework.ldap.NamingException;
 
 import com.fontar.bus.api.configuracion.GrupoService;
 import com.fontar.bus.api.configuracion.UsuarioService;
@@ -201,7 +201,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario findByPrimaryKey(String name) {
     	try{
     		return usuarioDao.findByPrimaryKey(name);	
-    	}catch (EntryNotFoundException e) {
+    	}catch (NamingException e) {
     		return null;
 		}
     }

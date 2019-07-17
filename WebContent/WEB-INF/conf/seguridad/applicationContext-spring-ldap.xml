@@ -8,17 +8,17 @@
 	</bean>
 
 	<!-- Authenticate using a fixed user -->
-	<bean id="contextSource" class="org.springframework.ldap.support.LdapContextSource" >
+	<bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource" >
 		<property name="urls" value="${ldap.urls}" />
 		<property name="base" value="${ldap.base}" />
 		<property name="userName" value="${ldap.userName}" />
 		<property name="password" value="${ldap.password}" />
-		<property name="dirObjectFactory" value="org.springframework.ldap.support.DefaultDirObjectFactory" />
+		<property name="dirObjectFactory" value="org.springframework.ldap.core.support.DefaultDirObjectFactory" />
 	</bean>
 
-	<bean id="acegiAuthenticationSource" class="org.springframework.ldap.support.authentication.AcegiAuthenticationSource" />
+	<bean id="acegiAuthenticationSource" class="org.springframework.ldap.authentication.AcegiAuthenticationSource" />
 	
-	<bean id="ldapOperations" class="org.springframework.ldap.LdapTemplate">
+	<bean id="ldapOperations" class="org.springframework.ldap.core.LdapTemplate">
 		<constructor-arg ref="contextSource" />
 	</bean>
 

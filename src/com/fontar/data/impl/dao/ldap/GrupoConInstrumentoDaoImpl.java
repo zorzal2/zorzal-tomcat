@@ -27,15 +27,15 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.ModificationItem;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.springframework.ldap.AttributesMapper;
-import org.springframework.ldap.ContextMapper;
-import org.springframework.ldap.LdapOperations;
-import org.springframework.ldap.support.DirContextAdapter;
-import org.springframework.ldap.support.DirContextOperations;
-import org.springframework.ldap.support.DistinguishedName;
-import org.springframework.ldap.support.filter.AndFilter;
-import org.springframework.ldap.support.filter.EqualsFilter;
-import org.springframework.ldap.support.filter.WhitespaceWildcardsFilter;
+import org.springframework.ldap.core.AttributesMapper;
+import org.springframework.ldap.core.ContextMapper;
+import org.springframework.ldap.core.DirContextAdapter;
+import org.springframework.ldap.core.DirContextOperations;
+import org.springframework.ldap.core.DistinguishedName;
+import org.springframework.ldap.core.LdapOperations;
+import org.springframework.ldap.filter.AndFilter;
+import org.springframework.ldap.filter.EqualsFilter;
+import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
 
 import com.fontar.data.impl.domain.ldap.GrupoConInstrumento;
 import com.fontar.data.impl.domain.ldap.Permiso;

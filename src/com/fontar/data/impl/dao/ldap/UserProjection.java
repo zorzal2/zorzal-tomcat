@@ -8,7 +8,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 
-import org.springframework.ldap.AttributesMapper;
+import org.springframework.ldap.core.AttributesMapper;
 
 public class UserProjection implements AttributesMapper {
 	

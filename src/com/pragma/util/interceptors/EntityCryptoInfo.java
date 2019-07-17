@@ -3,7 +3,7 @@
  */
 package com.pragma.util.interceptors;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author fferrara
@@ -15,13 +15,13 @@ public class EntityCryptoInfo {
 
 	private String tableName;
 
-	private HashMap<String, String> crytoFields;
+	private Map<String, String> crytoFields;
 
-	public HashMap<String, String> getCrytoFields() {
+	public Map<String, String> getCrytoFields() {
 		return crytoFields;
 	}
 
-	public void setCrytoFields(HashMap<String, String> crytoFields) {
+	public void setCrytoFields(Map<String, String> crytoFields) {
 		this.crytoFields = crytoFields;
 	}
 

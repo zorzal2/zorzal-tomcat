@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.PrivateKey;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.SecretKey;
 
@@ -39,7 +40,7 @@ public class GenericCryptoWorker implements CryptoWorker {
 	 * ====================================================================================
 	 */
 
-	private HashMap<String, EntityCryptoInfo> criptoInfo = new HashMap<String, EntityCryptoInfo>();
+	private Map<String, EntityCryptoInfo> criptoInfo = new HashMap<String, EntityCryptoInfo>();
 
 	private ThreadLocal<Session> session = new ThreadLocal<Session>();
 
@@ -230,7 +231,7 @@ public class GenericCryptoWorker implements CryptoWorker {
 	 * (non-Javadoc)
 	 * @see test.pragma.fontar.interceptors.CryptoWorker#getCriptoInfo()
 	 */
-	public HashMap<String, EntityCryptoInfo> getCriptoInfo() {
+	public Map<String, EntityCryptoInfo> getCriptoInfo() {
 		return criptoInfo;
 	}
 
@@ -238,7 +239,7 @@ public class GenericCryptoWorker implements CryptoWorker {
 	 * (non-Javadoc)
 	 * @see test.pragma.fontar.interceptors.CryptoWorker#setCriptoInfo(java.util.HashMap)
 	 */
-	public void setCriptoInfo(HashMap<String, EntityCryptoInfo> criptoInfo) {
+	public void setCriptoInfo(Map<String, EntityCryptoInfo> criptoInfo) {
 		this.criptoInfo = criptoInfo;
 	}
 

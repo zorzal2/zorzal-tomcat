@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.ldap.EntryNotFoundException;
+import org.springframework.ldap.NamingException;
 
 import com.fontar.data.impl.dao.ldap.PermisoDao;
 import com.fontar.data.impl.domain.ldap.Permiso;
@@ -60,7 +60,7 @@ public class PermissionCreationCommand  extends InitializationCommand {
 				this.permisoDao.update(permiso);
 				this.getLogger().info("Permiso @" + idPermission + " actualizado");
 			}
-		}catch (EntryNotFoundException e) {
+		}catch (NamingException e) {
 			permiso = new Permiso();
 			permiso.setModulo(moduleName);
 			permiso.setIdPermiso(idPermission);

@@ -20,10 +20,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.ldap.ContextMapper;
-import org.springframework.ldap.EntryNotFoundException;
-import org.springframework.ldap.LdapOperations;
-import org.springframework.ldap.support.DirContextOperations;
+import org.springframework.ldap.NamingException;
+import org.springframework.ldap.core.ContextMapper;
+import org.springframework.ldap.core.DirContextOperations;
+import org.springframework.ldap.core.LdapOperations;
 
 import com.fontar.data.impl.domain.ldap.GrupoInstrumentable;
 import com.fontar.data.impl.domain.ldap.Permiso;
@@ -63,7 +63,7 @@ public class GrupoInstrumentableContextMapper implements ContextMapper {
 				try{
 					String userDN= usuariosArray[i];
 					usuarios.add(usuarioDao.findByDn(userDN));
-				}catch (EntryNotFoundException e) {
+				}catch (NamingException e) {
 
 				}
 			}

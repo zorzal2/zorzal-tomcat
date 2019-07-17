@@ -4,12 +4,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.ldap.ContextMapper;
-import org.springframework.ldap.LdapOperations;
-import org.springframework.ldap.support.DistinguishedName;
-import org.springframework.ldap.support.filter.AndFilter;
-import org.springframework.ldap.support.filter.EqualsFilter;
-import org.springframework.ldap.support.filter.OrFilter;
+import org.springframework.ldap.core.ContextMapper;
+import org.springframework.ldap.core.DistinguishedName;
+import org.springframework.ldap.core.LdapOperations;
+import org.springframework.ldap.filter.AndFilter;
+import org.springframework.ldap.filter.EqualsFilter;
+import org.springframework.ldap.filter.OrFilter;
 
 import com.fontar.data.impl.domain.ldap.GrupoAbstracto;
 
