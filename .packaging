@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations>
+<archive destination="" exploded="false" name="fontar.war" used="true">
+<folder excludes="" includes="**/*.*" location="bin" name="bin" prefix="WEB-INF/classes" project="" projectLocation="/bin" used="true"/>
+<folder excludes="" includes="" location="src/resources" name="resources" prefix="WEB-INF/classes/resources" project="" projectLocation="src/resources" used="true"/>
+<folder excludes="" includes="**/*.*" location="webroot" name="webroot" prefix="" project="" projectLocation="webroot" used="true"/>
+<file location="lib/jbpm-3.1.jar" name="jbpm-3.1.jar" prefix="WEB-INF/lib" project="" projectLocation="lib/jbpm-3.1.jar" used="true"/>
+<file location="lib/jbpm-webapp-3.1.jar" name="jbpm-webapp-3.1.jar" prefix="WEB-INF/lib" project="" projectLocation="lib/jbpm-webapp-3.1.jar" used="true"/>
+<file location="lib/excel_xml_lib.jar" name="excel_xml_lib.jar" prefix="WEB-INF/lib" project="" projectLocation="lib/excel_xml_lib.jar" used="true"/>
+<file location="lib/jxl.jar" name="jxl.jar" prefix="WEB-INF/lib" project="" projectLocation="lib/jxl.jar" used="true"/>
+</archive>
+</configurations>

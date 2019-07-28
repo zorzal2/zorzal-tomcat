@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<configExtensions>
+		<configExtension>xml</configExtension>
+	</configExtensions>
+	<configs>
+		<config>webroot/WEB-INF/conf/cripto/services-config-cripto.xml</config>
+		<config>webroot/WEB-INF/conf/applicationContext-hibernate.xml</config>
+		<config>webroot/WEB-INF/conf/consultas/services-config.xml</config>
+		<config>webroot/WEB-INF/conf/seguimientos/services-config-seguimientos.xml</config>
+		<config>webroot/WEB-INF/conf/administracion/action-servlet-administracion.xml</config>
+		<config>webroot/WEB-INF/conf/manager/action-servlet.xml</config>
+		<config>webroot/WEB-INF/conf/manager/services-config.xml</config>
+		<config>webroot/WEB-INF/conf/configuracion/services-config-configuracion.xml</config>
+		<config>webroot/WEB-INF/conf/seguridad/applicationContext-spring-ldap.xml</config>
+		<config>webroot/WEB-INF/conf/instrumentos/services-config-instrumentos.xml</config>
+		<config>webroot/WEB-INF/conf/services-config.xml</config>
+		<config>webroot/WEB-INF/conf/configuracion/action-servlet-configuracion.xml</config>
+		<config>webroot/WEB-INF/conf/seguridad/applicationContext-acegi.xml</config>
+		<config>webroot/WEB-INF/conf/seguridad/services-config.xml</config>
+		<config>webroot/WEB-INF/conf/seguimientos/action-servlet-seguimientos.xml</config>
+		<config>webroot/WEB-INF/conf/instrumentos/action-servlet-instrumentos.xml</config>
+		<config>webroot/WEB-INF/conf/dao-config.xml</config>
+		<config>webroot/WEB-INF/conf/initialization.xml</config>
+		<config>webroot/WEB-INF/conf/beans-context-web.xml</config>
+		<config>webroot/WEB-INF/conf/cripto/action-servlet-cripto.xml</config>
+		<config>webroot/WEB-INF/conf/administracion/services-config-administracion.xml</config>
+		<config>webroot/WEB-INF/conf/consultas/action-servlet.xml</config>
+		<config>webroot/WEB-INF/conf/seguridad/action-servlet-logon.xml</config>
+		<config>webroot/WEB-INF/conf/cripto/applicationContext-cripto.xml</config>
+		<config>webroot/WEB-INF/conf/beans-context.xml</config>
+	</configs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

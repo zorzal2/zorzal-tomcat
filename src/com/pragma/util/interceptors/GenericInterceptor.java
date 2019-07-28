@@ -6,6 +6,7 @@ package com.pragma.util.interceptors;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.SessionFactory;
@@ -24,9 +25,9 @@ import com.pragma.util.ContextUtil;
  */
 public class GenericInterceptor extends EmptyInterceptor {
 
-	protected HashMap<String, CryptoWorker> matches = new HashMap<String, CryptoWorker>();
+	protected Map<String, CryptoWorker> matches = new HashMap<String, CryptoWorker>();
 
-	protected HashMap<String, String> bitacoras = new HashMap<String, String>();
+	protected Map<String, String> bitacoras = new HashMap<String, String>();
 
 	protected SessionFactory sessionFactory;
 
@@ -106,11 +107,11 @@ public class GenericInterceptor extends EmptyInterceptor {
 		return entity.getClass().getSimpleName();
 	}
 
-	public HashMap<String, CryptoWorker> getMatches() {
+	public Map<String, CryptoWorker> getMatches() {
 		return matches;
 	}
 
-	public void setMatches(HashMap<String, CryptoWorker> matches) {
+	public void setMatches(Map<String, CryptoWorker> matches) {
 		this.matches = matches;
 	}
 
@@ -132,11 +133,11 @@ public class GenericInterceptor extends EmptyInterceptor {
 		}
 	}
 
-	public HashMap<String, String> getBitacoras() {
+	public Map<String, String> getBitacoras() {
 		return bitacoras;
 	}
 
-	public void setBitacoras(HashMap<String, String> bitacoras) {
+	public void setBitacoras(Map<String, String> bitacoras) {
 		this.bitacoras = bitacoras;
 	}
 	

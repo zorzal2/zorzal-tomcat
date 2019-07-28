@@ -2,6 +2,7 @@ package com.pragma.bus.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fontar.seguridad.AuthenticationService;
 import com.pragma.bus.api.GenericService;
@@ -18,7 +19,7 @@ public class GenericServiceImpl implements GenericService {
 	// ~ Instance fields
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	protected HashMap<String, GenericDao> hashDao = new HashMap<String, GenericDao>();
+	protected Map<String, GenericDao> hashDao = new HashMap<String, GenericDao>();
 
 	protected Class type;
 
@@ -46,7 +47,7 @@ public class GenericServiceImpl implements GenericService {
 	 * 
 	 * @return Documentar el valor de retorno!
 	 */
-	public HashMap<String, GenericDao> getHashDao() {
+	public Map<String, GenericDao> getHashDao() {
 		return hashDao;
 	}
 
@@ -59,7 +60,7 @@ public class GenericServiceImpl implements GenericService {
 	 * 
 	 * @param hashDao Documentar el parametro!
 	 */
-	public void setHashDao(HashMap<String, GenericDao> hashDao) {
+	public void setHashDao(Map<String, GenericDao> hashDao) {
 		this.hashDao = hashDao;
 	}
 

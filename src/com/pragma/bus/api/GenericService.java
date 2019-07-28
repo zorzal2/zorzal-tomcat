@@ -2,13 +2,14 @@ package com.pragma.bus.api;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.pragma.data.genericdao.GenericDao;
 
 public interface GenericService {
-	public abstract HashMap<String, GenericDao> getHashDao();
+	public abstract Map<String, GenericDao> getHashDao();
 
-	public abstract void setHashDao(HashMap<String, GenericDao> hashDao);
+	public abstract void setHashDao(Map<String, GenericDao> hashDao);
 
 	public abstract List getAll(Class clase);
 
